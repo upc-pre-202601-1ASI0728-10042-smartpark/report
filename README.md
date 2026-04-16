@@ -5,17 +5,17 @@
 ## Facultad de Ingeniería
 ### Carrera de Ingeniería de Software
 
-**CICLO:** 202401  
-**CURSO:** SI728 - Arquitecturas de Software Emergentes  
-**SECCIÓN:** SW81 / SW82 / WS82 / WX82 _(reemplazar con la sección)_  
-**PROFESOR:** _(Nombre del profesor)_
+**CICLO:** 202601  
+**CURSO:** Arquitecturas de Software Emergentes  
+**SECCIÓN:** 10042  
+**PROFESOR:** Royer Edelwer Rojas Malasquez
 
 ---
 
 ## INFORME DE TRABAJO FINAL
 
-**Startup:** _(Nombre de la Startup)_  
-**Producto:** _(Nombre del Producto)_
+**Startup:** _Apex Twin_  
+**Producto:** _SmartPark_
 
 ### Plataforma de gestión inteligente de estacionamientos en centros comerciales basada en Digital Twins
 
@@ -23,14 +23,15 @@
 
 ### Relación de Integrantes
 
-| Código | Apellidos y Nombres |
-|---|---|
-| U20XXXXXX | _(Apellidos, Nombres)_ |
-| U20XXXXXX | _(Apellidos, Nombres)_ |
-| U20XXXXXX | _(Apellidos, Nombres)_ |
-| U20XXXXXX | _(Apellidos, Nombres)_ |
+| Código     | Apellidos y Nombres             |
+|------------|---------------------------------|
+| U202220829 | Riva Rodriguez, Elmer Augusto   |
+| u202216263 | Morales Calderon, Hernan Emilio |
+| U20211g671 | Qqueso Rodriguez, Britney Delhy |
+| U202210973 | Sanchez Rios, Camila Cristina   |
+| U202210297 | Valle Zuta, Abel Andrés         |
 
-**Lima, Perú — _(Mes) de 2026_**
+**Lima, Perú — Abril de 2026**
 
 </div>
 
@@ -38,29 +39,29 @@
 
 ## Registro de Versiones del Informe
 
-| Versión | Fecha | Autor | Descripción de modificación |
-|---|---|---|---|
-| 0.1.0 | YYYY-MM-DD | _(Nombre)_ | Versión inicial del informe para entrega TB1. Incluye Capítulos I, II, III y IV. |
-| | | | |
-| | | | |
+| Versión | Fecha      | Autor      | Descripción de modificación                                                      |
+|---------|------------|------------|----------------------------------------------------------------------------------|
+| 0.1.0   | YYYY-MM-DD | _(Nombre)_ | Versión inicial del informe para entrega TB1. Incluye Capítulos I, II, III y IV. |
+|         |            |            |                                                                                  |
+|         |            |            |                                                                                  |
 
 ---
 
 ## Project Report Collaboration Insights
 
-**URL del repositorio del informe:** `https://github.com/<organizacion>/report`
+**URL del repositorio del informe:** `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/report`
 
-**URL de la organización GitHub:** `https://github.com/<organizacion>`
+**URL de la organización GitHub:** `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark`
 
 ### Repositorios de productos digitales
 
-| Producto | Repositorio |
-|---|---|
-| Landing Page | `https://github.com/<organizacion>/landing-page` |
-| Web Application (Operador) | `https://github.com/<organizacion>/web-application` |
-| Web Services (API) | `https://github.com/<organizacion>/web-services` |
-| IoT Simulator | `https://github.com/<organizacion>/iot-simulator` |
-| Mobile App (PowerApps) | `https://github.com/<organizacion>/mobile-app` |
+| Producto                   | Repositorio                                                                  |
+|----------------------------|------------------------------------------------------------------------------|
+| Landing Page               | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/landing-page`    |
+| Web Application (Operador) | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-application` |
+| Web Services (API)         | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-services`    |
+| IoT Simulator              | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/iot-simulator`   |
+| Mobile App (PowerApps)     | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/mobile-app`      |
 
 ### Evidencias de colaboración
 
@@ -238,10 +239,10 @@ El curso contribuye al cumplimiento del Student Outcome ABET:
 
 En el siguiente cuadro se describe las acciones realizadas y enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET – EAC - Student Outcome 3.
 
-| Criterio específico | Acciones realizadas | Conclusiones |
-|---|---|---|
-| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | **_(Apellidos, Nombres del integrante 1)_**<br>**TB1**<br>_(Acciones específicas realizadas)_<br><br>**TP1**<br>_(Acciones específicas realizadas)_<br><br>**TB2**<br>_(Acciones específicas realizadas)_<br><br>**TF1**<br>_(Acciones específicas realizadas)_<br><br>**_(Apellidos, Nombres del integrante 2)_**<br>**TB1**<br>_(Acciones específicas realizadas)_ | _(Conclusiones grupales acumulables por entrega)_ |
-| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | **_(Apellidos, Nombres del integrante 1)_**<br>**TB1**<br>_(Acciones específicas realizadas)_<br><br>**TP1**<br>_(Acciones específicas realizadas)_ | _(Conclusiones grupales acumulables por entrega)_ |
+| Criterio específico                                                                                                                                                                       | Acciones realizadas                                                                                                                                                                                                                                                                                                                                                  | Conclusiones                                      |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.**    | **_(Apellidos, Nombres del integrante 1)_**<br>**TB1**<br>_(Acciones específicas realizadas)_<br><br>**TP1**<br>_(Acciones específicas realizadas)_<br><br>**TB2**<br>_(Acciones específicas realizadas)_<br><br>**TF1**<br>_(Acciones específicas realizadas)_<br><br>**_(Apellidos, Nombres del integrante 2)_**<br>**TB1**<br>_(Acciones específicas realizadas)_ | _(Conclusiones grupales acumulables por entrega)_ |
+| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | **_(Apellidos, Nombres del integrante 1)_**<br>**TB1**<br>_(Acciones específicas realizadas)_<br><br>**TP1**<br>_(Acciones específicas realizadas)_                                                                                                                                                                                                                  | _(Conclusiones grupales acumulables por entrega)_ |
 
 ---
 
@@ -255,8 +256,8 @@ _(Descripción de la startup: nombre, misión, visión, valores, propuesta de va
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
-| Foto | Nombre completo | Código | Carrera | Aporte al equipo |
-|---|---|---|---|---|
+| Foto       | Nombre completo        | Código    | Carrera                | Aporte al equipo                                    |
+|------------|------------------------|-----------|------------------------|-----------------------------------------------------|
 | _(Imagen)_ | _(Apellidos, Nombres)_ | U20XXXXXX | Ingeniería de Software | _(Conocimientos técnicos y habilidades que aporta)_ |
 | _(Imagen)_ | _(Apellidos, Nombres)_ | U20XXXXXX | Ingeniería de Software | _(Conocimientos técnicos y habilidades que aporta)_ |
 | _(Imagen)_ | _(Apellidos, Nombres)_ | U20XXXXXX | Ingeniería de Software | _(Conocimientos técnicos y habilidades que aporta)_ |
@@ -366,34 +367,34 @@ _(Características demográficas, hábitos de consumo, información estadística
 
 _(Introducción identificando los competidores directos e indirectos seleccionados, mínimo 3.)_
 
-| Competidor | Tipo | Logo |
-|---|---|---|
-| _(Parkopedia)_ | Directo / Indirecto | _(Imagen)_ |
-| _(SpotHero)_ | Directo / Indirecto | _(Imagen)_ |
+| Competidor      | Tipo                | Logo       |
+|-----------------|---------------------|------------|
+| _(Parkopedia)_  | Directo / Indirecto | _(Imagen)_ |
+| _(SpotHero)_    | Directo / Indirecto | _(Imagen)_ |
 | _(Park Assist)_ | Directo / Indirecto | _(Imagen)_ |
 
 ### 2.1.1. Análisis competitivo
 
 #### Competitive Analysis Landscape
 
-| | **¿Por qué llevar a cabo este análisis?** _(Objetivo del análisis)_ | | | |
-|---|---|---|---|---|
-| | **Tu Startup** | **Competidor 1** | **Competidor 2** | **Competidor 3** |
-| **Perfil** | | | | |
-| Overview | | | | |
-| Ventaja competitiva / ¿Qué valor ofrece a los clientes? | | | | |
-| **Perfil de Marketing** | | | | |
-| Mercado objetivo | | | | |
-| Estrategias de marketing | | | | |
-| **Perfil de Producto** | | | | |
-| Productos & Servicios | | | | |
-| Precios & Costos | | | | |
-| Canales de distribución (Web y/o Móvil) | | | | |
-| **Análisis SWOT** | | | | |
-| Fortalezas | | | | |
-| Debilidades | | | | |
-| Oportunidades | | | | |
-| Amenazas | | | | |
+|                                                         | **¿Por qué llevar a cabo este análisis?** _(Objetivo del análisis)_ |                  |                  |                  |
+|---------------------------------------------------------|---------------------------------------------------------------------|------------------|------------------|------------------|
+|                                                         | **Tu Startup**                                                      | **Competidor 1** | **Competidor 2** | **Competidor 3** |
+| **Perfil**                                              |                                                                     |                  |                  |                  |
+| Overview                                                |                                                                     |                  |                  |                  |
+| Ventaja competitiva / ¿Qué valor ofrece a los clientes? |                                                                     |                  |                  |                  |
+| **Perfil de Marketing**                                 |                                                                     |                  |                  |                  |
+| Mercado objetivo                                        |                                                                     |                  |                  |                  |
+| Estrategias de marketing                                |                                                                     |                  |                  |                  |
+| **Perfil de Producto**                                  |                                                                     |                  |                  |                  |
+| Productos & Servicios                                   |                                                                     |                  |                  |                  |
+| Precios & Costos                                        |                                                                     |                  |                  |                  |
+| Canales de distribución (Web y/o Móvil)                 |                                                                     |                  |                  |                  |
+| **Análisis SWOT**                                       |                                                                     |                  |                  |                  |
+| Fortalezas                                              |                                                                     |                  |                  |                  |
+| Debilidades                                             |                                                                     |                  |                  |                  |
+| Oportunidades                                           |                                                                     |                  |                  |                  |
+| Amenazas                                                |                                                                     |                  |                  |                  |
 
 ### 2.1.2. Estrategias y tácticas frente a competidores
 
