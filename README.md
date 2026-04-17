@@ -267,13 +267,21 @@ _(Descripción de la startup: nombre, misión, visión, valores, propuesta de va
 
 ### 1.2.1. Antecedentes y problemática
 
-_(Aplicar la técnica The 5 'W's & 2 'H's para describir antecedentes y problemática.)_
+La gestión de estacionamientos en centros comerciales de gran escala constituye una tarea operativa compleja que demanda coordinación simultánea entre múltiples variables: ocupación de plazas, seguridad, flujo vehicular e iluminación. En Lima, este reto se agrava por la dimensión que ha alcanzado el sector: la Asociación de Centros Comerciales y Entretenimiento del Perú (ACCEP) agrupa actualmente a 88 centros comerciales a nivel nacional, 48 de los cuales se ubican en Lima y 40 en provincias, según declaraciones de su presidente citadas por el diario Gestión (2025). A esta base ya consolidada se suman nuevas aperturas proyectadas, lo que presupone una demanda creciente de soluciones operativas más eficientes. A continuación se describe la problemática aplicando la técnica de las 5 W's y 2 H's.
 
 #### What (¿Qué?)
-_(Descripción del problema central.)_
+
+El problema central radica en la ausencia de visibilidad integral y en tiempo real sobre el estado operativo del estacionamiento como un sistema unificado. Según Parklio (2023), "la principal dificultad en la gestión de los estacionamientos de los centros comerciales es la falta de informes en tiempo real sobre la ocupación de los mismos"; una limitación que se extiende igualmente a la seguridad, el flujo vehicular y el consumo energético. En la práctica, los operadores gestionan cada una de estas dimensiones con herramientas aisladas que no intercambian datos ni los contextualizan en un modelo espacial común.
+
+Esta fragmentación tiene consecuencias concretas. No es posible, por ejemplo, identificar de forma inmediata que una alerta de humo se está produciendo en una zona con alta ocupación de vehículos y personas, lo cual comprometería las rutas de evacuación disponibles. Del mismo modo, resulta inviable correlacionar los datos de ocupación por zona con los niveles de iluminación para tomar decisiones de ahorro energético en tiempo real. Del lado del conductor, el problema se traduce en una experiencia marcada por la incertidumbre: tiempo perdido buscando plazas libres, dificultad para localizar el vehículo al salir y falta de información ante incidentes en la zona donde se encuentra estacionado.
 
 #### When (¿Cuándo?)
-_(Cuándo ocurre el problema, frecuencia, momentos críticos.)_
+
+La problemática se intensifica en los momentos de mayor afluencia vehicular: fines de semana, feriados, campañas navideñas, Cyber Days y las franjas horarias de almuerzo y salida laboral (12:00–14:00 y 18:00–21:00). Durante estos períodos pico, los estacionamientos de centros comerciales grandes pueden superar el 90% de su capacidad, y el tiempo invertido en buscar una plaza puede extenderse considerablemente.
+
+En cuanto a la magnitud del fenómeno, un análisis comparativo de 16 estudios realizados en 11 ciudades del mundo —llevado a cabo por Shoup (2006, citado en BID, 2020)— concluye que encontrar un espacio de estacionamiento tarda en promedio 8,1 minutos y contribuye con hasta el 30% de la congestión vehicular urbana. Por su parte, INRIX Research (2017), en un estudio que combinó datos de su base de más de 100 000 ubicaciones en 8 700 ciudades con encuestas a cerca de 18 000 conductores en Estados Unidos, Reino Unido y Alemania, calculó que el conductor promedio en zonas urbanas destina 17 horas al año a la búsqueda de estacionamiento, con un costo de USD 345 en tiempo perdido, combustible y emisiones. En estacionamientos subterráneos de múltiples niveles, estas estimaciones tienden a agravarse por la ausencia de señalización dinámica que oriente al conductor hacia las zonas disponibles.
+
+En lo que respecta a la seguridad, los incidentes como alertas de humo son poco frecuentes pero de naturaleza impredecible. Un esquema de detección manual, en el que el operador recibe únicamente una señal genérica sin contexto espacial, puede derivar en tiempos de reacción que superan los 5 minutos desde la activación de la alarma hasta la confirmación visual del foco; un margen crítico en un espacio cerrado con presencia simultánea de vehículos y personas.
 
 #### Where (¿Dónde?)
 _(Contexto físico, geográfico y digital donde ocurre.)_
