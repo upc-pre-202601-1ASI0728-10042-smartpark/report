@@ -260,6 +260,14 @@ Democratizar el acceso a tecnologías de Digital Twin para la gestión operativa
 **Visión:**
 Convertirnos en el referente tecnológico de Latinoamérica en soluciones de gestión inteligente de estacionamientos basadas en gemelos digitales, con presencia en los principales centros comerciales de Perú, Colombia y Chile hacia 2029.
 
+**Producto: SmartPark**
+
+SmartPark ofrece una plataforma SaaS (Software as a Service) que integra cuatro dimensiones operativas normalmente gestionadas como silos independientes: ocupación de plazas, seguridad contra incendios, flujo vehicular y eficiencia energética. El núcleo de la solución es un gemelo digital construido sobre Azure Digital Twins, que reproduce el estacionamiento en un modelo 3D interactivo y lo sincroniza continuamente con datos provenientes de sensores IoT.
+
+La plataforma se materializa en dos productos digitales diferenciados por perfil de usuario. El primero es una aplicación web desarrollada en Angular, orientada al operador del centro comercial, que presenta el gemelo digital 3D como panel central de operaciones: mapas de ocupación en tiempo real, alertas de humo con localización espacial, indicadores de flujo vehicular y recomendaciones de eficiencia energética. El segundo es una aplicación móvil low-code construida con Microsoft PowerApps, orientada al conductor, que le permite consultar la disponibilidad de plazas, registrar la ubicación de su vehículo, monitorear el costo acumulado de su sesión y recibir alertas de seguridad vía push notifications a través de Firebase Cloud Messaging.
+
+El modelo de negocio se sustenta en una suscripción mensual por centro comercial, con tres planes escalonados según la cantidad de plazas monitoreadas (Basic hasta 500 plazas, Professional hasta 1 500 plazas, Enterprise por encima de 1 500 plazas), complementado con un esquema freemium para la aplicación del conductor.
+
 ### 1.1.2. Perfiles de integrantes del equipo
 
 | Foto       | Nombre completo        | Código    | Carrera                | Aporte al equipo                                    |
