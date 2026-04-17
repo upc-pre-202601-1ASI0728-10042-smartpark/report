@@ -252,7 +252,13 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 ### 1.1.1. Descripción de la Startup
 
-_(Descripción de la startup: nombre, misión, visión, valores, propuesta de valor única, mercado objetivo, modelo de negocio. Incluir logo de la startup.)_
+**Apex Twin** es una startup tecnológica fundada en 2026 por estudiantes de Ingeniería de Software de la Universidad Peruana de Ciencias Aplicadas (UPC), orientada a la transformación digital de la gestión de estacionamientos en centros comerciales de gran escala. Su origen responde a una observación directa y recurrente: la ausencia de una plataforma unificada que permita monitorear, analizar y actuar sobre el estado integral de un estacionamiento en tiempo real perjudica tanto a los operadores que lo gestionan como a los conductores que lo utilizan.
+
+**Misión:**
+Democratizar el acceso a tecnologías de Digital Twin para la gestión operativa de estacionamientos, transformando espacios físicos en entornos inteligentes que optimicen la experiencia del conductor, la eficiencia operativa y la seguridad.
+
+**Visión:**
+Convertirnos en el referente tecnológico de Latinoamérica en soluciones de gestión inteligente de estacionamientos basadas en gemelos digitales, con presencia en los principales centros comerciales de Perú, Colombia y Chile hacia 2029.
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
