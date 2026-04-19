@@ -284,13 +284,16 @@ En cuanto a la magnitud del fenómeno, un análisis comparativo de 16 estudios r
 En lo que respecta a la seguridad, los incidentes como alertas de humo son poco frecuentes pero de naturaleza impredecible. Un esquema de detección manual, en el que el operador recibe únicamente una señal genérica sin contexto espacial, puede derivar en tiempos de reacción que superan los 5 minutos desde la activación de la alarma hasta la confirmación visual del foco; un margen crítico en un espacio cerrado con presencia simultánea de vehículos y personas.
 
 #### Where (¿Dónde?)
-_(Contexto físico, geográfico y digital donde ocurre.)_
+
+El problema se presenta en los estacionamientos subterráneos y de superficie de centros comerciales de gran escala en Lima. Según datos del Instituto de Economía y Desarrollo Empresarial (IEDEP) de la Cámara de Comercio de Lima, citados por el diario Gestión (2024), el Perú proyectó la apertura de siete nuevos centros comerciales para el periodo 2023-2025, lo que evidencia un mercado en expansión sostenida. Estableciminetos como el Jockey Plaza, Mall del Sur —que cuenta con más de 2 000 plazas distribuidas en dos niveles subterráneos (Intellisoft Parking, s.f.)—, Plaza Norte, MegaPlaza y Real Plaza Puruchuco son ejemplos de complejos donde la extensión del estacionamiento, combinada con la baja visibilidad natural y la alta rotación vehicular, hace que el seguimiento manual del estado operativo resulte estructuralmente insuficiente.
 
 #### Who (¿Quién?)
-_(Actores afectados: operadores de estacionamientos, conductores, administradores de centros comerciales.)_
+
+Dos segmentos se ven directamente afectados. El primero está compuesto por los **operadores de estacionamientos de centros comerciales** —jefes de operaciones, supervisores de seguridad y facility managers—, quienes coordinan la ocupación, gestionan incidentes, supervisan el flujo vehicular y controlan el consumo energético, hoy con herramientas reactivas y desconectadas entre sí. El segundo segmento lo conforman los **conductores frecuentes de centros comerciales**, personas que visitan regularmente estos espacios en vehículo propio y cuya experiencia de estacionamiento condiciona su percepción general del servicio del establecimiento.
 
 #### Why (¿Por qué?)
-_(Causas raíz del problema.)_
+
+Las causas raíz de la problemática son múltiples y se refuerzan entre sí. La primera es una **fragmentación tecnológica estructural**: los sistemas de control de acceso vehicular, los paneles de detección de incendios, los contadores de flujo y los sistemas de iluminación operan con protocolos propietarios que no intercambian información. La segunda causa es la **ausencia de contexto espacial**: aunque el operador reciba una alerta de humo, no puede visualizar de inmediato su ubicación exacta en relación con las plazas ocupadas, las rutas de evacuación o los accesos vehiculares. En tercer lugar, la **gestión predominantemente reactiva** hace que los problemas —congestión en rampas, iluminación innecesaria, concentración vehicular en un sector— sean atendidos después de que ya se manifiestan. Para el conductor, la causa de fondo es la **inexistencia de un canal digital** entre el sistema de gestión del estacionamiento y quien lo utiliza.
 
 #### How (¿Cómo?)
 _(Cómo se manifiesta el problema en la operación diaria.)_
