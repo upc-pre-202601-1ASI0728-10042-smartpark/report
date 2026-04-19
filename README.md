@@ -1824,21 +1824,29 @@ _(Resumen del proceso de trabajo, pauta de secuencias con timing, screenshot del
 
 # Bibliografía
 
-_(Referencias en formato APA.)_
+Asociación de Centros Comerciales y Entretenimiento del Perú (ACCEP). (2025). Declaraciones de su presidente José Antonio Contreras. Citadas en: Gestión. (2025, diciembre). *Centros comerciales alcanzarían ventas por S/ 40 000 millones este año y crecerían 10%, según ACCEP*. https://gestion.pe/economia/centros-comerciales-alcanzarian-ventas-por-s-40000-millones-este-ano-y-crecerian-10-segun-accep-noticia/
 
-- Brown, S. (2018). _The C4 model for visualising software architecture_. C4 Model. https://c4model.com/
-- Cervantes, H., & Kazman, R. (2016). _Designing Software Architectures: A Practical Approach_. Addison-Wesley.
-- Driessen, V. (2010). _A successful Git branching model_. https://nvie.com/posts/a-successful-git-branching-model/
-- Evans, E. (2003). _Domain-Driven Design: Tackling Complexity in the Heart of Software_. Addison-Wesley.
-- Fowler, M. (2006). _UbiquitousLanguage_. martinfowler.com. https://martinfowler.com/bliki/UbiquitousLanguage.html
-- Gothelf, J., & Seiden, J. (2021). _Lean UX: Designing Great Products with Agile Teams_ (3rd ed.). O'Reilly Media.
-- Microsoft. (2025). _Azure Digital Twins documentation_. https://learn.microsoft.com/en-us/azure/digital-twins/
-- Microsoft. (2025). _3D Scenes Studio (preview) for Azure Digital Twins_. https://learn.microsoft.com/en-us/azure/digital-twins/concepts-3d-scenes-studio
-- Microsoft. (2025). _Microsoft Power Apps documentation_. https://learn.microsoft.com/en-us/power-apps/
-- Nielsen, J. (1994). _10 Usability Heuristics for User Interface Design_. Nielsen Norman Group. https://www.nngroup.com/articles/ten-usability-heuristics/
-- Preston-Werner, T. (2013). _Semantic Versioning 2.0.0_. https://semver.org/
+Asociación Peruana de Empresas de Inteligencia de Mercados (APEIM). (2023). *Niveles socioeconómicos 2023-2024: Lima Metropolitana*. APEIM. https://apeim.com.pe/wp-content/uploads/2024/01/APEIM-Informe-de-Niveles-Socioeconomicos-2023-2024-Version-WEB.pdf
 
-_(Continuar con todas las referencias utilizadas.)_
+Banco Interamericano de Desarrollo (BID). (2020, 13 de abril). *La pesadilla de buscar estacionamiento, sobre la mesa* [Entrada de blog]. Moviliblog. https://blogs.iadb.org/transporte/es/la-pesadilla-de-buscar-estacionamiento-sobre-la-mesa/
+
+Cámara de Comercio de Lima — Instituto de Economía y Desarrollo Empresarial (IEDEP). (2024). Proyecciones de apertura de nuevos centros comerciales 2023–2025. Citadas en: Gestión. (2024, 17 de enero). *Ventas de malls del 2023 superaron las del año anterior, según ACCEP*. https://gestion.pe/economia/empresas/ventas-de-malls-del-2023-superaron-las-del-ano-anterior-segun-accep-centros-comerciales-empresas-noticia/
+
+Intellisoft Parking. (s.f.). *Mall del Sur*. Recuperado el 16 de abril de 2026, de https://intellisoftparking.com/park/index.php/proyectos/mall-del-sur.html
+
+INRIX Research. (2017, 12 de julio). *Searching for parking costs Americans $73 billion a year* [Nota de prensa]. INRIX. https://inrix.com/press-releases/parking-pain-us/
+
+Millard-Ball, A., Weinberger, R., & Hampshire, R. C. (2014). Is the curb 80% full or 20% empty? Assessing the impacts of San Francisco's parking pricing experiment. *Transportation Research Part A: Policy and Practice*, *63*, 76–92. Citado en BID (2020).
+
+Ministerio de Vivienda, Construcción y Saneamiento. (2006). *Reglamento Nacional de Edificaciones: Norma técnica EM.010 Instalaciones eléctricas interiores*. Diario Oficial El Peruano.
+
+Parklio. (2023). *Soluciones de administración de estacionamientos para centro comercial*. https://parklio.com/es/casos-de-uso/soluciones-y-sistemas-de-gestion-de-estacionamientos-para-centro-comercial
+
+Perú21. (2023, 10 de noviembre). *Recesión golpeará más al nivel socioeconómico C*. https://peru21.pe/economia/recesion-golpeara-mas-al-nivel-socioeconomico-c-noticia/
+
+San Francisco Municipal Transportation Agency (SFMTA). (2014). *SFpark: Putting theory into practice*. Citado en BID (2020).
+
+Shoup, D. C. (2006). Cruising for parking. *Transport Policy*, *13*(6), 479–486. Citado en BID (2020).
 
 ---
 
