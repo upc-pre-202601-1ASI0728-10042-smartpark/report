@@ -126,14 +126,14 @@ _(Pendiente)_
     - [2.1.2. Estrategias y tácticas frente a competidores](#212-estrategias-y-tácticas-frente-a-competidores)
   - [2.2. Entrevistas](#22-entrevistas)
     - [2.2.1. Diseño de entrevistas](#221-diseño-de-entrevistas)
-      - [Preguntas para Segmento 1: Operadores de estacionamiento](#preguntas-para-segmento-1-operadores-de-estacionamiento)
-      - [Preguntas para Segmento 2: Conductores](#preguntas-para-segmento-2-conductores)
+      - [Preguntas para Segmento 1: Operadores de estacionamientos en centros comerciales](#preguntas-para-segmento-1-operadores-de-estacionamientos-en-centros-comerciales)
+      - [Preguntas para Segmento 2: Conductores frecuentes de centros comerciales](#preguntas-para-segmento-2-conductores-frecuentes-de-centros-comerciales)
     - [2.2.2. Registro de entrevistas](#222-registro-de-entrevistas)
-      - [Segmento 1: Operadores](#segmento-1-operadores)
-      - [Segmento 2: Conductores](#segmento-2-conductores)
+      - [Segmento 1: Operadores de estacionamientos en centros comerciales](#segmento-1-operadores-de-estacionamientos-en-centros-comerciales-1)
+      - [Segmento 2: Conductores frecuentes de centros comerciales](#segmento-2-conductores-frecuentes-de-centros-comerciales-1)
     - [2.2.3. Análisis de entrevistas](#223-análisis-de-entrevistas)
-      - [Segmento 1: Operadores](#segmento-1-operadores-1)
-      - [Segmento 2: Conductores](#segmento-2-conductores-1)
+      - [Segmento 1: Operadores de estacionamientos en centros comerciales](#segmento-1-operadores-de-estacionamientos-en-centros-comerciales-2)
+      - [Segmento 2: Conductores frecuentes de centros comerciales](#segmento-2-conductores-frecuentes-de-centros-comerciales-2)
   - [2.3. Needfinding](#23-needfinding)
     - [2.3.1. User Personas](#231-user-personas)
       - [User Persona 1: Operador de Estacionamiento](#user-persona-1-operador-de-estacionamiento)
@@ -606,35 +606,81 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
 
 ### 2.2.1. Diseño de entrevistas
 
-#### Preguntas para Segmento 1: Operadores de estacionamiento
+#### Preguntas para Segmento 1: Operadores de estacionamientos en centros comerciales
 
 **Preguntas demográficas y de contexto**
 1. ¿Cuál es su nombre, edad y cargo?
-2. ¿En qué centro comercial trabaja y desde hace cuánto?
-3. ¿Qué tan grande es el estacionamiento que opera (cantidad de plazas, niveles)?
+2. ¿Cuál es su cargo actual y cuánto tiempo lleva trabajando en la gestión de estacionamientos?
+3. ¿Cuántas plazas de estacionamiento tiene aproximadamente el centro comercial donde trabaja?
+4. Descríbame un día típico de trabajo. ¿Cuáles son sus responsabilidades principales?
+5. ¿Qué herramientas o sistemas tecnológicos utiliza actualmente para gestionar el estacionamiento?
 
 **Preguntas principales**
-1. _(¿Cómo monitorea actualmente el estado de ocupación del estacionamiento?)_
-2. _(¿Qué herramientas tecnológicas utiliza día a día?)_
-3. _(...)_
+1. ¿Cómo monitorean actualmente el nivel de ocupación del estacionamiento?
+2. ¿Con qué frecuencia se presentan errores o discrepancias en el conteo de vehículos? ¿Qué impacto tienen?
+3. ¿Pueden saber en tiempo real cuáles son las zonas o niveles más ocupados y cuáles tienen mayor disponibilidad?
+4. ¿Qué tan rápido pueden identificar si se ha alcanzado la capacidad máxima del estacionamiento?
+5. ¿Qué tipo de incidentes de seguridad han enfrentado en el estacionamiento? (humo, accidentes, vandalismo, etc.)
+6. Cuando reciben una alerta de seguridad, ¿cómo saben exactamente dónde está ocurriendo el incidente?
+7. ¿Cuánto tiempo transcurre, en promedio, desde que reciben una alerta hasta que confirman visualmente la ubicación del problema?
+8. ¿Cómo coordinan la evacuación o el cierre de zonas cuando hay un incidente de seguridad?
+9. ¿En qué momentos del día o de la semana se presentan las mayores congestiones vehiculares dentro del estacionamiento?
+10. ¿Tienen visibilidad sobre los cuellos de botella en rampas o accesos? ¿Cómo los detectan?
+11. ¿Qué medidas toman cuando identifican una congestión interna?
+12. ¿Cómo gestionan actualmente la iluminación del estacionamiento?
+13. ¿Existe algún esquema de atenuación o apagado de luces en zonas desocupadas?
+14. ¿Han medido el consumo energético del estacionamiento? ¿Qué porcentaje representa del consumo total del centro comercial?
 
 **Preguntas complementarias**
-1. _(...)_
+1. ¿Cuál es el mayor dolor de cabeza que enfrenta en su trabajo diario relacionado con la gestión del estacionamiento?
+2. Si pudiera tener una herramienta ideal para gestionar el estacionamiento, ¿qué funcionalidad no podría faltar?
+3. ¿Qué información le gustaría poder consultar en tiempo real que hoy no tiene disponible?
+4. ¿Considera que las herramientas actuales le permiten tomar decisiones proactivas o solo reaccionar ante problemas ya manifiestos?
+5. ¿Qué tan abierto estaría a implementar una nueva plataforma tecnológica si esta le brindara visibilidad integral del estacionamiento?
+6. ¿Cuáles serían sus principales preocupaciones al evaluar una solución de este tipo? (costo, complejidad, integración, capacitación, etc.)
+7. ¿Preferiría una solución que requiera inversión en sensores desde el inicio, o una que permita empezar con datos simulados para evaluar el valor antes de invertir en hardware?
 
-#### Preguntas para Segmento 2: Conductores
+#### Preguntas para Segmento 2: Conductores frecuentes de centros comerciales
 
 **Preguntas demográficas y de contexto**
 1. ¿Cuál es su nombre, edad, distrito de residencia y ocupación?
-2. ¿Con qué frecuencia visita centros comerciales?
+2. ¿Con qué frecuencia visita centros comerciales en su vehículo propio?
+3. ¿Cuáles son los centros comerciales que frecuenta habitualmente?
+4. ¿En qué días y horarios suele visitarlos?
+5. ¿Cuánto tiempo permanece en el centro comercial en una visita típica?
+6. ¿Qué actividades realiza principalmente? (compras, gastronomía, entretenimiento, servicios, etc.)
 
 **Preguntas principales**
-1. _(¿Cuánto tiempo promedio invierte buscando estacionamiento?)_
-2. _(¿Le ha pasado perder su vehículo dentro de un estacionamiento?)_
-3. _(...)_
+1. Cuénteme sobre su experiencia la última vez que fue a estacionar en un centro comercial. ¿Cómo fue el proceso de encontrar una plaza?
+2. ¿Cuánto tiempo le toma habitualmente encontrar una plaza libre cuando llega al estacionamiento?
+3. ¿Ese tiempo varía según el día u horario? ¿En qué momentos es más difícil encontrar espacio?
+4. ¿Qué estrategia sigue para buscar estacionamiento? (¿va directo a un nivel específico, recorre todos los niveles, sigue señalización, etc.?)
+5. ¿Alguna vez ha considerado no visitar un centro comercial o cambiar de destino por dificultades para estacionar?
+6. ¿Cómo recuerda dónde dejó su vehículo cuando regresa de sus compras?
+7. ¿Alguna vez ha tenido dificultad para encontrar su vehículo al regresar? ¿Qué hizo?
+8. ¿Toma alguna fotografía, nota mental o utiliza alguna app para recordar la ubicación?
+9. ¿Cómo se entera del costo total de su estadía en el estacionamiento?
+10. ¿Le gustaría poder consultar el costo acumulado en tiempo real mientras está en el centro comercial?
+11. ¿Qué tan importante es para usted conocer las tarifas antes de ingresar al estacionamiento?
+12. ¿Alguna vez ha presenciado o ha sido informado de un incidente de seguridad (humo, alarma, accidente) mientras estaba en el estacionamiento?
+13. En caso de un incidente de seguridad, ¿cómo le gustaría ser notificado? (altavoces, mensaje en su celular, señalización digital, etc.)
+14. ¿Qué tan importante es para usted recibir información sobre la seguridad de la zona donde dejó su vehículo?
+
+**Preguntas complementarias**
+1. ¿Utiliza aplicaciones móviles en su día a día? ¿Cuáles son las que más usa? (Waze, Yape, Rappi, etc.)
+2. ¿Estaría dispuesto a descargar una app que le ayude a encontrar estacionamiento disponible y a localizar su vehículo?
+3. ¿Qué características debería tener esa app para que la use regularmente?
+4. ¿Qué tan importante es que la app sea rápida y simple de usar?
+5. ¿Cuál es el aspecto más frustrante de su experiencia de estacionamiento en centros comerciales?
+6. Si pudiera mejorar algo sobre la forma en que funcionan los estacionamientos de centros comerciales, ¿qué sería?
+7. ¿Qué haría que su experiencia de estacionamiento pasara de frustrante a satisfactoria?
+8. Si existiera una app gratuita que le mostrara en tiempo real dónde hay espacios disponibles, ¿la usaría?
+9. ¿Estaría dispuesto a registrar su ubicación de estacionamiento con un botón en la app para poder encontrar su vehículo después?
+10. ¿Qué tan valioso sería para usted recibir alertas de seguridad en su celular si hay un incidente cerca de donde está su vehículo?
 
 ### 2.2.2. Registro de entrevistas
 
-#### Segmento 1: Operadores
+#### Segmento 1: Operadores de estacionamientos en centros comerciales
 
 **Entrevista 1**
 
@@ -662,7 +708,7 @@ _(Misma estructura)_
 **Entrevista 3 — Operador**  
 _(Misma estructura)_
 
-#### Segmento 2: Conductores
+#### Segmento 2: Conductores frecuentes de centros comerciales
 
 **Entrevista 1 — Conductor**  
 _(Misma estructura)_
@@ -675,7 +721,7 @@ _(Misma estructura)_
 
 ### 2.2.3. Análisis de entrevistas
 
-#### Segmento 1: Operadores
+#### Segmento 1: Operadores de estacionamientos en centros comerciales
 
 _(Análisis con sustento estadístico — porcentajes — de las características objetivas y subjetivas más comunes encontradas. Cada característica debe tener relación clara con las entrevistas registradas.)_
 
@@ -684,7 +730,7 @@ _(Análisis con sustento estadístico — porcentajes — de las característica
 | _(Edad promedio entre 35-50 años)_ | _(80%)_ | _(E1, E2, E4)_ |
 | _(Usa Excel para registro manual)_ | _(60%)_ | _(E1, E3, E5)_ |
 
-#### Segmento 2: Conductores
+#### Segmento 2: Conductores frecuentes de centros comerciales
 
 _(Mismo formato de análisis para el segmento de conductores.)_
 
