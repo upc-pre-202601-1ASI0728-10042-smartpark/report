@@ -331,18 +331,40 @@ Hemos observado que los conductores frecuentes —personas entre 25 y 55 años, 
 
 **Business Assumptions**
 
-| ID | Assumption |
-|---|---|
-| BA-01 | _(Los operadores de centros comerciales están dispuestos a invertir en una plataforma de gestión inteligente de estacionamientos.)_ |
-| BA-02 | _(Los conductores adoptarán una app móvil que reduzca su tiempo de búsqueda de plaza.)_ |
-| BA-03 | _(...)_ |
+1. **Creemos que nuestros clientes necesitan** una plataforma que unifique en una sola vista las dimensiones operativas del estacionamiento (ocupación, seguridad, flujo, energía), contextualizadas espacialmente en un modelo 3D.
+2. **Estas necesidades se pueden resolver con** una solución basada en Azure Digital Twins que reproduzca el estacionamiento como gemelo digital, alimentado por datos de sensores IoT y consumido por una aplicación web para el operador y una aplicación móvil para el conductor.
+3. **Nuestros clientes iniciales son** operadores de estacionamientos de centros comerciales de Lima Metropolitana con más de 500 plazas, y conductores entre 25 y 55 años de NSE B/C que los frecuentan semanalmente con vehículo propio.
+4. **El valor número 1 que un cliente quiere de nuestro servicio es** visibilidad unificada en tiempo real con contexto espacial para el operador, y reducción del tiempo de búsqueda de plaza para el conductor.
+5. **El cliente también puede obtener estos beneficios adicionales:** reducción de costos energéticos por atenuación inteligente de iluminación, mejora del tiempo de respuesta ante incidentes de seguridad, y datos históricos de ocupación para planificación operativa.
+6. **Vamos a adquirir la mayoría de nuestros clientes a través de** demostraciones presenciales a administraciones de centros comerciales y del Landing Page con contenido segmentado y llamadas a acción diferenciadas por tipo de usuario.
+7. **Haremos dinero a través de** un modelo de suscripción mensual por centro comercial con planes diferenciados según cantidad de plazas monitoreadas (Plan Basic: hasta 500 plazas, Plan Professional: hasta 1 500 plazas, Plan Enterprise: más de 1 500 plazas), complementado con modelo freemium para la app del conductor.
+8. **Nuestra competencia principal en el mercado será** soluciones de parking guidance como ParkHelp/Cleverciti, plataformas de reserva como SpotHero, y sistemas de gestión integral como Park Assist. Nuestra ventaja competitiva radica en la integración de múltiples dimensiones operativas bajo un gemelo digital 3D.
+9. **Los venceremos debido a** que las soluciones existentes se enfocan exclusivamente en guía de ocupación sin contextualizar seguridad, flujo y energía en un modelo espacial unificado. Ningún competidor ofrece un gemelo digital accesible como SaaS para centros comerciales de mercados emergentes.
+10. **Nuestro mayor riesgo de producto es** que los operadores de centros comerciales consideren que la inversión en un gemelo digital no justifica el retorno frente a soluciones puntuales más simples.
+11. **Resolveremos esto a través de** una prueba piloto con datos simulados que demuestre el valor de la correlación espacial sin requerir inversión inicial en hardware IoT, reduciendo la barrera de entrada.
+12. **Sabremos que tenemos éxito cuando veamos** que al menos 3 centros comerciales solicitan acceso a la plataforma tras la demostración piloto, y que los conductores de prueba reportan una reducción percibida de al menos el 50% en el tiempo de búsqueda de plaza.
 
 **User Assumptions**
 
-| ID | ¿Quién es el usuario? | ¿Dónde encaja nuestro producto en su día? | ¿Qué problemas resuelve? | ¿Cuándo y cómo lo usa? | ¿Qué features son importantes? | ¿Cómo debería verse y comportarse? |
-|---|---|---|---|---|---|---|
-| UA-01 | _(Operador)_ | _(...)_ | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| UA-02 | _(Conductor)_ | _(...)_ | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
+**¿Quién es el usuario?**
+Los usuarios primarios son dos: (a) operadores de estacionamientos de centros comerciales, profesionales de entre 30 y 55 años con experiencia en gestión de facilities o seguridad, familiaridad tecnológica intermedia y uso cotidiano de dashboards y sistemas de monitoreo; y (b) conductores frecuentes de centros comerciales, personas de 25 a 55 años, NSE B/C, con smartphone Android o iOS y alta familiaridad con aplicaciones móviles de uso diario como Yape, Rappi o Waze.
+
+**¿Dónde encaja nuestro producto en su vida o trabajo?**
+Para el operador, la plataforma se integra en su rutina diaria como panel central de operaciones, reemplazando la consulta fragmentada de múltiples sistemas y reportes manuales. Se usaría durante toda la jornada laboral, con mayor intensidad en horarios pico y ante incidentes. Para el conductor, la aplicación se activa en momentos específicos y breves: al ingresar al estacionamiento para buscar plaza, al estacionar para registrar la ubicación, durante su estadía para consultar el costo y al regresar para localizar el vehículo.
+
+**¿Qué problemas tiene nuestro producto que resolver?**
+Para el operador: eliminar la fragmentación entre sistemas, proporcionar contexto espacial a las alertas y habilitar decisiones proactivas de flujo y energía. Para el conductor: reducir el tiempo de búsqueda de plaza, eliminar la incertidumbre sobre la ubicación del vehículo y brindar seguridad mediante alertas oportunas.
+
+**¿Cuándo y cómo es usado nuestro producto?**
+El dashboard web del operador es utilizado durante todo el horario operativo del estacionamiento (8 a. m. - 11 p. m.), desde una estación de trabajo con monitor grande en el centro de control. La app del conductor se utiliza en cada visita al centro comercial, con sesiones muy cortas —de 30 segundos a 2 minutos— pero de alto valor.
+
+**¿Qué características son importantes?**
+Para el operador: visualización 3D con estado en tiempo real, alertas con localización espacial precisa, indicadores de flujo por acceso y rampa, y recomendaciones de atenuación de iluminación. Para el conductor: mapa de disponibilidad por zona y nivel, registro rápido de ubicación con un toque, consulta de costo acumulado y push notifications ante incidentes en su zona.
+
+**¿Cómo debe verse y comportarse nuestro producto?**
+El dashboard del operador debe transmitir profesionalismo y confianza técnica, con un lenguaje de diseño basado en Material Design y gama cromática sobria con acentos de alerta (rojo para humo, ámbar para congestión, verde para disponibilidad). La app del conductor, en cambio, debe ser visualmente simple, con interacciones mínimas y tiempos de carga inferiores a 3 segundos, priorizando la legibilidad en condiciones de baja iluminación propias de los estacionamientos subterráneos.
+
+---
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
