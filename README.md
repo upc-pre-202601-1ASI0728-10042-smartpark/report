@@ -353,7 +353,21 @@ _(Insertar imagen del Lean UX Canvas v2 elaborado en Miro o LucidChart.)_
 
 ### Segmento 1: Operadores de estacionamientos en centros comerciales
 
-_(Características demográficas, perfil profesional, información estadística de sustento con citas.)_
+Este segmento agrupa a los profesionales responsables de la gestión operativa de estacionamientos en centros comerciales de gran escala en Lima Metropolitana.
+
+**Características demográficas y profesionales:**
+Tienen entre 30 y 55 años, con una composición predominantemente masculina —aunque con creciente participación femenina en roles de facility management— y formación técnica o universitaria en administración, ingeniería industrial, seguridad o carreras afines. Sus cargos típicos incluyen Jefe de Operaciones de Estacionamiento, Supervisor de Seguridad, Facility Manager y Coordinador de Mantenimiento. Trabajan en turnos rotativos de 8 a 12 horas que cubren el horario operativo del centro comercial (8 a. m. - 11 p. m.) y acumulan al menos 3 años de experiencia en operaciones o mantenimiento de edificaciones comerciales.
+
+**Perfil tecnológico:**
+Su familiaridad con la tecnología es intermedia: manejan cotidianamente circuitos cerrados de cámaras (CCTV), paneles de detección de incendios y sistemas de control de acceso vehicular. El dispositivo principal de trabajo es una PC de escritorio con monitor grande ubicada en el centro de control del estacionamiento, complementada con un smartphone Android para coordinación vía WhatsApp. Su browser habitual es Google Chrome y sus canales digitales preferidos son el correo corporativo y WhatsApp Business.
+
+**Necesidades operativas:**
+Los miembros de este segmento buscan, ante todo, visibilidad consolidada del estado del estacionamiento sin depender de recorridos presenciales. Les interesa también responder rápida y coordinadamente ante incidentes de seguridad, contar con datos que justifiquen inversiones ante la administración del centro comercial y reducir costos operativos, especialmente en consumo energético.
+
+**Sustento estadístico:**
+Según el presidente de ACCEP, citado por el diario Gestión (2025), el sector agrupa actualmente 88 centros comerciales a nivel nacional, 48 de ellos en Lima. Los de mayor escala —como el Jockey Plaza, Mall del Sur, Plaza Norte y MegaPlaza— operan estacionamientos con más de 1 000 plazas, que demandan equipos de operación de entre 5 y 15 personas por turno. De acuerdo con datos del IEDEP de la Cámara de Comercio de Lima, citados por Gestión (2024), el sector proyectó la apertura de siete nuevos centros comerciales para el periodo 2023-2025, lo que confirma la tendencia de crecimiento y la demanda futura de soluciones de gestión operativa más avanzadas.
+
+---
 
 ### Segmento 2: Conductores frecuentes de centros comerciales
 
