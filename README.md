@@ -368,17 +368,31 @@ El dashboard del operador debe transmitir profesionalismo y confianza técnica, 
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
-**Hypothesis 1**  
-We believe that **_(business outcome esperado)_**  
-will be achieved if **_(usuarios objetivo)_**  
-attain **_(beneficio para el usuario)_**  
-with **_(feature propuesto)_**.
+**Hypothesis Statement 1: Reducción del tiempo de respuesta ante incidentes**
 
-**Hypothesis 2**  
-We believe that...
+Creemos que lograremos una **reducción del 60% en el tiempo de respuesta del operador ante alertas de humo** si los **operadores de estacionamientos de centros comerciales** obtienen **localización espacial inmediata del foco de la alerta en el modelo 3D, con visualización simultánea de las plazas ocupadas y rutas de evacuación comprometidas en la zona afectada** con la funcionalidad de **alerta de humo con contexto espacial en el dashboard 3D del gemelo digital**.
 
-**Hypothesis 3**  
-We believe that...
+**Hypothesis Statement 2: Reducción del tiempo de búsqueda de plaza**
+
+Creemos que lograremos una **reducción del 40% en el tiempo promedio que un conductor invierte buscando una plaza libre** si los **conductores frecuentes de centros comerciales** obtienen **información en tiempo real sobre la disponibilidad de espacios por zona y nivel, con orientación hacia el área de mayor disponibilidad** con la funcionalidad de **mapa de disponibilidad en la aplicación móvil PowerApps**.
+
+**Hypothesis Statement 3: Optimización del consumo energético**
+
+Creemos que lograremos una **reducción del 20% en el consumo energético de iluminación del estacionamiento** si los **operadores de estacionamientos de centros comerciales** obtienen **identificación automática de zonas con ocupación inferior al 20% donde la iluminación puede atenuarse, presentada como recomendación visual en el dashboard** con la funcionalidad de **vista de gestión energética basada en la correlación de datos de ocupación y luminosidad**.
+
+**Hypothesis Statement 4: Mejora en la localización del vehículo**
+
+Creemos que lograremos que el **90% de los conductores localicen su vehículo en menos de 2 minutos tras regresar de sus compras** si los **conductores frecuentes de centros comerciales** obtienen **un registro digital de la ubicación exacta donde estacionaron (nivel, zona, plaza), accesible con un toque en la app** con la funcionalidad de **registro de ubicación de vehículo en la aplicación móvil**.
+
+**Hypothesis Statement 5: Seguridad proactiva del conductor**
+
+Creemos que lograremos un **incremento del 80% en la percepción de seguridad del conductor durante su estancia** si los **conductores frecuentes de centros comerciales** obtienen **notificaciones push inmediatas ante incidentes de seguridad en la zona donde se encuentra su vehículo, con indicaciones claras de evacuación si fuera necesario** con la funcionalidad de **alertas de seguridad vía Firebase Cloud Messaging integrado con la app PowerApps**.
+
+**Hypothesis Statement 6: Adopción de la plataforma por centros comerciales**
+
+Creemos que lograremos **5 contratos de suscripción con centros comerciales de Lima Metropolitana en los primeros 12 meses** si los **administradores y gerentes de operaciones de centros comerciales** obtienen **una demostración funcional del gemelo digital con datos simulados que evidencie el valor de la correlación espacial entre ocupación, seguridad, flujo y energía, sin requerir inversión inicial en hardware IoT** con la funcionalidad del **piloto basado en simulación de sensores y modelo 3D del estacionamiento**.
+
+---
 
 #### 1.2.2.4. Lean UX Canvas
 
