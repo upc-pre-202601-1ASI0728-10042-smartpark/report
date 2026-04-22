@@ -738,15 +738,21 @@ _(Mismo formato de análisis para el segmento de conductores.)_
 
 ### 2.3.1. User Personas
 
-_(Introducción explicando la relación entre los User Personas y las características identificadas en el análisis de entrevistas y competencia.)_
+Los User Personas son perfiles representativos que sintetizan las características, motivaciones y frustraciones de los usuarios finales. A partir de los segmentos identificados en los Problem Statements, se construyeron dos personas, un operador de estacionamiento y una conductora frecuente, que humanizan los datos recogidos y sirven como referencia transversal para guiar las decisiones de diseño a lo largo del proyecto.
 
 #### User Persona 1: Operador de Estacionamiento
 
-![User Persona Operador](assets/images/chapter-02/user-persona-operator.png)
+<div align="center">
+  <img src="./assets/images/chapter-02/user-persona-operator.png" alt="SmartPark User Persona Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: User Persona - Operador</i></p>
+</div>
 
 #### User Persona 2: Conductor Frecuente
 
-![User Persona Conductor](assets/images/chapter-02/user-persona-driver.png)
+<div align="center">
+  <img src="./assets/images/chapter-02/user-persona-driver.png" alt="SmartPark User Persona Driver" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: User Persona - Conductor</i></p>
+</div>
 
 ### 2.3.2. User Task Matrix
 
