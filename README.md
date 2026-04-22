@@ -807,13 +807,21 @@ El Empathy Mapping es una técnica que busca comprender al usuario desde sus dim
 
 ### 2.3.4. As-is Scenario Mapping
 
-_(Resumen del proceso. Capturas de los As-Is Scenario Maps elaborados en LucidChart/Miro, con filas Phases, Doing, Thinking, Feeling.)_
+El As-Is Scenario Mapping documenta la experiencia actual del usuario, desglosando su recorrido en fases y registrando qué hace, qué piensa y qué siente en cada una. Se construyeron dos escenarios, el del operador en una jornada típica y el de la conductora en una visita habitual, lo que permite visualizar los puntos de fricción actuales y justificar la necesidad de la solución propuesta.
 
 #### As-Is Scenario Map: Operador
-![As-Is Scenario Operador](assets/images/chapter-02/as-is-operator.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/as-is-operator.png" alt="SmartPark As-Is Scenario Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: As-Is Process Diagram - Operador</i></p>
+</div>
 
 #### As-Is Scenario Map: Conductor
-![As-Is Scenario Conductor](assets/images/chapter-02/as-is-driver.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/as-is-driver.png" alt="SmartPark As-Is Scenario Driver" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: As-Is Process Diagram - Conductor</i></p>
+</div>
 
 ## 2.4. Ubiquitous Language
 
