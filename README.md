@@ -396,9 +396,12 @@ Creemos que lograremos **5 contratos de suscripción con centros comerciales de 
 
 #### 1.2.2.4. Lean UX Canvas
 
-_(Insertar imagen del Lean UX Canvas v2 elaborado en Miro o LucidChart.)_
 
-![Lean UX Canvas](assets/images/chapter-01/lean-ux-canvas.png)
+<div align="center">
+  <img src="assets/images/chapter-01/lean-ux-canvas.png" alt="Lean UX Canvas SmartPark" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Lean UX Canvas de la plataforma SmartPark</i></p>
+</div>
+
 
 ## 1.3. Segmentos objetivo
 
