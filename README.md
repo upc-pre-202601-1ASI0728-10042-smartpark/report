@@ -788,13 +788,22 @@ El análisis comparativo de las tareas identificadas revela patrones claros sobr
 
 ### 2.3.3. Empathy Mapping
 
-_(Resumen del proceso de elaboración. Capturas de los Empathy Maps elaborados en UXPressia para cada User Persona.)_
+El Empathy Mapping es una técnica que busca comprender al usuario desde sus dimensiones emocionales, cognitivas y sociales, explorando lo que piensa, siente, ve, escucha, dice y hace, así como sus dolores y ganancias. Se elaboró un mapa para cada segmento, lo que permitió revelar tensiones y motivaciones menos visibles que sirven de base para diseñar una propuesta de valor que conecte genuinamente con las necesidades humanas de los usuarios.
 
 #### Empathy Map: Operador
-![Empathy Map Operador](assets/images/chapter-02/empathy-map-operator.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/empathy-map-operator.png" alt="SmartPark Empathy Map Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Empathy Map - Operador</i></p>
+</div>
 
 #### Empathy Map: Conductor
-![Empathy Map Conductor](assets/images/chapter-02/empathy-map-driver.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/empathy-map-driver.png" alt="SmartPark Empathy Map Driver" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Empathy Map - Conductor</i></p>
+</div>
+
 
 ### 2.3.4. As-is Scenario Mapping
 
