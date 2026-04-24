@@ -682,42 +682,77 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
 
 #### Segmento 1: Operadores de estacionamientos en centros comerciales
 
-**Entrevista 1**
-
-| Campo | Dato |
-|---|---|
-| Nombres y Apellidos | _(...)_ |
-| Edad | _(...)_ |
-| Distrito | _(...)_ |
-| Cargo | _(...)_ |
-| Fecha de entrevista | YYYY-MM-DD |
-| URL del video (Microsoft Stream) | `https://...` |
-| Timing inicio | HH:MM:SS |
-| Duración | MM:SS |
-
-_(Screenshot del video de entrevista)_
-
-![Screenshot Entrevista 1 - Operador](assets/images/chapter-02/interview-operator-01.png)
-
-**Resumen de la entrevista:**  
-_(Descripción detallada de las principales respuestas, incluyendo personalidad, marcas e influencias, tecnología, canales de interacción, browser, dispositivos.)_
-
-**Entrevista 2 — Operador**  
-_(Misma estructura)_
-
-**Entrevista 3 — Operador**  
-_(Misma estructura)_
+<table border="1">
+  <tr>
+    <th>Entrevista</th>
+    <td>1</td>
+    <th>Nombre</th>
+    <td>...</td>
+  </tr>
+  <tr>
+    <th>Edad</th>
+    <td>x</td>
+    <th>Distrito</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>Captura de la entrevista: <img src="assets/Chapter-2/.png" alt="Captura de la entrevista" width="200"></th>
+    <td colspan="3">
+        ..
+    </td>
+  </tr>
+  <tr>
+    <th>URL de la grabación</th>
+    <td colspan="3">
+      <a href="h">
+        Ver grabación
+      </a>
+    </td>
+  </tr>
+  <tr>
+   <th>Timing</th>
+    <td colspan="3">
+         xx
+    </td>
+  </tr>
+</table>
 
 #### Segmento 2: Conductores frecuentes de centros comerciales
 
-**Entrevista 1 — Conductor**  
-_(Misma estructura)_
-
-**Entrevista 2 — Conductor**  
-_(Misma estructura)_
-
-**Entrevista 3 — Conductor**  
-_(Misma estructura)_
+<table border="1">
+  <tr>
+    <th>Entrevista</th>
+    <td>1</td>
+    <th>Nombre</th>
+    <td>Sebastian Rubio</td>
+  </tr>
+  <tr>
+    <th>Edad</th>
+    <td>20</td>
+    <th>Distrito</th>
+    <td>Surco</td>
+  </tr>
+  <tr>
+    <th>Captura de la entrevista: <img src="./assets/images/chapter-02/entrevista1.png" alt="Captura de la entrevista" width="200"></th>
+    <td colspan="3">
+        El entrevistado, de 20 años, visita centros comerciales como Jockey Plaza entre 1 y 2 veces por semana, principalmente los fines de semana, para ir al cine, comer o comprar ropa. Señala que encontrar estacionamiento suele ser complicado en horas pico, demorando entre 5 y 10 minutos, por lo que prefiere ir directamente a los niveles superiores, donde hay más espacios disponibles. También considera importante conocer el costo acumulado del estacionamiento en tiempo real y recibir alertas de seguridad ante incidentes. Además, estaría dispuesto a usar una aplicación móvil que le permita ubicar espacios libres, registrar dónde dejó su vehículo y acceder a un mapa interactivo con información precisa sobre la disponibilidad de estacionamientos.
+    </td>
+  </tr>
+  <tr>
+    <th>URL de la grabación</th>
+    <td colspan="3">
+      <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210973_upc_edu_pe/IQDczbI-ti9ARrdbBQuNVIxDAUpsh_TZarox-GgCpR_0Tbs?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=fyFeXn">
+        Ver grabación
+      </a>
+    </td>
+  </tr>
+  <tr>
+   <th>Timing</th>
+    <td colspan="3">
+         7:51
+    </td>
+  </tr>
+</table>
 
 ### 2.2.3. Análisis de entrevistas
 
@@ -860,10 +895,20 @@ _(Glosario de términos del business domain en inglés, sin ambigüedad. NO incl
 _(Resumen del proceso. Capturas de los To-Be Scenario Maps con identificación de cambios respecto al As-Is.)_
 
 ### To-Be Scenario Map: Operador
-![To-Be Scenario Operador](assets/images/chapter-03/to-be-operator.png)
+
+El To-Be Scenario Mapping permite proyectar el escenario ideal de interacción del usuario con el sistema, describiendo cómo deberían desarrollarse los procesos una vez implementada la solución. A través de esta técnica se identifican los cambios esperados respecto al estado actual, destacando mejoras en la experiencia del usuario, eficiencia operativa y cumplimiento de objetivos del proyecto.
+
+<div align="center">
+  <img src="./assets/images/chapter-02/Impact Mapping11.png" alt="SmartPark Impact Mapping Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Impact Mapping - Operador</i></p>
+</div>
 
 ### To-Be Scenario Map: Conductor
-![To-Be Scenario Conductor](assets/images/chapter-03/to-be-driver.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/Impact Mapping2.png" alt="SmartPark Impact Mapping Conductor Frecuente" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Impact Mapping - Conductor Frecuente</i></p>
+</div>
 
 ## 3.2. User Stories
 
