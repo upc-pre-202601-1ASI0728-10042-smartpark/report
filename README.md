@@ -892,22 +892,20 @@ _(Glosario de términos del business domain en inglés, sin ambigüedad. NO incl
 
 ## 3.1. To-Be Scenario Mapping
 
-_(Resumen del proceso. Capturas de los To-Be Scenario Maps con identificación de cambios respecto al As-Is.)_
+El To-Be Scenario Mapping permite proyectar el escenario ideal de interacción del usuario con el sistema, describiendo cómo deberían desarrollarse los procesos una vez implementada la solución. A través de esta técnica se identifican los cambios esperados respecto al estado actual, destacando mejoras en la experiencia del usuario, eficiencia operativa y cumplimiento de objetivos del proyecto.
 
 ### To-Be Scenario Map: Operador
 
-El To-Be Scenario Mapping permite proyectar el escenario ideal de interacción del usuario con el sistema, describiendo cómo deberían desarrollarse los procesos una vez implementada la solución. A través de esta técnica se identifican los cambios esperados respecto al estado actual, destacando mejoras en la experiencia del usuario, eficiencia operativa y cumplimiento de objetivos del proyecto.
-
 <div align="center">
-  <img src="./assets/images/chapter-02/Impact Mapping11.png" alt="SmartPark Impact Mapping Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
-  <p><i>Figura: Impact Mapping - Operador</i></p>
+  <img src="./assets/images/chapter-02/tobe.jpg" alt="SmartPark To-Be Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: To-Be - Operador</i></p>
 </div>
 
 ### To-Be Scenario Map: Conductor
 
 <div align="center">
-  <img src="./assets/images/chapter-02/Impact Mapping2.png" alt="SmartPark Impact Mapping Conductor Frecuente" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
-  <p><i>Figura: Impact Mapping - Conductor Frecuente</i></p>
+  <img src="./assets/images/chapter-02/tobe2.jpg" alt="SmartPark To-Be  Conductor Frecuente" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: To-Be  - Conductor Frecuente</i></p>
 </div>
 
 ## 3.2. User Stories
