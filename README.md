@@ -893,9 +893,15 @@ _(Continuar con el resto de User Stories y Technical Stories.)_
 
 ## 3.3. Impact Mapping
 
-![Impact Map](assets/images/chapter-03/impact-map.png)
+<div align="center">
+  <img src="./assets/images/chapter-02/Impact Mapping11.png" alt="SmartPark Impact Mapping Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Impact Mapping - Operador</i></p>
+</div>
 
-
+<div align="center">
+  <img src="./assets/images/chapter-02/Impact Mapping2.png" alt="SmartPark Impact Mapping Conductor Frecuente" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Impact Mapping - Conductor Frecuente</i></p>
+</div>
 
 ## 3.4. Product Backlog
 
