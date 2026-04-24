@@ -738,50 +738,90 @@ _(Mismo formato de análisis para el segmento de conductores.)_
 
 ### 2.3.1. User Personas
 
-_(Introducción explicando la relación entre los User Personas y las características identificadas en el análisis de entrevistas y competencia.)_
+Los User Personas son perfiles representativos que sintetizan las características, motivaciones y frustraciones de los usuarios finales. A partir de los segmentos identificados en los Problem Statements, se construyeron dos personas, un operador de estacionamiento y una conductora frecuente, que humanizan los datos recogidos y sirven como referencia transversal para guiar las decisiones de diseño a lo largo del proyecto.
 
 #### User Persona 1: Operador de Estacionamiento
 
-![User Persona Operador](assets/images/chapter-02/user-persona-operator.png)
+<div align="center">
+  <img src="./assets/images/chapter-02/user-persona-operator.png" alt="SmartPark User Persona Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: User Persona - Operador</i></p>
+</div>
 
 #### User Persona 2: Conductor Frecuente
 
-![User Persona Conductor](assets/images/chapter-02/user-persona-driver.png)
+<div align="center">
+  <img src="./assets/images/chapter-02/user-persona-driver.png" alt="SmartPark User Persona Driver" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: User Persona - Conductor</i></p>
+</div>
 
 ### 2.3.2. User Task Matrix
+La User Task Matrix es una herramienta comparativa que mapea las tareas que realiza cada tipo de usuario dentro del sistema, junto con su frecuencia e importancia. Este ejercicio permite identificar tareas compartidas, tareas exclusivas y actividades críticas de cada segmento, facilitando la priorización de funcionalidades y el diseño diferenciado de interfaces para el operador y el conductor.
 
-_(Introducción establecidiendo los segmentos considerados.)_
+| **Tarea**                                                         | **Operador (S1) Frecuencia** | **Operador (S1) Importancia** | **Conductor (S2) Frecuencia** | **Conductor (S2) Importancia** |
+| ----------------------------------------------------------------- | ---------------------------- | ----------------------------- | ----------------------------- | ------------------------------ |
+| Monitorear la ocupación del estacionamiento en tiempo real        | Alta                         | Alta                          | Baja                          | Media                          |
+| Identificar zonas disponibles para estacionamiento                | Alta                         | Alta                          | Alta                          | Alta                           |
+| Detectar incidentes (seguridad, congestión, fallas)               | Alta                         | Alta                          | Baja                          | Alta                           |
+| Gestionar alertas y coordinar respuesta operativa                 | Alta                         | Alta                          | Baja                          | Media                          |
+| Visualizar el flujo vehicular en accesos y rampas                 | Alta                         | Alta                          | Media                         | Media                          |
+| Optimizar la distribución de vehículos dentro del estacionamiento | Media                        | Alta                          | Baja                          | Baja                           |
+| Consultar disponibilidad antes de ingresar al estacionamiento     | Baja                         | Media                         | Alta                          | Alta                           |
+| Navegar hacia una zona con espacios disponibles                   | Baja                         | Media                         | Alta                          | Alta                           |
+| Buscar un espacio libre dentro del estacionamiento                | Baja                         | Media                         | Alta                          | Alta                           |
+| Recordar la ubicación del vehículo estacionado                    | Baja                         | Baja                          | Alta                          | Media                          |
+| Recibir notificaciones sobre disponibilidad o incidentes          | Media                        | Alta                          | Media                         | Alta                           |
+| Supervisar indicadores operativos (KPIs)                          | Media                        | Alta                          | Baja                          | Baja                           |
+| Optimizar consumo energético basado en ocupación                  | Media                        | Alta                          | Baja                          | Baja                           |
+| Analizar patrones históricos de uso del estacionamiento           | Baja                         | Media                         | Baja                          | Baja                           |
+| Reducir congestión en horas punta                                 | Media                        | Alta                          | Media                         | Alta                           |
+| Tomar decisiones operativas basadas en datos en tiempo real       | Alta                         | Alta                          | Baja                          | Baja                           |
 
-| Tarea | Operador (Frecuencia) | Operador (Importancia) | Conductor (Frecuencia) | Conductor (Importancia) |
-|---|---|---|---|---|
-| _(Verificar estado del estacionamiento)_ | Always | High | Often | Medium |
-| _(Buscar plaza libre)_ | Never | N/A | Always | High |
-| _(Atender alerta de incidente)_ | Sometimes | High | Sometimes | High |
-| _(Ajustar iluminación por zona)_ | Often | Medium | Never | N/A |
-| _(Recordar ubicación de vehículo)_ | Never | N/A | Always | High |
-| _(...)_ | | | | |
 
-_(Análisis post-tabla resaltando tareas con mayor frecuencia/importancia, diferencias y coincidencias entre User Personas.)_
+
+El análisis comparativo de las tareas identificadas revela patrones claros sobre cómo cada segmento interactúa con la plataforma y dónde se concentra el valor del producto.
+
+**Tareas de alta frecuencia e importancia:** En el caso de Carlos Ramírez, las tareas críticas se concentran en el monitoreo continuo de ocupación, la supervisión de alertas de seguridad y la coordinación con el personal de campo, actividades que ejecuta durante toda su jornada laboral y que son determinantes para la operación del estacionamiento. En el caso de Valeria Soto, las tareas de mayor relevancia son la consulta de disponibilidad antes de ingresar, el registro de la ubicación del vehículo y la localización del mismo al regresar; si bien son de corta duración, se repiten en cada visita al centro comercial y definen directamente la calidad de su experiencia.
+
+**Diferencias entre User Personas:** Las diferencias más notables radican en el perfil de uso y la profundidad funcional que cada segmento requiere. Carlos necesita una plataforma robusta de monitoreo continuo, con capacidades analíticas, generación de reportes y visualización espacial en 3D desde una estación de trabajo. Valeria, en cambio, requiere una aplicación móvil ligera, con interacciones breves y de alto impacto, priorizando rapidez, claridad visual y notificaciones oportunas. Mientras Carlos opera en un contexto profesional y técnico, Valeria lo hace en un contexto cotidiano donde el producto debe integrarse con la misma fluidez que otras apps de uso diario.
+
+**Coincidencias entre User Personas:** A pesar de las diferencias, ambos segmentos convergen en la necesidad de información en tiempo real y en la importancia de las alertas de seguridad contextualizadas espacialmente. Tanto el operador como la conductora se benefician de un sistema que ofrezca visibilidad inmediata sobre el estado del estacionamiento, aunque cada uno consuma esta información con un nivel de detalle distinto. Esta coincidencia confirma que el gemelo digital funciona como una única fuente de verdad que alimenta dos experiencias diferenciadas pero complementarias, maximizando el valor de la inversión tecnológica subyacente.
 
 ### 2.3.3. Empathy Mapping
 
-_(Resumen del proceso de elaboración. Capturas de los Empathy Maps elaborados en UXPressia para cada User Persona.)_
+El Empathy Mapping es una técnica que busca comprender al usuario desde sus dimensiones emocionales, cognitivas y sociales, explorando lo que piensa, siente, ve, escucha, dice y hace, así como sus dolores y ganancias. Se elaboró un mapa para cada segmento, lo que permitió revelar tensiones y motivaciones menos visibles que sirven de base para diseñar una propuesta de valor que conecte genuinamente con las necesidades humanas de los usuarios.
 
 #### Empathy Map: Operador
-![Empathy Map Operador](assets/images/chapter-02/empathy-map-operator.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/empathy-map-operator.png" alt="SmartPark Empathy Map Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Empathy Map - Operador</i></p>
+</div>
 
 #### Empathy Map: Conductor
-![Empathy Map Conductor](assets/images/chapter-02/empathy-map-driver.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/empathy-map-driver.png" alt="SmartPark Empathy Map Driver" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Empathy Map - Conductor</i></p>
+</div>
+
 
 ### 2.3.4. As-is Scenario Mapping
 
-_(Resumen del proceso. Capturas de los As-Is Scenario Maps elaborados en LucidChart/Miro, con filas Phases, Doing, Thinking, Feeling.)_
+El As-Is Scenario Mapping documenta la experiencia actual del usuario, desglosando su recorrido en fases y registrando qué hace, qué piensa y qué siente en cada una. Se construyeron dos escenarios, el del operador en una jornada típica y el de la conductora en una visita habitual, lo que permite visualizar los puntos de fricción actuales y justificar la necesidad de la solución propuesta.
 
 #### As-Is Scenario Map: Operador
-![As-Is Scenario Operador](assets/images/chapter-02/as-is-operator.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/as-is-operator.png" alt="SmartPark As-Is Scenario Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: As-Is Process Diagram - Operador</i></p>
+</div>
 
 #### As-Is Scenario Map: Conductor
-![As-Is Scenario Conductor](assets/images/chapter-02/as-is-driver.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/as-is-driver.png" alt="SmartPark As-Is Scenario Driver" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: As-Is Process Diagram - Conductor</i></p>
+</div>
 
 ## 2.4. Ubiquitous Language
 
