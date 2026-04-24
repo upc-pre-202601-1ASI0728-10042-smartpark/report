@@ -853,16 +853,9 @@ _(Continuar con el resto de User Stories y Technical Stories.)_
 
 ## 3.3. Impact Mapping
 
-_(Resumen del proceso de elaboración. Capturas del Impact Map en UXPressia.)_
-
 ![Impact Map](assets/images/chapter-03/impact-map.png)
 
-**Business Goals (SMART):**
-         
-- **BG-01:** Alcanzar 5 contratos con centros comerciales de Lima Metropolitana en un lapso de 12 meses tras el lanzamiento.
-- **BG-02:** Lograr 10,000 descargas activas de la aplicación móvil del conductor en un lapso de 8 meses.
-- **BG-03:** Reducir en 30% el tiempo promedio de búsqueda de plaza para conductores en estacionamientos contratantes en un lapso de 6 meses.
-- **BG-04:** _(...)_
+
 
 ## 3.4. Product Backlog
 
