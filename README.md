@@ -687,24 +687,24 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
     <th>Entrevista</th>
     <td>1</td>
     <th>Nombre</th>
-    <td>...</td>
+    <td>Sebastian Silva</td>
   </tr>
   <tr>
     <th>Edad</th>
-    <td>x</td>
+    <td>25</td>
     <th>Distrito</th>
-    <td></td>
+    <td>Surco</td>
   </tr>
   <tr>
-    <th>Captura de la entrevista: <img src="assets/Chapter-2/.png" alt="Captura de la entrevista" width="200"></th>
+    <th>Captura de la entrevista: <img src="./assets/images/chapter-02/seg1 entrevista.png" alt="Captura de la entrevista" width="200"></th>
     <td colspan="3">
-        ..
+        El entrevistado, operador de estacionamientos con un año de experiencia, trabaja en la gestión y control de un estacionamiento de aproximadamente 100 plazas distribuidas en dos sótanos. Sus principales funciones son supervisar el ingreso y salida de vehículos, mantener el orden en horas pico y coordinar incidentes de seguridad mediante cámaras, sirenas y comunicación por radio. Señala que el sistema actual de sensores presenta errores al detectar espacios libres y existe un pequeño retraso en la actualización de datos, lo que dificulta la gestión eficiente. Considera importante contar con una plataforma tecnológica más precisa que permita asignar espacios automáticamente, mostrar disponibilidad en tiempo real y mejorar la experiencia del usuario. También destaca que sus mayores preocupaciones al implementar una nueva solución serían el costo, la integración con el sistema actual y la capacitación del personal.
     </td>
   </tr>
   <tr>
     <th>URL de la grabación</th>
     <td colspan="3">
-      <a href="h">
+      <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210973_upc_edu_pe/IQC-7VJgcFQ7SqAUpkX0d2a7AVgYj6Xm8-epfEkyVjptlTc?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=Kw4mkf">
         Ver grabación
       </a>
     </td>
@@ -712,7 +712,7 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
   <tr>
    <th>Timing</th>
     <td colspan="3">
-         xx
+         9:37
     </td>
   </tr>
 </table>
