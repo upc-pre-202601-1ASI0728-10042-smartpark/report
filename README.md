@@ -656,11 +656,10 @@ _(Resumen del proceso de elaboración. Capturas del Impact Map en UXPressia.)_
 
 ## 3.4. Product Backlog
 
-**URL del Product Backlog en herramienta:** `https://www.pivotaltracker.com/...` _(o Trello / Jira / YouTrack)_
+**URL del Product Backlog en herramienta:** https://smart-parkk.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?selectedIssue=SCRUM-11&atlOrigin=eyJpIjoiZmMzNjE4YzE3YzA4NDkyNGFmNmYyNjdhODE3YTYwMDIiLCJwIjoiaiJ9
 
-_(Captura del Product Backlog en la herramienta seleccionada.)_
+![jira.png](assets/images/chapter-03/product-backlog/jira.png)
 
-![Product Backlog](assets/images/chapter-03/product-backlog.png)
 
 El Product Backlog prioriza los User Stories según el valor que aportan al negocio. Los User Stories relacionados con el Landing Page se incluyen desde el primer sprint por ser el primer punto de contacto con los segmentos objetivo. Los Story Points se estiman usando la secuencia de Fibonacci (1, 2, 3, 5, 8) donde 1 representa una tarea trivial y 8 una tarea de alta complejidad.
 
