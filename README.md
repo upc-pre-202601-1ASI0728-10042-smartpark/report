@@ -812,22 +812,27 @@ Las constraints son, por definición, innegociables. En nuestro caso provienen d
 
 ### 4.1.3. Architectural Drivers Backlog
 
-_(Introducción al proceso seguido en el Quality Attribute Workshop iterativo.)_
+El Architectural Drivers Backlog consolida los inputs del proceso y los ordena según dos criterios combinados: importancia para los stakeholders y complejidad técnica que introduce el driver en la arquitectura.
 
-| Driver ID | Título de Driver | Descripción | Importancia para Stakeholders | Impacto en Architecture Technical Complexity |
+
+| Driver ID | Título del Driver | Descripción | Importancia para Stakeholders | Impacto en Technical Complexity |
 |---|---|---|---|---|
-| QA-01 | Low Latency for Safety Alerts | Las alertas de humo deben propagarse del sensor al operador y conductor en menos de 5 segundos. | High | High |
-| QA-02 | Sensor Type Modifiability | Incorporar nuevos tipos de sensores debe ser posible en menos de 3 días-desarrollador. | High | High |
-| QA-03 | Cost Containment | Costo operativo dentro del crédito de Azure for Students. | High | Medium |
-| FR-01 | 3D Spatial Visualization | Visualización 3D del estacionamiento con estado en tiempo real. | High | High |
-| FR-02 | Real-time Driver Notifications | Push notifications ante incidentes de seguridad. | High | Medium |
-| QA-04 | Throughput at Peak | Sostener 500 msg/s en horas pico. | Medium | High |
-| QA-05 | Availability | 99.5% uptime en horario operativo. | High | Medium |
-| CON-01 | Azure Digital Twins as Twin Store | Restricción tecnológica del gemelo digital. | High | Medium |
-| CON-02 | PowerApps for Mobile | Restricción de tecnología low-code. | High | Medium |
-| CON-03 | ASP.NET Core for Backend | Restricción de framework backend. | High | Low |
-| CON-04 | Angular for Web Frontend | Restricción de framework web. | High | Low |
-| CON-05 | English as Default Language | Restricción de internacionalización. | Medium | Low |
+| DR-01 | Actualización casi en tiempo real del gemelo digital | El gemelo debe reflejar cambios de estado operativo con latencia inferior a 2 segundos bajo la carga proyectada (DR derivado de TS-10 + US-16). | High | High |
+| DR-02 | Disponibilidad del dashboard de operaciones en horario comercial | El Operator debe contar con el dashboard accesible al menos el 99.5% del horario de apertura del centro comercial. | High | High |
+| DR-03 | Contextualización espacial de alertas de seguridad | Toda alerta crítica (humo, evacuación) debe estar georreferenciada sobre el modelo 3D y mostrar rutas de evacuación comprometidas (US-19, US-20). | High | High |
+| DR-04 | Uso de Azure Digital Twins como plataforma obligatoria | Constraint CT-01 que condiciona el modelado, la sincronización y la persistencia del gemelo. | High | High |
+| DR-05 | Experiencia móvil fluida para el Driver en PowerApps | El Driver debe acceder a la información relevante en menos de 5 segundos, bajo condiciones de red variable, dentro de las limitaciones de PowerApps (CT-02). | High | Medium |
+| DR-06 | Separación clara entre experiencia de Operator y Driver | Los dos segmentos requieren vistas, flujos, reglas y controles de acceso independientes. | High | Medium |
+| DR-07 | Modelado del dominio con DTDL 2.0 | La definición del gemelo digital debe respetar la sintaxis y semántica de DTDL para garantizar interoperabilidad con ADT. | Medium | High |
+| DR-08 | Push notifications confiables vía Firebase Cloud Messaging | Las notificaciones críticas de seguridad (US-32) deben llegar al Driver con reintentos automáticos y filtrado por zona afectada. | High | Medium |
+| DR-09 | Seguridad por roles diferenciados con JWT | Operators y Drivers deben autenticarse y autorizarse mediante esquemas claramente separados, con refresh tokens (TS-09). | High | Medium |
+| DR-10 | Capacidad de incorporar nuevos tipos de sensores | El sistema debe poder extenderse con sensores adicionales sin reescribir contextos. | Medium | Medium |
+| DR-11 | Comunicación en tiempo real al dashboard vía SignalR | Las alertas y cambios de estado operativos (CT-05) deben llegar al dashboard sin requerir polling. | High | Medium |
+| DR-12 | Cálculo de costo acumulado por sesión | El cálculo del costo (US-29) debe contemplar transiciones entre periodos tarifarios dentro de una misma sesión. | Medium | Medium |
+| DR-13 | Internacionalización en en_US y es_419 | Constraint CT-06 con impacto sobre la capa de presentación. | Medium | Low |
+| DR-14 | Accesibilidad WCAG 2.1 AA en experiencias web | Constraint CT-07 con impacto sobre diseño y desarrollo de UI. | Medium | Low |
+| DR-15 | Despliegue continuo sobre plataforma cloud | Constraint CT-09 que obliga a definir pipelines y configuración reproducible. | Medium | Medium |
+
 
 ### 4.1.4. Architectural Design Decisions
 
