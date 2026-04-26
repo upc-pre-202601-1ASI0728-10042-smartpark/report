@@ -1911,7 +1911,13 @@ Asociación Peruana de Empresas de Inteligencia de Mercados (APEIM). (2023). *Ni
 
 Banco Interamericano de Desarrollo (BID). (2020, 13 de abril). *La pesadilla de buscar estacionamiento, sobre la mesa* [Entrada de blog]. Moviliblog. https://blogs.iadb.org/transporte/es/la-pesadilla-de-buscar-estacionamiento-sobre-la-mesa/
 
+Len Bass, Paul Clements, & Rick Kazman. (2021). *Software Architecture in Practice*, 4th Edition. Addison-Wesley Professional. https://catalogo.upc.edu.pe/permalink/51UPC_INST/7catuc/cdi_safari_books_v2_9780136885979
+
 Cámara de Comercio de Lima — Instituto de Economía y Desarrollo Empresarial (IEDEP). (2024). Proyecciones de apertura de nuevos centros comerciales 2023–2025. Citadas en: Gestión. (2024, 17 de enero). *Ventas de malls del 2023 superaron las del año anterior, según ACCEP*. https://gestion.pe/economia/empresas/ventas-de-malls-del-2023-superaron-las-del-ano-anterior-segun-accep-centros-comerciales-empresas-noticia/
+
+Cervantes, H., & Kazman, R. (2016). *Designing software architectures: A practical approach*. Addison-Wesley Professional. https://www.oreilly.com/library/view/designing-software-architectures/9780134390857/
+
+Grieves, M., & Vickers, J. (2017). Digital twin: Mitigating unpredictable, undesirable emergent behavior in complex systems. In F.-J. Kahlen, S. Flumerfelt, & A. Alves (Eds.), *Transdisciplinary perspectives on complex systems: New findings and approaches* (pp. 85–113). Springer. https://doi.org/10.1007/978-3-319-38756-7_4
 
 Intellisoft Parking. (s.f.). *Mall del Sur*. Recuperado el 16 de abril de 2026, de https://intellisoftparking.com/park/index.php/proyectos/mall-del-sur.html
 
@@ -1920,6 +1926,8 @@ INRIX Research. (2017, 12 de julio). *Searching for parking costs Americans $73 
 Millard-Ball, A., Weinberger, R., & Hampshire, R. C. (2014). Is the curb 80% full or 20% empty? Assessing the impacts of San Francisco's parking pricing experiment. *Transportation Research Part A: Policy and Practice*, *63*, 76–92. Citado en BID (2020).
 
 Ministerio de Vivienda, Construcción y Saneamiento. (2006). *Reglamento Nacional de Edificaciones: Norma técnica EM.010 Instalaciones eléctricas interiores*. Diario Oficial El Peruano.
+
+Richardson, C. (2018). *Microservices Patterns: With examples in Java* (1st ed.). Manning. https://catalogo.upc.edu.pe/permalink/51UPC_INST/7catuc/cdi_ieee_books_10280260
 
 Parklio. (2023). *Soluciones de administración de estacionamientos para centro comercial*. https://parklio.com/es/casos-de-uso/soluciones-y-sistemas-de-gestion-de-estacionamientos-para-centro-comercial
 
