@@ -83,37 +83,74 @@ _(Pendiente)_
 
 ## Tabla de Contenidos
 
-- [Registro de Versiones del Informe](#registro-de-versiones-del-informe)
-- [Project Report Collaboration Insights](#project-report-collaboration-insights)
-- [Student Outcome](#student-outcome)
+- [UNIVERSIDAD PERUANA DE CIENCIAS APLICADAS](#universidad-peruana-de-ciencias-aplicadas)
+  - [Facultad de Ingeniería](#facultad-de-ingeniería)
+    - [Carrera de Ingeniería de Software](#carrera-de-ingeniería-de-software)
+  - [INFORME DE TRABAJO FINAL](#informe-de-trabajo-final)
+    - [Plataforma de gestión inteligente de estacionamientos en centros comerciales basada en Digital Twins](#plataforma-de-gestión-inteligente-de-estacionamientos-en-centros-comerciales-basada-en-digital-twins)
+    - [Relación de Integrantes](#relación-de-integrantes)
+  - [Registro de Versiones del Informe](#registro-de-versiones-del-informe)
+  - [Project Report Collaboration Insights](#project-report-collaboration-insights)
+    - [Repositorios de productos digitales](#repositorios-de-productos-digitales)
+    - [Evidencias de colaboración](#evidencias-de-colaboración)
+      - [TB1](#tb1)
+      - [TP1](#tp1)
+      - [TB2](#tb2)
+      - [TF1](#tf1)
+  - [Tabla de Contenidos](#tabla-de-contenidos)
+  - [Student Outcome](#student-outcome)
 - [Capítulo I: Introducción](#capítulo-i-introducción)
   - [1.1. Startup Profile](#11-startup-profile)
     - [1.1.1. Descripción de la Startup](#111-descripción-de-la-startup)
     - [1.1.2. Perfiles de integrantes del equipo](#112-perfiles-de-integrantes-del-equipo)
   - [1.2. Solution Profile](#12-solution-profile)
     - [1.2.1. Antecedentes y problemática](#121-antecedentes-y-problemática)
+      - [What (¿Qué?)](#what-qué)
+      - [When (¿Cuándo?)](#when-cuándo)
+      - [Where (¿Dónde?)](#where-dónde)
+      - [Who (¿Quién?)](#who-quién)
+      - [Why (¿Por qué?)](#why-por-qué)
+      - [How (¿Cómo?)](#how-cómo)
+      - [How Much (¿Cuánto?)](#how-much-cuánto)
     - [1.2.2. Lean UX Process](#122-lean-ux-process)
       - [1.2.2.1. Lean UX Problem Statements](#1221-lean-ux-problem-statements)
       - [1.2.2.2. Lean UX Assumptions](#1222-lean-ux-assumptions)
       - [1.2.2.3. Lean UX Hypothesis Statements](#1223-lean-ux-hypothesis-statements)
       - [1.2.2.4. Lean UX Canvas](#1224-lean-ux-canvas)
   - [1.3. Segmentos objetivo](#13-segmentos-objetivo)
-- [Capítulo II: Requirements Elicitation & Analysis](#capítulo-ii-requirements-elicitation--analysis)
+    - [Segmento 1: Operadores de estacionamientos en centros comerciales](#segmento-1-operadores-de-estacionamientos-en-centros-comerciales)
+    - [Segmento 2: Conductores frecuentes de centros comerciales](#segmento-2-conductores-frecuentes-de-centros-comerciales)
+- [Capítulo II: Requirements Elicitation \& Analysis](#capítulo-ii-requirements-elicitation--analysis)
   - [2.1. Competidores](#21-competidores)
     - [2.1.1. Análisis competitivo](#211-análisis-competitivo)
+      - [Competitive Analysis Landscape](#competitive-analysis-landscape)
     - [2.1.2. Estrategias y tácticas frente a competidores](#212-estrategias-y-tácticas-frente-a-competidores)
   - [2.2. Entrevistas](#22-entrevistas)
     - [2.2.1. Diseño de entrevistas](#221-diseño-de-entrevistas)
+      - [Preguntas para Segmento 1: Operadores de estacionamiento](#preguntas-para-segmento-1-operadores-de-estacionamiento)
+      - [Preguntas para Segmento 2: Conductores](#preguntas-para-segmento-2-conductores)
     - [2.2.2. Registro de entrevistas](#222-registro-de-entrevistas)
+      - [Segmento 1: Operadores](#segmento-1-operadores)
+      - [Segmento 2: Conductores](#segmento-2-conductores)
     - [2.2.3. Análisis de entrevistas](#223-análisis-de-entrevistas)
+      - [Segmento 1: Operadores](#segmento-1-operadores-1)
+      - [Segmento 2: Conductores](#segmento-2-conductores-1)
   - [2.3. Needfinding](#23-needfinding)
     - [2.3.1. User Personas](#231-user-personas)
+      - [User Persona 1: Operador de Estacionamiento](#user-persona-1-operador-de-estacionamiento)
+      - [User Persona 2: Conductor Frecuente](#user-persona-2-conductor-frecuente)
     - [2.3.2. User Task Matrix](#232-user-task-matrix)
     - [2.3.3. Empathy Mapping](#233-empathy-mapping)
+      - [Empathy Map: Operador](#empathy-map-operador)
+      - [Empathy Map: Conductor](#empathy-map-conductor)
     - [2.3.4. As-is Scenario Mapping](#234-as-is-scenario-mapping)
+      - [As-Is Scenario Map: Operador](#as-is-scenario-map-operador)
+      - [As-Is Scenario Map: Conductor](#as-is-scenario-map-conductor)
   - [2.4. Ubiquitous Language](#24-ubiquitous-language)
 - [Capítulo III: Requirements Specification](#capítulo-iii-requirements-specification)
   - [3.1. To-Be Scenario Mapping](#31-to-be-scenario-mapping)
+    - [To-Be Scenario Map: Operador](#to-be-scenario-map-operador)
+    - [To-Be Scenario Map: Conductor](#to-be-scenario-map-conductor)
   - [3.2. User Stories](#32-user-stories)
   - [3.3. Impact Mapping](#33-impact-mapping)
   - [3.4. Product Backlog](#34-product-backlog)
@@ -126,12 +163,29 @@ _(Pendiente)_
       - [4.1.2.3. Constraints](#4123-constraints)
     - [4.1.3. Architectural Drivers Backlog](#413-architectural-drivers-backlog)
     - [4.1.4. Architectural Design Decisions](#414-architectural-design-decisions)
+      - [Iteración 1: Decomposition Strategy](#iteración-1-decomposition-strategy)
+      - [Iteración 2: Real-time Data Propagation](#iteración-2-real-time-data-propagation)
+      - [Iteración 3: Twin Synchronization](#iteración-3-twin-synchronization)
     - [4.1.5. Quality Attribute Scenario Refinements](#415-quality-attribute-scenario-refinements)
+      - [Scenario Refinement for Scenario 1: Low Latency for Smoke Alerts](#scenario-refinement-for-scenario-1-low-latency-for-smoke-alerts)
+      - [Scenario Refinement for Scenario 2: Sensor Type Modifiability](#scenario-refinement-for-scenario-2-sensor-type-modifiability)
+      - [Scenario Refinement for Scenario 3: Cost Containment](#scenario-refinement-for-scenario-3-cost-containment)
   - [4.2. Strategic-Level Domain-Driven Design](#42-strategic-level-domain-driven-design)
     - [4.2.1. EventStorming](#421-eventstorming)
     - [4.2.2. Candidate Context Discovery](#422-candidate-context-discovery)
     - [4.2.3. Domain Message Flows Modeling](#423-domain-message-flows-modeling)
+      - [Flow 1: Smoke Alert End-to-End](#flow-1-smoke-alert-end-to-end)
+      - [Flow 2: Driver Parking Session](#flow-2-driver-parking-session)
+      - [Flow 3: Energy Adjustment Recommendation](#flow-3-energy-adjustment-recommendation)
     - [4.2.4. Bounded Context Canvases](#424-bounded-context-canvases)
+      - [Bounded Context Canvas 1: Parking Occupancy](#bounded-context-canvas-1-parking-occupancy)
+      - [Bounded Context Canvas 2: Safety \& Incidents](#bounded-context-canvas-2-safety--incidents)
+      - [Bounded Context Canvas 3: Traffic Flow](#bounded-context-canvas-3-traffic-flow)
+      - [Bounded Context Canvas 4: Energy Management](#bounded-context-canvas-4-energy-management)
+      - [Bounded Context Canvas 5: Parking Session](#bounded-context-canvas-5-parking-session)
+      - [Bounded Context Canvas 6: Notifications](#bounded-context-canvas-6-notifications)
+      - [Bounded Context Canvas 7: Identity \& Access Management](#bounded-context-canvas-7-identity--access-management)
+      - [Bounded Context Canvas 8: Digital Twin Synchronization](#bounded-context-canvas-8-digital-twin-synchronization)
     - [4.2.5. Context Mapping](#425-context-mapping)
   - [4.3. Software Architecture](#43-software-architecture)
     - [4.3.1. Software Architecture System Landscape Diagram](#431-software-architecture-system-landscape-diagram)
@@ -148,7 +202,7 @@ _(Pendiente)_
     - [5.1.6. Bounded Context Software Architecture Code Level Diagrams](#516-bounded-context-software-architecture-code-level-diagrams)
       - [5.1.6.1. Bounded Context Domain Layer Class Diagrams](#5161-bounded-context-domain-layer-class-diagrams)
       - [5.1.6.2. Bounded Context Database Design Diagram](#5162-bounded-context-database-design-diagram)
-  - [5.2. Bounded Context: Safety & Incidents](#52-bounded-context-safety--incidents)
+  - [5.2. Bounded Context: Safety \& Incidents](#52-bounded-context-safety--incidents)
     - [5.2.1. Domain Layer](#521-domain-layer)
     - [5.2.2. Interface Layer](#522-interface-layer)
     - [5.2.3. Application Layer](#523-application-layer)
@@ -159,12 +213,12 @@ _(Pendiente)_
   - [5.4. Bounded Context: Energy Management](#54-bounded-context-energy-management)
   - [5.5. Bounded Context: Parking Session](#55-bounded-context-parking-session)
   - [5.6. Bounded Context: Notifications](#56-bounded-context-notifications)
-  - [5.7. Bounded Context: Identity & Access Management](#57-bounded-context-identity--access-management)
+  - [5.7. Bounded Context: Identity \& Access Management](#57-bounded-context-identity--access-management)
   - [5.8. Bounded Context: Digital Twin Synchronization](#58-bounded-context-digital-twin-synchronization)
 - [Capítulo VI: Solution UX Design](#capítulo-vi-solution-ux-design)
   - [6.1. Style Guidelines](#61-style-guidelines)
     - [6.1.1. General Style Guidelines](#611-general-style-guidelines)
-    - [6.1.2. Web, Mobile & Devices Style Guidelines](#612-web-mobile--devices-style-guidelines)
+    - [6.1.2. Web, Mobile \& Devices Style Guidelines](#612-web-mobile--devices-style-guidelines)
   - [6.2. Information Architecture](#62-information-architecture)
     - [6.2.1. Organization Systems](#621-organization-systems)
     - [6.2.2. Labeling Systems](#622-labeling-systems)
@@ -173,19 +227,39 @@ _(Pendiente)_
     - [6.2.5. Navigation Systems](#625-navigation-systems)
   - [6.3. Landing Page UI Design](#63-landing-page-ui-design)
     - [6.3.1. Landing Page Wireframe](#631-landing-page-wireframe)
+      - [Desktop Web Browser](#desktop-web-browser)
+      - [Mobile Web Browser](#mobile-web-browser)
     - [6.3.2. Landing Page Mock-up](#632-landing-page-mock-up)
+      - [Desktop Web Browser](#desktop-web-browser-1)
+      - [Mobile Web Browser](#mobile-web-browser-1)
   - [6.4. Applications UX/UI Design](#64-applications-uxui-design)
     - [6.4.1. Applications Wireframes](#641-applications-wireframes)
+      - [Web Application (Operador)](#web-application-operador)
+      - [Mobile Application (Conductor — PowerApps)](#mobile-application-conductor--powerapps)
     - [6.4.2. Applications Wireflow Diagrams](#642-applications-wireflow-diagrams)
+      - [Wireflow: Operator views smoke alert and locates affected zone](#wireflow-operator-views-smoke-alert-and-locates-affected-zone)
+      - [Wireflow: Driver finds and registers a parking space](#wireflow-driver-finds-and-registers-a-parking-space)
     - [6.4.3. Applications Mock-ups](#643-applications-mock-ups)
+      - [Web Application (Operador)](#web-application-operador-1)
+      - [Mobile Application (Conductor)](#mobile-application-conductor)
     - [6.4.4. Applications User Flow Diagrams](#644-applications-user-flow-diagrams)
+      - [User Flow: Operator manages an active smoke incident](#user-flow-operator-manages-an-active-smoke-incident)
+      - [User Flow: Driver completes a parking session](#user-flow-driver-completes-a-parking-session)
   - [6.5. Applications Prototyping](#65-applications-prototyping)
-- [Capítulo VII: Product Implementation, Validation & Deployment](#capítulo-vii-product-implementation-validation--deployment)
+    - [Prototype: Web Application (Operador)](#prototype-web-application-operador)
+    - [Prototype: Mobile Application (Conductor)](#prototype-mobile-application-conductor)
+- [Capítulo VII: Product Implementation, Validation \& Deployment](#capítulo-vii-product-implementation-validation--deployment)
   - [7.1. Software Configuration Management](#71-software-configuration-management)
     - [7.1.1. Software Development Environment Configuration](#711-software-development-environment-configuration)
     - [7.1.2. Source Code Management](#712-source-code-management)
-    - [7.1.3. Source Code Style Guide & Conventions](#713-source-code-style-guide--conventions)
+    - [7.1.3. Source Code Style Guide \& Conventions](#713-source-code-style-guide--conventions)
     - [7.1.4. Software Deployment Configuration](#714-software-deployment-configuration)
+      - [Landing Page → Azure Static Web Apps](#landing-page--azure-static-web-apps)
+      - [Web Application (Angular) → Azure Static Web Apps](#web-application-angular--azure-static-web-apps)
+      - [Web Services (ASP.NET Core) → Azure App Service](#web-services-aspnet-core--azure-app-service)
+      - [IoT Simulator (Node.js) → Azure Container Apps](#iot-simulator-nodejs--azure-container-apps)
+      - [Mobile App (PowerApps)](#mobile-app-powerapps)
+      - [Azure Digital Twins](#azure-digital-twins)
   - [7.2. Solution Implementation](#72-solution-implementation)
     - [7.2.1. Sprint 1](#721-sprint-1)
       - [7.2.1.1. Sprint Planning 1](#7211-sprint-planning-1)
@@ -217,10 +291,17 @@ _(Pendiente)_
   - [7.3. Validation Interviews](#73-validation-interviews)
     - [7.3.1. Diseño de Entrevistas](#731-diseño-de-entrevistas)
     - [7.3.2. Registro de Entrevistas](#732-registro-de-entrevistas)
+      - [Entrevista de Validación 1 — Operador](#entrevista-de-validación-1--operador)
     - [7.3.3. Evaluaciones según heurísticas](#733-evaluaciones-según-heurísticas)
   - [7.4. Video About-the-Product](#74-video-about-the-product)
 - [Conclusiones](#conclusiones)
   - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
+    - [Conclusiones por entrega](#conclusiones-por-entrega)
+      - [TB1](#tb1-1)
+      - [TP1](#tp1-1)
+      - [TB2](#tb2-1)
+      - [TF1](#tf1-1)
+    - [Recomendaciones de roadmap](#recomendaciones-de-roadmap)
   - [Video About-the-Team](#video-about-the-team)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -252,16 +333,31 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 ### 1.1.1. Descripción de la Startup
 
-_(Descripción de la startup: nombre, misión, visión, valores, propuesta de valor única, mercado objetivo, modelo de negocio. Incluir logo de la startup.)_
+**Apex Twin** es una startup tecnológica fundada en 2026 por estudiantes de Ingeniería de Software de la Universidad Peruana de Ciencias Aplicadas (UPC), orientada a la transformación digital de la gestión de estacionamientos en centros comerciales de gran escala. Su origen responde a una observación directa y recurrente: la ausencia de una plataforma unificada que permita monitorear, analizar y actuar sobre el estado integral de un estacionamiento en tiempo real perjudica tanto a los operadores que lo gestionan como a los conductores que lo utilizan.
+
+**Misión:**
+Democratizar el acceso a tecnologías de Digital Twin para la gestión operativa de estacionamientos, transformando espacios físicos en entornos inteligentes que optimicen la experiencia del conductor, la eficiencia operativa y la seguridad.
+
+**Visión:**
+Convertirnos en el referente tecnológico de Latinoamérica en soluciones de gestión inteligente de estacionamientos basadas en gemelos digitales, con presencia en los principales centros comerciales de Perú, Colombia y Chile hacia 2029.
+
+**Producto: SmartPark**
+
+SmartPark ofrece una plataforma SaaS (Software as a Service) que integra cuatro dimensiones operativas normalmente gestionadas como silos independientes: ocupación de plazas, seguridad contra incendios, flujo vehicular y eficiencia energética. El núcleo de la solución es un gemelo digital construido sobre Azure Digital Twins, que reproduce el estacionamiento en un modelo 3D interactivo y lo sincroniza continuamente con datos provenientes de sensores IoT.
+
+La plataforma se materializa en dos productos digitales diferenciados por perfil de usuario. El primero es una aplicación web desarrollada en Angular, orientada al operador del centro comercial, que presenta el gemelo digital 3D como panel central de operaciones: mapas de ocupación en tiempo real, alertas de humo con localización espacial, indicadores de flujo vehicular y recomendaciones de eficiencia energética. El segundo es una aplicación móvil low-code construida con Microsoft PowerApps, orientada al conductor, que le permite consultar la disponibilidad de plazas, registrar la ubicación de su vehículo, monitorear el costo acumulado de su sesión y recibir alertas de seguridad vía push notifications a través de Firebase Cloud Messaging.
+
+El modelo de negocio se sustenta en una suscripción mensual por centro comercial, con tres planes escalonados según la cantidad de plazas monitoreadas (Basic hasta 500 plazas, Professional hasta 1 500 plazas, Enterprise por encima de 1 500 plazas), complementado con un esquema freemium para la aplicación del conductor.
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
-| Foto       | Nombre completo        | Código    | Carrera                | Aporte al equipo                                    |
-|------------|------------------------|-----------|------------------------|-----------------------------------------------------|
-| _(Imagen)_ | _(Apellidos, Nombres)_ | U20XXXXXX | Ingeniería de Software | _(Conocimientos técnicos y habilidades que aporta)_ |
-| _(Imagen)_ | _(Apellidos, Nombres)_ | U20XXXXXX | Ingeniería de Software | _(Conocimientos técnicos y habilidades que aporta)_ |
-| _(Imagen)_ | _(Apellidos, Nombres)_ | U20XXXXXX | Ingeniería de Software | _(Conocimientos técnicos y habilidades que aporta)_ |
-| _(Imagen)_ | _(Apellidos, Nombres)_ | U20XXXXXX | Ingeniería de Software | _(Conocimientos técnicos y habilidades que aporta)_ |
+| Foto                                                                         | Nombre completo                  | Código     | Carrera                | Aporte al equipo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|------------------------------------------------------------------------------|----------------------------------|------------|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![elmer-riva.png](assets/images/chapter-01/foto-integrantes/elmer-riva.png)  | Riva Rodriguez, Elmer Augusto    | U202220829 | Ingeniería de Software | Soy estudiante de Ingeniería de Software con experiencia en desarrollo backend con Java y Spring Boot, y C# con ASP.NET Core, así como en frontend con Angular. Manejo bases de datos relacionales como MySQL y PostgreSQL, y cuento con experiencia en soluciones cloud sobre Microsoft Azure, incluyendo despliegue y configuración de servicios. Tengo familiaridad con IoT y desarrollo mobile con Flutter. En lo arquitectónico, aplico principios de Domain-Driven Design para estructurar soluciones en bounded contexts bien definidos. A nivel de equipo, asumo roles de liderazgo técnico, contribuyendo a las decisiones arquitectónicas y a la coordinación del grupo a lo largo del ciclo de vida del proyecto.  |
+| _(Imagen)_                                                                   | Morales Calderon, Hernan Emilio  | u202216263 | Ingeniería de Software | _(Conocimientos técnicos y habilidades que aporta)_                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ![britney-qqueso.jpg](assets/images/chapter-01/foto-integrantes/britney-qqueso.jpg)| Qqueso Rodriguez, Britney Delhy  | U20211g671 | Ingeniería de Software | Soy estudiante de Ingeniería de Software en la UPC, enfocada en el desarrollo de soluciones creativas y eficientes. Me considero una persona autodidacta y organizada, con conocimientos en desarrollo web y ciencia de datos, lo que me permite adaptarme rápido a distintas tecnologías y metodologías de trabajo. Me comprometo con el equipo a trabajar de forma proactiva, aportar en el desarrollo técnico y apoyar constantemente en la gestión de las tareas para asegurar que alcancemos nuestras metas y el éxito del proyecto. |
+| ![camila-san.jpg](assets/images/chapter-01/foto-integrantes/fotocam.png)                                                                   | Sanchez Rios, Camila Cristina    | U202210973 | Ingeniería de Software | Soy estudiante de la carrera de Ingeniería de Software en la Universidad Peruana de Ciencias Aplicadas, actualmente me encuentro en el octavo ciclo. Poseo conocimientos sólidos en el desarrollo de aplicaciones web y de escritorio utilizando lenguajes como HTML, Java y C#, aplicando principios de diseño orientados al dominio (Domain Driven Design) y metodologías de desarrollo modernas. Además, tengo experiencia en diseño de interfaces y prototipado con Figma, lo que me permite aportar al equipo en la creación de soluciones visualmente coherentes, funcionales y centradas en la experiencia del usuario (UI/UX)._                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ![andres-valle.jpeg](assets/images/chapter-01/foto-integrantes/andres-valle.jpeg)| Valle Zuta, Abel Andrés          | U202210297 | Ingeniería de Software | Soy estudiante de la carrera de Ingeniería de Software en la Universidad Peruana de Ciencias Aplicadas (UPC), tengo 21 años y actualmente estoy cursando el 8vo ciclo en la sede de Monterrico. Sé desarrollar aplicaciones web, móviles, tengo conocimientos de IoT, RPA, creación de Agentes de IA y Gestión de Proyectos. Además, sé resolver problemas, trabajar en equipo y lograr unir más al grupo. Mis hobbies son jugar básquet, fútbol, tenis, videojuegos, escuchar música, salir a pasear con mis amigos, ver películas, nadar, hacer ejercicio, pasear a mis mascotas y pasar tiempo con mi familia. Finalmente, siempre estoy dispuesto a trabajar y terminar a tiempo los deberes, esforzándome para aprender y comprender lo máximo posible y finalizar con éxito todos mis objetivos, por lo que considero que puedo aportar al equipo en lograr terminar a tiempo nuestros deberes, alcanzar nuestras metas y aportar en el desarrollo tecnológico del proyecto. |
 
 ## 1.2. Solution Profile
 
