@@ -946,6 +946,12 @@ _(Explicación del proceso de elaboración del Context Map, indicando los patron
 
 ## 4.3. Software Architecture
 
+En esta sección se presenta la representación de la arquitectura de software de la plataforma SmartPark, aplicando el C4 Model y utilizando Structurizr como herramienta de modelado. La arquitectura refleja las decisiones de diseño tomadas durante el proceso de Attribute-Driven Design y Domain-Driven Design documentados en las secciones previas de este capítulo, y responde a los Quality Attribute Scenarios priorizados —en particular latencia sub-segundo para alertas de humo, disponibilidad del 99.5% para el dashboard del operador y escalabilidad para el procesamiento continuo de telemetría de sensores IoT.
+
+Los diagramas se organizan en cuatro niveles de abstracción: System Landscape (contexto global del ecosistema), Context (interacciones del sistema con usuarios y sistemas externos), Container (componentes de alto nivel y sus tecnologías) y Deployment (distribución física sobre la infraestructura cloud).
+
+---
+
 ### 4.3.1. Software Architecture System Landscape Diagram
 
 _(Diagrama de paisaje del sistema mostrando la solución completa en su contexto empresarial.)_
