@@ -794,19 +794,21 @@ Los escenarios de atributos de calidad se construyeron siguiendo la estructura c
 
 #### 4.1.2.3. Constraints
 
-_(Restricciones impuestas por el cliente o el negocio, no negociables.)_
+Las constraints son, por definición, innegociables. En nuestro caso provienen de tres fuentes distintas: lineamientos del curso, naturaleza del dominio y acuerdos tomados dentro del propio equipo respecto del alcance que nos resulta manejable durante el ciclo académico.
+
 
 | Technical Story ID | Título | Descripción | Criterios de Aceptación | Relacionado con (Epic ID) |
 |---|---|---|---|---|
-| CON-01 | Use of Azure Digital Twins | El gemelo digital debe construirse sobre Azure Digital Twins por requerimiento del modelo de negocio basado en transformación digital. | El sistema utiliza Azure Digital Twins como repositorio del grafo del gemelo digital. | — |
-| CON-02 | Low-code Mobile App | La aplicación móvil del conductor debe desarrollarse con tecnología low-code. | La app móvil se construye con Microsoft PowerApps. | — |
-| CON-03 | Web Services Framework | Los Web Services deben implementarse en ASP.NET Core con C#. | Todos los servicios REST se construyen con ASP.NET Core 8. | — |
-| CON-04 | Web Application Framework | La aplicación web del operador debe implementarse en Angular. | El dashboard del operador se construye con Angular y Angular Material o PrimeNG. | — |
-| CON-05 | Default Language English | El idioma por defecto en todos los productos digitales debe ser inglés (en_US), con soporte a español latinoamericano (es_419). | Todas las interfaces, mensajes y documentación API están en inglés por defecto. | — |
-| CON-06 | Cost Containment | El presupuesto operativo debe ajustarse a Azure for Students ($100 USD). | Se evita el uso de Event Grid e IoT Hub; el simulador alimenta ADT directamente vía SDK. | — |
-| CON-07 | RESTful API Style | Los Web Services deben seguir el estilo arquitectónico RESTful. | Endpoints diseñados con verbos HTTP semánticos y recursos como sustantivos. | — |
-| CON-08 | Documentation with OpenAPI | La documentación de APIs debe seguir OpenAPI Specification vía Swagger. | Cada endpoint cuenta con su especificación Swagger publicada. | — |
-| CON-09 | Source Control with GitFlow | El control de versiones aplica GitFlow y Conventional Commits. | Todos los repos siguen el branching model definido. | — |
+| CT-01 | Uso obligatorio de Azure Digital Twins | La plataforma de gemelo digital debe implementarse sobre Azure Digital Twins, con modelado en DTDL 2.0 y visualización vía 3D Scenes Studio. | Dado el modelo del estacionamiento, cuando se despliega, entonces reside en una instancia de Azure Digital Twins con todas las entidades definidas en DTDL 2.0 y la escena cargada en 3D Scenes Studio. | EP-09 |
+| CT-02 | Aplicación móvil en tecnología low-code (PowerApps) | La aplicación móvil para el Driver debe desarrollarse en Microsoft PowerApps, dada la orientación low-code del proyecto. | Dado el código fuente, cuando se revisa el repositorio, entonces el proyecto móvil está construido íntegramente en PowerApps y consume los Web Services RESTful expuestos por el backend. | EP-02, EP-07, EP-08 |
+| CT-03 | Simulación de sensores IoT vía servicio Node.js | No se desplegará hardware IoT físico; los sensores se simulan mediante un servicio Node.js que genera eventos y los sincroniza con ADT vía JSON Patch (TS-10). | Dado el servicio de simulación, cuando se ejecuta, entonces produce eventos realistas de ocupación, humo, flujo vehicular y luminosidad con patrones horarios coherentes con un centro comercial. | EP-10 |
+| CT-04 | Notificaciones push vía Firebase Cloud Messaging | Las notificaciones push hacia conductores deben implementarse exclusivamente con Firebase Cloud Messaging. | Dado un evento de alerta confirmado, cuando corresponde notificar al Driver, entonces la notificación se entrega vía FCM con reintentos automáticos ante fallos transitorios. | EP-08 |
+| CT-05 | Comunicación en tiempo real al dashboard vía SignalR | Las actualizaciones en tiempo real desde el backend al dashboard del Operator deben implementarse con SignalR. | Dado un evento que afecte al dashboard (alerta, cambio de ocupación, congestión), cuando ocurre, entonces se publica vía SignalR a los clientes conectados sin requerir polling explícito. | EP-03, EP-04 |
+| CT-06 | Internacionalización i18n | La experiencia del Landing Page y de la Web Application debe estar disponible en inglés (en_US) y español latinoamericano (es_419), con inglés como idioma por defecto. | Dado el navegador con preferencia en_US, cuando el Visitor ingresa, entonces la interfaz se presenta en inglés. Dado la preferencia es_419, cuando ingresa, entonces la interfaz se presenta en español latinoamericano. | EP-01 |
+| CT-07 | Accesibilidad a11y con atributos ARIA | Las interfaces web deben incluir atributos ARIA apropiados y cumplir con criterios WCAG 2.1 nivel AA en los componentes principales. | Dado un auditor de accesibilidad automático, cuando analiza las páginas principales, entonces no reporta errores críticos WCAG 2.1 AA. | EP-01, EP-09 |
+| CT-08 | Control de versiones con GitFlow | El código fuente debe gestionarse en GitHub bajo GitFlow y utilizando conventional commits. | Dado el repositorio, cuando se revisa su historial, entonces se evidencian ramas main, develop, feature/*, release/* y commits con prefijos convencionales (feat, fix, test, etc.). | — |
+| CT-09 | Despliegue sobre infraestructura cloud | Los productos digitales deben desplegarse sobre un proveedor cloud (Azure, AWS o Google Cloud) con URLs públicas. | Dado la finalización del Sprint 1, cuando se revisa la evidencia de despliegue, entonces existe una URL pública para cada producto digital de SmartPark. | — |
+
 
 ### 4.1.3. Architectural Drivers Backlog
 
