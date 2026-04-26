@@ -696,8 +696,6 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
     <td>[Edad]</td>
     <td><strong>Distrito</strong></td>
     <td>[Distrito]</td>
-    <td><strong>Entrevistador(a)</strong></td>
-    <td>[Nombre del Entrevistador(a)]</td>
   </tr>
   <tr>
     <td><strong>Captura de la entrevista:</strong><br><br><img src="[ruta-de-la-imagen.png]" width="200"></td>
@@ -710,6 +708,10 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
   <tr>
     <td><strong>Timing</strong></td>
     <td colspan="3">[mm:ss]</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador(a)</strong></td>
+    <td colspan="3">[Entrevistador(a)]</td>
   </tr>
 </table>
 
@@ -738,8 +740,6 @@ _(Misma estructura)_
     <td>25</td>
     <td><strong>Distrito</strong></td>
     <td>La Molina</td>
-    <td><strong>Entrevistador</strong></td>
-    <td>Abel Andrés Valle Zuta</td>
   </tr>
   <tr>
     <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/entrevista_arquitectura_software_emergentes_luis.jpeg" width="200"></td>
@@ -752,6 +752,10 @@ _(Misma estructura)_
   <tr>
     <td><strong>Timing</strong></td>
     <td colspan="3">[16:46]</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Abel Andrés Valle Zuta</td>
   </tr>
 </table>
 
