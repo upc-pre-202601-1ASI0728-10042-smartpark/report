@@ -1191,11 +1191,138 @@ workspace "SmartPark - Container Diagram" {
 
 ### 4.3.4. Software Architecture Deployment Diagrams
 
-_(Diagrama de deployment mostrando cómo se despliegan los containers en infraestructura física/cloud.)_
+El diagrama de despliegue muestra cómo los containers de la plataforma SmartPark se distribuyen sobre la infraestructura de ejecución. La estrategia de despliegue se organiza en torno a Microsoft Azure como cloud provider principal, complementado con GitHub Pages para el hosting del Landing Page y Firebase (Google Cloud) para las notificaciones push.
 
-![C4 Deployment Diagram](assets/images/chapter-04/c4-deployment.png)
+La decisión de utilizar Azure como proveedor principal responde a la coherencia arquitectónica con Azure Digital Twins, que constituye el núcleo del sistema. Esta elección minimiza la latencia entre el Web Service y el grafo de twins, simplifica la gestión de identidad mediante Azure Active Directory y permite aprovechar el crédito de Azure for Students (USD 100) sin requerir tarjeta de crédito.
+
+El despliegue se organiza en los siguientes nodos:
+
+**GitHub Pages** aloja el Landing Page como sitio estático. Se despliega automáticamente desde el branch `main` del repositorio `landing-page` en la organización de GitHub del equipo, lo que integra el despliegue con el flujo de GitFlow establecido.
+
+**Azure Static Web Apps** aloja la Web Application del operador (Angular SPA). El servicio sirve los archivos estáticos de la aplicación Angular compilada y gestiona el enrutamiento de la SPA. El despliegue se realiza mediante GitHub Actions desde el repositorio `web-application`.
+
+**Azure App Service (Tier B1)** aloja el Web Service (ASP.NET Core 8). Este nodo ejecuta la API RESTful y el hub de SignalR para comunicación en tiempo real con los dashboards de operadores. Se despliega mediante GitHub Actions desde el repositorio `web-services`. El tier B1 proporciona 1.75 GB de RAM y soporte para custom domains con SSL, suficiente para la carga del proyecto académico.
+
+**Azure Database for PostgreSQL (Flexible Server)** aloja la base de datos de sesiones. Se configura con el tier Burstable B1ms (1 vCore, 2 GB RAM) que incluye 32 GB de almacenamiento. La conexión desde el Web Service se establece mediante una cadena de conexión con SSL enforced.
+
+**Azure Digital Twins** aloja la instancia del gemelo digital del estacionamiento. El grafo de twins se modela en DTDL con interfaces para ParkingSpace, ParkingZone, ParkingLevel, SmokeDetector, AccessPoint, Ramp, LightingZone y LuminositySensor. Un Azure Storage Account asociado almacena los archivos de escena 3D utilizados por ADT 3D Scenes Studio.
+
+**Microsoft Power Platform** aloja la Mobile Application del conductor como Canvas App de PowerApps. La distribución se realiza mediante el mecanismo de compartición de PowerApps, donde los conductores acceden a la app mediante un enlace directo o código QR publicado en el Landing Page.
+
+**Firebase (Google Cloud)** aloja el proyecto de Firebase Cloud Messaging que gestiona el envío de notificaciones push. El Web Service se autentica con FCM mediante una service account key almacenada como secreto en la configuración de Azure App Service.
+
+**Entorno local del desarrollador** ejecuta el Simulador IoT durante las sesiones de desarrollo y demostración. El servicio Node.js se conecta a la instancia de Azure Digital Twins en la nube mediante DefaultAzureCredential (que resuelve automáticamente las credenciales del desarrollador autenticado en Azure CLI). Para demostraciones automatizadas, el simulador puede desplegarse opcionalmente en Azure Container Apps.
+
+![DeploymentDiagram.png](assets/images/chapter-04/software-architecture/DeploymentDiagram.png)
+
+**Código Structurizr DSL:**
+
+```dsl
+workspace "SmartPark - Deployment Diagram" {
+
+    model {
+        parkSenseSystem = softwareSystem "SmartPark Platform" {
+            landingPage = container "Landing Page" "" "HTML5, CSS3, JavaScript"
+            webApp = container "Web Application" "" "Angular 17, PrimeNG"
+            mobileApp = container "Mobile Application" "" "Microsoft PowerApps"
+            webService = container "Web Service (API)" "" "ASP.NET Core 8, C#"
+            database = container "Base de Datos de Sesiones" "" "PostgreSQL 16"
+        }
+        iotSimulatorSystem = softwareSystem "Simulador IoT" "" "External" {
+            iotSimService = container "IoT Simulator Service" "" "Node.js 20"
+        }
+
+        // Deployment - Producción
+        production = deploymentEnvironment "Producción" {
+
+            deploymentNode "GitHub Pages" "" "GitHub" {
+                deploymentNode "Servidor Estático" "" "CDN Global" {
+                    containerInstance landingPage
+                }
+            }
+
+            deploymentNode "Microsoft Azure" "" "Azure Cloud" {
+
+                deploymentNode "Azure Static Web Apps" "" "PaaS" {
+                    containerInstance webApp
+                }
+
+                deploymentNode "Azure App Service" "" "Plan B1 (1.75 GB RAM, 1 vCPU)" {
+                    deploymentNode "ASP.NET Core Runtime 8.0" "" "Linux" {
+                        containerInstance webService
+                    }
+                }
+
+                deploymentNode "Azure Database for PostgreSQL" "" "Flexible Server, Burstable B1ms" {
+                    containerInstance database
+                }
+
+                deploymentNode "Azure Digital Twins" "" "PaaS" {
+                    infrastructureNode "Instancia ADT" "Grafo de twins del estacionamiento modelado en DTDL. Interfaces: ParkingSpace, ParkingZone, ParkingLevel, SmokeDetector, AccessPoint, Ramp, LightingZone, LuminositySensor."
+                }
+
+                deploymentNode "Azure Storage Account" "" "Blob Storage" {
+                    infrastructureNode "3D Scenes Studio Files" "Archivos de escena 3D (.glb) y configuración de escena para el visor embebido del gemelo digital."
+                }
+            }
+
+            deploymentNode "Microsoft Power Platform" "" "Cloud" {
+                containerInstance mobileApp
+            }
+
+            deploymentNode "Google Cloud Platform" "" "Firebase" {
+                infrastructureNode "Firebase Cloud Messaging" "Servicio de notificaciones push. Proyecto configurado con service account key para autenticación server-to-server desde el Web Service."
+            }
+
+            deploymentNode "Dispositivo del Operador" "" "PC con monitor grande, Google Chrome" {
+                infrastructureNode "Navegador Web" "Google Chrome. Accede a la Web Application y al visor 3D embebido."
+            }
+
+            deploymentNode "Smartphone del Conductor" "" "Android, PowerApps Client" {
+                infrastructureNode "PowerApps Mobile" "Cliente de PowerApps que ejecuta la Canvas App del conductor y recibe push notifications vía FCM."
+            }
+
+            deploymentNode "Entorno Local del Desarrollador" "" "Windows/macOS/Linux" {
+                deploymentNode "Node.js 20 Runtime" "" "" {
+                    containerInstance iotSimService
+                }
+            }
+        }
+    }
+
+    views {
+        deployment parkSenseSystem production "DeploymentDiagram" "Diagrama de despliegue de la plataforma SmartPark en producción" {
+            include *
+            autoLayout
+        }
+
+        styles {
+            element "Infrastructure Node" {
+                shape RoundedBox
+                background #999999
+                color #ffffff
+            }
+        }
+    }
+}
+```
 
 ---
+
+### Resumen de decisiones tecnológicas reflejadas en la arquitectura
+
+| Decisión                                         | Justificación                                                                                                                                                                                       |
+|--------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Azure como cloud provider principal              | Coherencia con Azure Digital Twins (core del sistema). Minimiza latencia entre Web Service y grafo de twins. Crédito Azure for Students disponible.                                                 |
+| ASP.NET Core 8 + C# para Web Service             | SDK nativo de Azure Digital Twins (`Azure.DigitalTwins.Core`) en C#. Soporte nativo de SignalR para comunicación en tiempo real. Entity Framework Core para acceso a PostgreSQL.                    |
+| Angular + PrimeNG para Web Application           | Requerimiento del enunciado (Angular Framework con PrimeNG). Integración con iframe de 3D Scenes Studio. Lenguaje de diseño Material Design.                                                        |
+| Microsoft PowerApps para Mobile Application      | Plataforma low-code permitida por el enunciado. Coherencia con el ecosistema Microsoft/Azure. Conector HTTP custom para consumo de API REST.                                                        |
+| PostgreSQL para persistencia transaccional       | Datos de sesiones, usuarios e incidentes son transaccionales y no pertenecen al grafo del gemelo digital. PostgreSQL es open-source y tiene tier gratuito en Azure.                                 |
+| Node.js para Simulador IoT                       | SDK `@azure/digital-twins-core` disponible en JavaScript. Naturaleza asíncrona de Node.js adecuada para un loop de generación de telemetría con I/O hacia Azure. Ejecución ligera en entorno local. |
+| GitHub Pages para Landing Page                   | Despliegue gratuito, integrado con el repositorio Git del equipo, automático desde branch `main`.                                                                                                   |
+| Firebase Cloud Messaging para push notifications | Servicio gratuito para el volumen del proyecto. Servicio externo de terceros requerido por el enunciado. Integrable con PowerApps mediante registro de device token en el backend.                  |
+| iframe para visor 3D                             | Ruta pragmática para integrar Azure Digital Twins 3D Scenes Studio en Angular sin necesidad de reescribir el componente React nativo. Permite enfocar el esfuerzo en la lógica de negocio.          |
+| SignalR para alertas en tiempo real              | Protocolo WebSocket gestionado, nativo de ASP.NET Core. Permite que las alertas de humo lleguen al dashboard del operador en menos de 2 segundos end-to-end sin polling.                            |
 
 # Capítulo V: Tactical-Level Software Design
 
