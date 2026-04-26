@@ -684,23 +684,34 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
 
 **Entrevista 1**
 
-| Campo | Dato |
-|---|---|
-| Nombres y Apellidos | _(...)_ |
-| Edad | _(...)_ |
-| Distrito | _(...)_ |
-| Cargo | _(...)_ |
-| Fecha de entrevista | YYYY-MM-DD |
-| URL del video (Microsoft Stream) | `https://...` |
-| Timing inicio | HH:MM:SS |
-| Duración | MM:SS |
-
-_(Screenshot del video de entrevista)_
-
-![Screenshot Entrevista 1 - Operador](assets/images/chapter-02/interview-operator-01.png)
-
-**Resumen de la entrevista:**  
-_(Descripción detallada de las principales respuestas, incluyendo personalidad, marcas e influencias, tecnología, canales de interacción, browser, dispositivos.)_
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>[N° de entrevista]</td>
+    <td><strong>Nombre</strong></td>
+    <td>[Nombre completo]</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>[Edad]</td>
+    <td><strong>Distrito</strong></td>
+    <td>[Distrito]</td>
+    <td><strong>Entrevistador(a)</strong></td>
+    <td>[Nombre del Entrevistador(a)]</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="[ruta-de-la-imagen.png]" width="200"></td>
+    <td colspan="3">[Resumen de la entrevista]</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="[URL-de-la-grabación]">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">[mm:ss]</td>
+  </tr>
+</table>
 
 **Entrevista 2 — Operador**  
 _(Misma estructura)_
@@ -713,8 +724,37 @@ _(Misma estructura)_
 **Entrevista 1 — Conductor**  
 _(Misma estructura)_
 
-**Entrevista 2 — Conductor**  
-_(Misma estructura)_
+**Entrevista 2 — Conductor**
+
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>2</td>
+    <td><strong>Nombre</strong></td>
+    <td>Luis Chinchihualpa Saldarriaga</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>25</td>
+    <td><strong>Distrito</strong></td>
+    <td>La Molina</td>
+    <td><strong>Entrevistador</strong></td>
+    <td>Abel Andrés Valle Zuta</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/entrevista_arquitectura_software_emergentes_luis.jpeg" width="200"></td>
+    <td colspan="3">Luis es un conductor frecuente de centros comerciales, a los que asiste todos los fines de semana debido a que durante la semana está ocupado con sus estudios universitarios y trabajo; suele ir en horarios de almuerzo o entre las 5 y 6 de la tarde, generalmente acompañado, con el objetivo de comer, ir al cine o realizar compras en lugares como el Mall de Puruchuco, el nuevo mall del Parque La Molina y el Jockey Plaza. Siempre utiliza su auto porque lo considera más seguro, pero enfrenta múltiples dificultades al estacionar: desconoce el precio hasta después de ingresar, encuentra pocos espacios disponibles y desconfía de los indicadores de luz, ya que no reflejan correctamente la disponibilidad; además, el proceso de búsqueda le toma entre 15 y 30 minutos, especialmente en tardes de fin de semana, donde el tráfico es alto. Su comportamiento consiste en dar vueltas sin una estrategia definida hasta encontrar un lugar, lo cual le genera frustración y estrés por la pérdida de tiempo y el costo. En cuanto a seguridad, la considera vital, ya que ha sufrido rayones y abolladuras en su vehículo, incluso un caso donde encontró ambas puertas dañadas, y también ha tenido dificultades para recordar la ubicación de su auto dentro del estacionamiento. A nivel tecnológico, está familiarizado con el uso de aplicaciones debido a su formación en ingeniería de software, aunque actualmente solo usa Google Maps, el cual no le resulta útil para este contexto; muestra interés en funcionalidades como visualización del costo acumulado, alertas de seguridad, mapas interactivos con disponibilidad de espacios y registro de ubicación del vehículo. Finalmente, identifica como principales problemas la falta de seguridad, la poca transparencia en los costos y la escasez de espacios, y considera ideal una solución que integre todas estas funcionalidades para mejorar su experiencia.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210297_upc_edu_pe/IQBwF8-wNd6GT4icNCBDmTLBAZoUCIvODFg4ZUDDZFs4shQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=klWNvR">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">[16:46]</td>
+  </tr>
+</table>
+
 
 **Entrevista 3 — Conductor**  
 _(Misma estructura)_
