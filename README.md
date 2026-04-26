@@ -267,87 +267,141 @@ _(Descripción de la startup: nombre, misión, visión, valores, propuesta de va
 
 ### 1.2.1. Antecedentes y problemática
 
-_(Aplicar la técnica The 5 'W's & 2 'H's para describir antecedentes y problemática.)_
+La gestión de estacionamientos en centros comerciales de gran escala constituye una tarea operativa compleja que demanda coordinación simultánea entre múltiples variables: ocupación de plazas, seguridad, flujo vehicular e iluminación. En Lima, este reto se agrava por la dimensión que ha alcanzado el sector: la Asociación de Centros Comerciales y Entretenimiento del Perú (ACCEP) agrupa actualmente a 88 centros comerciales a nivel nacional, 48 de los cuales se ubican en Lima y 40 en provincias, según declaraciones de su presidente citadas por el diario Gestión (2025). A esta base ya consolidada se suman nuevas aperturas proyectadas, lo que presupone una demanda creciente de soluciones operativas más eficientes. A continuación se describe la problemática aplicando la técnica de las 5 W's y 2 H's.
 
 #### What (¿Qué?)
-_(Descripción del problema central.)_
+
+El problema central radica en la ausencia de visibilidad integral y en tiempo real sobre el estado operativo del estacionamiento como un sistema unificado. Según Parklio (2023), "la principal dificultad en la gestión de los estacionamientos de los centros comerciales es la falta de informes en tiempo real sobre la ocupación de los mismos"; una limitación que se extiende igualmente a la seguridad, el flujo vehicular y el consumo energético. En la práctica, los operadores gestionan cada una de estas dimensiones con herramientas aisladas que no intercambian datos ni los contextualizan en un modelo espacial común.
+
+Esta fragmentación tiene consecuencias concretas. No es posible, por ejemplo, identificar de forma inmediata que una alerta de humo se está produciendo en una zona con alta ocupación de vehículos y personas, lo cual comprometería las rutas de evacuación disponibles. Del mismo modo, resulta inviable correlacionar los datos de ocupación por zona con los niveles de iluminación para tomar decisiones de ahorro energético en tiempo real. Del lado del conductor, el problema se traduce en una experiencia marcada por la incertidumbre: tiempo perdido buscando plazas libres, dificultad para localizar el vehículo al salir y falta de información ante incidentes en la zona donde se encuentra estacionado.
 
 #### When (¿Cuándo?)
-_(Cuándo ocurre el problema, frecuencia, momentos críticos.)_
+
+La problemática se intensifica en los momentos de mayor afluencia vehicular: fines de semana, feriados, campañas navideñas, Cyber Days y las franjas horarias de almuerzo y salida laboral (12:00–14:00 y 18:00–21:00). Durante estos períodos pico, los estacionamientos de centros comerciales grandes pueden superar el 90% de su capacidad, y el tiempo invertido en buscar una plaza puede extenderse considerablemente.
+
+En cuanto a la magnitud del fenómeno, un análisis comparativo de 16 estudios realizados en 11 ciudades del mundo —llevado a cabo por Shoup (2006, citado en BID, 2020)— concluye que encontrar un espacio de estacionamiento tarda en promedio 8,1 minutos y contribuye con hasta el 30% de la congestión vehicular urbana. Por su parte, INRIX Research (2017), en un estudio que combinó datos de su base de más de 100 000 ubicaciones en 8 700 ciudades con encuestas a cerca de 18 000 conductores en Estados Unidos, Reino Unido y Alemania, calculó que el conductor promedio en zonas urbanas destina 17 horas al año a la búsqueda de estacionamiento, con un costo de USD 345 en tiempo perdido, combustible y emisiones. En estacionamientos subterráneos de múltiples niveles, estas estimaciones tienden a agravarse por la ausencia de señalización dinámica que oriente al conductor hacia las zonas disponibles.
+
+En lo que respecta a la seguridad, los incidentes como alertas de humo son poco frecuentes pero de naturaleza impredecible. Un esquema de detección manual, en el que el operador recibe únicamente una señal genérica sin contexto espacial, puede derivar en tiempos de reacción que superan los 5 minutos desde la activación de la alarma hasta la confirmación visual del foco; un margen crítico en un espacio cerrado con presencia simultánea de vehículos y personas.
 
 #### Where (¿Dónde?)
-_(Contexto físico, geográfico y digital donde ocurre.)_
+
+El problema se presenta en los estacionamientos subterráneos y de superficie de centros comerciales de gran escala en Lima. Según datos del Instituto de Economía y Desarrollo Empresarial (IEDEP) de la Cámara de Comercio de Lima, citados por el diario Gestión (2024), el Perú proyectó la apertura de siete nuevos centros comerciales para el periodo 2023-2025, lo que evidencia un mercado en expansión sostenida. Estableciminetos como el Jockey Plaza, Mall del Sur —que cuenta con más de 2 000 plazas distribuidas en dos niveles subterráneos (Intellisoft Parking, s.f.)—, Plaza Norte, MegaPlaza y Real Plaza Puruchuco son ejemplos de complejos donde la extensión del estacionamiento, combinada con la baja visibilidad natural y la alta rotación vehicular, hace que el seguimiento manual del estado operativo resulte estructuralmente insuficiente.
 
 #### Who (¿Quién?)
-_(Actores afectados: operadores de estacionamientos, conductores, administradores de centros comerciales.)_
+
+Dos segmentos se ven directamente afectados. El primero está compuesto por los **operadores de estacionamientos de centros comerciales** —jefes de operaciones, supervisores de seguridad y facility managers—, quienes coordinan la ocupación, gestionan incidentes, supervisan el flujo vehicular y controlan el consumo energético, hoy con herramientas reactivas y desconectadas entre sí. El segundo segmento lo conforman los **conductores frecuentes de centros comerciales**, personas que visitan regularmente estos espacios en vehículo propio y cuya experiencia de estacionamiento condiciona su percepción general del servicio del establecimiento.
 
 #### Why (¿Por qué?)
-_(Causas raíz del problema.)_
+
+Las causas raíz de la problemática son múltiples y se refuerzan entre sí. La primera es una **fragmentación tecnológica estructural**: los sistemas de control de acceso vehicular, los paneles de detección de incendios, los contadores de flujo y los sistemas de iluminación operan con protocolos propietarios que no intercambian información. La segunda causa es la **ausencia de contexto espacial**: aunque el operador reciba una alerta de humo, no puede visualizar de inmediato su ubicación exacta en relación con las plazas ocupadas, las rutas de evacuación o los accesos vehiculares. En tercer lugar, la **gestión predominantemente reactiva** hace que los problemas —congestión en rampas, iluminación innecesaria, concentración vehicular en un sector— sean atendidos después de que ya se manifiestan. Para el conductor, la causa de fondo es la **inexistencia de un canal digital** entre el sistema de gestión del estacionamiento y quien lo utiliza.
 
 #### How (¿Cómo?)
-_(Cómo se manifiesta el problema en la operación diaria.)_
+
+A nivel operativo, el problema se manifiesta de varias formas. Las alertas de humo llegan al panel centralizado como señales genéricas sin localización precisa, obligando al personal de seguridad a recorrer físicamente la zona afectada antes de poder coordinar una respuesta. La ocupación se estima por diferencia entre entradas y salidas, un método que acumula errores a lo largo del día y no refleja la distribución real por zona ni por nivel. El flujo en rampas internas no se monitorea en tiempo real, de modo que las congestiones solo se detectan cuando ya son evidentes. La iluminación permanece al 100% durante todo el horario operativo sin atender si hay zonas vacías donde podría atenuarse. Todo ello confluye, como apunta Parklio (2023), en que los propios visitantes tampoco disponen de información sobre el estado del estacionamiento antes de ingresar, lo que genera recorridos innecesarios y congestión en espacios cerrados.
 
 #### How Much (¿Cuánto?)
-_(Magnitud cuantitativa del problema: pérdidas económicas, tiempos perdidos, incidentes, etc.)_
+
+La magnitud económica y operativa del problema es significativa. INRIX Research (2017), en su estudio sobre el costo del estacionamiento en las diez mayores ciudades de Estados Unidos, calculó que los conductores de ese país pierden en promedio 17 horas al año buscando dónde estacionar, con un costo total de USD 345 por persona en tiempo perdido, combustible y emisiones. Aunque los valores unitarios en Lima son distintos, el estudio resulta una referencia válida para dimensionar el orden de magnitud del problema en entornos urbanos con alta densidad vehicular.
+
+Desde una perspectiva más amplia, investigaciones referenciadas por el BID (2020) indican que gestionar los estacionamientos con una meta de ocupación de entre 80% y 85% podría prácticamente eliminar el tiempo destinado a encontrar una plaza (Millard-Ball et al., 2014; Shoup, 2005, citados en BID, 2020). El programa SFPark de San Francisco ofrece evidencia empírica al respecto: al incorporar sensores de ocupación y tarifas dinámicas, el tiempo de búsqueda de estacionamiento se redujo en un 43% y el volumen de tráfico en las zonas piloto, en un 8% (SFMTA, 2014, citado en BID, 2020). Estos resultados demuestran que la tecnología de monitoreo en tiempo real genera un retorno operativo medible. En cuanto a la dimensión energética, mantener la iluminación al 100% en zonas con ocupación inferior al 20% puede representar un sobrecosto de entre el 15% y el 25% del consumo total de iluminación del estacionamiento, conforme a estimaciones propias basadas en los estándares de la norma técnica EM.010 del Reglamento Nacional de Edificaciones (2006).
 
 ### 1.2.2. Lean UX Process
 
 #### 1.2.2.1. Lean UX Problem Statements
 
-**Problem Statement 1 — Operadores de Centros Comerciales**
+**Problem Statement 1 — Operadores de centros comerciales**
 
-_(Domain)_: La operación de estacionamientos en centros comerciales de gran escala...  
-_(Customer Segments)_: Operadores de estacionamiento y administradores de seguridad...  
-_(Pain Points)_: Falta de visibilidad integral en tiempo real, decisiones reactivas, ineficiencia energética...  
-_(Gap)_: Las soluciones existentes no integran ocupación, seguridad, flujo y energía en una vista espacial unificada...  
-_(Vision/Strategy)_: Construir un gemelo digital 3D operacional como single pane of glass...  
-_(Initial Segment)_: Centros comerciales de Lima Metropolitana con más de 500 plazas de estacionamiento...
+Nuestro contexto de negocio se sitúa en la gestión operativa de estacionamientos de centros comerciales de gran escala en Lima Metropolitana, un entorno donde la seguridad, la ocupación, el flujo vehicular y la eficiencia energética deben coordinarse en tiempo real.
+
+Hemos observado que los operadores de estacionamiento —jefes de operaciones, supervisores de seguridad y facility managers— enfrentan los siguientes pain points: gestionan la ocupación mediante conteo vehicular manual propenso a errores; reciben alertas de seguridad sin contexto espacial que permita localizar inmediatamente el foco del incidente; no cuentan con visibilidad sobre los cuellos de botella en rampas y accesos; y mantienen la iluminación encendida uniformemente sin considerar la ocupación real por zona. Estas limitaciones son consecuencia directa de que los sistemas de monitoreo existentes operan como silos tecnológicos que no comparten información ni la contextualizan en un modelo espacial unificado.
+
+¿Cómo podríamos proporcionar a los operadores una plataforma que integre ocupación, seguridad, flujo vehicular y eficiencia energética en una visualización 3D unificada y en tiempo real, que les permita tomar decisiones operativas proactivas en lugar de reactivas?
 
 **Problem Statement 2 — Conductores frecuentes de centros comerciales**
 
-_(Domain)_: La experiencia de estacionamiento en centros comerciales...  
-_(Customer Segments)_: Conductores que visitan centros comerciales semanalmente...  
-_(Pain Points)_: Tiempo perdido buscando espacio, dificultad para localizar vehículo al regresar, desconocimiento de costo acumulado, falta de información ante incidentes...  
-_(Gap)_: Las apps existentes no ofrecen guía contextual ni alertas de seguridad georreferenciadas...  
-_(Vision/Strategy)_: Aplicación móvil low-code que entregue disponibilidad en tiempo real, registro de ubicación y alertas de seguridad...  
-_(Initial Segment)_: Conductores entre 25-55 años, NSE B/C, residentes en Lima...
+Nuestro contexto de negocio se sitúa en la experiencia de estacionamiento del conductor que visita centros comerciales regularmente, un momento que condiciona la percepción general del servicio del establecimiento.
+
+Hemos observado que los conductores frecuentes —personas entre 25 y 55 años, NSE B/C, que visitan centros comerciales al menos semanalmente con vehículo propio— experimentan frustraciones recurrentes: invierten tiempo excesivo buscando plazas sin orientación; tienen dificultad para recordar la ubicación exacta donde dejaron su vehículo al regresar de sus compras; desconocen el costo acumulado de su estancia hasta el momento de pagar en la salida; y no reciben información oportuna ante incidentes de seguridad que puedan afectar la zona donde se encuentra su vehículo. El origen de todas estas fricciones es, en esencia, la inexistencia de un canal de comunicación digital entre el sistema de gestión del estacionamiento y el conductor.
+
+¿Cómo podríamos ofrecer al conductor una herramienta móvil accesible que le brinde visibilidad sobre disponibilidad de plazas, le permita registrar su ubicación, le informe sobre costos y le alerte proactivamente ante incidentes de seguridad relevantes para su zona?
+
+---
 
 #### 1.2.2.2. Lean UX Assumptions
 
 **Business Assumptions**
 
-| ID | Assumption |
-|---|---|
-| BA-01 | _(Los operadores de centros comerciales están dispuestos a invertir en una plataforma de gestión inteligente de estacionamientos.)_ |
-| BA-02 | _(Los conductores adoptarán una app móvil que reduzca su tiempo de búsqueda de plaza.)_ |
-| BA-03 | _(...)_ |
+1. **Creemos que nuestros clientes necesitan** una plataforma que unifique en una sola vista las dimensiones operativas del estacionamiento (ocupación, seguridad, flujo, energía), contextualizadas espacialmente en un modelo 3D.
+2. **Estas necesidades se pueden resolver con** una solución basada en Azure Digital Twins que reproduzca el estacionamiento como gemelo digital, alimentado por datos de sensores IoT y consumido por una aplicación web para el operador y una aplicación móvil para el conductor.
+3. **Nuestros clientes iniciales son** operadores de estacionamientos de centros comerciales de Lima Metropolitana con más de 500 plazas, y conductores entre 25 y 55 años de NSE B/C que los frecuentan semanalmente con vehículo propio.
+4. **El valor número 1 que un cliente quiere de nuestro servicio es** visibilidad unificada en tiempo real con contexto espacial para el operador, y reducción del tiempo de búsqueda de plaza para el conductor.
+5. **El cliente también puede obtener estos beneficios adicionales:** reducción de costos energéticos por atenuación inteligente de iluminación, mejora del tiempo de respuesta ante incidentes de seguridad, y datos históricos de ocupación para planificación operativa.
+6. **Vamos a adquirir la mayoría de nuestros clientes a través de** demostraciones presenciales a administraciones de centros comerciales y del Landing Page con contenido segmentado y llamadas a acción diferenciadas por tipo de usuario.
+7. **Haremos dinero a través de** un modelo de suscripción mensual por centro comercial con planes diferenciados según cantidad de plazas monitoreadas (Plan Basic: hasta 500 plazas, Plan Professional: hasta 1 500 plazas, Plan Enterprise: más de 1 500 plazas), complementado con modelo freemium para la app del conductor.
+8. **Nuestra competencia principal en el mercado será** soluciones de parking guidance como ParkHelp/Cleverciti, plataformas de reserva como SpotHero, y sistemas de gestión integral como Park Assist. Nuestra ventaja competitiva radica en la integración de múltiples dimensiones operativas bajo un gemelo digital 3D.
+9. **Los venceremos debido a** que las soluciones existentes se enfocan exclusivamente en guía de ocupación sin contextualizar seguridad, flujo y energía en un modelo espacial unificado. Ningún competidor ofrece un gemelo digital accesible como SaaS para centros comerciales de mercados emergentes.
+10. **Nuestro mayor riesgo de producto es** que los operadores de centros comerciales consideren que la inversión en un gemelo digital no justifica el retorno frente a soluciones puntuales más simples.
+11. **Resolveremos esto a través de** una prueba piloto con datos simulados que demuestre el valor de la correlación espacial sin requerir inversión inicial en hardware IoT, reduciendo la barrera de entrada.
+12. **Sabremos que tenemos éxito cuando veamos** que al menos 3 centros comerciales solicitan acceso a la plataforma tras la demostración piloto, y que los conductores de prueba reportan una reducción percibida de al menos el 50% en el tiempo de búsqueda de plaza.
 
 **User Assumptions**
 
-| ID | ¿Quién es el usuario? | ¿Dónde encaja nuestro producto en su día? | ¿Qué problemas resuelve? | ¿Cuándo y cómo lo usa? | ¿Qué features son importantes? | ¿Cómo debería verse y comportarse? |
-|---|---|---|---|---|---|---|
-| UA-01 | _(Operador)_ | _(...)_ | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| UA-02 | _(Conductor)_ | _(...)_ | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
+**¿Quién es el usuario?**
+Los usuarios primarios son dos: (a) operadores de estacionamientos de centros comerciales, profesionales de entre 30 y 55 años con experiencia en gestión de facilities o seguridad, familiaridad tecnológica intermedia y uso cotidiano de dashboards y sistemas de monitoreo; y (b) conductores frecuentes de centros comerciales, personas de 25 a 55 años, NSE B/C, con smartphone Android o iOS y alta familiaridad con aplicaciones móviles de uso diario como Yape, Rappi o Waze.
+
+**¿Dónde encaja nuestro producto en su vida o trabajo?**
+Para el operador, la plataforma se integra en su rutina diaria como panel central de operaciones, reemplazando la consulta fragmentada de múltiples sistemas y reportes manuales. Se usaría durante toda la jornada laboral, con mayor intensidad en horarios pico y ante incidentes. Para el conductor, la aplicación se activa en momentos específicos y breves: al ingresar al estacionamiento para buscar plaza, al estacionar para registrar la ubicación, durante su estadía para consultar el costo y al regresar para localizar el vehículo.
+
+**¿Qué problemas tiene nuestro producto que resolver?**
+Para el operador: eliminar la fragmentación entre sistemas, proporcionar contexto espacial a las alertas y habilitar decisiones proactivas de flujo y energía. Para el conductor: reducir el tiempo de búsqueda de plaza, eliminar la incertidumbre sobre la ubicación del vehículo y brindar seguridad mediante alertas oportunas.
+
+**¿Cuándo y cómo es usado nuestro producto?**
+El dashboard web del operador es utilizado durante todo el horario operativo del estacionamiento (8 a. m. - 11 p. m.), desde una estación de trabajo con monitor grande en el centro de control. La app del conductor se utiliza en cada visita al centro comercial, con sesiones muy cortas —de 30 segundos a 2 minutos— pero de alto valor.
+
+**¿Qué características son importantes?**
+Para el operador: visualización 3D con estado en tiempo real, alertas con localización espacial precisa, indicadores de flujo por acceso y rampa, y recomendaciones de atenuación de iluminación. Para el conductor: mapa de disponibilidad por zona y nivel, registro rápido de ubicación con un toque, consulta de costo acumulado y push notifications ante incidentes en su zona.
+
+**¿Cómo debe verse y comportarse nuestro producto?**
+El dashboard del operador debe transmitir profesionalismo y confianza técnica, con un lenguaje de diseño basado en Material Design y gama cromática sobria con acentos de alerta (rojo para humo, ámbar para congestión, verde para disponibilidad). La app del conductor, en cambio, debe ser visualmente simple, con interacciones mínimas y tiempos de carga inferiores a 3 segundos, priorizando la legibilidad en condiciones de baja iluminación propias de los estacionamientos subterráneos.
+
+---
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
-**Hypothesis 1**  
-We believe that **_(business outcome esperado)_**  
-will be achieved if **_(usuarios objetivo)_**  
-attain **_(beneficio para el usuario)_**  
-with **_(feature propuesto)_**.
+**Hypothesis Statement 1: Reducción del tiempo de respuesta ante incidentes**
 
-**Hypothesis 2**  
-We believe that...
+Creemos que lograremos una **reducción del 60% en el tiempo de respuesta del operador ante alertas de humo** si los **operadores de estacionamientos de centros comerciales** obtienen **localización espacial inmediata del foco de la alerta en el modelo 3D, con visualización simultánea de las plazas ocupadas y rutas de evacuación comprometidas en la zona afectada** con la funcionalidad de **alerta de humo con contexto espacial en el dashboard 3D del gemelo digital**.
 
-**Hypothesis 3**  
-We believe that...
+**Hypothesis Statement 2: Reducción del tiempo de búsqueda de plaza**
+
+Creemos que lograremos una **reducción del 40% en el tiempo promedio que un conductor invierte buscando una plaza libre** si los **conductores frecuentes de centros comerciales** obtienen **información en tiempo real sobre la disponibilidad de espacios por zona y nivel, con orientación hacia el área de mayor disponibilidad** con la funcionalidad de **mapa de disponibilidad en la aplicación móvil PowerApps**.
+
+**Hypothesis Statement 3: Optimización del consumo energético**
+
+Creemos que lograremos una **reducción del 20% en el consumo energético de iluminación del estacionamiento** si los **operadores de estacionamientos de centros comerciales** obtienen **identificación automática de zonas con ocupación inferior al 20% donde la iluminación puede atenuarse, presentada como recomendación visual en el dashboard** con la funcionalidad de **vista de gestión energética basada en la correlación de datos de ocupación y luminosidad**.
+
+**Hypothesis Statement 4: Mejora en la localización del vehículo**
+
+Creemos que lograremos que el **90% de los conductores localicen su vehículo en menos de 2 minutos tras regresar de sus compras** si los **conductores frecuentes de centros comerciales** obtienen **un registro digital de la ubicación exacta donde estacionaron (nivel, zona, plaza), accesible con un toque en la app** con la funcionalidad de **registro de ubicación de vehículo en la aplicación móvil**.
+
+**Hypothesis Statement 5: Seguridad proactiva del conductor**
+
+Creemos que lograremos un **incremento del 80% en la percepción de seguridad del conductor durante su estancia** si los **conductores frecuentes de centros comerciales** obtienen **notificaciones push inmediatas ante incidentes de seguridad en la zona donde se encuentra su vehículo, con indicaciones claras de evacuación si fuera necesario** con la funcionalidad de **alertas de seguridad vía Firebase Cloud Messaging integrado con la app PowerApps**.
+
+**Hypothesis Statement 6: Adopción de la plataforma por centros comerciales**
+
+Creemos que lograremos **5 contratos de suscripción con centros comerciales de Lima Metropolitana en los primeros 12 meses** si los **administradores y gerentes de operaciones de centros comerciales** obtienen **una demostración funcional del gemelo digital con datos simulados que evidencie el valor de la correlación espacial entre ocupación, seguridad, flujo y energía, sin requerir inversión inicial en hardware IoT** con la funcionalidad del **piloto basado en simulación de sensores y modelo 3D del estacionamiento**.
+
+---
 
 #### 1.2.2.4. Lean UX Canvas
 
-_(Insertar imagen del Lean UX Canvas v2 elaborado en Miro o LucidChart.)_
 
-![Lean UX Canvas](assets/images/chapter-01/lean-ux-canvas.png)
+<div align="center">
+  <img src="assets/images/chapter-01/lean-ux-canvas.png" alt="Lean UX Canvas SmartPark" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Lean UX Canvas de la plataforma SmartPark</i></p>
+</div>
+
 
 ## 1.3. Segmentos objetivo
 
