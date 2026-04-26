@@ -751,7 +751,7 @@ _(Misma estructura)_
   </tr>
   <tr>
     <td><strong>Timing</strong></td>
-    <td colspan="3">[16:46]</td>
+    <td colspan="3">16 minutos con 46 segundos</td>
   </tr>
   <tr>
     <td><strong>Entrevistador</strong></td>
