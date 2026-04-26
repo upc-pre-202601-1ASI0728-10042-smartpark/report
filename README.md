@@ -914,27 +914,68 @@ El driver DR-08 cubre un requerimiento crítico de seguridad: cuando un Driver t
 
 ### 4.1.5. Quality Attribute Scenario Refinements
 
-#### Scenario Refinement for Scenario 1: Low Latency for Smoke Alerts
+Tras las cinco iteraciones anteriores, los escenarios originales se refinaron para incorporar detalles que antes eran imprecisos. Este refinamiento, que retomamos de la guía de SEI para el Quality Attribute Workshop (Bass, Clements & Kazman, 2021), permite que los escenarios funcionen como criterios de aceptación arquitectónicos verificables.
 
-| Campo | Valor |
+#### Scenario Refinement for Scenario 1 — Performance en actualización del gemelo
+
+| Scenario(s) | Un evento de cambio de ocupación llega al sistema y debe reflejarse en el gemelo digital y en el dashboard del Operator. |
 |---|---|
-| **Scenario(s):** | A smoke detector triggers an alert; the system propagates it to the operator dashboard and to drivers with active sessions in the affected zone. |
-| **Business Goals:** | Ensure rapid response to safety incidents to protect lives and property; differentiate the platform from reactive parking systems. |
-| **Relevant Quality Attributes:** | Performance (latency), Reliability |
-| **Stimulus:** | Smoke detection event |
-| **Stimulus Source:** | Smoke detector sensor (simulated) |
-| **Environment:** | Normal operation, business hours |
-| **Artifact:** | Web Services + Azure Digital Twins + SignalR Hub + FCM |
-| **Response:** | Twin state updated; alert pushed to operator dashboard via SignalR; FCM message sent to drivers with active session in zone |
-| **Response Measure:** | Operator dashboard alert visible ≤ 2 seconds; driver push notification delivered ≤ 5 seconds |
-| **Questions:** | Is the SignalR Hub colocated with the Web Services? How is FCM rate-limited? |
-| **Issues:** | Need to validate end-to-end latency under load; FCM delivery is best-effort |
+| Business Goals | Permitir al Operator tomar decisiones operativas oportunas sobre ocupación y redirección de flujo vehicular. |
+| Relevant Quality Attributes | Performance, Availability. |
+| Stimulus | Llegada de un evento de cambio de estado de ocupación proveniente del simulador (TS-10) o, en futuro, de sensores físicos. |
+| Stimulus Source | Simulador Node.js de SmartPark. |
+| Environment | Operación normal con carga proyectada de hasta 1,200 eventos por minuto. |
+| Artifact | Servicio de ingesta de telemetría, broker de mensajería, instancia de Azure Digital Twins y canal SignalR hacia el dashboard. |
+| Response | El evento es validado, persistido vía JSON Patch, propagado al twin correspondiente y notificado al dashboard del Operator a través de SignalR. |
+| Response Measure | Latencia end-to-end menor a 2 segundos en el percentil 95 bajo la carga proyectada; refresh visual del dashboard dentro del ciclo de 5 segundos definido en US-16. |
+| Questions | ¿Qué ocurre si la carga supera el umbral? ¿Se priorizan eventos críticos (humo) sobre eventos de ocupación? |
+| Issues | Actualmente el simulador no diferencia prioridades; es necesario introducir un campo "criticality" en el evento. |
 
-#### Scenario Refinement for Scenario 2: Sensor Type Modifiability
-_(Misma estructura)_
+#### Scenario Refinement for Scenario 2 — Availability del dashboard de operaciones
 
-#### Scenario Refinement for Scenario 3: Cost Containment
-_(Misma estructura)_
+| Scenario(s) | El Operator accede al dashboard web de SmartPark durante el horario comercial. |
+|---|---|
+| Business Goals | Garantizar que el personal de operaciones pueda supervisar el estacionamiento sin interrupciones significativas. |
+| Relevant Quality Attributes | Availability, Security. |
+| Stimulus | Solicitud de acceso al dashboard mediante navegador moderno. |
+| Stimulus Source | Operadores autenticados del centro comercial (rol Operator). |
+| Environment | Horario comercial (06:00–23:00), con uso continuo durante toda la jornada. |
+| Artifact | Web Application Angular, API Gateway, servicio de identidad (TS-09), servicio de gemelo digital (TS-02). |
+| Response | El dashboard se despliega con los datos del gemelo digital. Si ADT no responde, se muestra el último estado cacheado con marca temporal y un banner de advertencia, conforme a US-16 escenario 2. |
+| Response Measure | Disponibilidad mensual igual o superior al 99.5% durante el horario de operación; modo degradado plenamente funcional en paneles de datos no-3D ante fallo de 3D Scenes Studio (US-35). |
+| Questions | ¿Cómo se notifica al Operator ante una caída parcial (por ejemplo, ADT sin responder)? ¿Existe un modo degradado documentado? |
+| Issues | Pendiente definir el comportamiento detallado del visor 3D cuando ADT no responde: ¿mostrar último frame cacheado o deshabilitar la vista 3D pero mantener los paneles tabulares? |
+
+#### Scenario Refinement for Scenario 3 — Contextualización espacial de alertas de humo
+
+| Scenario(s) | Un sensor de humo reporta detección positiva y la alerta debe visualizarse espacialmente y notificarse a Drivers afectados. |
+|---|---|
+| Business Goals | Reducir el tiempo de respuesta ante emergencias y facilitar la coordinación de evacuaciones. |
+| Relevant Quality Attributes | Performance, Usability, Availability, Reliability. |
+| Stimulus | Evento de detección de humo generado por el simulador (TS-10). |
+| Stimulus Source | Simulador Node.js (futuro: detector físico). |
+| Environment | Operación normal o de alta demanda. |
+| Artifact | Servicio de telemetría, servicio Safety & Incident Management (TS-03), servicio del gemelo digital (TS-02), servicio de Notificaciones (TS-05) y FCM. |
+| Response | La zona afectada se resalta sobre el modelo 3D, el visor navega automáticamente a la ubicación, se emite notificación audiovisual al Operator vía SignalR y se disparan notificaciones push vía FCM a Drivers con sesiones activas en la zona, conforme a US-19 y US-32. |
+| Response Measure | Tiempo entre la detección y la visualización menor a 2 segundos; tiempo entre la detección y la entrega de la notificación push menor a 5 segundos; tasa de falsos negativos igual a 0; supresión de duplicados dentro de ventana de 60 segundos (TS-03). |
+| Questions | ¿Qué ocurre si un Driver tiene la app cerrada o las notificaciones desactivadas? |
+| Issues | US-32 escenario 3 ya contempla mostrar un banner in-app al abrir la aplicación; queda como mejora futura un canal SMS de respaldo. |
+
+#### Scenario Refinement for Scenario 4 — Usabilidad de la consulta de disponibilidad en PowerApps
+
+| Scenario(s) | El Driver consulta la disponibilidad por zona al ingresar al centro comercial desde la app PowerApps. |
+|---|---|
+| Business Goals | Acelerar la decisión de estacionamiento y reducir el tiempo de recorrido interno buscando plaza. |
+| Relevant Quality Attributes | Usability, Performance. |
+| Stimulus | Apertura de la aplicación móvil PowerApps. |
+| Stimulus Source | Driver. |
+| Environment | Dispositivo Android con red móvil variable; el Driver se encuentra al volante o junto al vehículo. |
+| Artifact | Aplicación móvil PowerApps, API pública de disponibilidad (TS-01), servicio de Parking Operations Monitoring. |
+| Response | Se presenta la disponibilidad por nivel ordenada de mayor a menor, con detalle por zona al tocar un nivel (US-18). |
+| Response Measure | La información aparece en menos de 5 segundos en el percentil 90; la antigüedad del dato es menor a 5 segundos. |
+| Questions | ¿Qué ocurre si se pierde la conexión justo después de cargar la pantalla? |
+| Issues | El escenario 4 de US-18 ya contempla mostrar un mensaje claro ante ausencia de conectividad; se evalúa como mejora una caché local persistente. |
+
 
 ## 4.2. Strategic-Level Domain-Driven Design
 
