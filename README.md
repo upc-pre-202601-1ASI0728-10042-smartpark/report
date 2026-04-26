@@ -836,30 +836,81 @@ El Architectural Drivers Backlog consolida los inputs del proceso y los ordena s
 
 ### 4.1.4. Architectural Design Decisions
 
-_(Explicación del proceso siguiendo los stages del Quality Attribute Workshop. Para cada iteración: drivers considerados, tácticas y patrones evaluados, criterios de decisión.)_
+Las decisiones arquitectónicas se tomaron a lo largo de cinco iteraciones, cada una centrada en un subconjunto de drivers del backlog. Después de evaluar entre dos y tres patrones candidatos por iteración, documentamos pros, contras y razones de adopción o descarte. El resumen se ofrece en las tablas a continuación, precedido por una breve narrativa de cada iteración.
 
-#### Iteración 1: Decomposition Strategy
-**Drivers considerados:** QA-02 (Modifiability), QA-04 (Throughput), CON-01
+**Iteración 1: Arquitectura general del backend.** 
+El problema que atacamos primero fue la descomposición del backend, dado que el sistema atenderá a dos audiencias muy distintas y debe incorporar capacidades que evolucionarán a ritmos diferentes. Comparamos una arquitectura monolítica en capas contra microservicios y contra una arquitectura monolítica modular.
 
-| Driver ID | Título | Patrón 1: Modular Monolith | Patrón 2: Microservices | Patrón 3: Serverless Functions |
+
+| Driver ID | Título del Driver | Pattern 1: Layered Monolith | Pattern 2: Modular Monolith | Pattern 3: Microservicios por Bounded Context |
 |---|---|---|---|---|
-| QA-02 | Sensor Type Modifiability | **Pro:** Cambios localizados en módulo. **Con:** Recompilación total. | **Pro:** Despliegue independiente. **Con:** Sobrecarga de coordinación. | **Pro:** Funciones específicas por sensor. **Con:** Cold starts, fragmentación. |
-| QA-04 | Throughput | **Pro:** Sin overhead de red entre módulos. **Con:** Escalado vertical. | **Pro:** Escalado horizontal selectivo. **Con:** Latencia de red. | **Pro:** Auto-scaling. **Con:** Costo por invocación. |
-| CON-03 | ASP.NET Core | **Pro:** Encaja naturalmente. | **Pro:** Encaja, pero overhead. | **Pro:** Azure Functions C#. **Con:** Cambio de paradigma. |
+| — | Evaluación general (Pro / Con) | Pro: Sencillez de despliegue y depuración.<br>Con: Acoplamiento a mediano plazo, difícil evolución independiente. | Pro: Aísla dominios internamente.<br>Con: No permite escalado independiente ni stacks diferenciados. | Pro: Encaja con la descomposición DDD, permite escalado y despliegue independientes.<br>Con: Mayor complejidad operativa e infraestructura adicional. |
+| DR-01 | Actualización casi en tiempo real del gemelo | Riesgo de que operaciones del Driver impacten el procesamiento del gemelo | Menor riesgo, pero comparten el mismo pool de recursos | Aislamiento total; el procesamiento del gemelo puede escalar por sí solo |
+| DR-02 | Disponibilidad del dashboard de operaciones | Un fallo afecta a toda la aplicación | Un fallo afecta todo el proceso | Los contextos fallan de forma aislada |
+| DR-06 | Separación Operator / Driver | Posible, aunque diluida | Posible a nivel de módulo | Natural, refuerza el diseño |
+| DR-10 | Incorporación de nuevos tipos de sensores | Alto riesgo de regresiones | Impacto acotado al módulo | Impacto aislado al servicio de telemetría |
 
-**Decisión:** Modular Monolith en ASP.NET Core con módulos por Bounded Context. Justificación: alcance académico, restricción de costo (CON-06), simplicidad de despliegue, modularidad interna suficiente para satisfacer modificabilidad.
 
-#### Iteración 2: Real-time Data Propagation
-**Drivers considerados:** QA-01 (Latency), QA-04 (Throughput)
+**Decisión adoptada:** Microservicios por Bounded Context, con API Gateway frontal y mensajería asíncrona para la integración entre servicios.
 
-| Driver ID | Título | Patrón 1: Polling | Patrón 2: WebSockets/SignalR | Patrón 3: Event-driven via FCM |
+
+**Iteración 2: Estrategia de integración y propagación de eventos.**
+Definida la descomposición, el siguiente punto fue cómo debían comunicarse los servicios. Se evaluaron tres alternativas: llamadas REST síncronas, un message broker publish/subscribe, y un modelo híbrido compuesto por comandos síncronos REST + eventos asíncronos pub/sub + SignalR para push hacia el dashboard.
+
+
+| Driver ID | Título del Driver | Pattern 1: REST Síncrono | Pattern 2: Pub/Sub Asíncrono | Pattern 3: Híbrido (REST + Eventos + SignalR) |
 |---|---|---|---|---|
-| QA-01 | Latency for Alerts | **Con:** Latencia variable según intervalo. | **Pro:** Push inmediato. **Con:** Mantener conexiones. | **Pro:** Push nativo. **Con:** Dependencia de servicio externo. |
+| — | Evaluación general (Pro / Con) | Pro: Fácil de implementar y depurar.<br>Con: Acoplamiento temporal; propagación lenta si hay encadenamientos. | Pro: Máxima independencia entre productores y consumidores.<br>Con: Trazabilidad compleja, requiere disciplina fuerte en el diseño de eventos. | Pro: Usa REST donde tiene sentido (queries, comandos), eventos para cambios de dominio y SignalR para notificación al cliente.<br>Con: Requiere tres mecanismos de infraestructura. |
+| DR-01 | Latencia <2s en actualización del gemelo | Cumple si la cadena es corta; se degrada con varios saltos | Cumple, siempre que el broker esté dimensionado | Cumple, permite optimizar caminos críticos |
+| DR-10 | Extensibilidad a nuevos sensores | Obliga a modificar productores al agregar consumidores | Consumidor adicional, cero impacto en productor | Igual ventaja, con menor carga cognitiva |
+| DR-11 | Push al dashboard sin polling | No lo soporta nativamente | Indirecto vía un consumidor intermedio | SignalR resuelve directamente este driver |
 
-**Decisión:** SignalR para dashboard del operador (web) + FCM para push a PowerApps móvil. Justificación: cada canal usa la tecnología más adecuada por tipo de cliente.
 
-#### Iteración 3: Twin Synchronization
-_(Continuar con más iteraciones según necesidades del proyecto.)_
+**Decisión adoptada:** Modelo híbrido. Las queries del dashboard al backend y los comandos del Driver al backend se resuelven por REST; los cambios de estado del gemelo digital y las alertas se propagan mediante eventos asíncronos; las actualizaciones que deben llegar al dashboard del Operator viajan por SignalR.
+
+
+**Iteración 3: Modelado y persistencia del gemelo digital.**
+La decisión se centró en cómo estructurar DTDL y qué complementar con bases de datos adicionales. Se evaluaron dos alternativas: modelo DTDL como única fuente de verdad, o modelo DTDL complementado con una base relacional para historia operativa, sesiones de estacionamiento y agregaciones.
+
+
+| Driver ID | Título del Driver | Pattern 1: DTDL como única fuente | Pattern 2: DTDL + Base Relacional |
+|---|---|---|---|
+| — | Evaluación general (Pro / Con) | Pro: Simplicidad, un solo lugar de consulta.<br>Con: Consultas analíticas costosas, sin historia nativa profunda. | Pro: Permite consultas analíticas, historia de sesiones e historial de incidentes (US-22, US-31), reportes.<br>Con: Introduce un desafío de consistencia entre ADT y la base. |
+| DR-04 | Uso obligatorio de Azure Digital Twins | Satisface el constraint | Satisface el constraint |
+| DR-01 | Latencia <2s | Puede verse afectada en consultas pesadas | No se afecta porque las consultas live usan ADT |
+| DR-10 | Extensibilidad | Media | Alta |
+| DR-12 | Cálculo de costo acumulado por sesión | Requiere modelar sesiones dentro del twin (anti-patrón) | Las sesiones se persisten en PostgreSQL con su lógica tarifaria |
+
+
+**Decisión adoptada:** DTDL + PostgreSQL. El twin mantiene el estado en vivo del estacionamiento; PostgreSQL almacena telemetría histórica, sesiones de estacionamiento, historial de incidentes y configuraciones tarifarias.
+
+
+**Iteración 4: Autenticación y autorización por roles.** 
+El driver DR-09 es especialmente sensible. El equipo se inclinó, tras comparar soluciones, por un esquema basado en JSON Web Tokens gestionado por un servicio dedicado de identidad, siguiendo la línea de lo propuesto por Richardson (2018) para microservicios y respetando la especificación detallada de TS-09 (registro, login, refresh, expiración).
+
+
+| Driver ID | Título del Driver | Pattern 1: Basic Auth por servicio | Pattern 2: JWT centralizado en Identity Service | Pattern 3: OAuth 2.0 con proveedor externo |
+|---|---|---|---|---|
+| — | Evaluación general (Pro / Con) | Pro: Mínima infraestructura.<br>Con: No escala, no separa roles claramente. | Pro: Tokens portables, roles claros, refresh tokens, aislado.<br>Con: Requiere servicio de identidad propio. | Pro: Estándar, delega a proveedor.<br>Con: Dependencia externa, fricción para el segmento Driver en PowerApps. |
+| DR-09 | Seguridad por roles diferenciados | Insuficiente | Cumple con accessToken+refreshToken | Cumple, pero con sobrecarga |
+| DR-06 | Separación Operator / Driver | Posible con esfuerzo | Natural | Natural |
+
+
+**Decisión adoptada:** JWT emitidos por un servicio dedicado de Identidad, validados en el API Gateway, con accessToken de corta duración y refreshToken para renovación, conforme a TS-09.
+
+
+**Iteración 5: Despacho de notificaciones push.** 
+El driver DR-08 cubre un requerimiento crítico de seguridad: cuando un Driver tiene un vehículo en una zona donde se produce una alerta de humo, debe ser notificado en menos de 5 segundos. La constraint CT-04 fija el proveedor (Firebase Cloud Messaging). La decisión, entonces, se centró en si la lógica de filtrado por zona afectada se ejecuta dentro del contexto de Notificaciones, dentro del contexto de Sesiones, o se distribuye.
+
+
+| Driver ID | Título del Driver | Pattern 1: Filtrado en Notificaciones | Pattern 2: Filtrado en Sesiones | Pattern 3: Filtrado distribuido (cada contexto reporta) |
+|---|---|---|---|---|
+| — | Evaluación general (Pro / Con) | Pro: Centraliza la responsabilidad de "a quién avisar".<br>Con: Necesita conocer las sesiones activas. | Pro: Sesiones es dueño natural del dato.<br>Con: Mezcla concerns de notificación con concerns de sesión. | Pro: Cada contexto sabe lo suyo.<br>Con: Requiere coordinación cross-context fuerte y mayor riesgo de eventos perdidos. |
+| DR-08 | Push notifications confiables | Cumple si Sesiones publica eventos legibles | Cumple, pero acopla Sesiones con FCM | Cumple, pero introduce duplicación |
+
+
+**Decisión adoptada:** Filtrado en el contexto de Notificaciones, suscrito a eventos de Safety & Incident Management y consultando al contexto de Parking Session Management qué Drivers tienen sesión activa en esa zona. Los reintentos con backoff exponencial (TS-05) viven dentro del contexto de Notificaciones.
+
 
 ### 4.1.5. Quality Attribute Scenario Refinements
 
