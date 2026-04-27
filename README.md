@@ -716,7 +716,36 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
 </table>
 
 **Entrevista 2 — Operador**  
-_(Misma estructura)_
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>2</td>
+    <td><strong>Nombre</strong></td>
+    <td>Jeremy Joel Quispe Andia</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>25</td>
+    <td><strong>Distrito</strong></td>
+    <td>San Juan de Lurigancho, Lima</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/entrevista_jeremy.png" width="200"></td>
+    <td colspan="3">Jeremy es jefe de operaciones con cuatro años de experiencia y gestiona un estacionamiento de aproximadamente 1,200 plazas en un centro comercial. Supervisa ocupación, flujo vehicular, seguridad y personal operativo, apoyándose en cámaras CCTV, radios, barreras automáticas y reportes manuales. Sin embargo, identifica limitaciones importantes, como errores frecuentes en el conteo de vehículos y falta de visibilidad en tiempo real sobre la disponibilidad exacta por zonas.Ante incidentes como accidentes, humo o robos, el equipo depende de reportes del personal y revisión de cámaras, lo que retrasa la ubicación del problema entre tres y siete minutos. Asimismo, las mayores congestiones ocurren en fines de semana y feriados, resolviéndose mediante redirección manual y apoyo de orientadores.Finalmente, Jeremy señala una gestión energética poco eficiente, ya que la iluminación funciona mayormente con horarios fijos y sin automatización en zonas vacías. Considera clave implementar una plataforma que permita monitorear ocupación, alertas y congestión en tiempo real para tomar decisiones más proactivas.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202216263_upc_edu_pe/IQB2AaFWtAp3TL58UwEXAlu2ARz4YzAm_o1UZWJrDLK0XGI?e=poyF6t&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">6 minutos con 56 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Hernan Morales Calderón</td>
+  </tr>
+</table>
 
 **Entrevista 3 — Operador**  
 <table>
