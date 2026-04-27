@@ -2526,9 +2526,4 @@ Shoup, D. C. (2006). Cruising for parking. *Transport Policy*, *13*(6), 479–48
 | TB2       | `https://web.microsoftstream.com/...`                                                                                                                                                                                                                                                                                   |
 | TF1       | `https://web.microsoftstream.com/...`                                                                                                                                                                                                                                                                                   |
 
-## Anexo B: Términos y Condiciones del Servicio
 
-## Anexo C: Configuración de Internacionalización (i18n) y Accesibilidad (a11y)
-
-## Anexo D: DTDL Models de Azure Digital Twins
-
