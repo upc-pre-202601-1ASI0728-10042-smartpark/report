@@ -41,7 +41,7 @@
 
 | Versión | Fecha      | Autor      | Descripción de modificación                                                      |
 |---------|------------|------------|----------------------------------------------------------------------------------|
-| 0.1.0   | YYYY-MM-DD | _(Nombre)_ | Versión inicial del informe para entrega TB1. Incluye Capítulos I, II, III y IV. |
+| TB1   | 24-04-2026 | <li>Riva Rodriguez, Elmer Augusto</li>  <li>Morales Calderon, Hernan Emilio</li> <li>Qqueso Rodriguez, Britney Delhy</li>  <li>Sanchez Rios, Camila Cristina</li> <li>Valle Zuta, Abel Andrés</li>| Versión inicial del informe para entrega TB1. Incluye Capítulos I, II, III y IV. |
 |         |            |            |                                                                                  |
 |         |            |            |                                                                                  |
 
@@ -127,14 +127,14 @@ _(Pendiente)_
     - [2.1.2. Estrategias y tácticas frente a competidores](#212-estrategias-y-tácticas-frente-a-competidores)
   - [2.2. Entrevistas](#22-entrevistas)
     - [2.2.1. Diseño de entrevistas](#221-diseño-de-entrevistas)
-      - [Preguntas para Segmento 1: Operadores de estacionamiento](#preguntas-para-segmento-1-operadores-de-estacionamiento)
-      - [Preguntas para Segmento 2: Conductores](#preguntas-para-segmento-2-conductores)
+      - [Preguntas para Segmento 1: Operadores de estacionamientos en centros comerciales](#preguntas-para-segmento-1-operadores-de-estacionamientos-en-centros-comerciales)
+      - [Preguntas para Segmento 2: Conductores frecuentes de centros comerciales](#preguntas-para-segmento-2-conductores-frecuentes-de-centros-comerciales)
     - [2.2.2. Registro de entrevistas](#222-registro-de-entrevistas)
-      - [Segmento 1: Operadores](#segmento-1-operadores)
-      - [Segmento 2: Conductores](#segmento-2-conductores)
+      - [Segmento 1: Operadores de estacionamientos en centros comerciales](#segmento-1-operadores-de-estacionamientos-en-centros-comerciales-1)
+      - [Segmento 2: Conductores frecuentes de centros comerciales](#segmento-2-conductores-frecuentes-de-centros-comerciales-1)
     - [2.2.3. Análisis de entrevistas](#223-análisis-de-entrevistas)
-      - [Segmento 1: Operadores](#segmento-1-operadores-1)
-      - [Segmento 2: Conductores](#segmento-2-conductores-1)
+      - [Segmento 1: Operadores de estacionamientos en centros comerciales](#segmento-1-operadores-de-estacionamientos-en-centros-comerciales-2)
+      - [Segmento 2: Conductores frecuentes de centros comerciales](#segmento-2-conductores-frecuentes-de-centros-comerciales-2)
   - [2.3. Needfinding](#23-needfinding)
     - [2.3.1. User Personas](#231-user-personas)
       - [User Persona 1: Operador de Estacionamiento](#user-persona-1-operador-de-estacionamiento)
@@ -544,175 +544,549 @@ De acuerdo con INRIX Research (2017), los conductores en Estados Unidos pierden 
 
 ## 2.1. Competidores
 
-_(Introducción identificando los competidores directos e indirectos seleccionados, mínimo 3.)_
-
-| Competidor      | Tipo                | Logo       |
-|-----------------|---------------------|------------|
-| _(Parkopedia)_  | Directo / Indirecto | _(Imagen)_ |
-| _(SpotHero)_    | Directo / Indirecto | _(Imagen)_ |
-| _(Park Assist)_ | Directo / Indirecto | _(Imagen)_ |
-
 ### 2.1.1. Análisis competitivo
 
-#### Competitive Analysis Landscape
-
-|                                                         | **¿Por qué llevar a cabo este análisis?** _(Objetivo del análisis)_ |                  |                  |                  |
-|---------------------------------------------------------|---------------------------------------------------------------------|------------------|------------------|------------------|
-|                                                         | **Tu Startup**                                                      | **Competidor 1** | **Competidor 2** | **Competidor 3** |
-| **Perfil**                                              |                                                                     |                  |                  |                  |
-| Overview                                                |                                                                     |                  |                  |                  |
-| Ventaja competitiva / ¿Qué valor ofrece a los clientes? |                                                                     |                  |                  |                  |
-| **Perfil de Marketing**                                 |                                                                     |                  |                  |                  |
-| Mercado objetivo                                        |                                                                     |                  |                  |                  |
-| Estrategias de marketing                                |                                                                     |                  |                  |                  |
-| **Perfil de Producto**                                  |                                                                     |                  |                  |                  |
-| Productos & Servicios                                   |                                                                     |                  |                  |                  |
-| Precios & Costos                                        |                                                                     |                  |                  |                  |
-| Canales de distribución (Web y/o Móvil)                 |                                                                     |                  |                  |                  |
-| **Análisis SWOT**                                       |                                                                     |                  |                  |                  |
-| Fortalezas                                              |                                                                     |                  |                  |                  |
-| Debilidades                                             |                                                                     |                  |                  |                  |
-| Oportunidades                                           |                                                                     |                  |                  |                  |
-| Amenazas                                                |                                                                     |                  |                  |                  |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th colspan="5">
+      <b>Objetivo del análisis:</b> Identificar el posicionamiento competitivo de SmartPark en el mercado de soluciones tecnológicas para la gestión de estacionamientos en centros comerciales, entendiendo las ventajas diferenciales y oportunidades de mejora frente a alternativas tradicionales y modernas.
+    </th>
+  </tr>
+  <tr>
+    <th></th>
+    <th>SmartPark (Apex Twin) <img src="./assets/images/chapter-02/logo1.png"></th>
+    <th>ParkingSoft (Perú) <img src="./assets/images/chapter-02/logo2.png"></th>
+    <th>Parkimovil (Latinoamérica) <img src="./assets/images/chapter-02/logo3.png"></th>
+    <th>TIBA Parking Systems (Global) <img src="./assets/images/chapter-02/logo4.png"></th>
+  </tr>
+  <tr>
+    <th colspan="5"><b>PERFIL</b></th>
+  </tr>
+  <tr>
+    <td><b>Overview</b></td>
+    <td>Plataforma SaaS con gemelo digital 3D en tiempo real que integra ocupación, seguridad contra incendios, flujo vehicular y eficiencia energética en una visualización unificada. Solución nativa de nube sobre Azure Digital Twins.</td>
+    <td>Sistema tradicional de control de acceso y gestión de estacionamientos con hardware propietario (barreras, lectores de tickets y contadores). Su foco principal está en el control de entrada y salida.</td>
+    <td>Solución mobile-first para conductores que muestra disponibilidad de plazas y permite reservas. Está orientada al usuario final y no al operador del centro comercial.</td>
+    <td>Multinacional con hardware y software integrado para estacionamientos automatizados (LPR, guiado por luces LED y cámaras). Tiene presencia sólida en centros comerciales de alta gama, pero no incorpora gemelo digital ni analítica predictiva.</td>
+  </tr>
+  <tr>
+    <td><b>Ventaja competitiva</b></td>
+    <td>Especialización en gemelo digital, visualización espacial en tiempo real, enfoque dual operador-conductor y modelo SaaS de menor barrera de entrada.</td>
+    <td>Robustez operativa, base instalada local y soporte presencial para proyectos tradicionales,integración con sistemas de facturación electrónica peruanos (Sunat).</td>
+    <td>Experiencia centrada en el conductor, fuerte adopción móvil y reserva anticipada de plazas.</td>
+    <td>Infraestructura madura, alta confiabilidad y reconocimiento de marca en el segmento premium.</td>
+  </tr>
+  <tr>
+    <th colspan="5"><b>PERFIL DE MARKETING</b></th>
+  </tr>
+  <tr>
+    <td><b>Mercado objetivo</b></td>
+    <td>Centros comerciales de gran escala en Lima, con proyección a Perú, Colombia y Chile hacia 2029. Segmento primario: operadores; segmento secundario: conductores frecuentes.</td>
+    <td>Centros comerciales medianos y grandes en Perú. Clientes actuales: Real Plaza, MegaPlaza, Mall Aventura. Foco exclusivo en operadores.</td>
+    <td>Centros comerciales y estacionamientos públicos en México, Colombia y Chile. Foco casi exclusivo en conductores.</td>
+    <td>Centros comerciales de lujo, aeropuertos y hospitales a nivel global. En Perú: Jockey Plaza, Larcomar. Segmento premium con alta inversión en hardware.</td>
+  </tr>
+  <tr>
+    <td><b>Estrategias de marketing</b></td>
+    <td>Marketing digital B2B, demostraciones del gemelo digital, alianzas con integradores IoT y participación en eventos de PropTech y Smart Buildings.</td>
+    <td>Fuerza de ventas directa, presencia en ferias de seguridad y tecnología para retail, y relaciones de largo plazo con constructoras.</td>
+    <td>Marketing B2C agresivo, alianzas con marcas de autos y estaciones de servicio, y fuerte presencia en tiendas de aplicaciones.</td>
+    <td>Marketing B2B tradicional con demostración técnica, presencia internacional en ferias especializadas y red global de partners.</td>
+  </tr>
+  <tr>
+    <th colspan="5"><b>PERFIL DE PRODUCTO</b></th>
+  </tr>
+  <tr>
+    <td><b>Productos &amp; Servicios</b></td>
+    <td><b>SmartPark Web (Operador):</b> gemelo digital 3D, mapa de ocupación en tiempo real, geolocalización de alertas de humo, mapa de calor de flujo vehicular y recomendaciones de eficiencia energética.<br><b>SmartPark App (Conductor):</b> consulta de plazas libres, registro de ubicación vía QR, monitoreo de costo acumulado y notificaciones push de seguridad.</td>
+    <td><b>ParkingSoft Core:</b> control de acceso, contadores por nivel, reportes históricos y facturación electrónica.<br><b>ParkingSoft Lite:</b> versión reducida para estacionamientos pequeños sin integración de sensores.</td>
+    <td><b>Parkimovil Driver:</b> mapa de disponibilidad, reserva de plazas, navegación interna e historial de estacionamientos.<br><b>Parkimovil Manager:</b> panel web simple con ocupación agregada por nivel.</td>
+    <td><b>TIBA ParCS:</b> control de acceso con LPR, emisión de tickets e integración con guiado por luces LED.<br><b>TIBA Fleet:</b> módulo para flotas corporativas.<br><b>TIBA Analytics:</b> reportes históricos de ocupación sin tiempo real ni gemelo digital.</td>
+  </tr>
+  <tr>
+    <td><b>Precios &amp; Costos</b></td>
+    <td>Modelo SaaS por suscripción mensual por centro comercial:<br>- <b>Basic</b> (hasta 500 plazas): USD 499/mes<br>- <b>Professional</b> (hasta 1,500): USD 999/mes<br>- <b>Enterprise</b> (&gt;1,500): USD 1,999/mes<br>App conductores: freemium o USD 2.99/mes sin anuncios y con reservas prioritarias.</td>
+    <td>Licenciamiento perpetuo más mantenimiento anual (15-20% del valor de licencia):<br>- <b>Pequeño</b> (hasta 300 plazas): USD 8,000 - 12,000<br>- <b>Mediano</b> (300-1,000): USD 15,000 - 25,000<br>- <b>Grande</b> (&gt;1,000): USD 30,000 - 50,000<br>Hardware adicional por acceso: USD 5,000 - 15,000.</td>
+    <td>Modelo freemium para conductores. Ingresos por reservas pagadas, plan premium y panel manager para operadores.</td>
+    <td>Licenciamiento perpetuo con hardware y software. Costos elevados por plaza monitoreada, mantenimiento anual y módulos de analítica adicionales.</td>
+  </tr>
+  <tr>
+    <td><b>Canales de distribución</b></td>
+    <td>Web (Angular) y móvil (PowerApps + Firebase) vía Microsoft AppSource y Google Play Store. Despliegue en Azure con opción on-premise controlada. Implementación remota asistida en 2-3 semanas.</td>
+    <td>Software instalado en servidores locales del cliente, con hardware propietario. Implementación presencial en 4-8 semanas por integrador certificado.</td>
+    <td>Móvil (iOS/Android) vía App Store y Google Play. Panel web accesible desde cualquier navegador. Implementación en 1 semana.</td>
+    <td>Hardware y software integrado instalado por personal técnico o partners certificados. Implementación presencial en 8-16 semanas.</td>
+  </tr>
+  <tr>
+    <th colspan="5"><b>Análisis SWOT</b></th>
+  </tr>
+  <tr>
+    <td><b>Fortalezas</b></td>
+    <td>- Único con gemelo digital 3D en tiempo real.<br>- Contexto espacial para alertas de humo.<br>- Modelo SaaS de bajo costo inicial.<br>- Proyección a eficiencia energética.<br>- Dos productos en uno.</td>
+    <td>- Amplia base instalada en Perú.<br>- Relaciones consolidadas con constructoras.<br>- Soporte local presencial.<br>- Integración con facturación electrónica peruana.</td>
+    <td>- Gran base de usuarios conductores.<br>- Modelo freemium efectivo.<br>- UI/UX pulida y gamificada.<br>- Reserva anticipada de plazas.</td>
+    <td>- Liderazgo tecnológico global.<br>- Estabilidad y confiabilidad probada.<br>- Capacidad de manejar altos volúmenes.<br>- Marca reconocida a nivel mundial.</td>
+  </tr>
+  <tr>
+    <td><b>Debilidades</b></td>
+    <td>- Marca desconocida en el mercado peruano.<br>- Dependencia de sensores IoT simulados.<br>- Curva de aprendizaje para operadores.<br>- Sin integración con facturación electrónica.</td>
+    <td>- Tecnología legacy.<br>- Sin visualización 3D ni gemelo digital.<br>- Alertas de seguridad sin contexto espacial.<br>- Alto costo inicial de licencia.</td>
+    <td>- Sin solución avanzada para operadores.<br>- No integra sensores de humo ni eficiencia energética.<br>- Dependencia de la instalación de la app.<br>- Sin gemelo digital ni visualización espacial para el operador.</td>
+    <td>- Costo de inversión inicial extremadamente alto.<br>- Dependencia de hardware propietario.<br>- Sin eficiencia energética ni recomendaciones de iluminación.<br>- Tiempos de implementación largos.</td>
+  </tr>
+  <tr>
+    <td><b>Oportunidades</b></td>
+    <td>- Crecimiento del mercado de centros comerciales en Perú.<br>- Alta demanda post-pandemia de digitalización.<br>- Posible integración con sistemas de facturación electrónica.<br>- Alianzas con integradores IoT locales.<br>- Expansión a otros verticales.</td>
+    <td>- Migración de centros comerciales pequeños a la nube.<br>- Adopción de sensores IoT de bajo costo.<br>- Alianzas con startups tecnológicas.</td>
+    <td>- Convertirse en plataforma B2B completa.<br>- Expansión a centros comerciales de primer nivel.<br>- Ofrecer módulo de eficiencia energética.</td>
+    <td>- Desarrollar una versión SaaS más accesible.<br>- Integrar gemelo digital como servicio adicional.<br>- Expandirse a mercados de menor poder adquisitivo.</td>
+  </tr>
+  <tr>
+    <td><b>Amenazas</b></td>
+    <td>- Competidores tradicionales con relaciones consolidadas.<br>- Competidores B2C capturando la relación con el conductor.<br>- Entrada de grandes tecnológicas al mercado de gemelos digitales.<br>- Escepticismo de operadores sobre la propuesta.<br>- Ciclos de decisión largos.</td>
+    <td>- SmartPark y soluciones SaaS nativas de nube.<br>- Parkimovil capturando la relación con el conductor.<br>- TIBA ofreciendo módulos de analítica más avanzados.<br>- Startups locales con gemelos digitales más económicos.</td>
+    <td>- SmartPark ofreciendo funcionalidades de reserva similares.<br>- Centros comerciales desarrollando sus propias apps.<br>- Integración de reservas en sistemas tradicionales.<br>- Regulaciones de protección de datos.</td>
+    <td>- SmartPark y startups con gemelos digitales a menor costo.<br>- Centros comerciales optando por sensores IoT genéricos + desarrollo propio.<br>- Crisis económica que reduzca inversiones.<br>- Competidores chinos con hardware más económico.</td>
+  </tr>
+</table>
 
 ### 2.1.2. Estrategias y tácticas frente a competidores
 
-_(Estrategias y tácticas preliminares que aplicará la startup para afrontar las fortalezas y aprovechar las debilidades de la competencia, así como el contexto de oportunidades y amenazas.)_
+A continuación, se presentan las estrategias y tácticas preliminares que Apex Twin aplicará para enfrentar a los competidores identificados (ParkingSoft, Parkimovil y TIBA), aprovechando sus debilidades y las oportunidades del mercado, mientras se mitigan las amenazas externas.
+
+**Estrategia 1: Diferenciación tecnológica basada en gemelo digital**
+
+Objetivo: Posicionar a SmartPark como la única solución en el mercado peruano que integra un gemelo digital 3D en tiempo real con cuatro dimensiones operativas (ocupación, seguridad, flujo vehicular, eficiencia energética).
+
+**Táctica**
+
+- Demostraciones técnicas gratuitas: Ofrecer pilotos de 30 días sin costo para centros comerciales interesados, donde se despliegue el gemelo digital con sensores simulados para que el operador experimente el valor antes de comprar.
+- Video de caso de uso comparativo: Producir un video de 3 minutos que muestre lado a lado cómo se gestiona una alerta de humo en SmartPark (geolocalización exacta en 3D) vs. ParkingSoft (señal genérica sin contexto).
+- Webinar "Gemelo digital vs. sistemas tradicionales": Realizar webinars mensuales dirigidos a facility managers, explicando las limitaciones de los sistemas legacy y cómo SmartPark resuelve problemas que ellos ya normalizaron (ej. tiempo de respuesta ante humo).
+  
+**Estrategia 2: Ataque al modelo de precios de competidores tradicionales**
+
+Objetivo: Capitalizar la principal debilidad de ParkingSoft y TIBA (alto costo de inversión inicial) mediante un modelo SaaS de bajo riesgo y pago por uso.
+
+**Táctica**
+
+- Plan de migración desde legacy: Ofrecer un descuento del 50% en los primeros 6 meses para centros comercionales que provengan de ParkingSoft o TIBA, cubriendo parcialmente el costo de romper contratos de mantenimiento anual.
+- Modelo "paga por plaza monitoreada": Flexibilizar aún más el pricing: permitir que centros comerciales paguen solo por las plazas que realmente monitorean (ej. USD 0.50 por plaza/día), sin compromiso de plan anual. Esto es imposible de replicar para TIBA por su modelo de hardware.
+
+**Estrategia 3: Integración rápida de requerimientos locales**
+
+Objetivo: Cerrar la brecha frente a ParkingSoft en integración con sistemas peruanos (facturación electrónica Sunat) y posicionarse como la solución "hecha para Perú".
+
+**Táctica**
+
+- Certificación como proveedor de software de gestión: Obtener certificaciones locales (ej. registro de software de la Sunat) que generen confianza en los operadores peruanos, quienes asocian "startup" con "poco confiable".
+- Alianza con integradores locales: Firmar acuerdos con empresas peruanas de instalación de sensores IoT (ej. Soltec Peru, DataCom) para ofrecer un paquete completo: SmartPark + sensores reales + instalación certificada.
+
+**Estrategia 4: Neutralización de Parkimovil en el segmento conductores**
+
+Objetivo: Impedir que Parkimovil capte a los conductores como "propios", ofreciendo funcionalidades similares (reservas, navegación) pero integradas directamente con el operador del centro comercial.
+
+**Táctica**
+
+- Funcionalidad de reserva de plazas: Incorporar en la app del conductor (SmartPark App) la opción de reservar una plaza con pago anticipado, igual que Parkimovil, pero con la ventaja de que el operador ve la reserva en su gemelo digital en tiempo real.
+- Notificaciones de seguridad como diferenciador: Destacar en la comunicación de la app que SmartPark es la única que alerta al conductor sobre humo en su zona específica (Parkimovil no tiene acceso a sensores de humo del estacionamiento).
+- Programa de fidelización conjunto con el centro comercial: Ofrecer al centro comercial la posibilidad de lanzar "SmartPark Rewards": minutos gratis por cada visita, canjeables desde la app. Parkimovil no puede hacer esto porque no tiene relación contractual directa con el operador.
+
+**Estrategia 5: Aprovechamiento de oportunidades de mercado**
+
+Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú y la tendencia post-pandemia de digitalización.
+
+**Táctica**
+
+- Landing page específica para cada nuevo proyecto: Crear páginas personalizadas como "SmartPark para Mall del Sur 2" o "SmartPark para el nuevo Real Plaza de Chorrillos", demostrando cómo el gemelo digital resuelve problemas específicos de esa zona.
+- Paquete "Digitalización post-pandemia": Ofrecer un descuento del 30% por 12 meses para centros comerciales que aún operan con sistemas manuales o legacy, posicionando a SmartPark como la solución de "transformación digital rápida".
 
 ## 2.2. Entrevistas
 
 ### 2.2.1. Diseño de entrevistas
 
-#### Preguntas para Segmento 1: Operadores de estacionamiento
+#### Preguntas para Segmento 1: Operadores de estacionamientos en centros comerciales
 
 **Preguntas demográficas y de contexto**
 1. ¿Cuál es su nombre, edad y cargo?
-2. ¿En qué centro comercial trabaja y desde hace cuánto?
-3. ¿Qué tan grande es el estacionamiento que opera (cantidad de plazas, niveles)?
+2. ¿Cuál es su cargo actual y cuánto tiempo lleva trabajando en la gestión de estacionamientos?
+3. ¿Cuántas plazas de estacionamiento tiene aproximadamente el centro comercial donde trabaja?
+4. Descríbame un día típico de trabajo. ¿Cuáles son sus responsabilidades principales?
+5. ¿Qué herramientas o sistemas tecnológicos utiliza actualmente para gestionar el estacionamiento?
 
 **Preguntas principales**
-1. _(¿Cómo monitorea actualmente el estado de ocupación del estacionamiento?)_
-2. _(¿Qué herramientas tecnológicas utiliza día a día?)_
-3. _(...)_
+1. ¿Cómo monitorean actualmente el nivel de ocupación del estacionamiento?
+2. ¿Con qué frecuencia se presentan errores o discrepancias en el conteo de vehículos? ¿Qué impacto tienen?
+3. ¿Pueden saber en tiempo real cuáles son las zonas o niveles más ocupados y cuáles tienen mayor disponibilidad?
+4. ¿Qué tan rápido pueden identificar si se ha alcanzado la capacidad máxima del estacionamiento?
+5. ¿Qué tipo de incidentes de seguridad han enfrentado en el estacionamiento? (humo, accidentes, vandalismo, etc.)
+6. Cuando reciben una alerta de seguridad, ¿cómo saben exactamente dónde está ocurriendo el incidente?
+7. ¿Cuánto tiempo transcurre, en promedio, desde que reciben una alerta hasta que confirman visualmente la ubicación del problema?
+8. ¿Cómo coordinan la evacuación o el cierre de zonas cuando hay un incidente de seguridad?
+9. ¿En qué momentos del día o de la semana se presentan las mayores congestiones vehiculares dentro del estacionamiento?
+10. ¿Tienen visibilidad sobre los cuellos de botella en rampas o accesos? ¿Cómo los detectan?
+11. ¿Qué medidas toman cuando identifican una congestión interna?
+12. ¿Cómo gestionan actualmente la iluminación del estacionamiento?
+13. ¿Existe algún esquema de atenuación o apagado de luces en zonas desocupadas?
+14. ¿Han medido el consumo energético del estacionamiento? ¿Qué porcentaje representa del consumo total del centro comercial?
 
 **Preguntas complementarias**
-1. _(...)_
+1. ¿Cuál es el mayor dolor de cabeza que enfrenta en su trabajo diario relacionado con la gestión del estacionamiento?
+2. Si pudiera tener una herramienta ideal para gestionar el estacionamiento, ¿qué funcionalidad no podría faltar?
+3. ¿Qué información le gustaría poder consultar en tiempo real que hoy no tiene disponible?
+4. ¿Considera que las herramientas actuales le permiten tomar decisiones proactivas o solo reaccionar ante problemas ya manifiestos?
+5. ¿Qué tan abierto estaría a implementar una nueva plataforma tecnológica si esta le brindara visibilidad integral del estacionamiento?
+6. ¿Cuáles serían sus principales preocupaciones al evaluar una solución de este tipo? (costo, complejidad, integración, capacitación, etc.)
+7. ¿Preferiría una solución que requiera inversión en sensores desde el inicio, o una que permita empezar con datos simulados para evaluar el valor antes de invertir en hardware?
 
-#### Preguntas para Segmento 2: Conductores
+#### Preguntas para Segmento 2: Conductores frecuentes de centros comerciales
 
 **Preguntas demográficas y de contexto**
 1. ¿Cuál es su nombre, edad, distrito de residencia y ocupación?
-2. ¿Con qué frecuencia visita centros comerciales?
+2. ¿Con qué frecuencia visita centros comerciales en su vehículo propio?
+3. ¿Cuáles son los centros comerciales que frecuenta habitualmente?
+4. ¿En qué días y horarios suele visitarlos?
+5. ¿Cuánto tiempo permanece en el centro comercial en una visita típica?
+6. ¿Qué actividades realiza principalmente? (compras, gastronomía, entretenimiento, servicios, etc.)
 
 **Preguntas principales**
-1. _(¿Cuánto tiempo promedio invierte buscando estacionamiento?)_
-2. _(¿Le ha pasado perder su vehículo dentro de un estacionamiento?)_
-3. _(...)_
+1. Cuénteme sobre su experiencia la última vez que fue a estacionar en un centro comercial. ¿Cómo fue el proceso de encontrar una plaza?
+2. ¿Cuánto tiempo le toma habitualmente encontrar una plaza libre cuando llega al estacionamiento?
+3. ¿Ese tiempo varía según el día u horario? ¿En qué momentos es más difícil encontrar espacio?
+4. ¿Qué estrategia sigue para buscar estacionamiento? (¿va directo a un nivel específico, recorre todos los niveles, sigue señalización, etc.?)
+5. ¿Alguna vez ha considerado no visitar un centro comercial o cambiar de destino por dificultades para estacionar?
+6. ¿Cómo recuerda dónde dejó su vehículo cuando regresa de sus compras?
+7. ¿Alguna vez ha tenido dificultad para encontrar su vehículo al regresar? ¿Qué hizo?
+8. ¿Toma alguna fotografía, nota mental o utiliza alguna app para recordar la ubicación?
+9. ¿Cómo se entera del costo total de su estadía en el estacionamiento?
+10. ¿Le gustaría poder consultar el costo acumulado en tiempo real mientras está en el centro comercial?
+11. ¿Qué tan importante es para usted conocer las tarifas antes de ingresar al estacionamiento?
+12. ¿Alguna vez ha presenciado o ha sido informado de un incidente de seguridad (humo, alarma, accidente) mientras estaba en el estacionamiento?
+13. En caso de un incidente de seguridad, ¿cómo le gustaría ser notificado? (altavoces, mensaje en su celular, señalización digital, etc.)
+14. ¿Qué tan importante es para usted recibir información sobre la seguridad de la zona donde dejó su vehículo?
+
+**Preguntas complementarias**
+1. ¿Utiliza aplicaciones móviles en su día a día? ¿Cuáles son las que más usa? (Waze, Yape, Rappi, etc.)
+2. ¿Estaría dispuesto a descargar una app que le ayude a encontrar estacionamiento disponible y a localizar su vehículo?
+3. ¿Qué características debería tener esa app para que la use regularmente?
+4. ¿Qué tan importante es que la app sea rápida y simple de usar?
+5. ¿Cuál es el aspecto más frustrante de su experiencia de estacionamiento en centros comerciales?
+6. Si pudiera mejorar algo sobre la forma en que funcionan los estacionamientos de centros comerciales, ¿qué sería?
+7. ¿Qué haría que su experiencia de estacionamiento pasara de frustrante a satisfactoria?
+8. Si existiera una app gratuita que le mostrara en tiempo real dónde hay espacios disponibles, ¿la usaría?
+9. ¿Estaría dispuesto a registrar su ubicación de estacionamiento con un botón en la app para poder encontrar su vehículo después?
+10. ¿Qué tan valioso sería para usted recibir alertas de seguridad en su celular si hay un incidente cerca de donde está su vehículo?
 
 ### 2.2.2. Registro de entrevistas
 
-#### Segmento 1: Operadores
+#### Segmento 1: Operadores de estacionamientos en centros comerciales
 
-**Entrevista 1**
+**Entrevista 1 — Operador**
 
-| Campo | Dato |
-|---|---|
-| Nombres y Apellidos | _(...)_ |
-| Edad | _(...)_ |
-| Distrito | _(...)_ |
-| Cargo | _(...)_ |
-| Fecha de entrevista | YYYY-MM-DD |
-| URL del video (Microsoft Stream) | `https://...` |
-| Timing inicio | HH:MM:SS |
-| Duración | MM:SS |
+<table border="1">
+  <tr>
+    <th>Entrevista</th>
+    <td>1</td>
+    <th>Nombre</th>
+    <td>Sebastian Silva</td>
+  </tr>
+  <tr>
+    <th>Edad</th>
+    <td>25</td>
+    <th>Distrito</th>
+    <td>Surco</td>
+  </tr>
+  <tr>
+    <th>Captura de la entrevista: <img src="./assets/images/chapter-02/seg1 entrevista.png" alt="Captura de la entrevista" width="200"></th>
+    <td colspan="3">
+        El entrevistado, operador de estacionamientos con un año de experiencia, trabaja en la gestión y control de un estacionamiento de aproximadamente 100 plazas distribuidas en dos sótanos. Sus principales funciones son supervisar el ingreso y salida de vehículos, mantener el orden en horas pico y coordinar incidentes de seguridad mediante cámaras, sirenas y comunicación por radio. Señala que el sistema actual de sensores presenta errores al detectar espacios libres y existe un pequeño retraso en la actualización de datos, lo que dificulta la gestión eficiente. Considera importante contar con una plataforma tecnológica más precisa que permita asignar espacios automáticamente, mostrar disponibilidad en tiempo real y mejorar la experiencia del usuario. También destaca que sus mayores preocupaciones al implementar una nueva solución serían el costo, la integración con el sistema actual y la capacitación del personal.
+    </td>
+  </tr>
+  <tr>
+    <th>URL de la grabación</th>
+    <td colspan="3">
+      <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210973_upc_edu_pe/IQC-7VJgcFQ7SqAUpkX0d2a7AVgYj6Xm8-epfEkyVjptlTc?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=Kw4mkf">
+        Ver grabación
+      </a>
+    </td>
+  </tr>
+  <tr>
+   <th>Timing</th>
+    <td colspan="3">
+         9:37
+    </td>
+  </tr>
+</table>
 
-_(Screenshot del video de entrevista)_
+**Entrevista 2 — Operador**
 
-![Screenshot Entrevista 1 - Operador](assets/images/chapter-02/interview-operator-01.png)
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>2</td>
+    <td><strong>Nombre</strong></td>
+    <td>Jeremy Joel Quispe Andia</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>25</td>
+    <td><strong>Distrito</strong></td>
+    <td>San Juan de Lurigancho, Lima</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/entrevista_jeremy.png" width="200"></td>
+    <td colspan="3">Jeremy es jefe de operaciones con cuatro años de experiencia y gestiona un estacionamiento de aproximadamente 1,200 plazas en un centro comercial. Supervisa ocupación, flujo vehicular, seguridad y personal operativo, apoyándose en cámaras CCTV, radios, barreras automáticas y reportes manuales. Sin embargo, identifica limitaciones importantes, como errores frecuentes en el conteo de vehículos y falta de visibilidad en tiempo real sobre la disponibilidad exacta por zonas.Ante incidentes como accidentes, humo o robos, el equipo depende de reportes del personal y revisión de cámaras, lo que retrasa la ubicación del problema entre tres y siete minutos. Asimismo, las mayores congestiones ocurren en fines de semana y feriados, resolviéndose mediante redirección manual y apoyo de orientadores.Finalmente, Jeremy señala una gestión energética poco eficiente, ya que la iluminación funciona mayormente con horarios fijos y sin automatización en zonas vacías. Considera clave implementar una plataforma que permita monitorear ocupación, alertas y congestión en tiempo real para tomar decisiones más proactivas.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202216263_upc_edu_pe/IQB2AaFWtAp3TL58UwEXAlu2ARz4YzAm_o1UZWJrDLK0XGI?e=poyF6t&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">6 minutos con 56 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Hernan Morales Calderón</td>
+  </tr>
+</table>
 
-**Resumen de la entrevista:**  
-_(Descripción detallada de las principales respuestas, incluyendo personalidad, marcas e influencias, tecnología, canales de interacción, browser, dispositivos.)_
+**Entrevista 3 — Operador**
 
-**Entrevista 2 — Operador**  
-_(Misma estructura)_
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>3</td>
+    <td><strong>Nombre</strong></td>
+    <td>Juan Alarcon Ramirez</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>25</td>
+    <td><strong>Distrito</strong></td>
+    <td>Wanchaq, Cusco</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/segmento-objetivo-operador-entrevista-3.png" width="200"></td>
+    <td colspan="3">Juan es técnico de operaciones con tres años de experiencia, gestiona un estacionamiento de entre 30 y 50 plazas donde se encarga del mantenimiento de maquinaria y la fluidez del tráfico. A pesar de contar con cámaras de vigilancia, barreras y sensores, Juan identifica limitaciones tecnológicas, como errores en el conteo de vehículos que generan molestias en los usuarios y la falta de visibilidad en tiempo real sobre la ocupación específica de cada pasillo. Ante incidentes de seguridad o congestiones en rampas que suelen ocurrir en fines de semana y feriados, el equipo depende del monitoreo manual por CCTV y la intervención directa de personal con señales manuales. Finalmente, destaca una gestión energética ineficiente, ya que la iluminación opera bajo horarios fijos sin sistemas de ahorro para zonas desocupadas, lo que resulta en un consumo elevado de electricidad.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQAMlLdlmF2pT75rc_E783gEAZ1O58GkQJQbV1O8t3DN02U?e=f1yiAz&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">4 minutos con 40 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Britney Qqueso Rodriguez</td>
+  </tr>
+</table>
 
-**Entrevista 3 — Operador**  
-_(Misma estructura)_
+#### Segmento 2: Conductores frecuentes de centros comerciales
 
-#### Segmento 2: Conductores
+**Entrevista 1 — Conductor**
 
-**Entrevista 1 — Conductor**  
-_(Misma estructura)_
+<table border="1">
+  <tr>
+    <th>Entrevista</th>
+    <td>1</td>
+    <th>Nombre</th>
+    <td>Sebastian Rubio</td>
+  </tr>
+  <tr>
+    <th>Edad</th>
+    <td>20</td>
+    <th>Distrito</th>
+    <td>Surco</td>
+  </tr>
+  <tr>
+    <th>Captura de la entrevista: <img src="./assets/images/chapter-02/entrevista1.png" alt="Captura de la entrevista" width="200"></th>
+    <td colspan="3">
+        El entrevistado, de 20 años, visita centros comerciales como Jockey Plaza entre 1 y 2 veces por semana, principalmente los fines de semana, para ir al cine, comer o comprar ropa. Señala que encontrar estacionamiento suele ser complicado en horas pico, demorando entre 5 y 10 minutos, por lo que prefiere ir directamente a los niveles superiores, donde hay más espacios disponibles. También considera importante conocer el costo acumulado del estacionamiento en tiempo real y recibir alertas de seguridad ante incidentes. Además, estaría dispuesto a usar una aplicación móvil que le permita ubicar espacios libres, registrar dónde dejó su vehículo y acceder a un mapa interactivo con información precisa sobre la disponibilidad de estacionamientos.
+    </td>
+  </tr>
+  <tr>
+    <th>URL de la grabación</th>
+    <td colspan="3">
+      <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210973_upc_edu_pe/IQDczbI-ti9ARrdbBQuNVIxDAUpsh_TZarox-GgCpR_0Tbs?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=fyFeXn">
+        Ver grabación
+      </a>
+    </td>
+  </tr>
+  <tr>
+   <th>Timing</th>
+    <td colspan="3">
+         7:51
+    </td>
+  </tr>
+</table>
 
-**Entrevista 2 — Conductor**  
-_(Misma estructura)_
+**Entrevista 2 — Conductor**
 
-**Entrevista 3 — Conductor**  
-_(Misma estructura)_
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>2</td>
+    <td><strong>Nombre</strong></td>
+    <td>Luis Chinchihualpa Saldarriaga</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>25</td>
+    <td><strong>Distrito</strong></td>
+    <td>La Molina</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/entrevista_arquitectura_software_emergentes_luis.jpeg" width="200"></td>
+    <td colspan="3">Luis es un conductor frecuente de centros comerciales, a los que asiste todos los fines de semana debido a que durante la semana está ocupado con sus estudios universitarios y trabajo; suele ir en horarios de almuerzo o entre las 5 y 6 de la tarde, generalmente acompañado, con el objetivo de comer, ir al cine o realizar compras en lugares como el Mall de Puruchuco, el nuevo mall del Parque La Molina y el Jockey Plaza. Siempre utiliza su auto porque lo considera más seguro, pero enfrenta múltiples dificultades al estacionar: desconoce el precio hasta después de ingresar, encuentra pocos espacios disponibles y desconfía de los indicadores de luz, ya que no reflejan correctamente la disponibilidad; además, el proceso de búsqueda le toma entre 15 y 30 minutos, especialmente en tardes de fin de semana, donde el tráfico es alto. Su comportamiento consiste en dar vueltas sin una estrategia definida hasta encontrar un lugar, lo cual le genera frustración y estrés por la pérdida de tiempo y el costo. En cuanto a seguridad, la considera vital, ya que ha sufrido rayones y abolladuras en su vehículo, incluso un caso donde encontró ambas puertas dañadas, y también ha tenido dificultades para recordar la ubicación de su auto dentro del estacionamiento. A nivel tecnológico, está familiarizado con el uso de aplicaciones debido a su formación en ingeniería de software, aunque actualmente solo usa Google Maps, el cual no le resulta útil para este contexto; muestra interés en funcionalidades como visualización del costo acumulado, alertas de seguridad, mapas interactivos con disponibilidad de espacios y registro de ubicación del vehículo. Finalmente, identifica como principales problemas la falta de seguridad, la poca transparencia en los costos y la escasez de espacios, y considera ideal una solución que integre todas estas funcionalidades para mejorar su experiencia.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210297_upc_edu_pe/IQBwF8-wNd6GT4icNCBDmTLBAZoUCIvODFg4ZUDDZFs4shQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=klWNvR">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">16 minutos con 46 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Abel Andrés Valle Zuta</td>
+  </tr>
+</table>
+
+**Entrevista 3 — Conductor**
+
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>3</td>
+    <td><strong>Nombre</strong></td>
+    <td>Edward Rodriguez</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>28</td>
+    <td><strong>Distrito</strong></td>
+    <td>Yanahuara, Arequipa</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/segmento-objetivo-conductor-entrevista-3.png" width="200"></td>
+    <td colspan="3">Edward Rodríguez Alarcón, un ingeniero de 28 años residente en Yanahuara, describe su experiencia de estacionamiento en centros comerciales como un proceso frustrante y congestionado, especialmente en horas pico, lo que a menudo la lleva a optar por servicios de delivery para evitar el estrés de buscar una plaza. Para gestionar la ubicación de su vehículo y evitar confusiones previas que le han tomado hasta 20 minutos resolver, utiliza una combinación de memoria visual, fotografías y Google Maps. Finalmente, Edward destaca la necesidad de soluciones tecnológicas que le permitan consultar el costo acumulado en tiempo real y recibir notificaciones directas al celular ante cualquier incidente de seguridad, priorizando la vigilancia y la información inmediata para su tranquilidad.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQDN3psHgYEbSJJE8h4T0B3HASpKNaqWqCPhXezHu2zqDPo?e=ky3NJO&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">5 minutos con 55 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Britney Qqueso Rodriguez</td>
+  </tr>
+</table>
 
 ### 2.2.3. Análisis de entrevistas
 
-#### Segmento 1: Operadores
+#### Segmento 1: Operadores de estacionamientos en centros comerciales
 
-_(Análisis con sustento estadístico — porcentajes — de las características objetivas y subjetivas más comunes encontradas. Cada característica debe tener relación clara con las entrevistas registradas.)_
+Las entrevistas reflejan que el principal problema para los operadores es la falta de precisión y visibilidad en tiempo real sobre la disponibilidad de espacios, debido a fallas en sensores, errores en el conteo de vehículos y retrasos en la actualización de datos. Esto genera congestión, desorden en horas pico y molestias frecuentes en los usuarios, obligando al personal a depender del monitoreo manual mediante cámaras, radio y supervisión presencial. Además, se evidencia una gestión energética poco eficiente por el uso continuo de iluminación sin automatización en zonas vacías. Como punto fuerte, ambos entrevistados destacan la necesidad de una plataforma tecnológica más precisa que permita asignación automática de espacios, monitoreo en tiempo real, mejor control de seguridad y optimización operativa, aunque consideran importante evaluar el costo, la integración con sistemas actuales y la capacitación del personal.
 
-| Característica | % | Sustento (entrevistas) |
-|---|---|---|
-| _(Edad promedio entre 35-50 años)_ | _(80%)_ | _(E1, E2, E4)_ |
-| _(Usa Excel para registro manual)_ | _(60%)_ | _(E1, E3, E5)_ |
+#### Segmento 2: Conductores frecuentes de centros comerciales
 
-#### Segmento 2: Conductores
-
-_(Mismo formato de análisis para el segmento de conductores.)_
+Las entrevistas muestran que los conductores experimentan frustración principalmente por la dificultad para encontrar estacionamiento, la falta de información clara sobre espacios disponibles y la poca confianza en los sistemas actuales de señalización. El tiempo de búsqueda puede variar entre 5 y 30 minutos, especialmente en fines de semana y horas pico, generando estrés, pérdida de tiempo e incluso cambios de destino. También se identifican problemas relacionados con la seguridad del vehículo, como rayones, robos o dificultad para recordar la ubicación exacta del auto. Como punto fuerte, los entrevistados muestran alta disposición para usar una aplicación móvil que les permita consultar espacios disponibles en tiempo real, visualizar el costo acumulado, recibir alertas de seguridad y registrar la ubicación del vehículo, valorando especialmente la precisión y la tranquilidad durante su visita.
 
 ## 2.3. Needfinding
 
 ### 2.3.1. User Personas
 
-_(Introducción explicando la relación entre los User Personas y las características identificadas en el análisis de entrevistas y competencia.)_
+Los User Personas son perfiles representativos que sintetizan las características, motivaciones y frustraciones de los usuarios finales. A partir de los segmentos identificados en los Problem Statements, se construyeron dos personas, un operador de estacionamiento y una conductora frecuente, que humanizan los datos recogidos y sirven como referencia transversal para guiar las decisiones de diseño a lo largo del proyecto.
 
 #### User Persona 1: Operador de Estacionamiento
 
-![User Persona Operador](assets/images/chapter-02/user-persona-operator.png)
+<div align="center">
+  <img src="./assets/images/chapter-02/user-persona-operator.png" alt="SmartPark User Persona Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: User Persona - Operador</i></p>
+</div>
 
 #### User Persona 2: Conductor Frecuente
 
-![User Persona Conductor](assets/images/chapter-02/user-persona-driver.png)
+<div align="center">
+  <img src="./assets/images/chapter-02/user-persona-driver.png" alt="SmartPark User Persona Driver" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: User Persona - Conductor</i></p>
+</div>
 
 ### 2.3.2. User Task Matrix
+La User Task Matrix es una herramienta comparativa que mapea las tareas que realiza cada tipo de usuario dentro del sistema, junto con su frecuencia e importancia. Este ejercicio permite identificar tareas compartidas, tareas exclusivas y actividades críticas de cada segmento, facilitando la priorización de funcionalidades y el diseño diferenciado de interfaces para el operador y el conductor.
 
-_(Introducción establecidiendo los segmentos considerados.)_
+| **Tarea**                                                         | **Operador (S1) Frecuencia** | **Operador (S1) Importancia** | **Conductor (S2) Frecuencia** | **Conductor (S2) Importancia** |
+| ----------------------------------------------------------------- | ---------------------------- | ----------------------------- | ----------------------------- | ------------------------------ |
+| Monitorear la ocupación del estacionamiento en tiempo real        | Alta                         | Alta                          | Baja                          | Media                          |
+| Identificar zonas disponibles para estacionamiento                | Alta                         | Alta                          | Alta                          | Alta                           |
+| Detectar incidentes (seguridad, congestión, fallas)               | Alta                         | Alta                          | Baja                          | Alta                           |
+| Gestionar alertas y coordinar respuesta operativa                 | Alta                         | Alta                          | Baja                          | Media                          |
+| Visualizar el flujo vehicular en accesos y rampas                 | Alta                         | Alta                          | Media                         | Media                          |
+| Optimizar la distribución de vehículos dentro del estacionamiento | Media                        | Alta                          | Baja                          | Baja                           |
+| Consultar disponibilidad antes de ingresar al estacionamiento     | Baja                         | Media                         | Alta                          | Alta                           |
+| Navegar hacia una zona con espacios disponibles                   | Baja                         | Media                         | Alta                          | Alta                           |
+| Buscar un espacio libre dentro del estacionamiento                | Baja                         | Media                         | Alta                          | Alta                           |
+| Recordar la ubicación del vehículo estacionado                    | Baja                         | Baja                          | Alta                          | Media                          |
+| Recibir notificaciones sobre disponibilidad o incidentes          | Media                        | Alta                          | Media                         | Alta                           |
+| Supervisar indicadores operativos (KPIs)                          | Media                        | Alta                          | Baja                          | Baja                           |
+| Optimizar consumo energético basado en ocupación                  | Media                        | Alta                          | Baja                          | Baja                           |
+| Analizar patrones históricos de uso del estacionamiento           | Baja                         | Media                         | Baja                          | Baja                           |
+| Reducir congestión en horas punta                                 | Media                        | Alta                          | Media                         | Alta                           |
+| Tomar decisiones operativas basadas en datos en tiempo real       | Alta                         | Alta                          | Baja                          | Baja                           |
 
-| Tarea | Operador (Frecuencia) | Operador (Importancia) | Conductor (Frecuencia) | Conductor (Importancia) |
-|---|---|---|---|---|
-| _(Verificar estado del estacionamiento)_ | Always | High | Often | Medium |
-| _(Buscar plaza libre)_ | Never | N/A | Always | High |
-| _(Atender alerta de incidente)_ | Sometimes | High | Sometimes | High |
-| _(Ajustar iluminación por zona)_ | Often | Medium | Never | N/A |
-| _(Recordar ubicación de vehículo)_ | Never | N/A | Always | High |
-| _(...)_ | | | | |
 
-_(Análisis post-tabla resaltando tareas con mayor frecuencia/importancia, diferencias y coincidencias entre User Personas.)_
+
+El análisis comparativo de las tareas identificadas revela patrones claros sobre cómo cada segmento interactúa con la plataforma y dónde se concentra el valor del producto.
+
+**Tareas de alta frecuencia e importancia:** En el caso de Carlos Ramírez, las tareas críticas se concentran en el monitoreo continuo de ocupación, la supervisión de alertas de seguridad y la coordinación con el personal de campo, actividades que ejecuta durante toda su jornada laboral y que son determinantes para la operación del estacionamiento. En el caso de Valeria Soto, las tareas de mayor relevancia son la consulta de disponibilidad antes de ingresar, el registro de la ubicación del vehículo y la localización del mismo al regresar; si bien son de corta duración, se repiten en cada visita al centro comercial y definen directamente la calidad de su experiencia.
+
+**Diferencias entre User Personas:** Las diferencias más notables radican en el perfil de uso y la profundidad funcional que cada segmento requiere. Carlos necesita una plataforma robusta de monitoreo continuo, con capacidades analíticas, generación de reportes y visualización espacial en 3D desde una estación de trabajo. Valeria, en cambio, requiere una aplicación móvil ligera, con interacciones breves y de alto impacto, priorizando rapidez, claridad visual y notificaciones oportunas. Mientras Carlos opera en un contexto profesional y técnico, Valeria lo hace en un contexto cotidiano donde el producto debe integrarse con la misma fluidez que otras apps de uso diario.
+
+**Coincidencias entre User Personas:** A pesar de las diferencias, ambos segmentos convergen en la necesidad de información en tiempo real y en la importancia de las alertas de seguridad contextualizadas espacialmente. Tanto el operador como la conductora se benefician de un sistema que ofrezca visibilidad inmediata sobre el estado del estacionamiento, aunque cada uno consuma esta información con un nivel de detalle distinto. Esta coincidencia confirma que el gemelo digital funciona como una única fuente de verdad que alimenta dos experiencias diferenciadas pero complementarias, maximizando el valor de la inversión tecnológica subyacente.
 
 ### 2.3.3. Empathy Mapping
 
-_(Resumen del proceso de elaboración. Capturas de los Empathy Maps elaborados en UXPressia para cada User Persona.)_
+El Empathy Mapping es una técnica que busca comprender al usuario desde sus dimensiones emocionales, cognitivas y sociales, explorando lo que piensa, siente, ve, escucha, dice y hace, así como sus dolores y ganancias. Se elaboró un mapa para cada segmento, lo que permitió revelar tensiones y motivaciones menos visibles que sirven de base para diseñar una propuesta de valor que conecte genuinamente con las necesidades humanas de los usuarios.
 
 #### Empathy Map: Operador
-![Empathy Map Operador](assets/images/chapter-02/empathy-map-operator.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/empathy-map-operator.png" alt="SmartPark Empathy Map Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Empathy Map - Operador</i></p>
+</div>
 
 #### Empathy Map: Conductor
-![Empathy Map Conductor](assets/images/chapter-02/empathy-map-driver.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/empathy-map-driver.png" alt="SmartPark Empathy Map Driver" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Empathy Map - Conductor</i></p>
+</div>
+
 
 ### 2.3.4. As-is Scenario Mapping
 
-_(Resumen del proceso. Capturas de los As-Is Scenario Maps elaborados en LucidChart/Miro, con filas Phases, Doing, Thinking, Feeling.)_
+El As-Is Scenario Mapping documenta la experiencia actual del usuario, desglosando su recorrido en fases y registrando qué hace, qué piensa y qué siente en cada una. Se construyeron dos escenarios, el del operador en una jornada típica y el de la conductora en una visita habitual, lo que permite visualizar los puntos de fricción actuales y justificar la necesidad de la solución propuesta.
 
 #### As-Is Scenario Map: Operador
-![As-Is Scenario Operador](assets/images/chapter-02/as-is-operator.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/as-is-operator.png" alt="SmartPark As-Is Scenario Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: As-Is Process Diagram - Operador</i></p>
+</div>
 
 #### As-Is Scenario Map: Conductor
-![As-Is Scenario Conductor](assets/images/chapter-02/as-is-driver.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/as-is-driver.png" alt="SmartPark As-Is Scenario Driver" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: As-Is Process Diagram - Conductor</i></p>
+</div>
 
 ## 2.4. Ubiquitous Language
 
@@ -748,13 +1122,21 @@ _(Glosario de términos del business domain en inglés, sin ambigüedad. NO incl
 
 ## 3.1. To-Be Scenario Mapping
 
-_(Resumen del proceso. Capturas de los To-Be Scenario Maps con identificación de cambios respecto al As-Is.)_
+El To-Be Scenario Mapping permite proyectar el escenario ideal de interacción del usuario con el sistema, describiendo cómo deberían desarrollarse los procesos una vez implementada la solución. A través de esta técnica se identifican los cambios esperados respecto al estado actual, destacando mejoras en la experiencia del usuario, eficiencia operativa y cumplimiento de objetivos del proyecto.
 
 ### To-Be Scenario Map: Operador
-![To-Be Scenario Operador](assets/images/chapter-03/to-be-operator.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/tobe.jpg" alt="SmartPark To-Be Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: To-Be - Operador</i></p>
+</div>
 
 ### To-Be Scenario Map: Conductor
-![To-Be Scenario Conductor](assets/images/chapter-03/to-be-driver.png)
+
+<div align="center">
+  <img src="./assets/images/chapter-02/tobe2.jpg" alt="SmartPark To-Be  Conductor Frecuente" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: To-Be  - Conductor Frecuente</i></p>
+</div>
 
 ## 3.2. User Stories
 
@@ -822,16 +1204,15 @@ A continuación se presenta el conjunto completo de Epics, User Stories y Techni
 
 ## 3.3. Impact Mapping
 
-_(Resumen del proceso de elaboración. Capturas del Impact Map en UXPressia.)_
+<div align="center">
+  <img src="./assets/images/chapter-02/Impact Mapping11.png" alt="SmartPark Impact Mapping Operator" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Impact Mapping - Operador</i></p>
+</div>
 
-![Impact Map](assets/images/chapter-03/impact-map.png)
-
-**Business Goals (SMART):**
-
-- **BG-01:** Alcanzar 5 contratos con centros comerciales de Lima Metropolitana en un lapso de 12 meses tras el lanzamiento.
-- **BG-02:** Lograr 10,000 descargas activas de la aplicación móvil del conductor en un lapso de 8 meses.
-- **BG-03:** Reducir en 30% el tiempo promedio de búsqueda de plaza para conductores en estacionamientos contratantes en un lapso de 6 meses.
-- **BG-04:** _(...)_
+<div align="center">
+  <img src="./assets/images/chapter-02/Impact Mapping2.png" alt="SmartPark Impact Mapping Conductor Frecuente" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+  <p><i>Figura: Impact Mapping - Conductor Frecuente</i></p>
+</div>
 
 ## 3.4. Product Backlog
 
