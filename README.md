@@ -1090,31 +1090,30 @@ El As-Is Scenario Mapping documenta la experiencia actual del usuario, desglosan
 
 ## 2.4. Ubiquitous Language
 
-_(Glosario de términos del business domain en inglés, sin ambigüedad. NO incluir términos técnicos de ingeniería de software.)_
 
-| Term (English) | Término (Español) | Definición |
-|---|---|---|
-| **Parking Space** | Plaza de estacionamiento | Unidad individual designada para el estacionamiento de un vehículo, identificada por código único dentro de una zona y nivel. |
-| **Parking Level** | Nivel de estacionamiento | División vertical del estacionamiento (sótano 1, sótano 2, primer piso, etc.) que agrupa zonas y plazas. |
-| **Parking Zone** | Zona de estacionamiento | Subdivisión de un nivel agrupando plazas con características comunes (preferencial, discapacitados, mujeres, general). |
-| **Occupancy State** | Estado de ocupación | Estado actual de una plaza: Free, Occupied, Reserved, OutOfService. |
-| **Smoke Detector** | Detector de humo | Sensor IoT que monitorea presencia de humo en una zona específica. |
-| **Smoke Alert** | Alerta de humo | Evento generado cuando un detector excede su umbral, con localización espacial. |
-| **Evacuation Route** | Ruta de evacuación | Trayecto designado para evacuación segura, asociado a salidas de emergencia. |
-| **Traffic Flow Counter** | Contador de flujo vehicular | Sensor que registra el paso de vehículos en accesos y rampas. |
-| **Access Point** | Punto de acceso | Entrada o salida vehicular del estacionamiento. |
-| **Ramp** | Rampa | Conexión inclinada entre niveles del estacionamiento. |
-| **Luminosity Level** | Nivel de luminosidad | Intensidad lumínica medida en una zona, expresada en lux. |
-| **Lighting Zone** | Zona de iluminación | Conjunto de luminarias controlables como unidad para gestión energética. |
-| **Parking Session** | Sesión de estacionamiento | Período entre el ingreso y salida de un vehículo, asociado a un conductor y una plaza. |
-| **Vehicle Location** | Ubicación de vehículo | Posición registrada (nivel, zona, plaza) donde un conductor estacionó. |
-| **Fare Rate** | Tarifa | Costo por unidad de tiempo aplicado a una sesión de estacionamiento. |
-| **Operator** | Operador | Personal del centro comercial responsable de la gestión del estacionamiento. |
-| **Driver** | Conductor | Usuario final que utiliza el estacionamiento del centro comercial. |
-| **Digital Twin** | Gemelo digital | Representación virtual sincronizada del estado físico del estacionamiento. |
-| **Twin Model (DTDL)** | Modelo de gemelo | Definición de la estructura y propiedades de una entidad en el grafo de Azure Digital Twins. |
-| **Telemetry** | Telemetría | Datos enviados por sensores (reales o simulados) hacia el gemelo digital. |
-| **Incident** | Incidente | Evento anómalo que requiere atención del operador (humo, congestión, falla). |
+| Term (English)           | Término (Español)           | Definición                                                                                                                    |
+|--------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| **Parking Space**        | Plaza de estacionamiento    | Unidad individual designada para el estacionamiento de un vehículo, identificada por código único dentro de una zona y nivel. |
+| **Parking Level**        | Nivel de estacionamiento    | División vertical del estacionamiento (sótano 1, sótano 2, primer piso, etc.) que agrupa zonas y plazas.                      |
+| **Parking Zone**         | Zona de estacionamiento     | Subdivisión de un nivel agrupando plazas con características comunes (preferencial, discapacitados, mujeres, general).        |
+| **Occupancy State**      | Estado de ocupación         | Estado actual de una plaza: Free, Occupied, Reserved, OutOfService.                                                           |
+| **Smoke Detector**       | Detector de humo            | Sensor IoT que monitorea presencia de humo en una zona específica.                                                            |
+| **Smoke Alert**          | Alerta de humo              | Evento generado cuando un detector excede su umbral, con localización espacial.                                               |
+| **Evacuation Route**     | Ruta de evacuación          | Trayecto designado para evacuación segura, asociado a salidas de emergencia.                                                  |
+| **Traffic Flow Counter** | Contador de flujo vehicular | Sensor que registra el paso de vehículos en accesos y rampas.                                                                 |
+| **Access Point**         | Punto de acceso             | Entrada o salida vehicular del estacionamiento.                                                                               |
+| **Ramp**                 | Rampa                       | Conexión inclinada entre niveles del estacionamiento.                                                                         |
+| **Luminosity Level**     | Nivel de luminosidad        | Intensidad lumínica medida en una zona, expresada en lux.                                                                     |
+| **Lighting Zone**        | Zona de iluminación         | Conjunto de luminarias controlables como unidad para gestión energética.                                                      |
+| **Parking Session**      | Sesión de estacionamiento   | Período entre el ingreso y salida de un vehículo, asociado a un conductor y una plaza.                                        |
+| **Vehicle Location**     | Ubicación de vehículo       | Posición registrada (nivel, zona, plaza) donde un conductor estacionó.                                                        |
+| **Fare Rate**            | Tarifa                      | Costo por unidad de tiempo aplicado a una sesión de estacionamiento.                                                          |
+| **Operator**             | Operador                    | Personal del centro comercial responsable de la gestión del estacionamiento.                                                  |
+| **Driver**               | Conductor                   | Usuario final que utiliza el estacionamiento del centro comercial.                                                            |
+| **Digital Twin**         | Gemelo digital              | Representación virtual sincronizada del estado físico del estacionamiento.                                                    |
+| **Twin Model (DTDL)**    | Modelo de gemelo            | Definición de la estructura y propiedades de una entidad en el grafo de Azure Digital Twins.                                  |
+| **Telemetry**            | Telemetría                  | Datos enviados por sensores (reales o simulados) hacia el gemelo digital.                                                     |
+| **Incident**             | Incidente                   | Evento anómalo que requiere atención del operador (humo, congestión, falla).                                                  |
 
 ---
 
