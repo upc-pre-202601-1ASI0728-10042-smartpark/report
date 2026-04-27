@@ -3097,12 +3097,19 @@ _(Introducción y descripción del contenido del video. Tono consistente con el 
 
 ## Conclusiones y recomendaciones
 
-_(Conclusiones sobre el trabajo, contrastando con los Problem Statements, Assumptions, Hypothesis Statements y criterios de éxito definidos en el proceso Lean UX. Recomendaciones sobre roadmap futuro de los productos digitales.)_
-
 ### Conclusiones por entrega
 
 #### TB1
-_(Conclusiones acumulables.)_
+
+1. **Los Problem Statements fueron validados empíricamente mediante las entrevistas.** Las seis entrevistas realizadas a operadores y conductores confirmaron los pain points identificados en el Lean UX: errores en el conteo de vehículos, ausencia de visibilidad en tiempo real por zonas, tiempos de búsqueda de plaza de entre 5 y 30 minutos, y desconfianza en los indicadores luminosos existentes. Esta triangulación entre la hipótesis inicial y el testimonio real de los usuarios otorga solidez al planteamiento del problema y justifica la inversión en la solución.
+
+2. **Las Hypothesis Statements guiaron directamente el diseño de los User Stories y la arquitectura de bounded contexts.** Los seis enunciados de hipótesis —reducción del tiempo de respuesta ante incidentes (H1), reducción del tiempo de búsqueda de plaza (H2), optimización energética (H3), localización del vehículo (H4), seguridad proactiva (H5) y adopción comercial (H6)— se materializaron en las épicas EP-01 a EP-10 del Product Backlog, y cada una de ellas encontró correspondencia directa en los bounded contexts definidos en la sección 4.2: Safety & Incidents (H1), Parking Occupancy (H2), Energy Management (H3), Parking Session (H4), Notifications (H5) e Identity & Access Management (H6).
+
+3. **El Attribute-Driven Design (ADD) demostró que la arquitectura puede acomodar los quality attribute scenarios más críticos sin sacrificar la modularidad.** Los escenarios priorizados —disponibilidad del 99,5 %, latencia de telemetría inferior a 500 ms y desacoplamiento entre bounded contexts— se satisfacen mediante una arquitectura de microservicios con Azure Digital Twins como núcleo de sincronización, mensajería asíncrona vía Azure Service Bus y despliegue en contenedores sobre Azure Kubernetes Service. Estas decisiones de diseño fueron tomadas con base en trade-offs explícitos documentados en la sección 4.1.4.
+
+4. **El proceso de Domain-Driven Design alineó el modelo de dominio con el lenguaje de los usuarios.** El EventStorming reveló nueve bounded contexts cohesivos y con responsabilidades claras, sin acoplamiento innecesario. El Context Map definió relaciones de Customer/Supplier y Conformist que protegen la integridad del Digital Twin Synchronization Context como núcleo estratégico de la plataforma. El Ubiquitous Language formalizado en la sección 2.4 garantiza que los términos de dominio como *Parking Session*, *Occupancy State* o *Smoke Alert* sean consistentes entre el equipo técnico y los stakeholders.
+
+5. **El equipo cumplió con la distribución de responsabilidades planificada para TB1.** Los cinco integrantes cubrieron la totalidad de los capítulos I al IV del informe, con evidencia de colaboración continua en el repositorio GitHub (24 commits no-merge sobre develop desde el 15 de abril al 26 de abril de 2026). La arquitectura del repositorio, el historial de ramas y los pull requests reflejan un flujo de trabajo colaborativo basado en feature branches con integración continua hacia develop.
 
 #### TP1
 _(Conclusiones acumulables.)_
@@ -3115,7 +3122,15 @@ _(Conclusiones finales del proyecto.)_
 
 ### Recomendaciones de roadmap
 
-_(Próximos pasos para escalar la solución: integración con sensores IoT reales, expansión a múltiples centros comerciales, pasarela de pagos, integración con sistemas de gestión del centro comercial, analítica predictiva, etc.)_
+1. **Priorizar la implementación del Parking Occupancy y Safety & Incidents bounded contexts en TP1.** Estos dos contextos son los de mayor impacto validado en las entrevistas y los que sustentan las hipótesis H1 y H2. Contar con un prototipo funcional —aunque sea con sensores simulados— permitirá realizar pruebas de usabilidad con operadores reales y obtener feedback cuantitativo para contrastar las métricas de éxito definidas en el Lean UX.
+
+2. **Avanzar en la integración del simulador IoT antes de involucrar hardware real.** La Business Assumption 11 establece explícitamente que el piloto debe demostrar valor sin inversión inicial en hardware. Desarrollar un simulador de telemetría realista que alimente el Azure Digital Twin permitirá demostrar la propuesta de valor a centros comerciales potenciales sin barreras de infraestructura, reduciendo el ciclo de ventas.
+
+3. **Diseñar y ejecutar pruebas de usabilidad con conductores para la aplicación móvil PowerApps.** Los User Personas y el As-Is Scenario Mapping evidencian que los conductores interactúan con la app en condiciones de baja iluminación y alta carga cognitiva. Las pruebas deben evaluar específicamente el tiempo de registro de ubicación (meta: menos de 15 segundos, un toque) y la comprensibilidad del mapa de disponibilidad por zona.
+
+4. **Establecer un acuerdo de piloto con al menos un centro comercial de Lima Metropolitana para TB2.** La Hypothesis Statement 6 establece como criterio de éxito la firma de 5 contratos en 12 meses. Para alcanzar esa meta, el equipo debe iniciar conversaciones comerciales en paralelo al desarrollo técnico, utilizando el demo con datos simulados como herramienta de prospección. La arquitectura multi-tenant definida en el Container Diagram facilita este despliegue desde la fase de piloto.
+
+5. **Incorporar analítica predictiva de ocupación como diferenciador competitivo en TF1.** Ninguno de los competidores analizados en la sección 2.1 —ParkHelp, Cleverciti, SpotHero ni Park Assist— ofrece predicción de demanda basada en históricos. Integrar modelos de series de tiempo sobre los datos acumulados por el gemelo digital representaría una ventaja competitiva sostenible y daría sustento cuantitativo a la Business Assumption 9.
 
 ## Video About-the-Team
 
