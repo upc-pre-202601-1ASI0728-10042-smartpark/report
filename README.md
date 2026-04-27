@@ -719,7 +719,36 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
 _(Misma estructura)_
 
 **Entrevista 3 — Operador**  
-_(Misma estructura)_
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>3</td>
+    <td><strong>Nombre</strong></td>
+    <td>Juan Alarcon Ramirez</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>25</td>
+    <td><strong>Distrito</strong></td>
+    <td>Wanchaq, Cusco</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/segmento-objetivo-operador-entrevista-3.png" width="200"></td>
+    <td colspan="3">Juan es técnico de operaciones con tres años de experiencia, gestiona un estacionamiento de entre 30 y 50 plazas donde se encarga del mantenimiento de maquinaria y la fluidez del tráfico. A pesar de contar con cámaras de vigilancia, barreras y sensores, Juan identifica limitaciones tecnológicas, como errores en el conteo de vehículos que generan molestias en los usuarios y la falta de visibilidad en tiempo real sobre la ocupación específica de cada pasillo. Ante incidentes de seguridad o congestiones en rampas que suelen ocurrir en fines de semana y feriados, el equipo depende del monitoreo manual por CCTV y la intervención directa de personal con señales manuales. Finalmente, destaca una gestión energética ineficiente, ya que la iluminación opera bajo horarios fijos sin sistemas de ahorro para zonas desocupadas, lo que resulta en un consumo elevado de electricidad.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQAMlLdlmF2pT75rc_E783gEAZ1O58GkQJQbV1O8t3DN02U?e=f1yiAz&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">4 minutos con 40 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Britney Qqueso Rodriguez</td>
+  </tr>
+</table>
 
 #### Segmento 2: Conductores frecuentes de centros comerciales
 
@@ -761,7 +790,37 @@ _(Misma estructura)_
 
 
 **Entrevista 3 — Conductor**  
-_(Misma estructura)_
+
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>3</td>
+    <td><strong>Nombre</strong></td>
+    <td>Edward Rodriguez</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>28</td>
+    <td><strong>Distrito</strong></td>
+    <td>Yanahuara, Arequipa</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/segmento-objetivo-conductor-entrevista-3.png" width="200"></td>
+    <td colspan="3">Edward Rodríguez Alarcón, un ingeniero de 28 años residente en Yanahuara, describe su experiencia de estacionamiento en centros comerciales como un proceso frustrante y congestionado, especialmente en horas pico, lo que a menudo la lleva a optar por servicios de delivery para evitar el estrés de buscar una plaza. Para gestionar la ubicación de su vehículo y evitar confusiones previas que le han tomado hasta 20 minutos resolver, utiliza una combinación de memoria visual, fotografías y Google Maps. Finalmente, Edward destaca la necesidad de soluciones tecnológicas que le permitan consultar el costo acumulado en tiempo real y recibir notificaciones directas al celular ante cualquier incidente de seguridad, priorizando la vigilancia y la información inmediata para su tranquilidad.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQDN3psHgYEbSJJE8h4T0B3HASpKNaqWqCPhXezHu2zqDPo?e=ky3NJO&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">5 minutos con 55 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Britney Qqueso Rodriguez</td>
+  </tr>
+</table>
 
 ### 2.2.3. Análisis de entrevistas
 
