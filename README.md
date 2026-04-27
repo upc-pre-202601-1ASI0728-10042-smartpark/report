@@ -500,12 +500,10 @@ Creemos que lograremos **5 contratos de suscripción con centros comerciales de 
 
 #### 1.2.2.4. Lean UX Canvas
 
-
 <div align="center">
   <img src="assets/images/chapter-01/lean-ux-canvas.png" alt="Lean UX Canvas SmartPark" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
   <p><i>Figura: Lean UX Canvas de la plataforma SmartPark</i></p>
 </div>
-
 
 ## 1.3. Segmentos objetivo
 
@@ -1049,8 +1047,6 @@ La User Task Matrix es una herramienta comparativa que mapea las tareas que real
 | Reducir congestión en horas punta                                 | Media                        | Alta                          | Media                         | Alta                           |
 | Tomar decisiones operativas basadas en datos en tiempo real       | Alta                         | Alta                          | Baja                          | Baja                           |
 
-
-
 El análisis comparativo de las tareas identificadas revela patrones claros sobre cómo cada segmento interactúa con la plataforma y dónde se concentra el valor del producto.
 
 **Tareas de alta frecuencia e importancia:** En el caso de Carlos Ramírez, las tareas críticas se concentran en el monitoreo continuo de ocupación, la supervisión de alertas de seguridad y la coordinación con el personal de campo, actividades que ejecuta durante toda su jornada laboral y que son determinantes para la operación del estacionamiento. En el caso de Valeria Soto, las tareas de mayor relevancia son la consulta de disponibilidad antes de ingresar, el registro de la ubicación del vehículo y la localización del mismo al regresar; si bien son de corta duración, se repiten en cada visita al centro comercial y definen directamente la calidad de su experiencia.
@@ -1077,7 +1073,6 @@ El Empathy Mapping es una técnica que busca comprender al usuario desde sus dim
   <p><i>Figura: Empathy Map - Conductor</i></p>
 </div>
 
-
 ### 2.3.4. As-is Scenario Mapping
 
 El As-Is Scenario Mapping documenta la experiencia actual del usuario, desglosando su recorrido en fases y registrando qué hace, qué piensa y qué siente en cada una. Se construyeron dos escenarios, el del operador en una jornada típica y el de la conductora en una visita habitual, lo que permite visualizar los puntos de fricción actuales y justificar la necesidad de la solución propuesta.
@@ -1097,7 +1092,6 @@ El As-Is Scenario Mapping documenta la experiencia actual del usuario, desglosan
 </div>
 
 ## 2.4. Ubiquitous Language
-
 
 | Term (English)           | Término (Español)           | Definición                                                                                                                    |
 |--------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -1226,7 +1220,6 @@ A continuación se presenta el conjunto completo de Epics, User Stories y Techni
 **URL del Product Backlog en herramienta:** https://smart-parkk.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?selectedIssue=SCRUM-11&atlOrigin=eyJpIjoiZmMzNjE4YzE3YzA4NDkyNGFmNmYyNjdhODE3YTYwMDIiLCJwIjoiaiJ9
 
 ![jira.png](assets/images/chapter-03/product-backlog/jira.png)
-
 
 El Product Backlog prioriza los User Stories según el valor que aportan al negocio. Los User Stories relacionados con el Landing Page se incluyen desde el primer sprint por ser el primer punto de contacto con los segmentos objetivo. Los Story Points se estiman usando la secuencia de Fibonacci (1, 2, 3, 5, 8) donde 1 representa una tarea trivial y 8 una tarea de alta complejidad.
 
@@ -1855,7 +1848,6 @@ La siguiente figura presenta el Context Map general de SmartPark, mientras que e
 | Identity & Access Management      | Notification Management       | Shared Kernel      | El acceso a preferencias y seguridad reutiliza el modelo común de identidad.                                                                                                                                                     |
 | Landing & Subscription Management | Identity & Access Management  | Open Host Service  | Landing & Subscription Management consume interfaces públicas de registro y creación de cuentas expuestas por Identity & Access Management.                                                                                      |
 
-
 ## 4.3. Software Architecture
 
 En esta sección se presenta la representación de la arquitectura de software de la plataforma SmartPark, aplicando el C4 Model y utilizando Structurizr como herramienta de modelado. La arquitectura refleja las decisiones de diseño tomadas durante el proceso de Attribute-Driven Design y Domain-Driven Design documentados en las secciones previas de este capítulo, y responde a los Quality Attribute Scenarios priorizados —en particular latencia sub-segundo para alertas de humo, disponibilidad del 99.5% para el dashboard del operador y escalabilidad para el procesamiento continuo de telemetría de sensores IoT.
@@ -2238,142 +2230,49 @@ workspace "SmartPark - Deployment Diagram" {
 
 # Capítulo V: Tactical-Level Software Design
 
-_(En este capítulo se incluye una sección por cada Bounded Context con el detalle táctico de su diseño. La numeración usa 5.1, 5.2, etc. por cada BC.)_
-
 ## 5.1. Bounded Context: Parking Occupancy
 
 ### 5.1.1. Domain Layer
 
-_(Clases que representan el core del bounded context y las reglas de negocio.)_
-
-**Entities:**
-- `ParkingSpace` — Entidad raíz del agregado de ocupación. Atributos: `Id`, `Code`, `Type`, `OccupancyState`, `LastUpdated`. Métodos: `MarkAsOccupied()`, `MarkAsFreed()`, `MarkOutOfService()`.
-- `ParkingZone` — Atributos: `Id`, `Name`, `LevelId`. Métodos: `GetOccupancyRate()`.
-- `ParkingLevel` — Atributos: `Id`, `Name`, `Floor`.
-
-**Value Objects:**
-- `OccupancyState` — Free, Occupied, Reserved, OutOfService.
-- `SpaceCode` — Código identificador de plaza con validación de formato.
-
-**Aggregates:**
-- `ParkingSpaceAggregate` (raíz: ParkingSpace).
-
-**Domain Services:**
-- `OccupancyCalculationService` — Calcula tasas de ocupación agregadas.
-
-**Repositories (interfaces):**
-- `IParkingSpaceRepository`
-- `IParkingZoneRepository`
-
 ### 5.1.2. Interface Layer
-
-_(Clases del Interface/Presentation Layer.)_
-
-**Controllers:**
-- `OccupancyController` — Expone `GET /api/v1/occupancy`, `GET /api/v1/occupancy/levels/{levelId}`, `GET /api/v1/occupancy/spaces/{spaceId}`.
 
 ### 5.1.3. Application Layer
 
-**Commands:**
-- `UpdateOccupancyStateCommand`
-
-**Command Handlers:**
-- `UpdateOccupancyStateCommandHandler`
-
-**Queries:**
-- `GetOccupancyByLevelQuery`
-- `GetOccupancyByZoneQuery`
-
-**Event Handlers:**
-- `TwinOccupancyChangedEventHandler` — Reacciona a eventos del Digital Twin Sync Context.
-
 ### 5.1.4. Infrastructure Layer
 
-**Repository Implementations:**
-- `ParkingSpaceRepository` (EF Core sobre PostgreSQL para metadata, lectura desde ADT para estado en tiempo real).
-
-**Adapters:**
-- `AzureDigitalTwinsAdapter` — Consume el SDK de Azure.DigitalTwins.Core.
-
 ### 5.1.5. Bounded Context Software Architecture Component Level Diagrams
-
-_(C4 Level 3: Component Diagram para los containers de este bounded context.)_
-
-![Component Diagram - Parking Occupancy](assets/images/chapter-05/component-parking-occupancy.png)
 
 ### 5.1.6. Bounded Context Software Architecture Code Level Diagrams
 
 #### 5.1.6.1. Bounded Context Domain Layer Class Diagrams
 
-_(Diagrama UML de las clases del Domain Layer, con atributos, métodos, scope, relaciones, multiplicidad.)_
-
-![Class Diagram - Parking Occupancy](assets/images/chapter-05/class-parking-occupancy.png)
-
 #### 5.1.6.2. Bounded Context Database Design Diagram
-
-_(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
-
-![DB Diagram - Parking Occupancy](assets/images/chapter-05/db-parking-occupancy.png)
-
----
 
 ## 5.2. Bounded Context: Safety & Incidents
 
 ### 5.2.1. Domain Layer
-_(Misma estructura)_
 
 ### 5.2.2. Interface Layer
-_(Misma estructura)_
 
 ### 5.2.3. Application Layer
-_(Misma estructura)_
 
 ### 5.2.4. Infrastructure Layer
-_(Misma estructura)_
 
 ### 5.2.5. Bounded Context Software Architecture Component Level Diagrams
-_(Misma estructura)_
 
 ### 5.2.6. Bounded Context Software Architecture Code Level Diagrams
-_(Misma estructura)_
-
----
 
 ## 5.3. Bounded Context: Traffic Flow
 
-_(Misma estructura)_
-
----
-
 ## 5.4. Bounded Context: Energy Management
-
-_(Misma estructura)_
-
----
 
 ## 5.5. Bounded Context: Parking Session
 
-_(Misma estructura)_
-
----
-
 ## 5.6. Bounded Context: Notifications
-
-_(Misma estructura)_
-
----
 
 ## 5.7. Bounded Context: Identity & Access Management
 
-_(Misma estructura)_
-
----
-
 ## 5.8. Bounded Context: Digital Twin Synchronization
-
-_(Misma estructura)_
-
----
 
 # Capítulo VI: Solution UX Design
 
@@ -2381,145 +2280,65 @@ _(Misma estructura)_
 
 ### 6.1.1. General Style Guidelines
 
-_(Decisiones sobre Branding, Typography, Colors, Spacing y tono de comunicación: Formal/Casual, Respetuoso/Irreverente, etc.)_
-
-**Branding:**
-- Nombre del producto: _(...)_
-- Logotipo: _(insertar)_
-- Tagline: _(...)_
-
-**Typography:**
-- Fuente primaria: _(Roboto / Inter / etc.)_
-- Fuente secundaria: _(...)_
-- Escala tipográfica: _(...)_
-
-**Colors:**
-| Token | Color | Uso |
-|---|---|---|
-| Primary | #_(hex)_ | _(...)_ |
-| Secondary | #_(hex)_ | _(...)_ |
-| Accent | #_(hex)_ | _(...)_ |
-| Alert/Danger | #_(hex)_ | _(...)_ |
-| Success | #_(hex)_ | _(...)_ |
-
-**Spacing:** Sistema basado en múltiplos de 8px (8, 16, 24, 32, 48, 64).
-
-**Tono de comunicación:** Profesional, claro, orientado a acción. Formal pero accesible.
-
 ### 6.1.2. Web, Mobile & Devices Style Guidelines
-
-_(Decisiones sobre estándares visuales y de interacción para responsive web e interfaces móviles.)_
 
 ## 6.2. Information Architecture
 
 ### 6.2.1. Organization Systems
 
-_(Esquemas de organización aplicados: jerárquica, secuencial, matricial. Esquemas de categorización: alfabético, cronológico, por tópicos, según audiencia.)_
-
 ### 6.2.2. Labeling Systems
-
-_(Etiquetas a utilizar para representar conjuntos de información, con el mínimo número de palabras.)_
 
 ### 6.2.3. SEO Tags and Meta Tags
 
-| Página | Title | Description | Keywords | Author |
-|---|---|---|---|---|
-| Landing Home | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| Landing For Operators | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| Landing For Drivers | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| Web App Dashboard | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-
-**ASO Elements (PowerApps):**
-| Field | Value |
-|---|---|
-| App Title | _(...)_ |
-| App Subtitle | _(...)_ |
-| App Keywords | _(...)_ |
-| App Description | _(...)_ |
-
 ### 6.2.4. Searching Systems
 
-_(Opciones de búsqueda, filtros disponibles, presentación de resultados.)_
-
 ### 6.2.5. Navigation Systems
-
-_(Acciones y técnicas de navegación a través del Landing Page y aplicaciones.)_
 
 ## 6.3. Landing Page UI Design
 
 ### 6.3.1. Landing Page Wireframe
 
 #### Desktop Web Browser
-![Landing Wireframe Desktop](assets/images/chapter-06/landing-wireframe-desktop.png)
 
 #### Mobile Web Browser
-![Landing Wireframe Mobile](assets/images/chapter-06/landing-wireframe-mobile.png)
 
 ### 6.3.2. Landing Page Mock-up
 
 #### Desktop Web Browser
-![Landing Mockup Desktop](assets/images/chapter-06/landing-mockup-desktop.png)
 
 #### Mobile Web Browser
-![Landing Mockup Mobile](assets/images/chapter-06/landing-mockup-mobile.png)
 
 ## 6.4. Applications UX/UI Design
 
 ### 6.4.1. Applications Wireframes
 
 #### Web Application (Operador)
-![Web App Wireframes](assets/images/chapter-06/webapp-wireframes.png)
 
 #### Mobile Application (Conductor — PowerApps)
-![Mobile App Wireframes](assets/images/chapter-06/mobile-wireframes.png)
 
 ### 6.4.2. Applications Wireflow Diagrams
 
 #### Wireflow: Operator views smoke alert and locates affected zone
-**User Goal:** Identificar la ubicación exacta de un incidente de humo para coordinar respuesta.
-
-![Wireflow Operator Smoke Alert](assets/images/chapter-06/wireflow-operator-smoke.png)
 
 #### Wireflow: Driver finds and registers a parking space
-**User Goal:** Localizar un espacio libre y registrar la ubicación del vehículo.
-
-![Wireflow Driver Park](assets/images/chapter-06/wireflow-driver-park.png)
 
 ### 6.4.3. Applications Mock-ups
 
 #### Web Application (Operador)
-![Web App Mockups](assets/images/chapter-06/webapp-mockups.png)
 
 #### Mobile Application (Conductor)
-![Mobile App Mockups](assets/images/chapter-06/mobile-mockups.png)
 
 ### 6.4.4. Applications User Flow Diagrams
 
 #### User Flow: Operator manages an active smoke incident
-**User Goal:** Gestionar un incidente de humo desde detección hasta resolución.
-
-![User Flow Operator](assets/images/chapter-06/userflow-operator.png)
 
 #### User Flow: Driver completes a parking session
-**User Goal:** Completar una sesión de estacionamiento desde ingreso hasta pago de salida.
-
-![User Flow Driver](assets/images/chapter-06/userflow-driver.png)
 
 ## 6.5. Applications Prototyping
 
-_(Prototipos de UI con simulación de interacción y navegación. Para cada aplicación: 1 screenshot del video y enlace al video subido en Microsoft Stream.)_
-
 ### Prototype: Web Application (Operador)
-![Web App Prototype Screenshot](assets/images/chapter-06/webapp-prototype-screenshot.png)
-
-**URL del video:** `https://web.microsoftstream.com/...`
 
 ### Prototype: Mobile Application (Conductor)
-![Mobile App Prototype Screenshot](assets/images/chapter-06/mobile-prototype-screenshot.png)
-
-**URL del video:** `https://web.microsoftstream.com/...`
-
----
 
 # Capítulo VII: Product Implementation, Validation & Deployment
 
@@ -2527,102 +2346,23 @@ _(Prototipos de UI con simulación de interacción y navegación. Para cada apli
 
 ### 7.1.1. Software Development Environment Configuration
 
-| Categoría | Producto | Propósito | Ruta de referencia/descarga |
-|---|---|---|---|
-| Project Management | Pivotal Tracker | Product Backlog y Sprint tracking | `https://www.pivotaltracker.com/` |
-| Requirements Management | UXPressia | User Personas, Empathy Maps, Impact Maps | `https://uxpressia.com/` |
-| Domain Modeling | Miro / LucidChart | EventStorming, Bounded Context Canvases, Domain Storytelling | `https://miro.com/` |
-| Software Architecture (C4) | Structurizr | C4 Model diagrams | `https://structurizr.com/` |
-| UML Design | LucidChart | UML class diagrams | `https://lucidchart.com/` |
-| Database Design | Vertabelo | DB design diagrams | `https://vertabelo.com/` |
-| UI/UX Design | Figma | Wireframes, mockups, prototypes | `https://figma.com/` |
-| IDE Backend | Visual Studio 2022 / JetBrains Rider | ASP.NET Core 8 development | `https://visualstudio.microsoft.com/` |
-| IDE Frontend | Visual Studio Code | Angular, Node.js, HTML/CSS/JS | `https://code.visualstudio.com/` |
-| Mobile Development | Microsoft PowerApps Studio | Low-code mobile app | `https://make.powerapps.com/` |
-| API Documentation | Swagger UI | OpenAPI documentation | Embebido en ASP.NET Core |
-| Source Control | Git + GitHub | Version control con GitFlow | `https://github.com/` |
-| Cloud Provider | Microsoft Azure | Web Services hosting, Digital Twins, Storage | `https://portal.azure.com/` |
-| Notifications | Firebase Cloud Messaging | Push notifications | `https://firebase.google.com/` |
-| Video Hosting | Microsoft Stream + YouTube | Videos de entrevistas y producto | — |
-
 ### 7.1.2. Source Code Management
-
-**Repositorios:**
-
-| Producto | Repositorio | Branches base |
-|---|---|---|
-| Report | `https://github.com/<org>/report` | main, develop |
-| Landing Page | `https://github.com/<org>/landing-page` | main, develop |
-| Web Application | `https://github.com/<org>/web-application` | main, develop |
-| Web Services | `https://github.com/<org>/web-services` | main, develop |
-| IoT Simulator | `https://github.com/<org>/iot-simulator` | main, develop |
-| Mobile App | `https://github.com/<org>/mobile-app` | main, develop |
-
-**GitFlow Workflow:**
-
-- `main`: rama principal con releases estables. Protected, solo merges desde `release/*` o `hotfix/*`.
-- `develop`: rama de integración. Default branch.
-- `feature/*`: una rama por feature/user story. Naming: `feature/<chapter-or-module>-<short-description>` para el report; `feature/us-<id>-<short-description>` para productos digitales.
-- `release/*`: ramas de preparación de release. Naming con semantic versioning: `release/v0.1.0-tb1`, `release/v0.2.0-tp1`, `release/v0.3.0-tb2`, `release/v1.0.0-tf1`.
-- `hotfix/*`: correcciones urgentes post-entrega. Naming: `hotfix/<short-description>`.
-
-**Conventional Commits:** Se aplica `https://www.conventionalcommits.org/`.
-
-| Tipo | Uso |
-|---|---|
-| `feat` | Nueva funcionalidad |
-| `fix` | Corrección de bug |
-| `docs` | Cambios de documentación |
-| `style` | Formato, sin cambios de lógica |
-| `refactor` | Refactorización sin cambio funcional |
-| `test` | Añadir o corregir tests |
-| `chore` | Tareas auxiliares |
-| `perf` | Mejoras de performance |
-
-**Semantic Versioning:** Se aplica `https://semver.org/` (MAJOR.MINOR.PATCH).
 
 ### 7.1.3. Source Code Style Guide & Conventions
 
-| Lenguaje | Guía adoptada | Referencia |
-|---|---|---|
-| C# (ASP.NET Core) | Microsoft C# Coding Conventions | `https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions` |
-| TypeScript (Angular) | Google TypeScript Style Guide | `https://google.github.io/styleguide/tsguide.html` |
-| JavaScript (Node, Landing) | Airbnb JavaScript Style Guide | `https://github.com/airbnb/javascript` |
-| HTML5 / CSS3 | Google HTML/CSS Style Guide | `https://google.github.io/styleguide/htmlcssguide.html` |
-| Gherkin (.feature) | Gherkin Conventions for Readable Specifications | `https://specflow.org/gherkin/gherkin-conventions-for-readable-specifications/` |
-
-Toda nomenclatura en inglés.
-
 ### 7.1.4. Software Deployment Configuration
 
-_(Pasos para desplegar cada producto digital desde sus repositorios.)_
-
 #### Landing Page → Azure Static Web Apps
-1. Push a `main` dispara GitHub Actions workflow.
-2. Azure Static Web Apps build & deploy.
 
 #### Web Application (Angular) → Azure Static Web Apps
-1. `ng build --configuration production`.
-2. Deploy automatizado vía GitHub Actions.
 
 #### Web Services (ASP.NET Core) → Azure App Service
-1. `dotnet publish -c Release`.
-2. Deploy vía Azure Pipelines o GitHub Actions.
 
 #### IoT Simulator (Node.js) → Azure Container Apps
-1. `docker build -t iot-simulator .`.
-2. Push a Azure Container Registry.
-3. Deploy a Container Apps.
 
 #### Mobile App (PowerApps)
-1. Export & Import via PowerApps Solution.
 
 #### Azure Digital Twins
-1. Deploy via ARM template / Bicep.
-2. Upload DTDL models via CLI.
-
-**Deployment Diagram (C4):**
-![Deployment Diagram](assets/images/chapter-07/deployment-diagram.png)
 
 ## 7.2. Solution Implementation
 
@@ -2630,468 +2370,67 @@ _(Pasos para desplegar cada producto digital desde sus repositorios.)_
 
 #### 7.2.1.1. Sprint Planning 1
 
-| Sprint Planning Background | |
-|---|---|
-| **Sprint #** | Sprint 1 |
-| **Date** | YYYY-MM-DD |
-| **Time** | HH:MM AM/PM |
-| **Location** | _(Virtual / Física)_ |
-| **Prepared By** | _(Team Leader)_ |
-| **Attendees** | _(Lista de asistentes)_ |
-| **Sprint 0 Review Summary** | N/A (primer sprint) |
-| **Sprint 0 Retrospective Summary** | N/A (primer sprint) |
-
-| Sprint Goal & User Stories | |
-|---|---|
-| **Sprint 1 Goal** | _(Definir el goal y la métrica de cumplimiento.)_ |
-| **Sprint 1 Velocity** | _(N story points)_ |
-| **Sum of Story Points** | _(N)_ |
-
 #### 7.2.1.2. Sprint Backlog 1
-
-**URL del Board:** `https://trello.com/b/...` _(o herramienta equivalente)_
-
-![Sprint 1 Board](assets/images/chapter-07/sprint-1-board.png)
-
-| Sprint # | Sprint 1 | | | | | | |
-|---|---|---|---|---|---|---|---|
-| **User Story** | | | **Work-Item / Task** | | | | |
-| Id | Title | Id | Title | Description | Estimation (Hours) | Assigned To | Status |
-| US-07 | View Landing Page as Mall Operator | T-01 | Setup landing page repo | _(...)_ | 2 | _(Nombre)_ | Done |
-| US-07 | View Landing Page as Mall Operator | T-02 | Build hero section | _(...)_ | 4 | _(Nombre)_ | Done |
-| US-08 | View Landing Page as Driver | T-03 | Build "For Drivers" section | _(...)_ | 4 | _(Nombre)_ | Done |
-| TS-01 | Twin State Update Endpoint | T-04 | Setup ASP.NET Core project | _(...)_ | 3 | _(Nombre)_ | Done |
-| TS-01 | Twin State Update Endpoint | T-05 | Implement PATCH /api/v1/twins/{id} | _(...)_ | 6 | _(Nombre)_ | Done |
-| _(...)_ | | | | | | | |
 
 #### 7.2.1.3. Development Evidence for Sprint Review
 
-_(Resumen de avances en implementación. Tabla de commits por repositorio.)_
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/landing-page` | `feature/hero-section` | `abc1234` | feat: add hero section | Implements landing page hero with primary CTA | YYYY-MM-DD |
-| `<org>/web-services` | `feature/ts-01-twin-update` | `def5678` | feat(twins): add PATCH endpoint for twin state updates | Implements UpdateOccupancyStateCommand and handler | YYYY-MM-DD |
-| _(...)_ | | | | | |
-
 #### 7.2.1.4. Testing Suite Evidence for Sprint Review
-
-_(Conjunto de Unit Tests, Integration Tests y Acceptance Tests automatizados, para Web Services.)_
-
-**Unit Tests implementados:**
-- `ParkingSpaceTests` — valida transiciones de estado.
-- `OccupancyCalculationServiceTests` — valida cálculos agregados.
-
-**Acceptance Tests (.feature):**
-
-```gherkin
-Feature: Twin State Update
-  As a developer
-  I want to update twin state via PATCH endpoint
-  So that the simulator can send telemetry
-
-  Scenario: Successful twin update
-    Given a valid twin with id "space-001"
-    When I send PATCH /api/v1/twins/space-001 with valid JSON Patch
-    Then the response status is 204
-
-  Scenario: Twin not found
-    Given a twin id "nonexistent" does not exist
-    When I send PATCH /api/v1/twins/nonexistent
-    Then the response status is 404
-```
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/ts-01-tests` | `ghi9012` | test(twins): add acceptance tests for twin update | Includes successful and not-found scenarios | YYYY-MM-DD |
 
 #### 7.2.1.5. Execution Evidence for Sprint Review
 
-_(Screenshots de las principales vistas implementadas + enlace a video demo.)_
-
-![Sprint 1 Landing Hero](assets/images/chapter-07/sprint-1-landing.png)
-
-**URL del video demo:** `https://web.microsoftstream.com/...`
-
 #### 7.2.1.6. Services Documentation Evidence for Sprint Review
-
-_(Endpoints documentados con OpenAPI relacionados con el alcance del sprint.)_
-
-| Endpoint | HTTP Verb | Description | Parameters | Example Response |
-|---|---|---|---|---|
-| `/api/v1/twins/{id}` | PATCH | Updates a twin state | `id` (path), JSON Patch (body) | `204 No Content` |
-| `/api/v1/occupancy/levels/{levelId}` | GET | Returns occupancy by level | `levelId` (path) | `200 OK` with JSON array |
-
-![Swagger UI Sprint 1](assets/images/chapter-07/sprint-1-swagger.png)
 
 #### 7.2.1.7. Software Deployment Evidence for Sprint Review
 
-_(Capturas de procesos de deployment ejecutados durante el sprint.)_
-
-![Deployment Sprint 1](assets/images/chapter-07/sprint-1-deployment.png)
-
-**URLs desplegadas:**
-- Landing Page: `https://...`
-- Web Services: `https://...`
-- Web App: `https://...`
-
 #### 7.2.1.8. Team Collaboration Insights during Sprint
-
-![Sprint 1 GitHub Insights](assets/images/chapter-07/sprint-1-insights.png)
-
-_(Análisis de la colaboración de cada miembro durante el sprint.)_
-
----
 
 ### 7.2.2. Sprint 2
 
 #### 7.2.2.1. Sprint Planning 2
 
-| Sprint Planning Background | |
-|---|---|
-| **Sprint #** | Sprint 2 |
-| **Date** | YYYY-MM-DD |
-| **Time** | HH:MM AM/PM |
-| **Location** | _(Virtual / Física)_ |
-| **Prepared By** | _(Team Leader)_ |
-| **Attendees** | _(Lista de asistentes)_ |
-| **Sprint 1 Review Summary** | _(Resumen del Sprint 1: resultados a nivel de productos de software, opiniones de miembros y feedback del product owner.)_ |
-| **Sprint 1 Retrospective Summary** | _(Resumen del Sprint 1: opiniones del equipo sobre aciertos y oportunidades de mejora en su forma de trabajo.)_ |
-
-| Sprint Goal & User Stories | |
-|---|---|
-| **Sprint 2 Goal** | _(Definir el goal y la métrica de cumplimiento.)_ |
-| **Sprint 2 Velocity** | _(N story points)_ |
-| **Sum of Story Points** | _(N)_ |
-
 #### 7.2.2.2. Sprint Backlog 2
-
-**URL del Board:** `https://trello.com/b/...` _(o herramienta equivalente)_
-
-![Sprint 2 Board](assets/images/chapter-07/sprint-2-board.png)
-
-| Sprint # | Sprint 2 | | | | | | |
-|---|---|---|---|---|---|---|---|
-| **User Story** | | | **Work-Item / Task** | | | | |
-| Id | Title | Id | Title | Description | Estimation (Hours) | Assigned To | Status |
-| US-01 | View 3D Parking Occupancy Map | T-01 | Setup Angular project with Material | _(...)_ | 3 | _(Nombre)_ | Done |
-| US-01 | View 3D Parking Occupancy Map | T-02 | Embed 3D Scenes Studio viewer via iframe | _(...)_ | 5 | _(Nombre)_ | Done |
-| US-03 | View Available Spaces by Zone | T-03 | Build PowerApps availability screen | _(...)_ | 4 | _(Nombre)_ | Done |
-| US-04 | Register Vehicle Location | T-04 | Implement vehicle location registration | _(...)_ | 5 | _(Nombre)_ | Done |
-| TS-02 | Occupancy Query Endpoint | T-05 | Implement GET /api/v1/occupancy | _(...)_ | 4 | _(Nombre)_ | Done |
-| _(...)_ | | | | | | | |
 
 #### 7.2.2.3. Development Evidence for Sprint Review
 
-_(Resumen de avances en implementación. Tabla de commits por repositorio.)_
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-application` | `feature/us-01-3d-viewer` | `a1b2c3d` | feat(dashboard): embed 3D Scenes Studio viewer | Adds iframe-based viewer for the parking digital twin | YYYY-MM-DD |
-| `<org>/mobile-app` | `feature/us-04-location-register` | `e4f5g6h` | feat(driver): add vehicle location registration screen | Implements zone/level selector and confirmation flow | YYYY-MM-DD |
-| `<org>/web-services` | `feature/ts-02-occupancy-query` | `i7j8k9l` | feat(occupancy): add GET endpoint for occupancy aggregation | Implements GetOccupancyByLevelQuery and handler | YYYY-MM-DD |
-| _(...)_ | | | | | |
-
 #### 7.2.2.4. Testing Suite Evidence for Sprint Review
-
-_(Conjunto de Unit Tests, Integration Tests y Acceptance Tests automatizados, para Web Services.)_
-
-**Unit Tests implementados:**
-- `OccupancyControllerTests` — valida respuesta de endpoint de ocupación.
-- `GetOccupancyByLevelQueryHandlerTests` — valida lógica de agregación.
-
-**Acceptance Tests (.feature):**
-
-```gherkin
-Feature: Occupancy Query
-  As an operator
-  I want to query parking occupancy by level
-  So that I can see the current state of each level
-
-  Scenario: Successful occupancy query
-    Given I am authenticated as an operator
-    When I send GET /api/v1/occupancy/levels/B1
-    Then the response status is 200
-    And the response contains the count of free, occupied, and reserved spaces
-
-  Scenario: Level not found
-    Given level "Z9" does not exist
-    When I send GET /api/v1/occupancy/levels/Z9
-    Then the response status is 404
-```
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/ts-02-tests` | `m1n2o3p` | test(occupancy): add acceptance tests for occupancy query | Includes successful and not-found scenarios | YYYY-MM-DD |
 
 #### 7.2.2.5. Execution Evidence for Sprint Review
 
-_(Screenshots de las principales vistas implementadas + enlace a video demo.)_
-
-![Sprint 2 Dashboard](assets/images/chapter-07/sprint-2-dashboard.png)
-![Sprint 2 Mobile App](assets/images/chapter-07/sprint-2-mobile.png)
-
-**URL del video demo:** `https://web.microsoftstream.com/...`
-
 #### 7.2.2.6. Services Documentation Evidence for Sprint Review
-
-_(Endpoints documentados con OpenAPI relacionados con el alcance del sprint.)_
-
-| Endpoint | HTTP Verb | Description | Parameters | Example Response |
-|---|---|---|---|---|
-| `/api/v1/occupancy/levels/{levelId}` | GET | Returns aggregated occupancy by level | `levelId` (path) | `200 OK` with JSON object |
-| `/api/v1/occupancy/zones/{zoneId}` | GET | Returns aggregated occupancy by zone | `zoneId` (path) | `200 OK` with JSON object |
-| `/api/v1/sessions` | POST | Registers a new parking session | Body (driver, location) | `201 Created` |
-
-![Swagger UI Sprint 2](assets/images/chapter-07/sprint-2-swagger.png)
 
 #### 7.2.2.7. Software Deployment Evidence for Sprint Review
 
-_(Capturas de procesos de deployment ejecutados durante el sprint.)_
-
-![Deployment Sprint 2](assets/images/chapter-07/sprint-2-deployment.png)
-
-**URLs desplegadas:**
-- Web Services: `https://...`
-- Web Application: `https://...`
-- IoT Simulator: `https://...`
-
 #### 7.2.2.8. Team Collaboration Insights during Sprint
-
-![Sprint 2 GitHub Insights](assets/images/chapter-07/sprint-2-insights.png)
-
-_(Análisis de la colaboración de cada miembro durante el sprint.)_
-
----
 
 ### 7.2.3. Sprint 3
 
 #### 7.2.3.1. Sprint Planning 3
 
-| Sprint Planning Background | |
-|---|---|
-| **Sprint #** | Sprint 3 |
-| **Date** | YYYY-MM-DD |
-| **Time** | HH:MM AM/PM |
-| **Location** | _(Virtual / Física)_ |
-| **Prepared By** | _(Team Leader)_ |
-| **Attendees** | _(Lista de asistentes)_ |
-| **Sprint 2 Review Summary** | _(Resumen del Sprint 2: resultados a nivel de productos de software, opiniones de miembros y feedback del product owner.)_ |
-| **Sprint 2 Retrospective Summary** | _(Resumen del Sprint 2: opiniones del equipo sobre aciertos y oportunidades de mejora en su forma de trabajo.)_ |
-
-| Sprint Goal & User Stories | |
-|---|---|
-| **Sprint 3 Goal** | _(Definir el goal y la métrica de cumplimiento. Foco en cierre: integración de alertas en tiempo real, push notifications, gestión energética y refinamiento UX.)_ |
-| **Sprint 3 Velocity** | _(N story points)_ |
-| **Sum of Story Points** | _(N)_ |
-
 #### 7.2.3.2. Sprint Backlog 3
-
-**URL del Board:** `https://trello.com/b/...` _(o herramienta equivalente)_
-
-![Sprint 3 Board](assets/images/chapter-07/sprint-3-board.png)
-
-| Sprint # | Sprint 3 | | | | | | |
-|---|---|---|---|---|---|---|---|
-| **User Story** | | | **Work-Item / Task** | | | | |
-| Id | Title | Id | Title | Description | Estimation (Hours) | Assigned To | Status |
-| US-02 | Receive Smoke Alert with Spatial Context | T-01 | Implement SignalR Hub for real-time alerts | _(...)_ | 6 | _(Nombre)_ | Done |
-| US-02 | Receive Smoke Alert with Spatial Context | T-02 | Subscribe operator dashboard to alert channel | _(...)_ | 4 | _(Nombre)_ | Done |
-| US-05 | Receive Safety Alerts Near Vehicle | T-03 | Integrate Firebase Cloud Messaging in backend | _(...)_ | 5 | _(Nombre)_ | Done |
-| US-05 | Receive Safety Alerts Near Vehicle | T-04 | Configure FCM device token registration in PowerApps | _(...)_ | 4 | _(Nombre)_ | Done |
-| TS-03 | Push Notification Trigger | T-05 | Implement notifications service for active sessions | _(...)_ | 5 | _(Nombre)_ | Done |
-| US-06 | Identify Low-Occupancy Zones for Lighting Adjustment | T-06 | Implement energy view in dashboard | _(...)_ | 4 | _(Nombre)_ | Done |
-| _(...)_ | | | | | | | |
 
 #### 7.2.3.3. Development Evidence for Sprint Review
 
-_(Resumen de avances en implementación. Tabla de commits por repositorio.)_
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/us-02-signalr-alerts` | `q1r2s3t` | feat(alerts): add SignalR Hub for real-time smoke alerts | Implements push channel for operator dashboard | YYYY-MM-DD |
-| `<org>/web-services` | `feature/ts-03-fcm-integration` | `u4v5w6x` | feat(notifications): integrate Firebase Cloud Messaging | Implements FcmNotificationService and device token registry | YYYY-MM-DD |
-| `<org>/web-application` | `feature/us-02-alert-overlay` | `y7z8a9b` | feat(dashboard): subscribe to SignalR alert channel | Renders alert overlay on 3D viewer when smoke detected | YYYY-MM-DD |
-| `<org>/mobile-app` | `feature/us-05-push-alerts` | `c1d2e3f` | feat(driver): handle FCM push notifications for safety alerts | Displays in-app evacuation instructions on alert receipt | YYYY-MM-DD |
-| `<org>/web-application` | `feature/us-06-energy-view` | `g4h5i6j` | feat(dashboard): add energy management view | Highlights low-occupancy zones with dimming recommendations | YYYY-MM-DD |
-| _(...)_ | | | | | | | |
-
 #### 7.2.3.4. Testing Suite Evidence for Sprint Review
-
-_(Conjunto de Unit Tests, Integration Tests y Acceptance Tests automatizados, para Web Services.)_
-
-**Unit Tests implementados:**
-- `FcmNotificationServiceTests` — valida envío correcto a FCM.
-- `SmokeAlertHandlerTests` — valida detección de sesiones afectadas por zona.
-- `EnergyRecommendationServiceTests` — valida lógica de recomendación de atenuación.
-
-**Acceptance Tests (.feature):**
-
-```gherkin
-Feature: Smoke Alert End-to-End
-  As an operator
-  I want to receive smoke alerts with spatial context in real time
-  So that I can coordinate the response immediately
-
-  Scenario: Alert reaches operator dashboard within 2 seconds
-    Given a smoke detector "SD-001" in zone "B1-A"
-    When the simulator emits a smoke detection event
-    Then within 2 seconds the operator dashboard receives the alert
-    And the affected zone is highlighted on the 3D viewer
-
-  Scenario: Driver with active session receives push notification
-    Given a driver with an active parking session in zone "B1-A"
-    When a smoke alert is triggered in zone "B1-A"
-    Then within 5 seconds the driver receives a push notification
-    And the notification includes evacuation instructions
-```
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/us-02-tests` | `k7l8m9n` | test(alerts): add end-to-end tests for smoke alerts | Validates 2s latency for dashboard and 5s for FCM push | YYYY-MM-DD |
 
 #### 7.2.3.5. Execution Evidence for Sprint Review
 
-_(Screenshots de las principales vistas implementadas + enlace a video demo.)_
-
-![Sprint 3 Smoke Alert](assets/images/chapter-07/sprint-3-alert.png)
-![Sprint 3 Push Notification](assets/images/chapter-07/sprint-3-push.png)
-![Sprint 3 Energy View](assets/images/chapter-07/sprint-3-energy.png)
-
-**URL del video demo:** `https://web.microsoftstream.com/...`
-
 #### 7.2.3.6. Services Documentation Evidence for Sprint Review
-
-_(Endpoints documentados con OpenAPI relacionados con el alcance del sprint.)_
-
-| Endpoint | HTTP Verb | Description | Parameters | Example Response |
-|---|---|---|---|---|
-| `/api/v1/alerts` | GET | Returns active alerts | Query: `zoneId`, `levelId` | `200 OK` with JSON array |
-| `/api/v1/alerts/{id}/acknowledge` | POST | Acknowledges an alert by operator | `id` (path) | `204 No Content` |
-| `/api/v1/notifications/devices` | POST | Registers a device token for push notifications | Body: `driverId`, `token` | `201 Created` |
-| `/api/v1/energy/recommendations` | GET | Returns lighting dimming recommendations by zone | Query: `levelId` | `200 OK` with JSON array |
-| `/hubs/alerts` | WebSocket | SignalR Hub for real-time alert channel | — | Real-time alert events |
-
-![Swagger UI Sprint 3](assets/images/chapter-07/sprint-3-swagger.png)
 
 #### 7.2.3.7. Software Deployment Evidence for Sprint Review
 
-_(Capturas de procesos de deployment ejecutados durante el sprint. Esta es la versión final desplegada de los productos digitales.)_
-
-![Deployment Sprint 3](assets/images/chapter-07/sprint-3-deployment.png)
-
-**URLs desplegadas (versión final):**
-- Landing Page: `https://...`
-- Web Application: `https://...`
-- Web Services: `https://...`
-- IoT Simulator: `https://...`
-- Swagger Docs: `https://.../swagger`
-
-**Configuración de Firebase Cloud Messaging:**
-- FCM Project: `<project-id>`
-- Server Key configurado en App Service settings.
-
-**Configuración de Azure Digital Twins:**
-- ADT Instance: `<instance-name>.api.<region>.digitaltwins.azure.net`
-- 3D Scenes Storage Container: `<container-name>`
-
 #### 7.2.3.8. Team Collaboration Insights during Sprint
-
-![Sprint 3 GitHub Insights](assets/images/chapter-07/sprint-3-insights.png)
-
-_(Análisis de la colaboración de cada miembro durante el sprint final.)_
 
 ## 7.3. Validation Interviews
 
 ### 7.3.1. Diseño de Entrevistas
 
-_(Elementos a validar por segmento objetivo, incluyendo Landing Page y aplicaciones. User flows que formarán parte de la validación.)_
-
 ### 7.3.2. Registro de Entrevistas
 
 #### Entrevista de Validación 1 — Operador
-| Campo | Dato |
-|---|---|
-| Nombres y Apellidos | _(...)_ |
-| Edad | _(...)_ |
-| Distrito | _(...)_ |
-| Cargo | _(...)_ |
-| Fecha de entrevista | YYYY-MM-DD |
-| URL del video | `https://web.microsoftstream.com/...` |
-| Timing inicio | HH:MM:SS |
-| Duración | MM:SS |
-
-![Validation Interview 1](assets/images/chapter-07/validation-interview-01.png)
-
-**Resumen:** _(Apreciaciones del entrevistado respecto a las tareas asignadas.)_
-
-_(Repetir para todas las entrevistas de validación, 3-5 por segmento.)_
 
 ### 7.3.3. Evaluaciones según heurísticas
 
-**UX Heuristics & Principles Evaluation**  
-**Usability – Inclusive Design – Information Architecture**
-
-| Campo | Valor |
-|---|---|
-| **CARRERA** | Ingeniería de Software |
-| **CURSO** | Arquitecturas de Software Emergentes |
-| **SECCIÓN** | _(...)_ |
-| **PROFESORES** | _(...)_ |
-| **AUDITOR** | _(Nombre del Grupo)_ |
-| **CLIENTE(S)** | _(Nombres de los participantes)_ |
-
-**SITE/APP A EVALUAR:** _(Web Application del Operador / Mobile App del Conductor)_
-
-**TAREAS A EVALUAR:**
-1. _(Login del operador)_
-2. _(Visualización de mapa 3D de ocupación)_
-3. _(Atención de alerta de humo)_
-4. _(Registro de ubicación de vehículo en app móvil)_
-5. _(Recepción de alerta de seguridad en app móvil)_
-6. _(...)_
-
-**TAREAS NO INCLUIDAS:**
-1. _(...)_
-
-**ESCALA DE SEVERIDAD:**
-
-| Nivel | Descripción |
-|---|---|
-| 1 | Problema superficial: puede ser fácilmente superado por el usuario o ocurre con muy poca frecuencia. |
-| 2 | Problema menor: ocurre un poco más frecuentemente o es más difícil de superar. Prioridad baja. |
-| 3 | Problema mayor: ocurre frecuentemente o los usuarios no pueden resolverlo. Prioridad alta. |
-| 4 | Problema muy grave: error de gran impacto que impide el uso. Imperativo corregir antes del lanzamiento. |
-
-**TABLA RESUMEN:**
-
-| # | Problema | Escala de severidad | Heurística/Principio violada(o) |
-|---|---|---|---|
-| 1 | _(Descripción del problema)_ | _(1-4)_ | _(Heurística violada)_ |
-| 2 | _(...)_ | _(...)_ | _(...)_ |
-
-**DESCRIPCIÓN DE PROBLEMAS:**
-
-**PROBLEMA #1:** _(Título)_
-
-- **Severidad:** _(1-4)_
-- **Heurística violada:** _(...)_
-- **Problema:** _(Descripción detallada con captura)_
-- **Recomendación:** _(...)_
-
-_(Repetir para cada problema identificado.)_
-
 ## 7.4. Video About-the-Product
-
-_(Introducción y descripción del contenido del video. Tono consistente con el producto. Incluye al menos un testimonio positivo de un usuario que haya participado en las entrevistas de validación.)_
-
-![Video About-the-Product Screenshot](assets/images/chapter-07/about-product-screenshot.png)
-
-- **URL Microsoft Stream:** `https://web.microsoftstream.com/...`
-- **URL YouTube:** `https://youtube.com/...`
-- **Duración:** MM:SS
-
----
 
 # Conclusiones
 
