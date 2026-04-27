@@ -758,16 +758,11 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
 
 #### Segmento 1: Operadores de estacionamientos en centros comerciales
 
-_(Análisis con sustento estadístico — porcentajes — de las características objetivas y subjetivas más comunes encontradas. Cada característica debe tener relación clara con las entrevistas registradas.)_
-
-| Característica | % | Sustento (entrevistas) |
-|---|---|---|
-| _(Edad promedio entre 35-50 años)_ | _(80%)_ | _(E1, E2, E4)_ |
-| _(Usa Excel para registro manual)_ | _(60%)_ | _(E1, E3, E5)_ |
+Las entrevistas reflejan que el principal problema para los operadores es la falta de precisión y visibilidad en tiempo real sobre la disponibilidad de espacios, debido a fallas en sensores, errores en el conteo de vehículos y retrasos en la actualización de datos. Esto genera congestión, desorden en horas pico y molestias frecuentes en los usuarios, obligando al personal a depender del monitoreo manual mediante cámaras, radio y supervisión presencial. Además, se evidencia una gestión energética poco eficiente por el uso continuo de iluminación sin automatización en zonas vacías. Como punto fuerte, ambos entrevistados destacan la necesidad de una plataforma tecnológica más precisa que permita asignación automática de espacios, monitoreo en tiempo real, mejor control de seguridad y optimización operativa, aunque consideran importante evaluar el costo, la integración con sistemas actuales y la capacitación del personal.
 
 #### Segmento 2: Conductores frecuentes de centros comerciales
 
-_(Mismo formato de análisis para el segmento de conductores.)_
+Las entrevistas muestran que los conductores experimentan frustración principalmente por la dificultad para encontrar estacionamiento, la falta de información clara sobre espacios disponibles y la poca confianza en los sistemas actuales de señalización. El tiempo de búsqueda puede variar entre 5 y 30 minutos, especialmente en fines de semana y horas pico, generando estrés, pérdida de tiempo e incluso cambios de destino. También se identifican problemas relacionados con la seguridad del vehículo, como rayones, robos o dificultad para recordar la ubicación exacta del auto. Como punto fuerte, los entrevistados muestran alta disposición para usar una aplicación móvil que les permita consultar espacios disponibles en tiempo real, visualizar el costo acumulado, recibir alertas de seguridad y registrar la ubicación del vehículo, valorando especialmente la precisión y la tranquilidad durante su visita.
 
 ## 2.3. Needfinding
 
