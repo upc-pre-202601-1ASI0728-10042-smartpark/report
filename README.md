@@ -865,234 +865,579 @@ El Product Backlog prioriza los User Stories según el valor que aportan al nego
 
 # Capítulo IV: Strategic-Level Software Design
 
+En este capítulo se presenta el razonamiento que guio las decisiones arquitectónicas de la solución, partiendo de un enfoque dirigido por atributos y articulándolo, en un segundo momento, con la descomposición estratégica propia del Domain-Driven Design. El objetivo fue llegar a una arquitectura que no solo responda a los requisitos funcionales del proyecto, sino que además sea sostenible en el tiempo frente a cambios previsibles, en especial la incorporación futura de sensores físicos y nuevos centros comerciales.
+
 ## 4.1. Strategic-Level Attribute-Driven Design
+
+El proceso de Attribute-Driven Design (ADD) fue aplicado siguiendo la propuesta metodológica de Cervantes y Kazman (2016), quienes plantean una serie de iteraciones donde los drivers arquitectónicos se traducen en decisiones concretas mediante la selección razonada de tácticas y patrones. En nuestro caso, trabajamos en varias sesiones internas de equipo, contrastando cada decisión con los escenarios de atributos de calidad que ya habíamos priorizado durante el Quality Attribute Workshop preliminar y con el catálogo completo de epics, user stories y technical stories levantados en el Capítulo III.
 
 ### 4.1.1. Design Purpose
 
-_(Explicación del propósito del proceso de diseño, evidenciando relación con la problemática y orientación a satisfacer las necesidades de los segmentos objetivo y el negocio.)_
+El propósito de este proceso de diseño fue doble. Por un lado, queríamos traducir la problemática identificada, la ausencia de visibilidad integral sobre el estado operativo de los estacionamientos de centros comerciales, en una estructura arquitectónica que hiciera posible contextualizar espacialmente la información y soportar decisiones operativas coordinadas. Por otro lado, buscábamos dejar abierta la puerta a un despliegue progresivo, por lo que la solución debía funcionar inicialmente con sensores simulados, según lo previsto en TS-10, el simulador Node.js que sincroniza con Azure Digital Twins mediante JSON Patch, y, en fases posteriores, admitir sensores físicos sin cambios disruptivos en el núcleo del sistema.
 
-El propósito del diseño arquitectónico de la plataforma es habilitar una solución que combine visibilidad operativa unificada para el operador del centro comercial con experiencias móviles ágiles para el conductor, sustentada por un gemelo digital como single source of truth del estado del estacionamiento. Las decisiones arquitectónicas buscan satisfacer simultáneamente requisitos de baja latencia para alertas de seguridad, alta modificabilidad para incorporar nuevos tipos de sensores en el futuro, y costo operativo controlado consistente con un modelo SaaS dirigido a centros comerciales medianos.
+Se entiende por gemelo digital, en el sentido propuesto por Grieves y Vickers (2017), a una representación virtual sincronizada de un sistema físico que permite analizar, simular y anticipar su comportamiento. En el presente proyecto, el gemelo digital no es un accesorio de visualización, sino el centro arquitectónico sobre el que gravitan el resto de decisiones. Esto condiciona, por ejemplo, la elección de plataforma (Azure Digital Twins con su 3D Scenes Studio para el visor 3D del operador), los patrones de integración entre servicios y la propia descomposición del dominio.
+
+Además, el propósito del diseño contempla satisfacer dos segmentos objetivo con necesidades marcadamente distintas: el operador del centro comercial, que requiere un dashboard 3D con información contextual en tiempo casi real sobre ocupación, seguridad, flujo vehicular y eficiencia energética; y el conductor frecuente, cuya experiencia transcurre en una aplicación móvil construida en PowerApps, con restricciones de consumo de datos y tiempos de respuesta muy acotados. Esta dualidad fue, de hecho, uno de los primeros factores que nos llevó a considerar una descomposición por bounded contexts. A esto se suma un tercer rol activo en el ecosistema, el Visitor del Landing Page, que consume contenido estático informativo, así como el rol técnico Developer que opera la plataforma desde el lado de Apex Twin.
 
 ### 4.1.2. Attribute-Driven Design Inputs
 
+Los inputs del proceso se organizaron en tres categorías: primary functionality expresada como user stories de alto impacto arquitectónico, quality attribute scenarios y constraints tanto técnicos como de negocio. A continuación se detalla cada uno.
+
 #### 4.1.2.1. Primary Functionality
 
-_(Resumen de los requisitos funcionales seleccionados como Primary, por su impacto en la arquitectura.)_
+No todos los user stories tienen el mismo peso a la hora de configurar la arquitectura. Para la presente sección de Strategic-Level ADD seleccionamos un subconjunto que cumple al menos uno de los siguientes criterios: su ejecución involucra varios componentes, atraviesa distintos bounded contexts, introduce restricciones de rendimiento, seguridad o disponibilidad significativas, o condiciona la elección de plataformas tecnológicas. Por lo que consideramos que aquellos ubicados en esta sección contemplan los items con mayor impacto arquitectónico de nuestras historias de usuario.
 
-| Epic / User Story ID | Título | Descripción | Criterios de Aceptación | Relacionado con (Epic ID) |
-|---|---|---|---|---|
-| US-01 | View 3D Parking Occupancy Map | _(...)_ | _(...)_ | EP-01 |
-| US-02 | Receive Smoke Alert with Spatial Context | _(...)_ | _(...)_ | EP-02 |
-| US-05 | Receive Safety Alerts Near Vehicle | _(...)_ | _(...)_ | EP-03 |
-| TS-01 | Twin State Update Endpoint | _(...)_ | _(...)_ | EP-06 |
-| TS-03 | Push Notification Trigger | _(...)_ | _(...)_ | EP-06 |
+| Epic / US ID | Título                                                 | Descripción                                                                                                                                                                          | Criterios de Aceptación (resumen arquitectónico)                                                                                                                                                                                                                             | Relacionado con (Epic ID) |
+|--------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| EP-01        | Experiencia del Landing Page                           | Sitio web estático para Visitor con secciones diferenciadas por segmento (Operador y Conductor) y llamadas a la acción que dirigen a cada producto digital correspondiente.          | —                                                                                                                                                                                                                                                                            | —                         |
+| US-04        | Visualización de Planes de Suscripción                 | Como Visitor, ver los planes Basic (hasta 500 plazas), Professional (hasta 1,500 plazas) y Enterprise (más de 1,500 plazas) para comparar y decidir el ajuste a mi centro comercial. | Las tres tarjetas de plan deben mostrarse con precio mensual, funcionalidades y CTA; al seleccionar un plan se redirige al formulario de registro o contacto prellenado con el plan elegido. Define la dimensión de scalability esperada del sistema.                        | EP-01                     |
+| EP-02        | Registro y Autenticación de Usuarios                   | Sistema de registro y autenticación que permite a Operators y Drivers acceder de forma segura a sus respectivas aplicaciones, diferenciando roles y permisos.                        | —                                                                                                                                                                                                                                                                            | —                         |
+| US-11        | Registro de Cuenta de Operador                         | Como Operator, registrarme en la plataforma con mis datos corporativos para obtener acceso al dashboard de gestión.                                                                  | El registro debe validar email único, complejidad mínima de contraseña, y disparar verificación por correo. Define el flujo principal de onboarding de nuevos clientes Apex Twin.                                                                                            | EP-02                     |
+| US-13        | Registro de Conductor en App Móvil                     | Como Driver, registrarme desde la app PowerApps para acceder a las funcionalidades de consulta de disponibilidad y registro de ubicación.                                            | Debe validar email único, manejar el edge case de "sin conexión" con un mensaje claro, y crear la cuenta vinculada al rol Driver del modelo de identidad.                                                                                                                    | EP-02                     |
+| EP-03        | Monitoreo de Ocupación en Tiempo Real                  | Contenedor de historias para visualizar el estado de ocupación por nivel y zona, tanto para Operator como para Driver.                                                               | —                                                                                                                                                                                                                                                                            | —                         |
+| US-16        | Dashboard de Ocupación en Tiempo Real                  | Como Operator, visualizar el estado de ocupación del estacionamiento en tiempo real para tomar decisiones operativas informadas.                                                     | El dashboard debe actualizarse automáticamente cada 5 segundos; ante indisponibilidad de Azure Digital Twins, se muestra el último estado cacheado con su marca temporal y un banner de advertencia; al alcanzar el 100% de ocupación se activa un indicador visual "LLENO". | EP-03                     |
+| US-18        | Mapa de Disponibilidad para Conductores                | Como Driver, ver un mapa de disponibilidad por nivel y zona en la app móvil para dirigirme al área con más espacios libres.                                                          | La app debe cargar la disponibilidad ordenada por nivel; ante ausencia de conectividad debe mostrar un mensaje claro; debe contemplar el edge case de "todo el estacionamiento lleno" con la marca de tiempo del último estado conocido.                                     | EP-03                     |
+| EP-04        | Gestión de Seguridad e Incidentes                      | Contenedor de historias relacionadas con detección de humo, visualización espacial de alertas y gestión del ciclo de vida del incidente.                                             | —                                                                                                                                                                                                                                                                            | —                         |
+| US-19        | Recepción de Alerta de Humo con Visualización Espacial | Como Operator, recibir alertas de humo con su localización exacta en el modelo 3D del estacionamiento para identificar el foco del incidente sin necesidad de recorrido presencial.  | El visor 3D debe navegar automáticamente a la ubicación del detector activado; debe soportar múltiples alertas simultáneas (edge case con menos de 10 segundos de diferencia); debe correlacionar la zona afectada con su nivel de ocupación.                                | EP-04                     |
+| US-20        | Visualización de Rutas de Evacuación                   | Como Operator, visualizar las rutas de evacuación comprometidas cuando se activa una alerta de humo para coordinar la respuesta de seguridad de forma eficiente.                     | El modelo 3D debe resaltar las rutas comprometidas en rojo y las alternativas en verde; ante zona con única ruta comprometida, debe disparar advertencia crítica de "sin ruta alternativa".                                                                                  | EP-04                     |
+| US-21        | Confirmación y Resolución de Alerta de Humo            | Como Operator, registrar la toma de conocimiento de una alerta y documentar acciones tomadas para mantener un registro auditable.                                                    | Cada cambio de estado de la alerta (Activa → Confirmada → Resuelta) debe persistirse con marca temporal y operador responsable, garantizando trazabilidad auditable. Resolver sin confirmar primero retorna error.                                                           | EP-04                     |
+| US-22        | Historial de Incidentes                                | Como Operator, acceder al historial de todos los incidentes registrados para analizar patrones y generar reportes.                                                                   | Debe permitir filtrado por rango de fechas, tipo y estado; el historial alimenta análisis offline y reportes corporativos, lo que justifica una persistencia analítica separada de ADT.                                                                                      | EP-04                     |
+| EP-05        | Monitoreo de Flujo Vehicular                           | Contenedor de historias relativas a la detección de congestión en accesos y rampas.                                                                                                  | —                                                                                                                                                                                                                                                                            | —                         |
+| US-24        | Alerta de Congestión Vehicular                         | Como Operator, recibir alertas cuando se detecte congestión vehicular severa en una rampa o acceso para activar medidas de redistribución del flujo.                                 | Se dispara cuando el flujo excede el 80% del umbral de capacidad por más de 3 minutos consecutivos; debe auto-resolverse cuando el flujo baja del umbral de forma natural.                                                                                                   | EP-05                     |
+| EP-06        | Gestión de Eficiencia Energética                       | Contenedor de historias para correlacionar ocupación y luminosidad por zona, identificando oportunidades de atenuación.                                                              | —                                                                                                                                                                                                                                                                            | —                         |
+| US-26        | Visualización de Recomendaciones de Atenuación         | Como Operator, ver recomendaciones de atenuación de iluminación contextualizadas en el modelo 3D para entender visualmente qué zonas pueden reducir consumo.                         | Las zonas recomendadas se sombrean en azul en el visor 3D; al hacer clic se muestra ocupación, luminosidad actual, ahorro estimado y marca temporal. Refuerza el rol del 3D Scenes Studio como capa visual transversal.                                                      | EP-06                     |
+| EP-07        | Gestión de Sesión de Estacionamiento                   | Contenedor de historias para registrar la ubicación del vehículo, calcular costo acumulado y gestionar el historial de sesiones.                                                     | —                                                                                                                                                                                                                                                                            | —                         |
+| US-27        | Registro de Ubicación del Vehículo                     | Como Driver, registrar con un solo toque la ubicación exacta donde estacioné mi vehículo para encontrarlo fácilmente al regresar.                                                    | Debe validar nivel obligatorio; debe detectar y resolver el edge case de "sesión activa preexistente" preguntando al usuario antes de sobrescribir.                                                                                                                          | EP-07                     |
+| US-29        | Seguimiento de Costo Acumulado                         | Como Driver, consultar el costo acumulado de mi estancia en tiempo real para anticipar el monto a pagar al salir.                                                                    | La tarifa debe recalcularse cada minuto y debe contemplar transiciones entre periodos de tarifa (estándar/pico) durante una misma sesión.                                                                                                                                    | EP-07                     |
+| US-30        | Finalización de Sesión de Estacionamiento              | Como Driver, finalizar mi sesión manualmente para registrar el cierre y consultar el costo total.                                                                                    | Debe pedir confirmación antes de cerrar; al confirmar se persiste hora de salida, duración y costo total. Es el evento natural de cierre del agregado Sesión.                                                                                                                | EP-07                     |
+| EP-08        | Notificaciones y Alertas de Seguridad                  | Contenedor de historias de notificación push hacia conductores con vehículos en zonas afectadas, vía Firebase Cloud Messaging.                                                       | —                                                                                                                                                                                                                                                                            | —                         |
+| US-32        | Notificación Push por Alerta de Humo al Conductor      | Como Driver, recibir una notificación push en mi celular cuando se detecte humo en mi zona de estacionamiento para tomar las precauciones necesarias.                                | La notificación debe entregarse vía Firebase Cloud Messaging; debe filtrarse correctamente por zona afectada (no notificar a conductores fuera de la zona); debe contemplar el edge case de notificaciones desactivadas mostrando un banner in-app.                          | EP-08                     |
+| EP-09        | Visualización del Gemelo Digital 3D                    | Contenedor de historias relativas al visor 3D como panel central del operador, con capas de datos intercambiables.                                                                   | —                                                                                                                                                                                                                                                                            | —                         |
+| US-35        | Visor del Gemelo Digital 3D                            | Como Operator, visualizar el gemelo digital 3D del estacionamiento como dashboard central con capas de datos intercambiables (ocupación, seguridad, energía).                        | El visor debe permitir interacciones de zoom, desplazamiento y rotación; ante indisponibilidad del 3D Scenes Studio los paneles de datos deben permanecer funcionales (degradación grácil).                                                                                  | EP-09                     |
+| EP-10        | Desarrollo de API RESTful                              | Contenedor de las technical stories del backend de SmartPark expuesto a las aplicaciones cliente, documentado con OpenAPI.                                                           | —                                                                                                                                                                                                                                                                            | —                         |
+| TS-01        | Endpoint de Consulta de Ocupación                      | Como Developer, exponer endpoints REST para consultar el estado de ocupación por nivel y zona, alimentando ambas aplicaciones cliente.                                               | Debe retornar 200 OK con el inventario completo de niveles; 404 ante ID inválido; 503 cuando ADT no esté accesible, manteniendo contratos OpenAPI versionados.                                                                                                               | EP-10                     |
+| TS-03        | Endpoint de Evento de Alerta de Humo                   | Como Developer, registrar eventos de humo provenientes del simulador, propagar a operadores vía SignalR y disparar push a conductores afectados.                                     | El endpoint debe retornar 201 Created al recibir el evento; debe suprimir alertas duplicadas dentro de una ventana de 60 segundos; debe rechazar eventos con detector inexistente con 404.                                                                                   | EP-10                     |
+| TS-05        | Endpoint de Despacho de Notificaciones                 | Como Developer, registrar device tokens FCM y despachar notificaciones a conductores en zonas afectadas con reintentos automáticos.                                                  | Debe almacenar el último token registrado por conductor; ante fallos de FCM debe reintentar hasta 3 veces con backoff exponencial y registrar las fallas.                                                                                                                    | EP-10                     |
+| TS-09        | Endpoints de Autenticación de Usuarios                 | Como Developer, exponer endpoints JWT para registro, login y refresh de tokens, diferenciando roles (Operator/Driver).                                                               | Debe retornar accessToken y refreshToken al login exitoso; debe contemplar refresh token expirado retornando 401 con instrucciones claras; debe bloquear temporalmente la cuenta tras 5 intentos fallidos.                                                                   | EP-10                     |
+| TS-10        | Sincronización del Simulador IoT con el Twin           | Como Developer, generar datos de sensores simulados desde un servicio Node.js y sincronizarlos con Azure Digital Twins mediante JSON Patch.                                          | Frecuencia configurable (por defecto 5 segundos); generación probabilística de eventos de humo (0.1% por ciclo por detector); reintentos con backoff ante indisponibilidad de ADT.                                                                                           | EP-10                     |
+
+La selección anterior contempla los items con mayor impacto arquitectónico del catálogo de 37 historias presentado en la Sección 3.2; deja fuera, deliberadamente, las historias del Landing Page (US-01 a US-10 dentro de EP-01) cuyo impacto arquitectónico es bajo, así como historias de soporte como el cierre de sesión (US-15) o el historial de sesiones del Driver (US-31), que se resuelven mediante mecanismos ya cubiertos por las historias incluidas. Nos resultó útil revisar esta lista al final de cada iteración del QAW, para verificar que ninguna decisión rompiera involuntariamente un criterio funcional definido en el catálogo canónico.
 
 #### 4.1.2.2. Quality Attribute Scenarios
 
-| Atributo | Fuente | Estímulo | Artefacto | Entorno | Respuesta | Medida |
-|---|---|---|---|---|---|---|
-| Performance (Latency) | Smoke detector sensor | Smoke detection event | Notifications service & Operator dashboard | Normal operation | System processes telemetry, updates twin and propagates alert | Alert visible in dashboard within 2 seconds; push notification delivered within 5 seconds |
-| Availability | Mall operator | Dashboard query during business hours | Web Application + Web Services | Production environment | Dashboard returns occupancy data | 99.5% monthly uptime during operating hours (8am-11pm) |
-| Scalability | IoT Simulator | 500 sensors emitting at 1 update/second | Web Services + Azure Digital Twins | Peak hours (mall full) | System processes all updates without data loss | Sustained throughput ≥ 500 msg/s with end-to-end latency < 500ms |
-| Modifiability | Product Owner | Request to add a new sensor type (e.g., air quality) | Twin Models (DTDL) + Simulator + Web Services | Development environment | Team integrates new sensor type | Integration completed within ≤ 3 person-days |
-| Security | External attacker | Unauthorized access attempt to Web Services | Web Services API | Production environment | System rejects request and logs the attempt | 100% of unauthenticated requests return HTTP 401; audit log generated |
-| Usability | Driver (first-time user) | Driver opens mobile app for the first time | PowerApps mobile application | Public deployment | User registers and views available spaces | First successful availability view within ≤ 60 seconds from app open |
-| Interoperability | IoT Simulator | Telemetry message in JSON Patch format | Azure Digital Twins via SDK | Continuous operation | Twin state updated successfully | 100% of valid JSON Patch operations applied with HTTP 204 |
+Los escenarios de atributos de calidad se construyeron siguiendo la estructura canónica de seis partes descrita por Bass, Clements y Kazman (2021): fuente, estímulo, artefacto, entorno, respuesta y medida. Durante la discusión interna, observamos que algunos atributos tenían un peso claramente dominante, performance, availability y usability, mientras que otros actuaban más bien como criterios secundarios de validación.
+
+| Atributo         | Fuente                                                                          | Estímulo                                                           | Artefacto                                                         | Entorno                                                                                           | Respuesta                                                                                                                                                           | Medida                                                                                                                                                      |
+|------------------|---------------------------------------------------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Performance      | Simulador de sensores IoT (TS-10)                                               | Llega un evento de cambio de ocupación                             | Servicio de ingesta + Azure Digital Twins                         | Operación normal con carga proyectada (hasta 1,200 eventos/minuto)                                | El sistema valida, persiste y propaga el evento al gemelo digital                                                                                                   | El estado del twin se actualiza en menos de 2 segundos en el percentil 95; el dashboard refleja el cambio dentro del ciclo de refresh de 5 segundos (US-16) |
+| Availability     | Operator del estacionamiento                                                    | Intenta acceder al dashboard web de SmartPark                      | Web Application Angular + Web Service ASP.NET Core                | Operación en horario comercial (06:00–23:00)                                                      | El sistema responde con la vista del gemelo digital disponible; ante caída de ADT, modo degradado con último estado cacheado y banner de advertencia (US-16, US-35) | Disponibilidad mensual ≥ 99.5% durante horario de operación                                                                                                 |
+| Usability        | Driver en el ingreso al centro comercial                                        | Solicita conocer la disponibilidad por zona desde la app PowerApps | Aplicación móvil PowerApps                                        | Driver en movimiento, red móvil variable, dispositivo Android                                     | La aplicación muestra la disponibilidad por nivel ordenada de mayor a menor (US-18)                                                                                 | El Driver obtiene la información útil en menos de 5 segundos desde abrir la app, en el percentil 90                                                         |
+| Security         | Actor externo no autorizado                                                     | Envía una petición a endpoints de operaciones sin token JWT válido | Middleware de autorización del Web Service + servicios de backend | Operación normal                                                                                  | El sistema rechaza la petición con 401/403 y registra el intento (TS-09)                                                                                            | 100% de peticiones sin token válido son respondidas con 401/403; bloqueo temporal tras 5 intentos fallidos en login                                         |
+| Modifiability    | Equipo de desarrollo de Apex Twin                                               | Se requiere incorporar un nuevo tipo de sensor (por ejemplo, CO₂)  | Servicio de telemetría + modelo DTDL                              | Ciclo de release regular                                                                          | Se agregan los artefactos necesarios para soportar el nuevo tipo sin reescribir contextos vecinos                                                                   | El cambio se completa en menos de 5 días-persona y no requiere modificar otros bounded contexts                                                             |
+| Interoperability | Aplicación móvil de terceros (futura integración con apps del centro comercial) | Solicita información de disponibilidad vía API pública             | API pública de disponibilidad (TS-01)                             | Internet abierto                                                                                  | El sistema expone los datos según contrato OpenAPI publicado                                                                                                        | El 100% de las peticiones válidas recibe respuesta conforme al contrato versión 1.0                                                                         |
+| Scalability      | Operador de la plataforma de Apex Twin                                          | Se incorpora un nuevo centro comercial al plan Enterprise          | Modelo del gemelo digital + base de datos + API                   | Crecimiento gradual de clientes según los planes Basic/Professional/Enterprise descritos en US-04 | El sistema acepta el nuevo estacionamiento sin degradación perceptible                                                                                              | El tiempo de respuesta promedio del dashboard se mantiene por debajo de los 2 segundos tras la incorporación                                                |
+| Reliability      | Servicio de Firebase Cloud Messaging                                            | Falla transitoria en la entrega de una notificación push (TS-05)   | Servicio de notificaciones + cola de reintentos                   | Operación normal con eventuales fallos parciales de FCM                                           | El servicio reintenta el envío hasta 3 veces con backoff exponencial y registra el fallo                                                                            | 100% de las notificaciones fallidas quedan registradas; tasa de entrega exitosa final ≥ 99%                                                                 |
 
 #### 4.1.2.3. Constraints
 
-_(Restricciones impuestas por el cliente o el negocio, no negociables.)_
+Las constraints son, por definición, innegociables. En nuestro caso provienen de tres fuentes distintas: lineamientos del curso, naturaleza del dominio y acuerdos tomados dentro del propio equipo respecto del alcance que nos resulta manejable durante el ciclo académico.
 
-| Technical Story ID | Título | Descripción | Criterios de Aceptación | Relacionado con (Epic ID) |
-|---|---|---|---|---|
-| CON-01 | Use of Azure Digital Twins | El gemelo digital debe construirse sobre Azure Digital Twins por requerimiento del modelo de negocio basado en transformación digital. | El sistema utiliza Azure Digital Twins como repositorio del grafo del gemelo digital. | — |
-| CON-02 | Low-code Mobile App | La aplicación móvil del conductor debe desarrollarse con tecnología low-code. | La app móvil se construye con Microsoft PowerApps. | — |
-| CON-03 | Web Services Framework | Los Web Services deben implementarse en ASP.NET Core con C#. | Todos los servicios REST se construyen con ASP.NET Core 8. | — |
-| CON-04 | Web Application Framework | La aplicación web del operador debe implementarse en Angular. | El dashboard del operador se construye con Angular y Angular Material o PrimeNG. | — |
-| CON-05 | Default Language English | El idioma por defecto en todos los productos digitales debe ser inglés (en_US), con soporte a español latinoamericano (es_419). | Todas las interfaces, mensajes y documentación API están en inglés por defecto. | — |
-| CON-06 | Cost Containment | El presupuesto operativo debe ajustarse a Azure for Students ($100 USD). | Se evita el uso de Event Grid e IoT Hub; el simulador alimenta ADT directamente vía SDK. | — |
-| CON-07 | RESTful API Style | Los Web Services deben seguir el estilo arquitectónico RESTful. | Endpoints diseñados con verbos HTTP semánticos y recursos como sustantivos. | — |
-| CON-08 | Documentation with OpenAPI | La documentación de APIs debe seguir OpenAPI Specification vía Swagger. | Cada endpoint cuenta con su especificación Swagger publicada. | — |
-| CON-09 | Source Control with GitFlow | El control de versiones aplica GitFlow y Conventional Commits. | Todos los repos siguen el branching model definido. | — |
+| Technical Story ID | Título                                               | Descripción                                                                                                                                                             | Criterios de Aceptación                                                                                                                                                                                                  | Relacionado con (Epic ID) |
+|--------------------|------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| CT-01              | Uso obligatorio de Azure Digital Twins               | La plataforma de gemelo digital debe implementarse sobre Azure Digital Twins, con modelado en DTDL 2.0 y visualización vía 3D Scenes Studio.                            | Dado el modelo del estacionamiento, cuando se despliega, entonces reside en una instancia de Azure Digital Twins con todas las entidades definidas en DTDL 2.0 y la escena cargada en 3D Scenes Studio.                  | EP-09                     |
+| CT-02              | Aplicación móvil en tecnología low-code (PowerApps)  | La aplicación móvil para el Driver debe desarrollarse en Microsoft PowerApps, dada la orientación low-code del proyecto.                                                | Dado el código fuente, cuando se revisa el repositorio, entonces el proyecto móvil está construido íntegramente en PowerApps y consume los Web Services RESTful expuestos por el backend.                                | EP-02, EP-07, EP-08       |
+| CT-03              | Simulación de sensores IoT vía servicio Node.js      | No se desplegará hardware IoT físico; los sensores se simulan mediante un servicio Node.js que genera eventos y los sincroniza con ADT vía JSON Patch (TS-10).          | Dado el servicio de simulación, cuando se ejecuta, entonces produce eventos realistas de ocupación, humo, flujo vehicular y luminosidad con patrones horarios coherentes con un centro comercial.                        | EP-10                     |
+| CT-04              | Notificaciones push vía Firebase Cloud Messaging     | Las notificaciones push hacia conductores deben implementarse exclusivamente con Firebase Cloud Messaging.                                                              | Dado un evento de alerta confirmado, cuando corresponde notificar al Driver, entonces la notificación se entrega vía FCM con reintentos automáticos ante fallos transitorios.                                            | EP-08                     |
+| CT-05              | Comunicación en tiempo real al dashboard vía SignalR | Las actualizaciones en tiempo real desde el backend al dashboard del Operator deben implementarse con SignalR.                                                          | Dado un evento que afecte al dashboard (alerta, cambio de ocupación, congestión), cuando ocurre, entonces se publica vía SignalR a los clientes conectados sin requerir polling explícito.                               | EP-03, EP-04              |
+| CT-06              | Internacionalización i18n                            | La experiencia del Landing Page y de la Web Application debe estar disponible en inglés (en_US) y español latinoamericano (es_419), con inglés como idioma por defecto. | Dado el navegador con preferencia en_US, cuando el Visitor ingresa, entonces la interfaz se presenta en inglés. Dado la preferencia es_419, cuando ingresa, entonces la interfaz se presenta en español latinoamericano. | EP-01                     |
+| CT-07              | Accesibilidad a11y con atributos ARIA                | Las interfaces web deben incluir atributos ARIA apropiados y cumplir con criterios WCAG 2.1 nivel AA en los componentes principales.                                    | Dado un auditor de accesibilidad automático, cuando analiza las páginas principales, entonces no reporta errores críticos WCAG 2.1 AA.                                                                                   | EP-01, EP-09              |
+| CT-08              | Control de versiones con GitFlow                     | El código fuente debe gestionarse en GitHub bajo GitFlow y utilizando conventional commits.                                                                             | Dado el repositorio, cuando se revisa su historial, entonces se evidencian ramas main, develop, feature/*, release/* y commits con prefijos convencionales (feat, fix, test, etc.).                                      | —                         |
+| CT-09              | Despliegue sobre infraestructura cloud               | Los productos digitales deben desplegarse sobre un proveedor cloud (Azure, AWS o Google Cloud) con URLs públicas.                                                       | Dado la finalización del Sprint 1, cuando se revisa la evidencia de despliegue, entonces existe una URL pública para cada producto digital de SmartPark.                                                                 | —                         |
 
 ### 4.1.3. Architectural Drivers Backlog
 
-_(Introducción al proceso seguido en el Quality Attribute Workshop iterativo.)_
+El Architectural Drivers Backlog consolida los inputs del proceso y los ordena según dos criterios combinados: importancia para los stakeholders y complejidad técnica que introduce el driver en la arquitectura.
 
-| Driver ID | Título de Driver | Descripción | Importancia para Stakeholders | Impacto en Architecture Technical Complexity |
-|---|---|---|---|---|
-| QA-01 | Low Latency for Safety Alerts | Las alertas de humo deben propagarse del sensor al operador y conductor en menos de 5 segundos. | High | High |
-| QA-02 | Sensor Type Modifiability | Incorporar nuevos tipos de sensores debe ser posible en menos de 3 días-desarrollador. | High | High |
-| QA-03 | Cost Containment | Costo operativo dentro del crédito de Azure for Students. | High | Medium |
-| FR-01 | 3D Spatial Visualization | Visualización 3D del estacionamiento con estado en tiempo real. | High | High |
-| FR-02 | Real-time Driver Notifications | Push notifications ante incidentes de seguridad. | High | Medium |
-| QA-04 | Throughput at Peak | Sostener 500 msg/s en horas pico. | Medium | High |
-| QA-05 | Availability | 99.5% uptime en horario operativo. | High | Medium |
-| CON-01 | Azure Digital Twins as Twin Store | Restricción tecnológica del gemelo digital. | High | Medium |
-| CON-02 | PowerApps for Mobile | Restricción de tecnología low-code. | High | Medium |
-| CON-03 | ASP.NET Core for Backend | Restricción de framework backend. | High | Low |
-| CON-04 | Angular for Web Frontend | Restricción de framework web. | High | Low |
-| CON-05 | English as Default Language | Restricción de internacionalización. | Medium | Low |
+| Driver ID | Título del Driver                                                | Descripción                                                                                                                                                  | Importancia para Stakeholders | Impacto en Technical Complexity |
+|-----------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------|---------------------------------|
+| DR-01     | Actualización casi en tiempo real del gemelo digital             | El gemelo debe reflejar cambios de estado operativo con latencia inferior a 2 segundos bajo la carga proyectada (DR derivado de TS-10 + US-16).              | High                          | High                            |
+| DR-02     | Disponibilidad del dashboard de operaciones en horario comercial | El Operator debe contar con el dashboard accesible al menos el 99.5% del horario de apertura del centro comercial.                                           | High                          | High                            |
+| DR-03     | Contextualización espacial de alertas de seguridad               | Toda alerta crítica (humo, evacuación) debe estar georreferenciada sobre el modelo 3D y mostrar rutas de evacuación comprometidas (US-19, US-20).            | High                          | High                            |
+| DR-04     | Uso de Azure Digital Twins como plataforma obligatoria           | Constraint CT-01 que condiciona el modelado, la sincronización y la persistencia del gemelo.                                                                 | High                          | High                            |
+| DR-05     | Experiencia móvil fluida para el Driver en PowerApps             | El Driver debe acceder a la información relevante en menos de 5 segundos, bajo condiciones de red variable, dentro de las limitaciones de PowerApps (CT-02). | High                          | Medium                          |
+| DR-06     | Separación clara entre experiencia de Operator y Driver          | Los dos segmentos requieren vistas, flujos, reglas y controles de acceso independientes.                                                                     | High                          | Medium                          |
+| DR-07     | Modelado del dominio con DTDL 2.0                                | La definición del gemelo digital debe respetar la sintaxis y semántica de DTDL para garantizar interoperabilidad con ADT.                                    | Medium                        | High                            |
+| DR-08     | Push notifications confiables vía Firebase Cloud Messaging       | Las notificaciones críticas de seguridad (US-32) deben llegar al Driver con reintentos automáticos y filtrado por zona afectada.                             | High                          | Medium                          |
+| DR-09     | Seguridad por roles diferenciados con JWT                        | Operators y Drivers deben autenticarse y autorizarse mediante esquemas claramente separados, con refresh tokens (TS-09).                                     | High                          | Medium                          |
+| DR-10     | Capacidad de incorporar nuevos tipos de sensores                 | El sistema debe poder extenderse con sensores adicionales sin reescribir contextos.                                                                          | Medium                        | Medium                          |
+| DR-11     | Comunicación en tiempo real al dashboard vía SignalR             | Las alertas y cambios de estado operativos (CT-05) deben llegar al dashboard sin requerir polling.                                                           | High                          | Medium                          |
+| DR-12     | Cálculo de costo acumulado por sesión                            | El cálculo del costo (US-29) debe contemplar transiciones entre periodos tarifarios dentro de una misma sesión.                                              | Medium                        | Medium                          |
+| DR-13     | Internacionalización en en_US y es_419                           | Constraint CT-06 con impacto sobre la capa de presentación.                                                                                                  | Medium                        | Low                             |
+| DR-14     | Accesibilidad WCAG 2.1 AA en experiencias web                    | Constraint CT-07 con impacto sobre diseño y desarrollo de UI.                                                                                                | Medium                        | Low                             |
+| DR-15     | Despliegue continuo sobre plataforma cloud                       | Constraint CT-09 que obliga a definir pipelines y configuración reproducible.                                                                                | Medium                        | Medium                          |
 
 ### 4.1.4. Architectural Design Decisions
 
-_(Explicación del proceso siguiendo los stages del Quality Attribute Workshop. Para cada iteración: drivers considerados, tácticas y patrones evaluados, criterios de decisión.)_
+Las decisiones arquitectónicas se tomaron a lo largo de cinco iteraciones, cada una centrada en un subconjunto de drivers del backlog. Después de evaluar entre dos y tres patrones candidatos por iteración, documentamos pros, contras y razones de adopción o descarte. El resumen se ofrece en las tablas a continuación, precedido por una breve narrativa de cada iteración.
 
-#### Iteración 1: Decomposition Strategy
-**Drivers considerados:** QA-02 (Modifiability), QA-04 (Throughput), CON-01
+**Iteración 1: Arquitectura general del backend.**
+El problema que atacamos primero fue la descomposición del backend, dado que el sistema atenderá a dos audiencias muy distintas y debe incorporar capacidades que evolucionarán a ritmos diferentes. Comparamos una arquitectura monolítica en capas contra un monolito modular organizado por bounded contexts y contra microservicios.
 
-| Driver ID | Título | Patrón 1: Modular Monolith | Patrón 2: Microservices | Patrón 3: Serverless Functions |
-|---|---|---|---|---|
-| QA-02 | Sensor Type Modifiability | **Pro:** Cambios localizados en módulo. **Con:** Recompilación total. | **Pro:** Despliegue independiente. **Con:** Sobrecarga de coordinación. | **Pro:** Funciones específicas por sensor. **Con:** Cold starts, fragmentación. |
-| QA-04 | Throughput | **Pro:** Sin overhead de red entre módulos. **Con:** Escalado vertical. | **Pro:** Escalado horizontal selectivo. **Con:** Latencia de red. | **Pro:** Auto-scaling. **Con:** Costo por invocación. |
-| CON-03 | ASP.NET Core | **Pro:** Encaja naturalmente. | **Pro:** Encaja, pero overhead. | **Pro:** Azure Functions C#. **Con:** Cambio de paradigma. |
+| Driver ID | Título del Driver                            | Pattern 1: Layered Monolith                                                                                       | Pattern 2: Modular Monolith                                                                                                                                                                                                                                             | Pattern 3: Microservicios por Bounded Context                                                                                                                                                                                                       |
+|-----------|----------------------------------------------|-------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| —         | Evaluación general (Pro / Con)               | Pro: Sencillez de despliegue y depuración.<br>Con: Acoplamiento a mediano plazo, difícil evolución independiente. | Pro: Aísla dominios internamente con interfaces bien definidas; despliegue simple sobre un único proceso; complejidad operativa acorde con el alcance académico del proyecto.<br>Con: No permite escalado independiente por módulo ni stacks de lenguaje diferenciados. | Pro: Encaja con la descomposición DDD, permite escalado y despliegue independientes.<br>Con: Mayor complejidad operativa, requiere API Gateway, message broker y orquestación de múltiples servicios, lo que excede el alcance del ciclo académico. |
+| DR-01     | Actualización casi en tiempo real del gemelo | Riesgo de que operaciones del Driver impacten el procesamiento del gemelo                                         | Menor riesgo: cada módulo tiene su propio pipeline de procesamiento con fronteras explícitas                                                                                                                                                                            | Aislamiento total; el procesamiento del gemelo puede escalar por sí solo                                                                                                                                                                            |
+| DR-02     | Disponibilidad del dashboard de operaciones  | Un fallo afecta a toda la aplicación                                                                              | El monolito puede implementar circuit breakers y caching por módulo; degradación grácil posible                                                                                                                                                                         | Los contextos fallan de forma aislada, mayor resiliencia inherente                                                                                                                                                                                  |
+| DR-06     | Separación Operator / Driver                 | Posible, aunque diluida                                                                                           | Natural a nivel de módulo con control de acceso en middleware                                                                                                                                                                                                           | Natural, refuerza el diseño                                                                                                                                                                                                                         |
+| DR-10     | Incorporación de nuevos tipos de sensores    | Alto riesgo de regresiones                                                                                        | Impacto acotado al módulo de telemetría; contratos internos estables                                                                                                                                                                                                    | Impacto aislado al servicio de telemetría                                                                                                                                                                                                           |
 
-**Decisión:** Modular Monolith en ASP.NET Core con módulos por Bounded Context. Justificación: alcance académico, restricción de costo (CON-06), simplicidad de despliegue, modularidad interna suficiente para satisfacer modificabilidad.
+**Decisión adoptada:** Modular Monolith organizado por Bounded Context. El backend se implementa como un único proceso ASP.NET Core 8 donde cada bounded context se encapsula en un módulo con interfaces internas bien definidas, eventos de dominio publicados in-process y acceso a datos aislado. Esta decisión es coherente con los constraints del proyecto (un único Web Service en Azure App Service B1, CT-09) y permite evolucionar hacia microservicios en fases posteriores extrayendo módulos de forma incremental.
 
-#### Iteración 2: Real-time Data Propagation
-**Drivers considerados:** QA-01 (Latency), QA-04 (Throughput)
+**Iteración 2: Estrategia de integración y propagación de eventos.**
+Definida la descomposición, el siguiente punto fue cómo debían comunicarse los módulos internamente y cómo propagar actualizaciones al dashboard del Operator. Se evaluaron tres alternativas: llamadas directas síncronas entre módulos, un bus de eventos in-process publish/subscribe, y un modelo híbrido compuesto por invocaciones síncronas para comandos y queries + eventos de dominio in-process para cambios de estado + SignalR para push hacia el dashboard.
 
-| Driver ID | Título | Patrón 1: Polling | Patrón 2: WebSockets/SignalR | Patrón 3: Event-driven via FCM |
-|---|---|---|---|---|
-| QA-01 | Latency for Alerts | **Con:** Latencia variable según intervalo. | **Pro:** Push inmediato. **Con:** Mantener conexiones. | **Pro:** Push nativo. **Con:** Dependencia de servicio externo. |
+| Driver ID | Título del Driver                        | Pattern 1: Invocaciones síncronas directas                                                                                      | Pattern 2: Bus de eventos in-process (Pub/Sub)                                                                                                                                                        | Pattern 3: Híbrido (Síncrono + Eventos in-process + SignalR)                                                                                                                                                                                                                     |
+|-----------|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| —         | Evaluación general (Pro / Con)           | Pro: Fácil de implementar y depurar.<br>Con: Acoplamiento entre módulos; la cadena de llamadas crece con cada nuevo consumidor. | Pro: Máxima independencia entre módulos productores y consumidores; el productor no conoce a sus suscriptores.<br>Con: Trazabilidad más compleja; requiere disciplina fuerte en el diseño de eventos. | Pro: Usa invocaciones síncronas donde tiene sentido (queries, comandos del Driver), eventos in-process para cambios de dominio y SignalR para notificación en tiempo real al cliente.<br>Con: Requiere tres mecanismos de comunicación, aunque todos in-process excepto SignalR. |
+| DR-01     | Latencia <2s en actualización del gemelo | Cumple si la cadena es corta; se degrada con varios módulos encadenados                                                         | Cumple; el mediator despacha eventos de forma inmediata                                                                                                                                               | Cumple; permite optimizar caminos críticos                                                                                                                                                                                                                                       |
+| DR-10     | Extensibilidad a nuevos sensores         | Obliga a modificar módulos productores al agregar consumidores                                                                  | Consumidor adicional como nuevo suscriptor, cero impacto en el productor                                                                                                                              | Igual ventaja, con menor carga cognitiva al separar queries de eventos                                                                                                                                                                                                           |
+| DR-11     | Push al dashboard sin polling            | No lo soporta nativamente                                                                                                       | Indirecto vía un suscriptor que escribe en SignalR                                                                                                                                                    | SignalR resuelve directamente este driver                                                                                                                                                                                                                                        |
 
-**Decisión:** SignalR para dashboard del operador (web) + FCM para push a PowerApps móvil. Justificación: cada canal usa la tecnología más adecuada por tipo de cliente.
+**Decisión adoptada:** Modelo híbrido. Las queries del dashboard al backend y los comandos del Driver al backend se resuelven por invocaciones síncronas REST; los cambios de estado del gemelo digital y las alertas se propagan mediante eventos de dominio publicados in-process a través de MediatR; las actualizaciones que deben llegar al dashboard del Operator viajan por SignalR desde el handler del evento correspondiente.
 
-#### Iteración 3: Twin Synchronization
-_(Continuar con más iteraciones según necesidades del proyecto.)_
+**Iteración 3: Modelado y persistencia del gemelo digital.**
+La decisión se centró en cómo estructurar DTDL y qué complementar con bases de datos adicionales. Se evaluaron dos alternativas: modelo DTDL como única fuente de verdad, o modelo DTDL complementado con una base relacional para historia operativa y sesiones de estacionamiento.
+
+| Driver ID | Título del Driver                      | Pattern 1: DTDL como única fuente                                                                                                                                                | Pattern 2: DTDL + Base Relacional                                                                                                                                                        |
+|-----------|----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| —         | Evaluación general (Pro / Con)         | Pro: Simplicidad, un solo lugar de consulta.<br>Con: Consultas analíticas costosas; ADT no está diseñado para almacenar historia transaccional profunda ni sesiones de usuarios. | Pro: Permite consultas analíticas, historia de sesiones e historial de incidentes (US-22, US-31), reportes.<br>Con: Introduce un desafío de consistencia entre ADT y la base relacional. |
+| DR-04     | Uso obligatorio de Azure Digital Twins | Satisface el constraint                                                                                                                                                          | Satisface el constraint                                                                                                                                                                  |
+| DR-01     | Latencia <2s                           | Puede verse afectada en consultas pesadas sobre ADT                                                                                                                              | No se afecta porque las consultas live usan ADT directamente                                                                                                                             |
+| DR-10     | Extensibilidad                         | Media                                                                                                                                                                            | Alta                                                                                                                                                                                     |
+| DR-12     | Cálculo de costo acumulado por sesión  | Requiere modelar sesiones dentro del twin, lo que constituye un anti-patrón                                                                                                      | Las sesiones se persisten en PostgreSQL con su lógica tarifaria                                                                                                                          |
+
+**Decisión adoptada:** DTDL + PostgreSQL. El twin mantiene el estado en vivo del estacionamiento (ocupación actual, estado de detectores, luminosidad); PostgreSQL almacena sesiones de estacionamiento de los conductores, historial de incidentes y configuraciones tarifarias. El almacenamiento de telemetría histórica detallada queda fuera del alcance actual y podría incorporarse en una fase posterior mediante un servicio de series de tiempo dedicado.
+
+**Iteración 4: Autenticación y autorización por roles.**
+El driver DR-09 es especialmente sensible. El equipo se inclinó, tras comparar soluciones, por un esquema basado en JSON Web Tokens gestionado por el módulo de identidad del Web Service, siguiendo la línea de lo propuesto por Richardson (2018) y respetando la especificación detallada de TS-09 (registro, login, refresh, expiración).
+
+| Driver ID | Título del Driver                 | Pattern 1: Basic Auth por módulo                                                                                  | Pattern 2: JWT centralizado en módulo Identity                                                                                                                                                        | Pattern 3: OAuth 2.0 con proveedor externo                                                                                                                |
+|-----------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| —         | Evaluación general (Pro / Con)    | Pro: Mínima infraestructura.<br>Con: No escala, no separa roles claramente, credenciales viajan en cada petición. | Pro: Tokens portables, roles claros, refresh tokens, lógica centralizada en el módulo IAM del monolito.<br>Con: Requiere implementar la emisión y validación de tokens dentro del propio Web Service. | Pro: Estándar de industria, delega al proveedor.<br>Con: Dependencia externa adicional; fricción para el segmento Driver en PowerApps con el flujo OAuth. |
+| DR-09     | Seguridad por roles diferenciados | Insuficiente                                                                                                      | Cumple con accessToken + refreshToken diferenciados por rol                                                                                                                                           | Cumple, pero con sobrecarga de integración                                                                                                                |
+| DR-06     | Separación Operator / Driver      | Posible con esfuerzo                                                                                              | Natural mediante claims en el JWT                                                                                                                                                                     | Natural                                                                                                                                                   |
+
+**Decisión adoptada:** JWT emitidos por el módulo Identity & Access Management del Web Service, validados por middleware de autorización en el mismo proceso ASP.NET Core, con accessToken de corta duración y refreshToken para renovación, conforme a TS-09.
+
+**Iteración 5: Despacho de notificaciones push.**
+El driver DR-08 cubre un requerimiento crítico de seguridad: cuando un Driver tiene un vehículo en una zona donde se produce una alerta de humo, debe ser notificado en menos de 5 segundos. La constraint CT-04 fija el proveedor (Firebase Cloud Messaging). La decisión, entonces, se centró en si la lógica de filtrado por zona afectada se ejecuta dentro del módulo de Notificaciones, dentro del módulo de Sesiones, o se distribuye.
+
+| Driver ID | Título del Driver              | Pattern 1: Filtrado en Notificaciones                                                                                                                                                                               | Pattern 2: Filtrado en Sesiones                                                                                                                                    | Pattern 3: Filtrado distribuido (cada módulo reporta)                                                                             |
+|-----------|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| —         | Evaluación general (Pro / Con) | Pro: Centraliza la responsabilidad de "a quién avisar"; el módulo de Sesiones publica eventos que Notificaciones consume, sin acoplar Sesiones con FCM.<br>Con: Notificaciones necesita consultar sesiones activas. | Pro: Sesiones es dueño natural del dato de ubicación del Driver.<br>Con: Mezcla concerns de notificación con concerns de sesión; Sesiones quedaría acoplado a FCM. | Pro: Cada módulo sabe lo suyo.<br>Con: Requiere coordinación cross-módulo fuerte y mayor riesgo de eventos perdidos o duplicados. |
+| DR-08     | Push notifications confiables  | Cumple; Sesiones publica eventos de sesión activa que Notificaciones consume                                                                                                                                        | Cumple, pero acopla Sesiones con FCM                                                                                                                               | Cumple, pero introduce duplicación de lógica                                                                                      |
+
+**Decisión adoptada:** Filtrado en el módulo de Notificaciones, suscrito a eventos de Safety & Incident Management y consultando al módulo de Parking Session Management qué Drivers tienen sesión activa en esa zona. Los reintentos con backoff exponencial (TS-05) viven dentro del módulo de Notificaciones. Parking Session Management actúa como upstream y Notification Management como downstream en esta interacción.
 
 ### 4.1.5. Quality Attribute Scenario Refinements
 
-#### Scenario Refinement for Scenario 1: Low Latency for Smoke Alerts
+Tras las cinco iteraciones anteriores, los escenarios originales se refinaron para incorporar detalles que antes eran imprecisos. Este refinamiento, que retomamos de la guía de SEI para el Quality Attribute Workshop (Bass, Clements & Kazman, 2021), permite que los escenarios funcionen como criterios de aceptación arquitectónicos verificables.
 
-| Campo | Valor |
-|---|---|
-| **Scenario(s):** | A smoke detector triggers an alert; the system propagates it to the operator dashboard and to drivers with active sessions in the affected zone. |
-| **Business Goals:** | Ensure rapid response to safety incidents to protect lives and property; differentiate the platform from reactive parking systems. |
-| **Relevant Quality Attributes:** | Performance (latency), Reliability |
-| **Stimulus:** | Smoke detection event |
-| **Stimulus Source:** | Smoke detector sensor (simulated) |
-| **Environment:** | Normal operation, business hours |
-| **Artifact:** | Web Services + Azure Digital Twins + SignalR Hub + FCM |
-| **Response:** | Twin state updated; alert pushed to operator dashboard via SignalR; FCM message sent to drivers with active session in zone |
-| **Response Measure:** | Operator dashboard alert visible ≤ 2 seconds; driver push notification delivered ≤ 5 seconds |
-| **Questions:** | Is the SignalR Hub colocated with the Web Services? How is FCM rate-limited? |
-| **Issues:** | Need to validate end-to-end latency under load; FCM delivery is best-effort |
+De los ocho escenarios identificados en la sección 4.1.2.2, se priorizaron para refinamiento los cuatro con mayor impacto sobre las decisiones de diseño adoptadas: Performance y Availability condicionaron directamente las iteraciones 1, 2 y 3; el escenario de alerta de humo atraviesa cuatro bounded contexts y cuatro decisiones; y el escenario de Usability en PowerApps restringió las decisiones de latencia y diseño de API. Los escenarios de Modifiability, Interoperability, Scalability y Reliability se resuelven de forma derivada a través de los patrones adoptados en las iteraciones anteriores y quedan documentados para su refinamiento en ciclos futuros.
 
-#### Scenario Refinement for Scenario 2: Sensor Type Modifiability
-_(Misma estructura)_
+#### Scenario Refinement for Scenario 1 — Performance en actualización del gemelo
 
-#### Scenario Refinement for Scenario 3: Cost Containment
-_(Misma estructura)_
+| Scenario(s)                 | Un evento de cambio de ocupación llega al sistema y debe reflejarse en el gemelo digital y en el dashboard del Operator.                                           |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Business Goals              | Permitir al Operator tomar decisiones operativas oportunas sobre ocupación y redirección de flujo vehicular.                                                       |
+| Relevant Quality Attributes | Performance, Availability.                                                                                                                                         |
+| Stimulus                    | Llegada de un evento de cambio de estado de ocupación proveniente del simulador (TS-10) o, en futuro, de sensores físicos.                                         |
+| Stimulus Source             | Simulador Node.js de SmartPark.                                                                                                                                    |
+| Environment                 | Operación normal con carga proyectada de hasta 1,200 eventos por minuto.                                                                                           |
+| Artifact                    | Módulo de ingesta de telemetría, bus de eventos in-process MediatR, instancia de Azure Digital Twins y canal SignalR hacia el dashboard.                           |
+| Response                    | El evento es validado, persistido vía JSON Patch, propagado al twin correspondiente y notificado al dashboard del Operator a través de SignalR.                    |
+| Response Measure            | Latencia end-to-end menor a 2 segundos en el percentil 95 bajo la carga proyectada; refresh visual del dashboard dentro del ciclo de 5 segundos definido en US-16. |
+| Questions                   | ¿Qué ocurre si la carga supera el umbral? ¿Se priorizan eventos críticos (humo) sobre eventos de ocupación?                                                        |
+| Issues                      | Actualmente el simulador no diferencia prioridades; es necesario introducir un campo "criticality" en el evento.                                                   |
+
+#### Scenario Refinement for Scenario 2 — Availability del dashboard de operaciones
+
+| Scenario(s)                 | El Operator accede al dashboard web de SmartPark durante el horario comercial.                                                                                                                    |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Business Goals              | Garantizar que el personal de operaciones pueda supervisar el estacionamiento sin interrupciones significativas.                                                                                  |
+| Relevant Quality Attributes | Availability, Security.                                                                                                                                                                           |
+| Stimulus                    | Solicitud de acceso al dashboard mediante navegador moderno.                                                                                                                                      |
+| Stimulus Source             | Operadores autenticados del centro comercial (rol Operator).                                                                                                                                      |
+| Environment                 | Horario comercial (06:00–23:00), con uso continuo durante toda la jornada.                                                                                                                        |
+| Artifact                    | Web Application Angular, Web Service ASP.NET Core, módulo de identidad (TS-09), módulo de gemelo digital (TS-02).                                                                                 |
+| Response                    | El dashboard se despliega con los datos del gemelo digital. Si ADT no responde, se muestra el último estado cacheado con marca temporal y un banner de advertencia, conforme a US-16 escenario 2. |
+| Response Measure            | Disponibilidad mensual igual o superior al 99.5% durante el horario de operación; modo degradado plenamente funcional en paneles de datos no-3D ante fallo de 3D Scenes Studio (US-35).           |
+| Questions                   | ¿Cómo se notifica al Operator ante una caída parcial (por ejemplo, ADT sin responder)? ¿Existe un modo degradado documentado?                                                                     |
+| Issues                      | Pendiente definir el comportamiento detallado del visor 3D cuando ADT no responde: ¿mostrar último frame cacheado o deshabilitar la vista 3D pero mantener los paneles tabulares?                 |
+
+#### Scenario Refinement for Scenario 3 — Contextualización espacial de alertas de humo
+
+| Scenario(s)                 | Un sensor de humo reporta detección positiva y la alerta debe visualizarse espacialmente y notificarse a Drivers afectados.                                                                                                                                              |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Business Goals              | Reducir el tiempo de respuesta ante emergencias y facilitar la coordinación de evacuaciones.                                                                                                                                                                             |
+| Relevant Quality Attributes | Performance, Usability, Availability, Reliability.                                                                                                                                                                                                                       |
+| Stimulus                    | Evento de detección de humo generado por el simulador (TS-10).                                                                                                                                                                                                           |
+| Stimulus Source             | Simulador Node.js (futuro: detector físico).                                                                                                                                                                                                                             |
+| Environment                 | Operación normal o de alta demanda.                                                                                                                                                                                                                                      |
+| Artifact                    | Módulo de telemetría, módulo Safety & Incident Management (TS-03), módulo de gemelo digital (TS-02), módulo de Notificaciones (TS-05) y FCM.                                                                                                                             |
+| Response                    | La zona afectada se resalta sobre el modelo 3D, el visor navega automáticamente a la ubicación, se emite notificación audiovisual al Operator vía SignalR y se disparan notificaciones push vía FCM a Drivers con sesiones activas en la zona, conforme a US-19 y US-32. |
+| Response Measure            | Tiempo entre la detección y la visualización menor a 2 segundos; tiempo entre la detección y la entrega de la notificación push menor a 5 segundos; tasa de falsos negativos igual a 0; supresión de duplicados dentro de ventana de 60 segundos (TS-03).                |
+| Questions                   | ¿Qué ocurre si un Driver tiene la app cerrada o las notificaciones desactivadas?                                                                                                                                                                                         |
+| Issues                      | US-32 escenario 3 ya contempla mostrar un banner in-app al abrir la aplicación; queda como mejora futura un canal SMS de respaldo.                                                                                                                                       |
+
+#### Scenario Refinement for Scenario 4 — Usabilidad de la consulta de disponibilidad en PowerApps
+
+| Scenario(s)                 | El Driver consulta la disponibilidad por zona al ingresar al centro comercial desde la app PowerApps.                                           |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| Business Goals              | Acelerar la decisión de estacionamiento y reducir el tiempo de recorrido interno buscando plaza.                                                |
+| Relevant Quality Attributes | Usability, Performance.                                                                                                                         |
+| Stimulus                    | Apertura de la aplicación móvil PowerApps.                                                                                                      |
+| Stimulus Source             | Driver.                                                                                                                                         |
+| Environment                 | Dispositivo Android con red móvil variable; el Driver se encuentra al volante o junto al vehículo.                                              |
+| Artifact                    | Aplicación móvil PowerApps, API pública de disponibilidad (TS-01), módulo de Parking Operations Monitoring.                                     |
+| Response                    | Se presenta la disponibilidad por nivel ordenada de mayor a menor, con detalle por zona al tocar un nivel (US-18).                              |
+| Response Measure            | La información aparece en menos de 5 segundos en el percentil 90; la antigüedad del dato es menor a 5 segundos.                                 |
+| Questions                   | ¿Qué ocurre si se pierde la conexión justo después de cargar la pantalla?                                                                       |
+| Issues                      | El escenario 4 de US-18 ya contempla mostrar un mensaje claro ante ausencia de conectividad; se evalúa como mejora una caché local persistente. |
 
 ## 4.2. Strategic-Level Domain-Driven Design
 
 ### 4.2.1. EventStorming
 
-_(Introducción y explicación de las actividades realizadas en la sesión de EventStorming, con duración aproximada de 1-2 horas. Capturas del EventStorm elaborado en Miro o Lucidchart.)_
+Con el objetivo de comprender cómo evoluciona el sistema ante cambios operativos y acciones de los usuarios, se aplicó EventStorming a nivel estratégico. Esta dinámica permitió representar los eventos de dominio más relevantes de SmartPark, identificar actores, comandos, agregados y bounded contexts, así como visualizar la interacción entre módulos mediante una arquitectura orientada a eventos.
 
-![EventStorming Session](assets/images/chapter-04/event-storming.png)
+El resultado evidenció que la solución no debía modelarse como un sistema monolítico tradicional, sino como un conjunto de contextos especializados que colaboran entre sí. En particular, se observó que la telemetría IoT actúa como principal generador de cambios de estado, propagando información hacia monitoreo operativo, seguridad, eficiencia energética y representación visual del gemelo digital.
 
-**Eventos de dominio identificados (Domain Events):**
-- ParkingSpaceOccupied
-- ParkingSpaceFreed
-- SmokeDetected
-- SmokeAlertTriggered
-- VehicleEnteredAccessPoint
-- VehicleExitedAccessPoint
-- TrafficCongestionDetected
-- LuminosityLevelChanged
-- LightingDimmingRecommended
-- ParkingSessionStarted
-- VehicleLocationRegistered
-- ParkingSessionEnded
-- FareCalculated
-- DriverNotificationSent
-- _(...)_
+![EventStorming Session](assets/images/chapter-04/eventstorming_imagencompleta.png)
+
+La vista general muestra que Telemetry Simulation & Ingestion origina eventos consumidos por monitoreo operativo, seguridad, eficiencia energética y gemelo digital. A su vez, Notification Management comunica alertas a los conductores.
+
+**Landing & Subscription Management**
+
+Este bounded context gestiona la captación comercial de visitantes interesados en la plataforma.
+
+Se identificaron comandos como `ViewLandingPage`, `SelectSubscriptionPlan` y `SubmitContactForm`, que generan eventos como `LandingPageViewed`, `SubscriptionPlanSelected` y `ContactRequestSubmitted`.
+
+El agregado principal es `SubscriptionLead`.
+
+![EventStorming Session](assets/images/chapter-04/event1.png)
+
+**Identity & Access Management**
+
+Este bounded context administra registro, autenticación y control de acceso de usuarios.
+
+Incluye comandos como `RegisterOperatorAccount`, `RegisterDriverAccount`, `LoginUser` y `RefreshAccessToken`, generando eventos como `UserLoggedIn`, `AccessTokenIssued` y `AccountTemporarilyBlocked`.
+
+El agregado principal es `UserAccount`.
+
+![EventStorming Session](assets/images/chapter-04/event2.png)
+
+**Telemetry Simulation & Ingestion**
+
+Este bounded context recibe y procesa datos operativos provenientes de sensores simulados o futuros sensores físicos.
+
+Se modelaron comandos como `GenerateSensorReading`, `SendTelemetryEvent` y `PatchDigitalTwinState`, generando eventos como `TelemetryEventReceived`, `TelemetryEventValidated` y `DigitalTwinStateUpdated`.
+
+Los agregados principales son `Sensor` y `TelemetryEvent`.
+
+![EventStorming Session](assets/images/chapter-04/event3.png)
+
+**Parking Operations Monitoring**
+
+Este bounded context supervisa ocupación, disponibilidad y congestión vehicular.
+
+Incluye comandos como `UpdateOccupancyStatus`, `QueryOccupancyByZone` y `DetectCongestion`, generando eventos como `OccupancyUpdated`, `ParkingZoneMarkedFull` y `CongestionAlertRaised`.
+
+Los agregados principales son `ParkingLot`, `ParkingZone` y `OccupancyStatus`.
+
+![EventStorming Session](assets/images/chapter-04/event4.png)
+
+**Digital Twin Management**
+
+Este bounded context administra la representación virtual del estacionamiento.
+
+Se identificaron comandos como `LoadDigitalTwinModel`, `Render3DScene` y `SwitchVisualizationLayer`, produciendo eventos como `DigitalTwinModelLoaded`, `ThreeDSceneRendered` y `AffectedZoneHighlighted`.
+
+Los agregados principales son `DigitalTwin`, `ThreeDScene` y `VisualizationLayer`.
+
+![EventStorming Session](assets/images/chapter-04/event5.png)
+
+**Safety & Incident Management**
+
+Este bounded context gestiona alertas críticas e incidentes de seguridad.
+
+Incluye comandos como `RegisterSmokeAlert`, `ConfirmIncidentAlert` y `ResolveIncidentAlert`, generando eventos como `SmokeAlertRegistered`, `IncidentAlertConfirmed` e `IncidentAlertResolved`.
+
+Los agregados principales son `Incident`, `SmokeAlert` y `EvacuationRoute`.
+
+![EventStorming Session](assets/images/chapter-04/event6.png)
+
+**Energy Efficiency Management**
+
+Este bounded context transforma datos operativos en recomendaciones de ahorro energético.
+
+Se modelaron comandos como `AnalyzeLightingByZone` y `GenerateDimmingRecommendation`, produciendo eventos como `LowOccupancyZoneDetected` y `DimmingRecommendationGenerated`.
+
+Los agregados principales son `LightingZone` y `DimmingRecommendation`.
+
+![EventStorming Session](assets/images/chapter-04/event7.png)
+
+**Parking Session Management**
+
+Este bounded context representa el ciclo de vida de la sesión de estacionamiento del conductor.
+
+Incluye comandos como `StartParkingSession`, `RegisterVehicleLocation` y `FinalizeParkingSession`, generando eventos como `ParkingSessionStarted`, `AccumulatedCostCalculated` y `ParkingSessionFinalized`.
+
+El agregado principal es `ParkingSession`.
+
+![EventStorming Session](assets/images/chapter-04/event8.png)
+
+**Notification Management**
+
+Este bounded context administra la comunicación reactiva hacia conductores.
+
+Se identificaron comandos como `RegisterDeviceToken`, `IdentifyAffectedDrivers` y `SendPushNotification`, generando eventos como `PushNotificationSent`, `PushNotificationFailed` e `InAppWarningDisplayed`.
+
+Los agregados principales son `DeviceToken`, `Notification` y `NotificationAttempt`.
+
+![EventStorming Session](assets/images/chapter-04/event9.png)
 
 ### 4.2.2. Candidate Context Discovery
 
-_(Explicación del proceso de identificación de bounded contexts a partir del EventStorming, aplicando técnicas como start-with-value, start-with-simple o look-for-pivotal-events.)_
+A partir del EventStorming desarrollado, se realizó la identificación de bounded contexts candidatos para SmartPark. Este proceso consistió en agrupar eventos de dominio, comandos, actores y agregados que compartían una misma intención de negocio, evitando organizar el sistema únicamente por capas técnicas.
 
-![Candidate Context Discovery](assets/images/chapter-04/candidate-contexts.png)
+Para descubrir los contextos se aplicaron principalmente tres criterios: **start-with-value**, para partir de las capacidades que generan mayor valor para los stakeholders; **look-for-pivotal-events**, para identificar eventos que cambian el estado relevante del negocio; y **start-with-simple**, para separar primero los flujos más evidentes antes de refinar dependencias entre contextos.
 
-**Bounded Contexts candidatos identificados:**
+En primer lugar, mediante **start-with-value**, se identificaron las capacidades principales que entregan valor directo a los usuarios: monitoreo de ocupación, visualización del gemelo digital, gestión de incidentes, sesión de estacionamiento del conductor y notificaciones de seguridad. Estas capacidades dieron origen a contextos como `Parking Operations Monitoring`, `Digital Twin Management`, `Safety & Incident Management`, `Parking Session Management` y `Notification Management`.
 
-1. **Parking Occupancy Context** — Estado de plazas, niveles, zonas
-2. **Safety & Incidents Context** — Detección de humo, alertas, evacuación
-3. **Traffic Flow Context** — Accesos, rampas, contadores
-4. **Energy Management Context** — Iluminación, luminosidad, reglas de atenuación
-5. **Parking Session Context** — Sesiones de conductor, ubicación, tarifa
-6. **Notifications Context** — Push, FCM, in-app
-7. **Identity & Access Management Context** — Autenticación de operadores y conductores
-8. **Digital Twin Synchronization Context** — Capa anti-corrupción hacia Azure Digital Twins
+Luego, con **look-for-pivotal-events**, se analizaron eventos que representan cambios importantes dentro del dominio, tales como `DigitalTwinStateUpdated`, `OccupancyUpdated`, `SmokeAlertRegistered`, `IncidentAlertConfirmed`, `ParkingSessionStarted`, `ParkingSessionFinalized` y `PushNotificationSent`. Estos eventos permitieron detectar límites naturales entre responsabilidades, ya que cada uno pertenece a una preocupación distinta del negocio.
+
+Finalmente, mediante **start-with-simple**, se separaron los flujos más directos y fáciles de aislar, como registro de usuarios, selección de planes, recepción de telemetría y generación de recomendaciones energéticas. Esto permitió definir contextos de soporte como `Landing & Subscription Management`, `Identity & Access Management`, `Telemetry Simulation & Ingestion` y `Energy Efficiency Management`.
+
+Como resultado, se identificaron los siguientes bounded contexts candidatos:
+
+| Bounded Context candidato         | Justificación                                                            |
+|-----------------------------------|--------------------------------------------------------------------------|
+| Landing & Subscription Management | Gestiona la captación de visitantes y selección de planes.               |
+| Identity & Access Management      | Administra registro, autenticación, tokens y roles.                      |
+| Telemetry Simulation & Ingestion  | Recibe, valida y sincroniza eventos de sensores simulados o físicos.     |
+| Parking Operations Monitoring     | Supervisa ocupación, disponibilidad y congestión.                        |
+| Digital Twin Management           | Representa visualmente el estacionamiento mediante el gemelo digital 3D. |
+| Safety & Incident Management      | Gestiona alertas de humo, evacuación e incidentes.                       |
+| Energy Efficiency Management      | Genera recomendaciones de atenuación y ahorro energético.                |
+| Parking Session Management        | Administra la sesión de estacionamiento del Driver.                      |
+| Notification Management           | Envía alertas push y gestiona reintentos de notificación.                |
+
+En conclusión, el descubrimiento de contextos candidatos permitió transformar los eventos identificados en el EventStorming en límites de dominio más claros, alineados con responsabilidades de negocio y preparados para una arquitectura modular y orientada a eventos.
 
 ### 4.2.3. Domain Message Flows Modeling
 
-_(Explicación del proceso de Domain Storytelling para visualizar la colaboración entre bounded contexts.)_
+Con los bounded contexts candidatos ya identificados, se procedió a modelar los flujos de colaboración entre dominios mediante **Domain Storytelling**, técnica orientada a representar cómo distintos actores y contextos cooperan para ejecutar procesos relevantes del negocio. A diferencia del EventStorming, centrado en eventos internos, esta etapa permitió visualizar mensajes, dependencias y secuencia de interacción entre bounded contexts.
 
-#### Flow 1: Smoke Alert End-to-End
-![Domain Story: Smoke Alert](assets/images/chapter-04/domain-story-smoke-alert.png)
+El objetivo principal fue comprender cómo viaja la información dentro de SmartPark desde que ocurre un estímulo operativo hasta que se genera una respuesta útil para operadores o conductores. Para ello, se modelaron historias de dominio clave relacionadas con monitoreo en tiempo real, incidentes críticos, sesiones de estacionamiento y eficiencia energética.
 
-#### Flow 2: Driver Parking Session
-![Domain Story: Parking Session](assets/images/chapter-04/domain-story-parking-session.png)
+Se utilizó una notación simple basada en actores, acciones y objetos intercambiados entre bounded contexts. Cada historia fue construida desde la perspectiva del negocio, evitando detalles técnicos de implementación y enfocándose en la colaboración entre capacidades del sistema.
 
-#### Flow 3: Energy Adjustment Recommendation
-![Domain Story: Energy Adjustment](assets/images/chapter-04/domain-story-energy.png)
+![Domain Message Flows](assets/images/chapter-04/bobo.png)
+
+A partir del modelado realizado, se identificaron los siguientes flujos principales:
+
+**Flujo 1: Actualización de ocupación en tiempo real**
+
+El `Sensor Simulator` genera lecturas periódicas que son recibidas por `Telemetry Simulation & Ingestion`. Luego, la información validada es enviada a `Parking Operations Monitoring`, donde se recalcula la ocupación por zonas. Finalmente, `Digital Twin Management` actualiza la visualización 3D mostrada al operador.
+
+![Flujo 1](assets/images/chapter-04/flujo1.png)
+
+**Flujo 2: Gestión de alerta de humo**
+
+Cuando un sensor detecta humo, `Telemetry Simulation & Ingestion` comunica el evento a `Safety & Incident Management`, donde se registra y confirma la alerta. Paralelamente, `Telemetry Simulation & Ingestion` publica el evento `DigitalTwinStateUpdated` que consume `Digital Twin Management` para resaltar la zona afectada. Adicionalmente, `Notification Management` recibe el evento de incidente confirmado y envía alertas push a los conductores impactados.
+
+![Flujo 2](assets/images/chapter-04/flujo2.png)
+
+**Flujo 3: Inicio y cierre de sesión de estacionamiento**
+
+El `Driver` inicia una sesión desde la aplicación móvil. `Parking Session Management` registra ubicación, calcula costo acumulado y finalmente procesa el cierre de la sesión cuando el usuario abandona el estacionamiento.
+
+![Flujo 3](assets/images/chapter-04/flujo3.png)
+
+**Flujo 4: Optimización energética**
+
+Los datos de luminosidad y ocupación son procesados por `Energy Efficiency Management`, que genera recomendaciones de atenuación visualizadas posteriormente en el gemelo digital para el operador.
+
+![Flujo 4](assets/images/chapter-04/flujo4.png)
+
+El ejercicio permitió detectar relaciones críticas entre bounded contexts y confirmar que SmartPark requiere comunicación desacoplada basada en mensajes y eventos de dominio. Asimismo, evidenció que contextos como `Telemetry Simulation & Ingestion` y `Notification Management` cumplen roles transversales dentro del ecosistema.
 
 ### 4.2.4. Bounded Context Canvases
 
-#### Bounded Context Canvas 1: Parking Occupancy
+Con los bounded contexts ya identificados y validados mediante EventStorming y Domain Message Flows, se procedió a elaborar los **Bounded Context Canvases**. Esta herramienta permitió describir cada contexto desde una perspectiva estratégica, detallando su propósito, responsabilidades, actores principales, modelos internos, relaciones externas y nivel de importancia dentro del ecosistema SmartPark.
 
-| Sección | Contenido |
-|---|---|
-| **Name** | Parking Occupancy |
-| **Purpose** | Track and expose the real-time occupancy state of every parking space, organized by zone and level. |
-| **Strategic Classification** | Core Domain |
-| **Domain Roles** | Operator (consumer), IoT Simulator (producer) |
-| **Inbound Communication** | Receives PATCH requests from Digital Twin Synchronization Context with new occupancy state. |
-| **Outbound Communication** | Publishes domain events: ParkingSpaceOccupied, ParkingSpaceFreed. |
-| **Ubiquitous Language** | ParkingSpace, ParkingZone, ParkingLevel, OccupancyState |
-| **Business Rules** | A space transitions Free→Occupied only via valid sensor event. OutOfService overrides any sensor reading. |
-| **Dependencies** | Depends on Digital Twin Synchronization Context (downstream). |
+El uso de canvases facilitó consolidar decisiones de diseño, reducir ambigüedad entre dominios y dejar explícitos los límites funcionales de cada contexto antes de avanzar hacia el Context Map y el diseño táctico posterior.
 
-#### Bounded Context Canvas 2: Safety & Incidents
-_(Misma estructura)_
+A continuación, se presentan los canvases de los nueve bounded contexts del sistema.
 
-#### Bounded Context Canvas 3: Traffic Flow
-_(Misma estructura)_
+#### Landing & Subscription Management Canvas
 
-#### Bounded Context Canvas 4: Energy Management
-_(Misma estructura)_
+| Elemento              | Descripción                                                                                                                                       |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| Nombre del Contexto   | Landing & Subscription Management                                                                                                                 |
+| Propósito             | Captar visitantes interesados en la plataforma y gestionar la selección de planes de suscripción.                                                 |
+| Responsabilidades     | Presentar el modelo de negocio de SmartPark, gestionar formularios de contacto, registrar leads de suscripción y redirigir al registro de cuenta. |
+| Actores Principales   | Visitor                                                                                                                                           |
+| Objetos de Negocio    | SubscriptionLead, SubscriptionPlan                                                                                                                |
+| Eventos Clave         | LandingPageViewed, SubscriptionPlanSelected, ContactRequestSubmitted                                                                              |
+| Relaciones            | Consume interfaces públicas de Identity & Access Management vía Open Host Service para el registro de nuevas cuentas de Operator                  |
+| Tipo de Subdominio    | Generic                                                                                                                                           |
+| Prioridad Estratégica | Media                                                                                                                                             |
 
-#### Bounded Context Canvas 5: Parking Session
-_(Misma estructura)_
+#### Identity & Access Management Canvas
 
-#### Bounded Context Canvas 6: Notifications
-_(Misma estructura)_
+| Elemento              | Descripción                                                                                                                                                                |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Nombre del Contexto   | Identity & Access Management                                                                                                                                               |
+| Propósito             | Administrar el registro, autenticación, autorización y control de acceso de todos los usuarios del sistema.                                                                |
+| Responsabilidades     | Registro de cuentas Operator y Driver, emisión y renovación de tokens JWT, bloqueo por intentos fallidos consecutivos, validación de roles mediante claims.                |
+| Actores Principales   | Operator, Driver                                                                                                                                                           |
+| Objetos de Negocio    | UserAccount, AccessToken, RefreshToken                                                                                                                                     |
+| Eventos Clave         | UserRegistered, UserLoggedIn, AccessTokenIssued, AccountTemporarilyBlocked                                                                                                 |
+| Relaciones            | Actúa como Shared Kernel para Parking Session Management, Digital Twin Management y Notification Management; expone Open Host Service al Landing & Subscription Management |
+| Tipo de Subdominio    | Generic                                                                                                                                                                    |
+| Prioridad Estratégica | Alta                                                                                                                                                                       |
 
-#### Bounded Context Canvas 7: Identity & Access Management
-_(Misma estructura)_
+#### Telemetry Simulation & Ingestion Canvas
 
-#### Bounded Context Canvas 8: Digital Twin Synchronization
-_(Misma estructura)_
+| Elemento              | Descripción                                                                                                                                 |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Nombre del Contexto   | Telemetry Simulation & Ingestion                                                                                                            |
+| Propósito             | Recibir, validar y distribuir datos provenientes de sensores simulados o físicos.                                                           |
+| Responsabilidades     | Generación de lecturas, validación de eventos, sincronización con Azure Digital Twins.                                                      |
+| Actores Principales   | Sensor Simulator, Developer                                                                                                                 |
+| Objetos de Negocio    | Sensor, TelemetryEvent                                                                                                                      |
+| Eventos Clave         | TelemetryEventReceived, TelemetryEventValidated, DigitalTwinStateUpdated                                                                    |
+| Relaciones            | Proveedor de datos para Parking Operations Monitoring, Safety & Incident Management, Energy Efficiency Management y Digital Twin Management |
+| Tipo de Subdominio    | Supporting                                                                                                                                  |
+| Prioridad Estratégica | Alta                                                                                                                                        |
+
+#### Parking Operations Monitoring Canvas
+
+| Elemento              | Descripción                                                                                 |
+|-----------------------|---------------------------------------------------------------------------------------------|
+| Nombre del Contexto   | Parking Operations Monitoring                                                               |
+| Propósito             | Supervisar ocupación, disponibilidad y congestión vehicular.                                |
+| Responsabilidades     | Recalcular ocupación, detectar zonas llenas, alertar congestión.                            |
+| Actores Principales   | Operator                                                                                    |
+| Objetos de Negocio    | ParkingLot, ParkingZone, OccupancyStatus                                                    |
+| Eventos Clave         | OccupancyUpdated, ParkingZoneMarkedFull, CongestionAlertRaised                              |
+| Relaciones            | Consume telemetría de Telemetry Simulation & Ingestion y alimenta a Digital Twin Management |
+| Tipo de Subdominio    | Core                                                                                        |
+| Prioridad Estratégica | Muy Alta                                                                                    |
+
+#### Digital Twin Management Canvas
+
+| Elemento              | Descripción                                                                                                                                     |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| Nombre del Contexto   | Digital Twin Management                                                                                                                         |
+| Propósito             | Representar visualmente el estado operativo del estacionamiento en 3D.                                                                          |
+| Responsabilidades     | Renderizar escena, cambiar capas, resaltar zonas críticas.                                                                                      |
+| Actores Principales   | Operator                                                                                                                                        |
+| Objetos de Negocio    | DigitalTwin, ThreeDScene, VisualizationLayer                                                                                                    |
+| Eventos Clave         | ThreeDSceneRendered, AffectedZoneHighlighted                                                                                                    |
+| Relaciones            | Consume eventos de Telemetry Simulation & Ingestion, Parking Operations Monitoring, Safety & Incident Management y Energy Efficiency Management |
+| Tipo de Subdominio    | Core                                                                                                                                            |
+| Prioridad Estratégica | Muy Alta                                                                                                                                        |
+
+#### Safety & Incident Management Canvas
+
+| Elemento              | Descripción                                                                                                                              |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| Nombre del Contexto   | Safety & Incident Management                                                                                                             |
+| Propósito             | Detectar, confirmar y resolver incidentes críticos.                                                                                      |
+| Responsabilidades     | Gestión de humo, evacuación, trazabilidad de incidentes.                                                                                 |
+| Actores Principales   | Operator, Sensor Simulator                                                                                                               |
+| Objetos de Negocio    | Incident, SmokeAlert, EvacuationRoute                                                                                                    |
+| Eventos Clave         | SmokeAlertRegistered, IncidentAlertConfirmed, IncidentAlertResolved                                                                      |
+| Relaciones            | Consume telemetría de Telemetry Simulation & Ingestion; publica eventos de incidente a Notification Management y Digital Twin Management |
+| Tipo de Subdominio    | Core                                                                                                                                     |
+| Prioridad Estratégica | Muy Alta                                                                                                                                 |
+
+#### Parking Session Management Canvas
+
+| Elemento              | Descripción                                                                                                                                         |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Nombre del Contexto   | Parking Session Management                                                                                                                          |
+| Propósito             | Gestionar la sesión activa del conductor dentro del estacionamiento.                                                                                |
+| Responsabilidades     | Inicio de sesión, ubicación del vehículo, costo acumulado, cierre.                                                                                  |
+| Actores Principales   | Driver                                                                                                                                              |
+| Objetos de Negocio    | ParkingSession                                                                                                                                      |
+| Eventos Clave         | ParkingSessionStarted, AccumulatedCostCalculated, ParkingSessionFinalized                                                                           |
+| Relaciones            | Actúa como upstream de Notification Management; Notification consulta sesiones activas para identificar conductores afectados en zonas de incidente |
+| Tipo de Subdominio    | Core                                                                                                                                                |
+| Prioridad Estratégica | Alta                                                                                                                                                |
+
+#### Notification Management Canvas
+
+| Elemento                | Descripción                                                                                                                                    |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| Nombre del Contexto     | Notification Management                                                                                                                        |
+| Propósito               | Comunicar alertas relevantes a conductores.                                                                                                    |
+| Responsabilidades       | Registro de tokens, envío push, reintentos y warnings in-app.                                                                                  |
+| Actores Principales     | Driver                                                                                                                                         |
+| Objetos de Negocio      | DeviceToken, Notification, NotificationAttempt                                                                                                 |
+| Eventos Clave           | PushNotificationSent, PushNotificationFailed                                                                                                   |
+| Relaciones              | Consume eventos de Safety & Incident Management; consulta sesiones activas a Parking Session Management para identificar conductores afectados |
+| Tipo de Subdominio      | Supporting                                                                                                                                     |
+| Prioridad Estratégica   | Alta                                                                                                                                           |
+
+#### Energy Efficiency Management Canvas
+
+| Elemento              | Descripción                                                                                                                  |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------|
+| Nombre del Contexto   | Energy Efficiency Management                                                                                                 |
+| Propósito             | Generar recomendaciones de ahorro energético por zona.                                                                       |
+| Responsabilidades     | Analizar luminosidad, detectar baja ocupación, recomendar atenuación.                                                        |
+| Actores Principales   | Operator                                                                                                                     |
+| Objetos de Negocio    | LightingZone, DimmingRecommendation                                                                                          |
+| Eventos Clave         | LowOccupancyZoneDetected, DimmingRecommendationGenerated                                                                     |
+| Relaciones            | Consume telemetría de Telemetry Simulation & Ingestion; alimenta a Digital Twin Management con recomendaciones de atenuación |
+| Tipo de Subdominio    | Supporting                                                                                                                   |
+| Prioridad Estratégica | Media                                                                                                                        |
+
+Los Bounded Context Canvases permitieron consolidar la visión estratégica de SmartPark, definiendo responsabilidades claras para cada dominio y facilitando la siguiente etapa de diseño: el Context Map y las relaciones formales entre contextos.
 
 ### 4.2.5. Context Mapping
 
-_(Explicación del proceso de elaboración del Context Map, indicando los patrones de relación aplicados.)_
+Con los bounded contexts previamente identificados, se elaboró el **Context Map** de SmartPark con el propósito de representar visualmente las relaciones estratégicas entre dominios, sus dependencias funcionales y los mecanismos de colaboración necesarios para mantener una arquitectura desacoplada y escalable.
 
-![Context Map](assets/images/chapter-04/context-map.png)
+Para su construcción, primero se identificaron los bounded contexts que actúan como proveedores de información (**upstream**) y aquellos que consumen capacidades o datos (**downstream**). Posteriormente, se analizaron los flujos definidos en EventStorming y Domain Message Flows, especialmente los relacionados con telemetría operativa, monitoreo de ocupación, gestión de incidentes, sesiones activas y notificaciones a conductores.
+
+A partir de dicho análisis, se seleccionaron los patrones de relación más adecuados para cada interacción. Se aplicó **Published Language** para intercambio de eventos mediante contratos comunes, **Customer/Supplier** cuando existe dependencia funcional entre proveedor y consumidor, **Conformist** cuando un contexto adopta el modelo externo existente, **Shared Kernel** para elementos compartidos como autenticación y seguridad, y **Open Host Service** para interfaces públicas reutilizables.
+
+La siguiente figura presenta el Context Map general de SmartPark, mientras que en la tabla posterior se detallan las relaciones identificadas entre bounded contexts, junto con el patrón aplicado y su respectiva justificación.
+
+![Context Map](assets/images/chapter-04/context.png)
 
 **Relaciones entre Bounded Contexts:**
 
-| Upstream | Downstream | Patrón | Justificación |
-|---|---|---|---|
-| Digital Twin Synchronization | Parking Occupancy | Customer/Supplier | Occupancy depende del estado actualizado del twin. |
-| Digital Twin Synchronization | Safety & Incidents | Customer/Supplier | Las alertas de humo dependen del estado del twin del SmokeDetector. |
-| Safety & Incidents | Notifications | Published Language | Eventos de SmokeAlertTriggered consumidos por Notifications. |
-| Parking Session | Notifications | Customer/Supplier | Notifications consulta sesiones activas para identificar destinatarios. |
-| Identity & Access Management | All others | Shared Kernel | Token de autenticación compartido. |
-| Energy Management | Parking Occupancy | Conformist | Energy consume estado de ocupación sin influir en su modelo. |
+| Upstream                          | Downstream                    | Patrón             | Justificación                                                                                                                                                                                                                    |
+|-----------------------------------|-------------------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Telemetry Simulation & Ingestion  | Parking Operations Monitoring | Published Language | Publica eventos de ocupación y flujo vehicular consumidos por monitoreo operativo.                                                                                                                                               |
+| Telemetry Simulation & Ingestion  | Safety & Incident Management  | Published Language | Publica eventos críticos de sensores utilizados para detección de humo e incidentes.                                                                                                                                             |
+| Telemetry Simulation & Ingestion  | Energy Efficiency Management  | Published Language | Comparte lecturas de luminosidad y ocupación usadas para recomendaciones energéticas.                                                                                                                                            |
+| Telemetry Simulation & Ingestion  | Digital Twin Management       | Published Language | Publica el evento DigitalTwinStateUpdated que Digital Twin Management consume para mantener el grafo de twins sincronizado con el estado en vivo del estacionamiento.                                                            |
+| Parking Operations Monitoring     | Digital Twin Management       | Customer/Supplier  | Digital Twin Management depende de los datos de ocupación calculados por Parking Operations para actualizar la capa visual de ocupación del modelo 3D.                                                                           |
+| Safety & Incident Management      | Notification Management       | Customer/Supplier  | Notification Management consume incidentes confirmados para alertar a conductores afectados.                                                                                                                                     |
+| Parking Session Management        | Notification Management       | Customer/Supplier  | Parking Session Management actúa como upstream publicando eventos de sesiones activas; Notification Management los consume para identificar qué conductores tienen vehículos en zonas de incidente sin acoplar Sesiones con FCM. |
+| Energy Efficiency Management      | Digital Twin Management       | Conformist         | Digital Twin Management adopta las recomendaciones energéticas generadas sin modificar el modelo origen.                                                                                                                         |
+| Identity & Access Management      | Parking Session Management    | Shared Kernel      | Comparte autenticación, roles y validación de tokens.                                                                                                                                                                            |
+| Identity & Access Management      | Digital Twin Management       | Shared Kernel      | El acceso del operador depende de identidad y autorización centralizadas.                                                                                                                                                        |
+| Identity & Access Management      | Notification Management       | Shared Kernel      | El acceso a preferencias y seguridad reutiliza el modelo común de identidad.                                                                                                                                                     |
+| Landing & Subscription Management | Identity & Access Management  | Open Host Service  | Landing & Subscription Management consume interfaces públicas de registro y creación de cuentas expuestas por Identity & Access Management.                                                                                      |
+
 
 ## 4.3. Software Architecture
 
