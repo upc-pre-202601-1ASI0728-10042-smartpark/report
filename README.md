@@ -503,11 +503,40 @@ Creemos que lograremos **5 contratos de suscripción con centros comerciales de 
 
 ### Segmento 1: Operadores de estacionamientos en centros comerciales
 
-_(Características demográficas, perfil profesional, información estadística de sustento con citas.)_
+Este segmento agrupa a los profesionales responsables de la gestión operativa de estacionamientos en centros comerciales de gran escala en Lima Metropolitana.
+
+**Características demográficas y profesionales:**
+Tienen entre 30 y 55 años, con una composición predominantemente masculina —aunque con creciente participación femenina en roles de facility management— y formación técnica o universitaria en administración, ingeniería industrial, seguridad o carreras afines. Sus cargos típicos incluyen Jefe de Operaciones de Estacionamiento, Supervisor de Seguridad, Facility Manager y Coordinador de Mantenimiento. Trabajan en turnos rotativos de 8 a 12 horas que cubren el horario operativo del centro comercial (8 a. m. - 11 p. m.) y acumulan al menos 3 años de experiencia en operaciones o mantenimiento de edificaciones comerciales.
+
+**Perfil tecnológico:**
+Su familiaridad con la tecnología es intermedia: manejan cotidianamente circuitos cerrados de cámaras (CCTV), paneles de detección de incendios y sistemas de control de acceso vehicular. El dispositivo principal de trabajo es una PC de escritorio con monitor grande ubicada en el centro de control del estacionamiento, complementada con un smartphone Android para coordinación vía WhatsApp. Su browser habitual es Google Chrome y sus canales digitales preferidos son el correo corporativo y WhatsApp Business.
+
+**Necesidades operativas:**
+Los miembros de este segmento buscan, ante todo, visibilidad consolidada del estado del estacionamiento sin depender de recorridos presenciales. Les interesa también responder rápida y coordinadamente ante incidentes de seguridad, contar con datos que justifiquen inversiones ante la administración del centro comercial y reducir costos operativos, especialmente en consumo energético.
+
+**Sustento estadístico:**
+Según el presidente de ACCEP, citado por el diario Gestión (2025), el sector agrupa actualmente 88 centros comerciales a nivel nacional, 48 de ellos en Lima. Los de mayor escala —como el Jockey Plaza, Mall del Sur, Plaza Norte y MegaPlaza— operan estacionamientos con más de 1 000 plazas, que demandan equipos de operación de entre 5 y 15 personas por turno. De acuerdo con datos del IEDEP de la Cámara de Comercio de Lima, citados por Gestión (2024), el sector proyectó la apertura de siete nuevos centros comerciales para el periodo 2023-2025, lo que confirma la tendencia de crecimiento y la demanda futura de soluciones de gestión operativa más avanzadas.
+
+---
 
 ### Segmento 2: Conductores frecuentes de centros comerciales
 
-_(Características demográficas, hábitos de consumo, información estadística de sustento con citas.)_
+Este segmento comprende a las personas que visitan centros comerciales de Lima Metropolitana al menos una vez por semana con vehículo propio.
+
+**Características demográficas:**
+Tienen entre 25 y 55 años, con una distribución equilibrada por género. Pertenecen a los niveles socioeconómicos B y C de Lima Metropolitana, que en conjunto concentran el 64,9% de los hogares limeños según datos de APEIM (2023): el NSE B representa el 20,9% de los hogares y el NSE C el 44,0%. En cuanto a ingresos, el hogar promedio del NSE B percibe S/ 6 700 mensuales y el del NSE C alrededor de S/ 3 700 mensuales, según cifras del propio APEIM reportadas por Perú21 (2023). En términos de composición familiar, el segmento incluye tanto solteros de 25 a 35 años como parejas con hijos de 35 a 55 años, para quienes la visita al centro comercial es con frecuencia una actividad familiar de fin de semana. Su ocupación habitual corresponde a empleados dependientes del sector privado, profesionales independientes y emprendedores de Lima Moderna, Lima Norte, Lima Este y Lima Sur.
+
+**Perfil tecnológico y de consumo:**
+El smartphone es el dispositivo central de su vida cotidiana, con predominancia del sistema operativo Android. Su familiaridad con aplicaciones móviles es alta; emplean con naturalidad Yape o Plin para pagos, Rappi o PedidosYa para delivery, Waze o Google Maps para navegación y WhatsApp para comunicación. Esta experiencia previa con aplicaciones orientadas a resolver problemas inmediatos configura una expectativa de interfaces simples, tiempos de carga inferiores a 3 segundos e interacciones de mínimo esfuerzo.
+
+**Comportamiento de visita:**
+Frecuentan los centros comerciales entre 1 y 3 veces por semana, con estadías de entre 1,5 y 3 horas. Sus motivaciones principales son las compras en retail o supermercado, la gastronomía, el entretenimiento y los servicios bancarios o de salud. El tiempo que invierten buscando estacionamiento en horarios regulares oscila entre 8 y 15 minutos, cifra que en horarios pico puede superar los 20 minutos; estimación coherente con los hallazgos de Shoup (2006, citado en BID, 2020) y con los datos del estudio de INRIX Research (2017).
+
+**Frustraciones relacionadas con el estacionamiento:**
+Los conductores de este segmento han experimentado, en algún momento, al menos una de las siguientes situaciones: circular por múltiples niveles sin saber dónde hay plazas disponibles; no recordar en qué zona o nivel dejaron el vehículo al regresar; conocer el costo total de la estadía únicamente al llegar a la salida; y no recibir ninguna información ante un incidente de seguridad en la zona donde está su vehículo. Estas fricciones reflejan la brecha estructural entre la gestión del estacionamiento y la experiencia del usuario final.
+
+**Sustento estadístico:**
+De acuerdo con INRIX Research (2017), los conductores en Estados Unidos pierden en promedio 17 horas al año buscando estacionamiento, con un costo de USD 345 por persona en tiempo, combustible y emisiones —un estudio basado en encuestas a cerca de 6 000 conductores en 10 ciudades y datos de más de 100 000 ubicaciones de estacionamiento en todo el mundo. Por otro lado, el programa SFPark de San Francisco demostró que la implementación de sensores de ocupación y gestión dinámica puede reducir el tiempo de búsqueda de estacionamiento en un 43% (SFMTA, 2014, citado en BID, 2020), lo que subraya tanto la magnitud del problema como el potencial de mejora que la solución propuesta puede ofrecer a este segmento.
 
 ---
 
