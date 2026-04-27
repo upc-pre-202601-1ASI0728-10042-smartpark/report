@@ -682,6 +682,8 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
 
 #### Segmento 1: Operadores de estacionamientos en centros comerciales
 
+**Entrevista 1 — Operador**
+
 <table border="1">
   <tr>
     <th>Entrevista</th>
@@ -717,7 +719,75 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
   </tr>
 </table>
 
+**Entrevista 2 — Operador**
+
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>2</td>
+    <td><strong>Nombre</strong></td>
+    <td>Jeremy Joel Quispe Andia</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>25</td>
+    <td><strong>Distrito</strong></td>
+    <td>San Juan de Lurigancho, Lima</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/entrevista_jeremy.png" width="200"></td>
+    <td colspan="3">Jeremy es jefe de operaciones con cuatro años de experiencia y gestiona un estacionamiento de aproximadamente 1,200 plazas en un centro comercial. Supervisa ocupación, flujo vehicular, seguridad y personal operativo, apoyándose en cámaras CCTV, radios, barreras automáticas y reportes manuales. Sin embargo, identifica limitaciones importantes, como errores frecuentes en el conteo de vehículos y falta de visibilidad en tiempo real sobre la disponibilidad exacta por zonas.Ante incidentes como accidentes, humo o robos, el equipo depende de reportes del personal y revisión de cámaras, lo que retrasa la ubicación del problema entre tres y siete minutos. Asimismo, las mayores congestiones ocurren en fines de semana y feriados, resolviéndose mediante redirección manual y apoyo de orientadores.Finalmente, Jeremy señala una gestión energética poco eficiente, ya que la iluminación funciona mayormente con horarios fijos y sin automatización en zonas vacías. Considera clave implementar una plataforma que permita monitorear ocupación, alertas y congestión en tiempo real para tomar decisiones más proactivas.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202216263_upc_edu_pe/IQB2AaFWtAp3TL58UwEXAlu2ARz4YzAm_o1UZWJrDLK0XGI?e=poyF6t&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">6 minutos con 56 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Hernan Morales Calderón</td>
+  </tr>
+</table>
+
+**Entrevista 3 — Operador**
+
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>3</td>
+    <td><strong>Nombre</strong></td>
+    <td>Juan Alarcon Ramirez</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>25</td>
+    <td><strong>Distrito</strong></td>
+    <td>Wanchaq, Cusco</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/segmento-objetivo-operador-entrevista-3.png" width="200"></td>
+    <td colspan="3">Juan es técnico de operaciones con tres años de experiencia, gestiona un estacionamiento de entre 30 y 50 plazas donde se encarga del mantenimiento de maquinaria y la fluidez del tráfico. A pesar de contar con cámaras de vigilancia, barreras y sensores, Juan identifica limitaciones tecnológicas, como errores en el conteo de vehículos que generan molestias en los usuarios y la falta de visibilidad en tiempo real sobre la ocupación específica de cada pasillo. Ante incidentes de seguridad o congestiones en rampas que suelen ocurrir en fines de semana y feriados, el equipo depende del monitoreo manual por CCTV y la intervención directa de personal con señales manuales. Finalmente, destaca una gestión energética ineficiente, ya que la iluminación opera bajo horarios fijos sin sistemas de ahorro para zonas desocupadas, lo que resulta en un consumo elevado de electricidad.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQAMlLdlmF2pT75rc_E783gEAZ1O58GkQJQbV1O8t3DN02U?e=f1yiAz&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">4 minutos con 40 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Britney Qqueso Rodriguez</td>
+  </tr>
+</table>
+
 #### Segmento 2: Conductores frecuentes de centros comerciales
+
+**Entrevista 1 — Conductor**
 
 <table border="1">
   <tr>
@@ -751,6 +821,72 @@ Objetivo: Capitalizar el crecimiento del sector de centros comerciales en Perú 
     <td colspan="3">
          7:51
     </td>
+  </tr>
+</table>
+
+**Entrevista 2 — Conductor**
+
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>2</td>
+    <td><strong>Nombre</strong></td>
+    <td>Luis Chinchihualpa Saldarriaga</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>25</td>
+    <td><strong>Distrito</strong></td>
+    <td>La Molina</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/entrevista_arquitectura_software_emergentes_luis.jpeg" width="200"></td>
+    <td colspan="3">Luis es un conductor frecuente de centros comerciales, a los que asiste todos los fines de semana debido a que durante la semana está ocupado con sus estudios universitarios y trabajo; suele ir en horarios de almuerzo o entre las 5 y 6 de la tarde, generalmente acompañado, con el objetivo de comer, ir al cine o realizar compras en lugares como el Mall de Puruchuco, el nuevo mall del Parque La Molina y el Jockey Plaza. Siempre utiliza su auto porque lo considera más seguro, pero enfrenta múltiples dificultades al estacionar: desconoce el precio hasta después de ingresar, encuentra pocos espacios disponibles y desconfía de los indicadores de luz, ya que no reflejan correctamente la disponibilidad; además, el proceso de búsqueda le toma entre 15 y 30 minutos, especialmente en tardes de fin de semana, donde el tráfico es alto. Su comportamiento consiste en dar vueltas sin una estrategia definida hasta encontrar un lugar, lo cual le genera frustración y estrés por la pérdida de tiempo y el costo. En cuanto a seguridad, la considera vital, ya que ha sufrido rayones y abolladuras en su vehículo, incluso un caso donde encontró ambas puertas dañadas, y también ha tenido dificultades para recordar la ubicación de su auto dentro del estacionamiento. A nivel tecnológico, está familiarizado con el uso de aplicaciones debido a su formación en ingeniería de software, aunque actualmente solo usa Google Maps, el cual no le resulta útil para este contexto; muestra interés en funcionalidades como visualización del costo acumulado, alertas de seguridad, mapas interactivos con disponibilidad de espacios y registro de ubicación del vehículo. Finalmente, identifica como principales problemas la falta de seguridad, la poca transparencia en los costos y la escasez de espacios, y considera ideal una solución que integre todas estas funcionalidades para mejorar su experiencia.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210297_upc_edu_pe/IQBwF8-wNd6GT4icNCBDmTLBAZoUCIvODFg4ZUDDZFs4shQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=klWNvR">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">16 minutos con 46 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Abel Andrés Valle Zuta</td>
+  </tr>
+</table>
+
+**Entrevista 3 — Conductor**
+
+<table>
+  <tr>
+    <td><strong>Entrevista</strong></td>
+    <td>3</td>
+    <td><strong>Nombre</strong></td>
+    <td>Edward Rodriguez</td>
+  </tr>
+  <tr>
+    <td><strong>Edad</strong></td>
+    <td>28</td>
+    <td><strong>Distrito</strong></td>
+    <td>Yanahuara, Arequipa</td>
+  </tr>
+  <tr>
+    <td><strong>Captura de la entrevista:</strong><br><br><img src="assets/images/chapter-02/segmento-objetivo-conductor-entrevista-3.png" width="200"></td>
+    <td colspan="3">Edward Rodríguez Alarcón, un ingeniero de 28 años residente en Yanahuara, describe su experiencia de estacionamiento en centros comerciales como un proceso frustrante y congestionado, especialmente en horas pico, lo que a menudo la lleva a optar por servicios de delivery para evitar el estrés de buscar una plaza. Para gestionar la ubicación de su vehículo y evitar confusiones previas que le han tomado hasta 20 minutos resolver, utiliza una combinación de memoria visual, fotografías y Google Maps. Finalmente, Edward destaca la necesidad de soluciones tecnológicas que le permitan consultar el costo acumulado en tiempo real y recibir notificaciones directas al celular ante cualquier incidente de seguridad, priorizando la vigilancia y la información inmediata para su tranquilidad.</td>
+  </tr>
+  <tr>
+    <td><strong>URL de la grabación</strong></td>
+    <td colspan="3"><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQDN3psHgYEbSJJE8h4T0B3HASpKNaqWqCPhXezHu2zqDPo?e=ky3NJO&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Ver grabación</a></td>
+  </tr>
+  <tr>
+    <td><strong>Timing</strong></td>
+    <td colspan="3">5 minutos con 55 segundos</td>
+  </tr>
+  <tr>
+    <td><strong>Entrevistador</strong></td>
+    <td colspan="3">Britney Qqueso Rodriguez</td>
   </tr>
 </table>
 
