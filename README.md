@@ -981,110 +981,327 @@ Tras las cinco iteraciones anteriores, los escenarios originales se refinaron pa
 
 ### 4.2.1. EventStorming
 
-_(Introducción y explicación de las actividades realizadas en la sesión de EventStorming, con duración aproximada de 1-2 horas. Capturas del EventStorm elaborado en Miro o Lucidchart.)_
+Con el objetivo de comprender cómo evoluciona el sistema ante cambios operativos y acciones de los usuarios, se aplicó EventStorming a nivel estratégico. Esta dinámica permitió representar los eventos de dominio más relevantes de SmartPark, identificar actores, comandos, agregados y bounded contexts, así como visualizar la interacción entre módulos mediante una arquitectura orientada a eventos.
 
-![EventStorming Session](assets/images/chapter-04/event-storming.png)
+El resultado evidenció que la solución no debía modelarse como un sistema monolítico tradicional, sino como un conjunto de contextos especializados que colaboran entre sí. En particular, se observó que la telemetría IoT actúa como principal generador de cambios de estado, propagando información hacia monitoreo operativo, seguridad, eficiencia energética y representación visual del gemelo digital.
 
-**Eventos de dominio identificados (Domain Events):**
-- ParkingSpaceOccupied
-- ParkingSpaceFreed
-- SmokeDetected
-- SmokeAlertTriggered
-- VehicleEnteredAccessPoint
-- VehicleExitedAccessPoint
-- TrafficCongestionDetected
-- LuminosityLevelChanged
-- LightingDimmingRecommended
-- ParkingSessionStarted
-- VehicleLocationRegistered
-- ParkingSessionEnded
-- FareCalculated
-- DriverNotificationSent
-- _(...)_
+![EventStorming Session](assets/images/chapter-04/eventstorming_imagencompleta.png)
+
+La vista general muestra que Telemetry Simulation & Ingestion origina eventos consumidos por monitoreo operativo, seguridad, eficiencia energética y gemelo digital. A su vez, Notification Management comunica alertas a los conductores.
+
+
+**Landing & Subscription Management**
+
+Este bounded context gestiona la captación comercial de visitantes interesados en la plataforma.
+
+Se identificaron comandos como `ViewLandingPage`, `SelectSubscriptionPlan` y `SubmitContactForm`, que generan eventos como `LandingPageViewed`, `SubscriptionPlanSelected` y `ContactRequestSubmitted`.
+
+
+El agregado principal es `SubscriptionLead`.
+
+![EventStorming Session](assets/images/chapter-04/event1.png)
+
+**Identity & Access Management**
+
+Este `bounded context` administra registro, autenticación y control de acceso de usuarios.
+
+Incluye comandos como `RegisterOperatorAccount`, `RegisterDriverAccount`, `LoginUser` y `RefreshAccessToken`, generando eventos como `UserLoggedIn`, `AccessTokenIssued` y `AccountTemporarilyBlocked`.
+
+El agregado principal es `UserAccount`.
+
+
+![EventStorming Session](assets/images/chapter-04/event2.png)
+
+**Telemetry Simulation & Ingestion**
+
+Este `bounded context` recibe y procesa datos operativos provenientes de sensores simulados o futuros sensores físicos.
+
+Se modelaron comandos como `GenerateSensorReading`, `SendTelemetryEvent` y `PatchDigitalTwinState`, generando eventos como `TelemetryEventReceived`, `TelemetryEventValidated` y `DigitalTwinStateUpdated`.
+
+Los agregados principales son `Sensor` y `TelemetryEvent`.
+
+
+
+![EventStorming Session](assets/images/chapter-04/event3.png)
+
+**Parking Operations Monitoring**
+
+Este `bounded context` supervisa ocupación, disponibilidad y congestión vehicular.
+
+Incluye comandos como `UpdateOccupancyStatus`, `QueryOccupancyByZone` y `DetectCongestion`, generando eventos como `OccupancyUpdated`, `ParkingZoneMarkedFull` y `CongestionAlertRaised`.
+
+Los agregados principales son `ParkingLot`, `ParkingZone` y `OccupancyStatus`.
+
+
+![EventStorming Session](assets/images/chapter-04/event4.png)
+
+**Digital Twin Management**
+
+Este `bounded context` administra la representación virtual del estacionamiento.
+
+Se identificaron comandos como `LoadDigitalTwinModel`, `Render3DScene` y `SwitchVisualizationLayer`, produciendo eventos como `DigitalTwinModelLoaded`, `ThreeDSceneRendered` y `AffectedZoneHighlighted`.
+
+Los agregados principales son `DigitalTwin`, `ThreeDScene` y `VisualizationLayer`.
+
+
+![EventStorming Session](assets/images/chapter-04/event5.png)
+
+**Safety & Incident Management**
+
+Este `bounded context` gestiona alertas críticas e incidentes de seguridad.
+
+Incluye comandos como `RegisterSmokeAlert`, `ConfirmIncidentAlert` y `ResolveIncidentAlert`, generando eventos como `SmokeAlertRegistered`, `IncidentAlertConfirmed` e `IncidentAlertResolved`.
+
+Los agregados principales son `Incident`, `SmokeAlert` y `EvacuationRoute`.
+
+
+![EventStorming Session](assets/images/chapter-04/event6.png)
+
+**Energy Efficiency Management**
+
+Este `bounded context` transforma datos operativos en recomendaciones de ahorro energético.
+
+Se modelaron comandos como `AnalyzeLightingByZone` y `GenerateDimmingRecommendation`, produciendo eventos como `LowOccupancyZoneDetected` y `DimmingRecommendationGenerated`.
+
+Los agregados principales son `LightingZone` y `DimmingRecommendation`.
+
+
+![EventStorming Session](assets/images/chapter-04/event7.png)
+
+
+**Parking Session Management**
+
+Este `bounded context` representa el ciclo de vida de la sesión de estacionamiento del conductor.
+
+Incluye comandos como `StartParkingSession`, `RegisterVehicleLocation` y `FinalizeParkingSession`, generando eventos como `ParkingSessionStarted`, `AccumulatedCostCalculated` y `ParkingSessionFinalized`.
+
+El agregado principal es `ParkingSession`.
+
+
+
+![EventStorming Session](assets/images/chapter-04/event8.png)
+
+**Notification Management**
+
+Este `bounded context` administra la comunicación reactiva hacia conductores.
+
+Se identificaron comandos como `RegisterDeviceToken`, `IdentifyAffectedDrivers` y `SendPushNotification`, generando eventos como `PushNotificationSent`, `PushNotificationFailed` e `InAppWarningDisplayed`.
+
+Los agregados principales son `DeviceToken`, `Notification` y `NotificationAttempt`.
+
+
+
+![EventStorming Session](assets/images/chapter-04/event9.png)
+
 
 ### 4.2.2. Candidate Context Discovery
 
-_(Explicación del proceso de identificación de bounded contexts a partir del EventStorming, aplicando técnicas como start-with-value, start-with-simple o look-for-pivotal-events.)_
+A partir del EventStorming desarrollado, se realizó la identificación de bounded contexts candidatos para SmartPark. Este proceso consistió en agrupar eventos de dominio, comandos, actores y agregados que compartían una misma intención de negocio, evitando organizar el sistema únicamente por capas técnicas.
 
-![Candidate Context Discovery](assets/images/chapter-04/candidate-contexts.png)
+Para descubrir los contextos se aplicaron principalmente tres criterios: **start-with-value**, para partir de las capacidades que generan mayor valor para los stakeholders; **look-for-pivotal-events**, para identificar eventos que cambian el estado relevante del negocio; y **start-with-simple**, para separar primero los flujos más evidentes antes de refinar dependencias entre contextos.
 
-**Bounded Contexts candidatos identificados:**
+En primer lugar, mediante **start-with-value**, se identificaron las capacidades principales que entregan valor directo a los usuarios: monitoreo de ocupación, visualización del gemelo digital, gestión de incidentes, sesión de estacionamiento del conductor y notificaciones de seguridad. Estas capacidades dieron origen a contextos como `Parking Operations Monitoring`, `Digital Twin Management`, `Safety & Incident Management`, `Parking Session Management` y `Notification Management`.
 
-1. **Parking Occupancy Context** — Estado de plazas, niveles, zonas
-2. **Safety & Incidents Context** — Detección de humo, alertas, evacuación
-3. **Traffic Flow Context** — Accesos, rampas, contadores
-4. **Energy Management Context** — Iluminación, luminosidad, reglas de atenuación
-5. **Parking Session Context** — Sesiones de conductor, ubicación, tarifa
-6. **Notifications Context** — Push, FCM, in-app
-7. **Identity & Access Management Context** — Autenticación de operadores y conductores
-8. **Digital Twin Synchronization Context** — Capa anti-corrupción hacia Azure Digital Twins
+Luego, con **look-for-pivotal-events**, se analizaron eventos que representan cambios importantes dentro del dominio, tales como `DigitalTwinStateUpdated`, `OccupancyUpdated`, `SmokeAlertRegistered`, `IncidentAlertConfirmed`, `ParkingSessionStarted`, `ParkingSessionFinalized` y `PushNotificationSent`. Estos eventos permitieron detectar límites naturales entre responsabilidades, ya que cada uno pertenece a una preocupación distinta del negocio.
+
+Finalmente, mediante **start-with-simple**, se separaron los flujos más directos y fáciles de aislar, como registro de usuarios, selección de planes, recepción de telemetría y generación de recomendaciones energéticas. Esto permitió definir contextos de soporte como `Landing & Subscription Management`, `Identity & Access Management`, `Telemetry Simulation & Ingestion` y `Energy Efficiency Management`.
+
+Como resultado, se identificaron los siguientes bounded contexts candidatos:
+
+| Bounded Context candidato | Justificación |
+|---|---|
+| Landing & Subscription Management | Gestiona la captación de visitantes y selección de planes. |
+| Identity & Access Management | Administra registro, autenticación, tokens y roles. |
+| Telemetry Simulation & Ingestion | Recibe, valida y sincroniza eventos de sensores simulados o físicos. |
+| Parking Operations Monitoring | Supervisa ocupación, disponibilidad y congestión. |
+| Digital Twin Management | Representa visualmente el estacionamiento mediante el gemelo digital 3D. |
+| Safety & Incident Management | Gestiona alertas de humo, evacuación e incidentes. |
+| Energy Efficiency Management | Genera recomendaciones de atenuación y ahorro energético. |
+| Parking Session Management | Administra la sesión de estacionamiento del Driver. |
+| Notification Management | Envía alertas push y gestiona reintentos de notificación. |
+
+En conclusión, el descubrimiento de contextos candidatos permitió transformar los eventos identificados en el EventStorming en límites de dominio más claros, alineados con responsabilidades de negocio y preparados para una arquitectura modular y orientada a eventos.
 
 ### 4.2.3. Domain Message Flows Modeling
 
-_(Explicación del proceso de Domain Storytelling para visualizar la colaboración entre bounded contexts.)_
+## 4.2.3. Domain Message Flows Modeling
 
-#### Flow 1: Smoke Alert End-to-End
-![Domain Story: Smoke Alert](assets/images/chapter-04/domain-story-smoke-alert.png)
+Con los bounded contexts candidatos ya identificados, se procedió a modelar los flujos de colaboración entre dominios mediante **Domain Storytelling**, técnica orientada a representar cómo distintos actores y contextos cooperan para ejecutar procesos relevantes del negocio. A diferencia del EventStorming, centrado en eventos internos, esta etapa permitió visualizar mensajes, dependencias y secuencia de interacción entre bounded contexts.
 
-#### Flow 2: Driver Parking Session
-![Domain Story: Parking Session](assets/images/chapter-04/domain-story-parking-session.png)
+El objetivo principal fue comprender cómo viaja la información dentro de SmartPark desde que ocurre un estímulo operativo hasta que se genera una respuesta útil para operadores o conductores. Para ello, se modelaron historias de dominio clave relacionadas con monitoreo en tiempo real, incidentes críticos, sesiones de estacionamiento y eficiencia energética.
 
-#### Flow 3: Energy Adjustment Recommendation
-![Domain Story: Energy Adjustment](assets/images/chapter-04/domain-story-energy.png)
+Se utilizó una notación simple basada en actores, acciones y objetos intercambiados entre bounded contexts. Cada historia fue construida desde la perspectiva del negocio, evitando detalles técnicos de implementación y enfocándose en la colaboración entre capacidades del sistema.
+
+![EventStorming Session](assets/images/chapter-04/bobo.png)
+
+
+A partir del modelado realizado, se identificaron los siguientes flujos principales:
+
+### Flujo 1: Actualización de ocupación en tiempo real
+
+El `Sensor Simulator` genera lecturas periódicas que son recibidas por `Telemetry Simulation & Ingestion`. Luego, la información validada es enviada a `Parking Operations Monitoring`, donde se recalcula la ocupación por zonas. Finalmente, `Digital Twin Management` actualiza la visualización 3D mostrada al operador.
+
+![EventStorming Session](assets/images/chapter-04/flujo1.png)
+
+### Flujo 2: Gestión de alerta de humo
+
+Cuando un sensor detecta humo, `Telemetry Simulation & Ingestion` comunica el evento a `Safety & Incident Management`, donde se registra y confirma la alerta. Luego, `Digital Twin Management` resalta la zona afectada y `Notification Management` envía alertas a conductores impactados.
+
+![EventStorming Session](assets/images/chapter-04/flujo2.png)
+
+### Flujo 3: Inicio y cierre de sesión de estacionamiento
+
+El `Driver` inicia una sesión desde la aplicación móvil. `Parking Session Management` registra ubicación, calcula costo acumulado y finalmente procesa el cierre de la sesión cuando el usuario abandona el estacionamiento.
+
+![EventStorming Session](assets/images/chapter-04/flujo3.png)
+
+### Flujo 4: Optimización energética
+
+Los datos de luminosidad y ocupación son procesados por `Energy Efficiency Management`, que genera recomendaciones de atenuación visualizadas posteriormente en el gemelo digital para el operador.
+
+![EventStorming Session](assets/images/chapter-04/flujo4.png)
+
+El ejercicio permitió detectar relaciones críticas entre `bounded contexts` y confirmar que `SmartPark` requiere comunicación desacoplada basada en mensajes y eventos de dominio. Asimismo, evidenció que contextos como `Telemetry Simulation & Ingestion` y `Notification Management` cumplen roles transversales dentro del ecosistema.
 
 ### 4.2.4. Bounded Context Canvases
 
-#### Bounded Context Canvas 1: Parking Occupancy
+Con los bounded contexts ya identificados y validados mediante EventStorming y Domain Message Flows, se procedió a elaborar los **Bounded Context Canvases**. Esta herramienta permitió describir cada contexto desde una perspectiva estratégica, detallando su propósito, responsabilidades, actores principales, modelos internos, relaciones externas y nivel de importancia dentro del ecosistema SmartPark.
 
-| Sección | Contenido |
+El uso de canvases facilitó consolidar decisiones de diseño, reducir ambigüedad entre dominios y dejar explícitos los límites funcionales de cada contexto antes de avanzar hacia el Context Map y el diseño táctico posterior.
+
+A continuación, se presentan los canvases principales del sistema.
+
+
+#### Telemetry Simulation & Ingestion Canvas
+
+| Elemento | Descripción |
 |---|---|
-| **Name** | Parking Occupancy |
-| **Purpose** | Track and expose the real-time occupancy state of every parking space, organized by zone and level. |
-| **Strategic Classification** | Core Domain |
-| **Domain Roles** | Operator (consumer), IoT Simulator (producer) |
-| **Inbound Communication** | Receives PATCH requests from Digital Twin Synchronization Context with new occupancy state. |
-| **Outbound Communication** | Publishes domain events: ParkingSpaceOccupied, ParkingSpaceFreed. |
-| **Ubiquitous Language** | ParkingSpace, ParkingZone, ParkingLevel, OccupancyState |
-| **Business Rules** | A space transitions Free→Occupied only via valid sensor event. OutOfService overrides any sensor reading. |
-| **Dependencies** | Depends on Digital Twin Synchronization Context (downstream). |
+| Nombre del Contexto | Telemetry Simulation & Ingestion |
+| Propósito | Recibir, validar y distribuir datos provenientes de sensores simulados o físicos. |
+| Responsabilidades | Generación de lecturas, validación de eventos, sincronización con Azure Digital Twins. |
+| Actores Principales | Sensor Simulator, Developer |
+| Objetos de Negocio | Sensor, TelemetryEvent |
+| Eventos Clave | TelemetryEventReceived, TelemetryEventValidated, DigitalTwinStateUpdated |
+| Relaciones | Proveedor de datos para Parking Operations, Safety, Energy y Digital Twin |
+| Tipo de Subdominio | Supporting |
+| Prioridad Estratégica | Alta |
 
-#### Bounded Context Canvas 2: Safety & Incidents
-_(Misma estructura)_
+#### Parking Operations Monitoring Canvas
 
-#### Bounded Context Canvas 3: Traffic Flow
-_(Misma estructura)_
+| Elemento | Descripción |
+|---|---|
+| Nombre del Contexto | Parking Operations Monitoring |
+| Propósito | Supervisar ocupación, disponibilidad y congestión vehicular. |
+| Responsabilidades | Recalcular ocupación, detectar zonas llenas, alertar congestión. |
+| Actores Principales | Operator |
+| Objetos de Negocio | ParkingLot, ParkingZone, OccupancyStatus |
+| Eventos Clave | OccupancyUpdated, ParkingZoneMarkedFull, CongestionAlertRaised |
+| Relaciones | Consume telemetría y alimenta Digital Twin |
+| Tipo de Subdominio | Core |
+| Prioridad Estratégica | Muy Alta |
 
-#### Bounded Context Canvas 4: Energy Management
-_(Misma estructura)_
+#### Digital Twin Management Canvas
 
-#### Bounded Context Canvas 5: Parking Session
-_(Misma estructura)_
+| Elemento | Descripción |
+|---|---|
+| Nombre del Contexto | Digital Twin Management |
+| Propósito | Representar visualmente el estado operativo del estacionamiento en 3D. |
+| Responsabilidades | Renderizar escena, cambiar capas, resaltar zonas críticas. |
+| Actores Principales | Operator |
+| Objetos de Negocio | DigitalTwin, ThreeDScene, VisualizationLayer |
+| Eventos Clave | ThreeDSceneRendered, AffectedZoneHighlighted |
+| Relaciones | Consume datos de Operations, Safety y Energy |
+| Tipo de Subdominio | Core |
+| Prioridad Estratégica | Muy Alta |
 
-#### Bounded Context Canvas 6: Notifications
-_(Misma estructura)_
+#### Safety & Incident Management Canvas
 
-#### Bounded Context Canvas 7: Identity & Access Management
-_(Misma estructura)_
+| Elemento | Descripción |
+|---|---|
+| Nombre del Contexto | Safety & Incident Management |
+| Propósito | Detectar, confirmar y resolver incidentes críticos. |
+| Responsabilidades | Gestión de humo, evacuación, trazabilidad de incidentes. |
+| Actores Principales | Operator, Sensor Simulator |
+| Objetos de Negocio | Incident, SmokeAlert, EvacuationRoute |
+| Eventos Clave | SmokeAlertRegistered, IncidentAlertConfirmed, IncidentAlertResolved |
+| Relaciones | Consume telemetría y publica eventos a Notification y Digital Twin |
+| Tipo de Subdominio | Core |
+| Prioridad Estratégica | Muy Alta |
 
-#### Bounded Context Canvas 8: Digital Twin Synchronization
-_(Misma estructura)_
+#### Parking Session Management Canvas
+
+| Elemento | Descripción |
+|---|---|
+| Nombre del Contexto | Parking Session Management |
+| Propósito | Gestionar la sesión activa del conductor dentro del estacionamiento. |
+| Responsabilidades | Inicio de sesión, ubicación del vehículo, costo acumulado, cierre. |
+| Actores Principales | Driver |
+| Objetos de Negocio | ParkingSession |
+| Eventos Clave | ParkingSessionStarted, AccumulatedCostCalculated, ParkingSessionFinalized |
+| Relaciones | Colabora con Notification |
+| Tipo de Subdominio | Core |
+| Prioridad Estratégica | Alta |
+
+#### Notification Management Canvas
+
+| Elemento | Descripción |
+|---|---|
+| Nombre del Contexto | Notification Management |
+| Propósito | Comunicar alertas relevantes a conductores. |
+| Responsabilidades | Registro de tokens, envío push, reintentos y warnings in-app. |
+| Actores Principales | Driver |
+| Objetos de Negocio | DeviceToken, Notification, NotificationAttempt |
+| Eventos Clave | PushNotificationSent, PushNotificationFailed |
+| Relaciones | Consume eventos de Safety y Parking Session |
+| Tipo de Subdominio | Supporting |
+| Prioridad Estratégica | Alta |
+
+#### Energy Efficiency Management Canvas
+
+| Elemento | Descripción |
+|---|---|
+| Nombre del Contexto | Energy Efficiency Management |
+| Propósito | Generar recomendaciones de ahorro energético por zona. |
+| Responsabilidades | Analizar luminosidad, detectar baja ocupación, recomendar atenuación. |
+| Actores Principales | Operator |
+| Objetos de Negocio | LightingZone, DimmingRecommendation |
+| Eventos Clave | LowOccupancyZoneDetected, DimmingRecommendationGenerated |
+| Relaciones | Consume telemetría y alimenta Digital Twin |
+| Tipo de Subdominio | Supporting |
+| Prioridad Estratégica | Media |
+
+
+
+Los Bounded Context Canvases permitieron consolidar la visión estratégica de SmartPark, definiendo responsabilidades claras para cada dominio y facilitando la siguiente etapa de diseño: el Context Map y las relaciones formales entre contextos.
 
 ### 4.2.5. Context Mapping
 
-_(Explicación del proceso de elaboración del Context Map, indicando los patrones de relación aplicados.)_
+Con los bounded contexts previamente identificados, se elaboró el **Context Map** de SmartPark con el propósito de representar visualmente las relaciones estratégicas entre dominios, sus dependencias funcionales y los mecanismos de colaboración necesarios para mantener una arquitectura desacoplada y escalable.
 
-![Context Map](assets/images/chapter-04/context-map.png)
+Para su construcción, primero se identificaron los bounded contexts que actúan como proveedores de información (**upstream**) y aquellos que consumen capacidades o datos (**downstream**). Posteriormente, se analizaron los flujos definidos en EventStorming y Domain Message Flows, especialmente los relacionados con telemetría operativa, monitoreo de ocupación, gestión de incidentes, sesiones activas y notificaciones a conductores.
+
+A partir de dicho análisis, se seleccionaron los patrones de relación más adecuados para cada interacción. Se aplicó **Published Language** para intercambio de eventos mediante contratos comunes, **Customer/Supplier** cuando existe dependencia funcional entre proveedor y consumidor, **Partnership** en colaboraciones bidireccionales, **Conformist** cuando un contexto adopta el modelo externo existente, **Shared Kernel** para elementos compartidos como autenticación y seguridad, y **Open Host Service** para interfaces públicas reutilizables.
+
+La siguiente figura presenta el Context Map general de SmartPark, mientras que en la tabla posterior se detallan las relaciones identificadas entre bounded contexts, junto con el patrón aplicado y su respectiva justificación.
+
+![Context Map](assets/images/chapter-04/context.png)
 
 **Relaciones entre Bounded Contexts:**
 
 | Upstream | Downstream | Patrón | Justificación |
 |---|---|---|---|
-| Digital Twin Synchronization | Parking Occupancy | Customer/Supplier | Occupancy depende del estado actualizado del twin. |
-| Digital Twin Synchronization | Safety & Incidents | Customer/Supplier | Las alertas de humo dependen del estado del twin del SmokeDetector. |
-| Safety & Incidents | Notifications | Published Language | Eventos de SmokeAlertTriggered consumidos por Notifications. |
-| Parking Session | Notifications | Customer/Supplier | Notifications consulta sesiones activas para identificar destinatarios. |
-| Identity & Access Management | All others | Shared Kernel | Token de autenticación compartido. |
-| Energy Management | Parking Occupancy | Conformist | Energy consume estado de ocupación sin influir en su modelo. |
+| Telemetry Simulation & Ingestion | Parking Operations Monitoring | Published Language | Publica eventos de ocupación y flujo vehicular consumidos por monitoreo operativo. |
+| Telemetry Simulation & Ingestion | Safety & Incident Management | Published Language | Publica eventos críticos de sensores utilizados para detección de humo e incidentes. |
+| Telemetry Simulation & Ingestion | Energy Efficiency Management | Published Language | Comparte lecturas de luminosidad y ocupación usadas para recomendaciones energéticas. |
+| Parking Operations Monitoring | Digital Twin Management | Customer/Supplier | Digital Twin depende de datos actualizados de ocupación y disponibilidad. |
+| Safety & Incident Management | Notification Management | Customer/Supplier | Notification consume incidentes confirmados para alertar a conductores afectados. |
+| Parking Session Management | Notification Management | Partnership | Ambos contextos colaboran para identificar conductores con sesión activa en zonas afectadas. |
+| Energy Efficiency Management | Digital Twin Management | Conformist | Digital Twin adopta recomendaciones energéticas sin modificar el modelo origen. |
+| Identity & Access Management | Parking Session Management | Shared Kernel | Comparte autenticación, roles y validación de tokens. |
+| Identity & Access Management | Digital Twin Management | Shared Kernel | El acceso del operador depende de identidad y autorización centralizadas. |
+| Identity & Access Management | Notification Management | Shared Kernel | El acceso a preferencias y seguridad reutiliza el modelo común de identidad. |
+| Landing & Subscription Management | Identity & Access Management | Open Host Service | Landing consume interfaces públicas de registro y creación de cuentas. |
+
 
 ## 4.3. Software Architecture
 
