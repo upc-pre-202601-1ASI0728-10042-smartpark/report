@@ -75,7 +75,8 @@
 ### Evidencias de colaboración
 
 #### TB1
-_(Pendiente)_
+
+![tb1.png](assets/images/contributions/tb1.png)
 
 #### TP1
 _(Pendiente)_
