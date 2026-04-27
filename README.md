@@ -2473,27 +2473,6 @@ _(Conclusiones finales del proyecto.)_
 
 ## Video About-the-Team
 
-_(Resumen del proceso de trabajo, pauta de secuencias con timing, screenshot del video.)_
-
-![Video About-the-Team Screenshot](assets/images/chapter-07/about-team-screenshot.png)
-
-**Pauta de secuencias:**
-
-| Inicio (hh:mm:ss) | Sección |
-|---|---|
-| 00:00:00 | Introducción |
-| 00:00:30 | Sesiones de trabajo del equipo |
-| 00:02:00 | Testimonio integrante 1 |
-| 00:03:00 | Testimonio integrante 2 |
-| 00:04:00 | Testimonio integrante 3 |
-| 00:05:00 | Testimonio integrante 4 |
-| 00:06:00 | Conclusiones grupales |
-
-- **URL Microsoft Stream:** `https://web.microsoftstream.com/...`
-- **URL YouTube:** `https://youtube.com/...`
-
----
-
 # Bibliografía
 
 Asociación de Centros Comerciales y Entretenimiento del Perú (ACCEP). (2025). Declaraciones de su presidente José Antonio Contreras. Citadas en: Gestión. (2025, diciembre). *Centros comerciales alcanzarían ventas por S/ 40 000 millones este año y crecerían 10%, según ACCEP*. https://gestion.pe/economia/centros-comerciales-alcanzarian-ventas-por-s-40000-millones-este-ano-y-crecerian-10-segun-accep-noticia/
@@ -2549,40 +2528,7 @@ Shoup, D. C. (2006). Cruising for parking. *Transport Policy*, *13*(6), 479–48
 
 ## Anexo B: Términos y Condiciones del Servicio
 
-_(Texto completo de los Terms of Service expuestos en el footer del Landing Page y aplicaciones, redactados con responsabilidad ética y profesional según los principios del código de ética de software engineering de ACM/IEEE y del CIP.)_
-
 ## Anexo C: Configuración de Internacionalización (i18n) y Accesibilidad (a11y)
 
-_(Detalle de la configuración de i18n para English (en_US) y Latin American Spanish (es_419), y configuración de ARIA attributes en Landing Page y Web Application.)_
-
 ## Anexo D: DTDL Models de Azure Digital Twins
-
-_(Listado de los Twin Models definidos en DTDL para el grafo del estacionamiento.)_
-
-```json
-{
-  "@id": "dtmi:smartpark:ParkingSpace;1",
-  "@type": "Interface",
-  "@context": "dtmi:dtdl:context;2",
-  "displayName": "Parking Space",
-  "contents": [
-    {
-      "@type": "Property",
-      "name": "code",
-      "schema": "string"
-    },
-    {
-      "@type": "Property",
-      "name": "occupancyState",
-      "schema": "string"
-    },
-    {
-      "@type": "Property",
-      "name": "lastUpdated",
-      "schema": "dateTime"
-    }
-  ]
-}
-```
-
-_(Continuar con los modelos de ParkingZone, ParkingLevel, SmokeDetector, etc.)_
+
