@@ -1388,30 +1388,81 @@ _(Misma estructura)_
 
 ### 6.1.1. General Style Guidelines
 
-_(Decisiones sobre Branding, Typography, Colors, Spacing y tono de comunicación: Formal/Casual, Respetuoso/Irreverente, etc.)_
+A continuación, se definen las decisiones de diseño visual y comunicacional que guiarán la construcción de la interfaz de usuario de SmartPark, tanto para la plataforma web (operadores) como para la aplicación móvil (conductores). 
 
 **Branding:**
-- Nombre del producto: _(...)_
-- Logotipo: _(insertar)_
-- Tagline: _(...)_
+- Nombre del producto: SmartPark
+- Logotipo: 
+
+![Logo](assets/images/chapter-06/logo%20emergentes.png)
+
+- Tagline: Digital Twin Solutions
+- Propuesta visual: Modernidad, tecnología, confianza y precisión. Transmite control inteligente a través de gemelos digitales.
 
 **Typography:**
-- Fuente primaria: _(Roboto / Inter / etc.)_
-- Fuente secundaria: _(...)_
-- Escala tipográfica: _(...)_
+
+La elección tipográfica para SmartPark es un componente esencial que complementa la identidad visual de la marca. Se han seleccionado dos familias tipográficas que juntas ofrecen versatilidad y coherencia, asegurando que la comunicación sea clara y efectiva en todos los medios.
+- Fuente primaria: 
+  - Inter (sans-serif) - Limpia, moderna, altamente legible en pantallas de escritorio y móviles.
+- Fuente secundaria: 
+  - Inter (misma familia) para consistencia, variando pesos (Regular 400, Medium 500, Bold 700).
+- Escala tipográfica: Tamaños basados en progresión 1.25 (major third)
+  - Títulos principales (H1): 32px / 40px (web) - 24px / 32px (móvil)
+  - Subtítulos (H2): 24px / 32px (web) - 20px / 28px (móvil)
+  - Encabezados de sección (H3): 20px / 28px (web) - 18px / 24px (móvil)
+  - Texto base (Body): 16px / 24px
+  - Texto pequeño (Caption): 14px / 20px
+  - Texto auxiliar (Helper): 12px / 16px
 
 **Colors:**
-| Token | Color | Uso |
+
+![Logo](assets/images/chapter-06/colores.png)
+
+| Token | Color | Uso Principal |
 |---|---|---|
-| Primary | #_(hex)_ | _(...)_ |
-| Secondary | #_(hex)_ | _(...)_ |
-| Accent | #_(hex)_ | _(...)_ |
-| Alert/Danger | #_(hex)_ | _(...)_ |
-| Success | #_(hex)_ | _(...)_ |
+| Primary | #194756 | Botones principales, encabezados, enlaces, elementos de navegación activos. |
+| Secondary | #54736E | Fondos secundarios, bordes, elementos de soporte, íconos no principales.|
+| Background Light | #F2EABC | Fondos de secciones alternas, tarjetas destacadas, modales informativos.|
+| Dark / Text | #080000 | Texto principal sobre fondos claros, elementos de alto contraste. |
+| Alert/Danger | #FF3B58 | Alertas de humo, errores críticos, estados de emergencia, notificaciones de alta prioridad. |
+| Success | #2E7D32 | Estados de éxito, confirmaciones, plazas disponibles, operación normal. |
+| Warning | #FFC107 | Advertencias, congestión moderada, atención preventiva. |
+| Neutral Gray | #6C757D | Texto secundario, placeholders, deshabilitados, separadores. |
+| White | #FFFFFF | Fondos principales, tarjetas, contenedores de contenido. |
 
 **Spacing:** Sistema basado en múltiplos de 8px (8, 16, 24, 32, 48, 64).
 
-**Tono de comunicación:** Profesional, claro, orientado a acción. Formal pero accesible.
+| Token | Valor | Uso |
+|---|---|---|
+| spacing-1 | 4px | Espaciado mínimo entre elementos muy cercanos |
+| spacing-2 | 8px| Espaciado interno de componentes pequeños (padding) |
+| spacing-3 | 16px | Espaciado estándar entre elementos relacionados |
+| spacing-4 | 24px | Margen entre secciones, padding de tarjetas |
+| spacing-5 | 32px | Separación entre bloques funcionales |
+| spacing-6 | 48px | Separación entre secciones principales |
+| spacing-7 | 64px| Separación entre pantallas o grandes bloques |
+
+**Grillas:** Sistema de 12 columnas para web (con gutters de 24px) y 4 columnas para móvil.
+
+**Tono de comunicación:** 
+
+| Aspecto | Decisión | 
+|---|---|
+| Estilo general| Profesional, claro, orientado a acción. |
+| Formalidad | Formal pero accesible. No excesivamente técnico. |
+| Para operadores | Tono directo, preciso, orientado a datos y eficiencia. Uso de términos como "monitoreo", "alerta", "reporte", "optimización". |
+| Para conductores| Tono amigable, cercano, útil. Uso de términos como "encontrar mi auto", "cuánto voy pagando", "estoy seguro".|
+| Comunicación de errores/alertas | Clara, urgente pero no alarmista. Acción recomendada siempre presente. | 
+| Mensajes de éxito | Positivos, breves, reforzantes. | 
+
+**Ejemplos de tono:**
+|Contexto | Ejemplo de mensaje | 
+|---|---|
+| Alerta de humo (operador) | "Alerta de humo detectada en Zona B, Nivel B2. Haga clic para ver ubicación exacta." | 
+|Alerta de humo (conductor) | "Alerta de seguridad: humo detectado en su zona de estacionamiento. Diríjase a la salida más cercana." |
+|Registro exitoso de ubicación | "¡Ubicación guardada! Nivel B2, Zona A. ¿Necesitas encontrarlo? Usa 'Encontrar mi vehículo'." |
+|Consulta de disponibilidad | "Hay 24 plazas disponibles en Nivel B1. ¿Te diriges allí?" |
+|Error de conexión | "No pudimos cargar los datos. Verifica tu conexión e intenta de nuevo." |
 
 ### 6.1.2. Web, Mobile & Devices Style Guidelines
 
