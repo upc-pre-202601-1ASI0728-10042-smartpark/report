@@ -1511,7 +1511,88 @@ La arquitectura de la información, también conocida como Information Architect
 
 ### 6.2.1. Organization Systems
 
-_(Esquemas de organización aplicados: jerárquica, secuencial, matricial. Esquemas de categorización: alfabético, cronológico, por tópicos, según audiencia.)_
+La arquitectura de organización de SmartPark está diseñada siguiendo principios de agrupación lógica y progresiva de la información, permitiendo a los usuarios acceder rápidamente a las funciones necesarias según su rol (operador o conductor) y contexto de uso.
+
+**Esquemas de organización aplicados**
+
+| Esquema | Aplicación en SmartPark |
+|---|---|
+| Jerárquica | Navegación principal del dashboard web del operador: Niveles > Zonas > Plazas individuales. |
+| Secuencial | Flujo del conductor en la app móvil: Ingreso > Buscar plaza > Estacionar > Registrar ubicación > Finalizar sesión. |
+| Matricial | Panel de gestión de incidentes: cruce entre tipo de incidente (humo, congestión) y ubicación (nivel, zona, rampa). |
+| Por tópicos | Módulos del dashboard: Ocupación, Seguridad, Flujo vehicular y Eficiencia energética. |
+| Cronológico | Historial de incidentes del operador y sesiones del conductor ordenados por fecha descendente. |
+| Por audiencia | Diferenciación entre contenido para operadores (dashboard web) y conductores (app móvil). |
+
+**Estructura organizacional principal**
+
+**Plataforma Web (Operadores)**
+
+| Módulo | Descripción | Funciones Principales | Acceso por Rol |
+|---|---|---|---|
+| Dashboard Ocupación | Vista consolidada del estado del estacionamiento en tiempo real | Resumen ejecutivo de ocupación; mapa de calor por nivel y zona; estado por plaza individual; métricas en tiempo real | Jefe de Operaciones, Supervisor |
+| Gemelo Digital 3D | Visualización interactiva del estacionamiento en modelo 3D | Visor 3D con zoom, rotación y desplazamiento; capas de datos (ocupación, seguridad, flujo, energía); geolocalización de alertas de humo | Jefe de Operaciones, Supervisor |
+| Seguridad e Incidentes | Gestión de alertas de humo y otros incidentes | Panel de alertas activas; localización espacial en mapa 3D; rutas de evacuación comprometidas; historial de incidentes con filtros por fecha, zona y estado | Jefe de Operaciones, Supervisor de Seguridad |
+| Flujo Vehicular | Monitoreo de tráfico interno en accesos y rampas | Indicadores de flujo por punto de acceso y rampa; alertas de congestión; historial de congestión por horario | Jefe de Operaciones |
+| Eficiencia Energética | Gestión de iluminación por zona | Ocupación vs luminosidad por zona; recomendaciones de atenuación; ahorro energético estimado y logrado | Jefe de Operaciones, Facility Manager |
+| Reportes | Generación y exportación de datos históricos | Reportes de incidentes, ocupación y flujo; exportación a PDF/Excel; análisis de patrones de congestión | Jefe de Operaciones, Gerencia |
+
+**Aplicación Móvil (Conductores)**
+
+| Módulo | Descripción | Funciones Principales | Acceso por Rol |
+|---|---|---|---|
+| Disponibilidad | Consulta de plazas libres antes de ingresar | Mapa simplificado de disponibilidad por nivel y zona; porcentaje de disponibilidad por nivel; zona con mayor disponibilidad resaltada | Conductor (usuario autenticado) |
+| Mi Sesión | Gestión de la sesión de estacionamiento activa | Registro de ubicación del vehículo (nivel + zona + QR); visualización de ubicación guardada; costo acumulado en tiempo real; botón Finalizar sesión | Conductor (usuario autenticado) |
+| Alertas | Notificaciones de seguridad y eventos | Alerta de humo en zona del vehículo; recomendaciones de evacuación; historial de alertas recibidas | Conductor (usuario autenticado) |
+| Historial | Registro de sesiones pasadas | Lista de sesiones anteriores; detalle de cada sesión; comprobante de pago | Conductor (usuario autenticado) |
+| Perfil | Configuración de cuenta y preferencias | Datos personales; preferencias de notificación; método de pago predeterminado; cerrar sesión | Conductor (usuario autenticado) |
+
+**Principios de organización aplicados**
+
+| Principio | Aplicación en SmartPark |
+|---|---|
+| Agrupación por funcionalidad | Las características se organizan según su propósito común: ocupación, seguridad, flujo y energía. Cada módulo agrupa funciones relacionadas, reduciendo la carga cognitiva. |
+| Jerarquía visual progresiva | La información se presenta desde lo general hacia lo específico: resumen general > nivel > zona > plaza individual, con drill-down controlado. |
+| Contextualización dinámica | Las opciones disponibles se adaptan según el rol del usuario y el módulo activo. Un conductor no ve opciones de gestión operativa y un operador no ve opciones de pago. |
+| Consistencia transversal | Los mismos patrones organizativos se aplican en todos los módulos. Por ejemplo, los indicadores de estado usan el mismo código de colores (verde/amarillo/rojo) en ocupación, flujo y energía. |
+| Priorización de tareas críticas | Las funciones más importantes, como alertas de humo y congestión severa, se presentan de forma prominente y accesible desde cualquier módulo. |
+
+**Organización de contenido por módulo**
+
+**Módulo de Ocupación (Operador - Web)**
+
+| Nivel de agrupación | Criterio |
+|---|---|
+| Agrupación primaria | Por nivel de estacionamiento (Nivel B1, B2, B3, etc.) |
+| Agrupación secundaria | Por zona dentro del nivel (Zona A, B, C, D) |
+| Agrupación terciaria | Por plaza individual (código de plaza + estado) |
+| Agrupación por estado | Plazas disponibles, ocupadas, reservadas, fuera de servicio |
+
+**Módulo de Seguridad e Incidentes (Operador - Web)**
+
+| Nivel de agrupación | Criterio |
+|---|---|
+| Agrupación primaria | Por estado de alerta (Activa, Confirmada, Resuelta) |
+| Agrupación secundaria | Por tipo de incidente (Humo, Congestión, Otro) |
+| Agrupación terciaria | Por ubicación (Nivel > Zona > Detector específico) |
+| Agrupación temporal | Por fecha y hora de detección (cronológico descendente) |
+
+**Módulo de Disponibilidad (Conductor - Móvil)**
+
+| Nivel de agrupación | Criterio |
+|---|---|
+| Agrupación primaria | Por nivel de estacionamiento (ordenado por disponibilidad descendente) |
+| Agrupación secundaria | Por zona dentro del nivel |
+| Destacado visual | Zona con mayor disponibilidad resaltada en verde |
+| Indicador | Porcentaje de disponibilidad en círculo de color |
+
+**Módulo de Historial de Sesiones (Conductor - Móvil)**
+
+| Nivel de agrupación | Criterio |
+|---|---|
+| Agrupación primaria | Cronológico descendente (más reciente primero) |
+| Agrupación secundaria | Por centro comercial (si aplica múltiples sedes) |
+| Filtros sugeridos | Por rango de fechas (semana, mes, personalizado) |
 
 ### 6.2.2. Labeling Systems
 
