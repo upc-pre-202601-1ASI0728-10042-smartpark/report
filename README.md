@@ -3972,6 +3972,454 @@ _(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
 
 ---
 
+## 5.4. Bounded Context: Telemetry Simulation & Ingestion
+
+El contexto **Telemetry Simulation & Ingestion** es la puerta de entrada al sistema para todos los datos provenientes del simulador IoT (TS-10) y, en un futuro, de sensores físicos reales. Sus responsabilidades son: (a) mantener el catálogo de sensores instalados con su metadata (tipo, ubicación, twin asociado en Azure Digital Twins, estado); (b) recibir eventos de telemetría enviados por el simulador externo; (c) validar cada evento contra las reglas del sensor que lo emitió (rangos válidos, frecuencia esperada, sensor activo); (d) aplicar la actualización al gemelo digital de Azure Digital Twins mediante JSON Patch; y (e) publicar el evento de dominio `DigitalTwinStateUpdated` que el contexto **Digital Twin Management** consume para actualizar la visualización 3D, y que **Parking Operations Monitoring**, **Safety & Incident Management** y **Energy Efficiency Management** consumen para actualizar sus propios agregados.
+
+Este contexto soporta la technical story **TS-10** (Sincronización del Simulador IoT con el Twin) y la technical story **TS-02** (Endpoint de Actualización de Estado del Twin), y actúa como infraestructura compartida que alimenta a los demás bounded contexts.
+
+### 5.4.1. Domain Layer
+
+**Agregado raíz: `Sensor`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Model;
+
+public sealed class Sensor
+{
+    public SensorId Id { get; }
+    public SensorType Type { get; }
+    public SensorLocationRef Location { get; }
+    public string TwinId { get; }
+    public SensorStatus Status { get; private set; }
+    public DateTimeOffset? LastReadingAt { get; private set; }
+    public ReadingRange ValidRange { get; }
+
+    private Sensor() { /* EF Core */ }
+
+    public Sensor(SensorId id, SensorType type, SensorLocationRef location,
+                  string twinId, ReadingRange validRange)
+    {
+        if (string.IsNullOrWhiteSpace(twinId))
+            throw new ArgumentException("TwinId is required");
+        Id = id;
+        Type = type;
+        Location = location;
+        TwinId = twinId;
+        ValidRange = validRange;
+        Status = SensorStatus.Active;
+    }
+
+    public bool IsValidReading(double value)
+    {
+        if (Status != SensorStatus.Active) return false;
+        return value >= ValidRange.Min && value <= ValidRange.Max;
+    }
+
+    public void MarkAsOffline() => Status = SensorStatus.Offline;
+    public void Activate() => Status = SensorStatus.Active;
+    public void Deactivate() => Status = SensorStatus.Inactive;
+    public void NotifyReadingReceived() => LastReadingAt = DateTimeOffset.UtcNow;
+}
+```
+
+**Agregado raíz: `TelemetryEvent`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Model;
+
+public sealed class TelemetryEvent
+{
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public TelemetryEventId Id { get; }
+    public SensorId SensorId { get; }
+    public ReadingValue Reading { get; }
+    public DateTimeOffset ReceivedAt { get; }
+    public DateTimeOffset? ValidatedAt { get; private set; }
+    public DateTimeOffset? AppliedAt { get; private set; }
+    public TelemetryEventStatus Status { get; private set; }
+    public string? RejectionReason { get; private set; }
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    private TelemetryEvent() { /* EF Core */ }
+
+    public TelemetryEvent(TelemetryEventId id, SensorId sensorId, ReadingValue reading)
+    {
+        Id = id;
+        SensorId = sensorId;
+        Reading = reading;
+        ReceivedAt = DateTimeOffset.UtcNow;
+        Status = TelemetryEventStatus.Received;
+        _domainEvents.Add(new TelemetryEventReceived(Id, SensorId, Reading, ReceivedAt));
+    }
+
+    public void Validate(Sensor sensor)
+    {
+        if (sensor.Id != SensorId)
+            throw new InvalidOperationException("Sensor mismatch");
+
+        if (!sensor.IsValidReading(Reading.NumericValue))
+        {
+            Status = TelemetryEventStatus.Rejected;
+            RejectionReason = $"Reading {Reading.NumericValue} outside valid range " +
+                              $"[{sensor.ValidRange.Min}, {sensor.ValidRange.Max}] " +
+                              $"or sensor inactive (status={sensor.Status}).";
+            _domainEvents.Add(new TelemetryEventRejected(Id, RejectionReason, DateTimeOffset.UtcNow));
+            return;
+        }
+
+        Status = TelemetryEventStatus.Validated;
+        ValidatedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new TelemetryEventValidated(Id, SensorId, Reading, ValidatedAt.Value));
+    }
+
+    public void MarkAsAppliedToTwin(string twinId)
+    {
+        if (Status != TelemetryEventStatus.Validated)
+            throw new InvalidOperationException("Only validated events can be applied to twin");
+
+        Status = TelemetryEventStatus.AppliedToTwin;
+        AppliedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new DigitalTwinStateUpdated(
+            Id, SensorId, twinId, Reading, AppliedAt.Value));
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+```
+
+**Value Objects y enumeraciones**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Model;
+
+public sealed record SensorId(string Value);
+public sealed record TelemetryEventId(string Value);
+
+public enum SensorType { Occupancy, Smoke, FlowVehicular, Luminosity }
+public enum SensorStatus { Active, Inactive, Offline }
+public enum TelemetryEventStatus { Received, Validated, Rejected, AppliedToTwin }
+
+public sealed record SensorLocationRef(string ParkingLotId, string ZoneId, string? SpaceCode);
+
+public sealed record ReadingRange(double Min, double Max)
+{
+    public ReadingRange : this(Min, Max)
+    {
+        if (Min >= Max) throw new ArgumentException("Min must be < Max");
+    }
+}
+
+public sealed record ReadingValue(double NumericValue, string Unit)
+{
+    public ReadingValue : this(NumericValue, Unit)
+    {
+        if (string.IsNullOrWhiteSpace(Unit))
+            throw new ArgumentException("Unit is required");
+    }
+}
+```
+
+**Eventos de dominio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Events;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Shared.Kernel;
+
+public sealed record TelemetryEventReceived(
+    TelemetryEventId Id, SensorId SensorId, ReadingValue Reading, DateTimeOffset OccurredAt)
+    : IDomainEvent, INotification;
+
+public sealed record TelemetryEventValidated(
+    TelemetryEventId Id, SensorId SensorId, ReadingValue Reading, DateTimeOffset OccurredAt)
+    : IDomainEvent, INotification;
+
+public sealed record TelemetryEventRejected(
+    TelemetryEventId Id, string Reason, DateTimeOffset OccurredAt)
+    : IDomainEvent, INotification;
+
+public sealed record DigitalTwinStateUpdated(
+    TelemetryEventId Id, SensorId SensorId, string TwinId,
+    ReadingValue Reading, DateTimeOffset OccurredAt)
+    : IDomainEvent, INotification;
+```
+
+**Puertos**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Repositories;
+
+public interface ISensorRepository
+{
+    Task<Sensor?> FindByIdAsync(SensorId id, CancellationToken ct = default);
+    Task<IReadOnlyList<Sensor>> FindByTypeAsync(SensorType type, CancellationToken ct = default);
+    Task SaveAsync(Sensor sensor, CancellationToken ct = default);
+}
+
+public interface ITelemetryEventRepository
+{
+    Task AppendAsync(TelemetryEvent telemetryEvent, CancellationToken ct = default);
+    Task UpdateAsync(TelemetryEvent telemetryEvent, CancellationToken ct = default);
+}
+
+// Port to Azure Digital Twins
+public interface IDigitalTwinPatcher
+{
+    Task PatchTwinAsync(string twinId, ReadingValue reading, SensorType sensorType, CancellationToken ct = default);
+}
+```
+
+### 5.4.2. Application Layer
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Application.Commands;
+
+using MediatR;
+
+public sealed record SendTelemetryEventCommand(
+    string SensorId,
+    double NumericValue,
+    string Unit) : IRequest<string>;
+
+public sealed record PatchDigitalTwinStateCommand(string TelemetryEventId) : IRequest;
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Repositories;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Events;
+
+public sealed class SendTelemetryEventHandler : IRequestHandler<SendTelemetryEventCommand, string>
+{
+    private readonly ISensorRepository _sensorRepo;
+    private readonly ITelemetryEventRepository _eventRepo;
+    private readonly IDigitalTwinPatcher _patcher;
+    private readonly IPublisher _publisher;
+
+    public SendTelemetryEventHandler(
+        ISensorRepository sensorRepo,
+        ITelemetryEventRepository eventRepo,
+        IDigitalTwinPatcher patcher,
+        IPublisher publisher)
+    {
+        _sensorRepo = sensorRepo;
+        _eventRepo = eventRepo;
+        _patcher = patcher;
+        _publisher = publisher;
+    }
+
+    public async Task<string> Handle(SendTelemetryEventCommand cmd, CancellationToken ct)
+    {
+        var sensorId = new SensorId(cmd.SensorId);
+        var sensor = await _sensorRepo.FindByIdAsync(sensorId, ct)
+            ?? throw new SensorNotFoundException(sensorId);
+
+        var telemetryEvent = new TelemetryEvent(
+            new TelemetryEventId(Guid.NewGuid().ToString()),
+            sensorId,
+            new ReadingValue(cmd.NumericValue, cmd.Unit));
+
+        telemetryEvent.Validate(sensor);
+
+        if (telemetryEvent.Status == TelemetryEventStatus.Validated)
+        {
+            await _patcher.PatchTwinAsync(sensor.TwinId, telemetryEvent.Reading, sensor.Type, ct);
+            telemetryEvent.MarkAsAppliedToTwin(sensor.TwinId);
+            sensor.NotifyReadingReceived();
+            await _sensorRepo.SaveAsync(sensor, ct);
+        }
+
+        await _eventRepo.AppendAsync(telemetryEvent, ct);
+
+        foreach (var domainEvent in telemetryEvent.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+        telemetryEvent.ClearDomainEvents();
+
+        return telemetryEvent.Id.Value;
+    }
+}
+```
+
+### 5.4.3. Interface Layer
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Interfaces.Rest.Dtos;
+
+[ApiController]
+[Route("api/v1/telemetry")]
+public sealed class TelemetryController : ControllerBase
+{
+    private readonly IMediator _mediator;
+    public TelemetryController(IMediator m) => _mediator = m;
+
+    [HttpPost("events")]
+    public async Task<IActionResult> ReceiveEvent(
+        [FromBody] TelemetryEventRequest request, CancellationToken ct)
+    {
+        var eventId = await _mediator.Send(new SendTelemetryEventCommand(
+            request.SensorId, request.NumericValue, request.Unit), ct);
+        return Accepted(new { eventId });
+    }
+}
+
+namespace Dtos
+{
+    public sealed record TelemetryEventRequest(string SensorId, double NumericValue, string Unit);
+}
+```
+
+**Validador**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Interfaces.Rest.Validation;
+
+using FluentValidation;
+
+public sealed class TelemetryEventRequestValidator : AbstractValidator<TelemetryEventRequest>
+{
+    public TelemetryEventRequestValidator()
+    {
+        RuleFor(x => x.SensorId).NotEmpty();
+        RuleFor(x => x.Unit).NotEmpty().MaximumLength(20);
+        RuleFor(x => x.NumericValue).NotEqual(double.NaN);
+    }
+}
+```
+
+### 5.4.4. Infrastructure Layer
+
+**Persistencia**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Repositories;
+
+public sealed class TelemetryIngestionDbContext : DbContext
+{
+    public DbSet<Sensor> Sensors => Set<Sensor>();
+    public DbSet<TelemetryEvent> TelemetryEvents => Set<TelemetryEvent>();
+
+    public TelemetryIngestionDbContext(DbContextOptions<TelemetryIngestionDbContext> opt) : base(opt) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("telemetry_ingestion");
+        modelBuilder.Entity<Sensor>(b =>
+        {
+            b.ToTable("sensors");
+            b.HasKey("Id");
+            b.Property(s => s.Id)
+                .HasConversion(id => id.Value, v => new SensorId(v))
+                .HasColumnName("sensor_id").HasMaxLength(50);
+            b.Property(s => s.Type).HasConversion<string>().HasMaxLength(20);
+            b.Property(s => s.Status).HasConversion<string>().HasMaxLength(20);
+            b.Property(s => s.TwinId).HasMaxLength(100);
+            b.OwnsOne(s => s.Location);
+            b.OwnsOne(s => s.ValidRange);
+        });
+        modelBuilder.Entity<TelemetryEvent>(b =>
+        {
+            b.ToTable("telemetry_events");
+            b.HasKey("Id");
+            b.Property(e => e.Id)
+                .HasConversion(id => id.Value, v => new TelemetryEventId(v))
+                .HasColumnName("event_id");
+            b.Property(e => e.SensorId).HasConversion(id => id.Value, v => new SensorId(v));
+            b.OwnsOne(e => e.Reading);
+            b.Property(e => e.Status).HasConversion<string>().HasMaxLength(20);
+            b.Ignore(e => e.DomainEvents);
+        });
+    }
+}
+```
+
+**Cliente de Azure Digital Twins (puerto implementado)**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Infrastructure.Adt;
+
+using Azure;
+using Azure.DigitalTwins.Core;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.TelemetryIngestion.Domain.Repositories;
+
+public sealed class AdtDigitalTwinPatcher : IDigitalTwinPatcher
+{
+    private readonly DigitalTwinsClient _client;
+    private readonly ILogger<AdtDigitalTwinPatcher> _logger;
+
+    public AdtDigitalTwinPatcher(DigitalTwinsClient client, ILogger<AdtDigitalTwinPatcher> logger)
+    {
+        _client = client;
+        _logger = logger;
+    }
+
+    public async Task PatchTwinAsync(
+        string twinId, ReadingValue reading, SensorType sensorType, CancellationToken ct = default)
+    {
+        var propertyName = sensorType switch
+        {
+            SensorType.Occupancy => "/occupancyState",
+            SensorType.Smoke => "/smokeDetected",
+            SensorType.FlowVehicular => "/vehiclesPerMinute",
+            SensorType.Luminosity => "/luxValue",
+            _ => throw new InvalidOperationException("Unknown sensor type")
+        };
+
+        var patch = new JsonPatchDocument();
+        patch.AppendReplace(propertyName, reading.NumericValue);
+        patch.AppendReplace("/lastUpdatedAt", DateTimeOffset.UtcNow.ToString("o"));
+
+        try
+        {
+            await _client.UpdateDigitalTwinAsync(twinId, patch, cancellationToken: ct);
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, "Failed to patch twin {TwinId}: {Status}", twinId, ex.Status);
+            throw new DigitalTwinPatchFailedException(twinId, ex);
+        }
+    }
+}
+```
+
+### 5.4.5. Component Diagram — Telemetry Simulation & Ingestion
+
+_(Diagrama UML de los componentes)_
+
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/component-telemetry-simulation-ingestion.png)
+
+### 5.4.6. Class Diagram — Telemetry Simulation & Ingestion
+
+_(Diagrama UML de las clases del Domain Layer, con atributos, métodos, scope, relaciones, multiplicidad.)_
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/class-telemetry-simulation-ingestion.png)
+
+### 5.4.7. Database Diagram — Telemetry Simulation & Ingestion
+
+_(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
+
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/db-telemetry-simulation-ingestion.png)
+
+
+
+---
+
 # Capítulo VI: Solution UX Design
 
 ## 6.1. Style Guidelines
