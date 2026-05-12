@@ -3469,39 +3469,506 @@ _(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
 
 ---
 
-## 5.3. Bounded Context: Traffic Flow
+## 5.3. Bounded Context: Landing & Subscription Management
 
-_(Misma estructura)_
+El contexto **Landing & Subscription Management** gestiona la captación comercial de visitantes interesados en SmartPark. Sus responsabilidades son: (a) registrar el recorrido del visitante por el Landing Page mediante el agregado `SubscriptionLead`, capturando los hitos relevantes (visualización del landing, selección de plan, envío del formulario de contacto); (b) ofrecer el catálogo público de planes de suscripción —Basic (≤500 plazas), Professional (≤1,500 plazas) y Enterprise (>1,500 plazas)—; (c) emitir eventos de dominio (`LandingPageViewed`, `SubscriptionPlanSelected`, `ContactRequestSubmitted`) que el equipo comercial de Apex Twin podrá usar para activar acciones de seguimiento; y (d) marcar la conversión del lead cuando el contexto **Identity & Access Management** notifica que el operador asociado ha completado su registro.
 
----
+Este contexto soporta principalmente la historia **US-04** (Visualización de Planes de Suscripción) y la historia **US-05** (Envío de Formulario de Contacto), y de manera transversal el resto del catálogo del Landing Page (US-01 a US-10), que en términos arquitectónicos se resuelven mayormente en el repositorio `landing-page` (sitio estático sobre Azure Static Web Apps); este bounded context aporta el backend que sustenta la captación de leads.
 
-## 5.4. Bounded Context: Energy Management
+### 5.3.1. Domain Layer
 
-_(Misma estructura)_
+**Agregado raíz: `SubscriptionLead`**
 
----
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Model;
 
-## 5.5. Bounded Context: Parking Session
+public sealed class SubscriptionLead
+{
+    private readonly List<IDomainEvent> _domainEvents = new();
 
-_(Misma estructura)_
+    public SubscriptionLeadId Id { get; }
+    public LeadStatus Status { get; private set; }
+    public SubscriptionTier? SelectedPlan { get; private set; }
+    public ContactInfo? Contact { get; private set; }
+    public string? Message { get; private set; }
+    public DateTimeOffset FirstSeenAt { get; }
+    public DateTimeOffset? ContactedAt { get; private set; }
+    public DateTimeOffset? ConvertedAt { get; private set; }
+    public string? ConvertedOperatorId { get; private set; }
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
----
+    private SubscriptionLead() { /* EF Core */ }
 
-## 5.6. Bounded Context: Notifications
+    public SubscriptionLead(SubscriptionLeadId id)
+    {
+        Id = id;
+        Status = LeadStatus.Viewing;
+        FirstSeenAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new LandingPageViewed(Id, FirstSeenAt));
+    }
 
-_(Misma estructura)_
+    public void SelectPlan(SubscriptionTier tier)
+    {
+        if (Status == LeadStatus.Converted || Status == LeadStatus.Discarded)
+            throw new InvalidLeadTransitionException(Status, nameof(SelectPlan));
+        SelectedPlan = tier;
+        Status = LeadStatus.PlanSelected;
+        _domainEvents.Add(new SubscriptionPlanSelected(Id, tier, DateTimeOffset.UtcNow));
+    }
 
----
+    public void SubmitContact(ContactInfo contact, string message)
+    {
+        if (string.IsNullOrWhiteSpace(message))
+            throw new ArgumentException("Message is required");
+        if (Status == LeadStatus.Converted || Status == LeadStatus.Discarded)
+            throw new InvalidLeadTransitionException(Status, nameof(SubmitContact));
+        Contact = contact;
+        Message = message;
+        Status = LeadStatus.Contacted;
+        ContactedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new ContactRequestSubmitted(Id, contact.Email, SelectedPlan, ContactedAt.Value));
+    }
 
-## 5.7. Bounded Context: Identity & Access Management
+    public void MarkAsConverted(string operatorId)
+    {
+        if (Status != LeadStatus.Contacted)
+            throw new InvalidLeadTransitionException(Status, nameof(MarkAsConverted));
+        ConvertedOperatorId = operatorId;
+        ConvertedAt = DateTimeOffset.UtcNow;
+        Status = LeadStatus.Converted;
+        _domainEvents.Add(new SubscriptionLeadConverted(Id, operatorId, ConvertedAt.Value));
+    }
 
-_(Misma estructura)_
+    public void Discard(string reason)
+    {
+        if (Status == LeadStatus.Converted) return;
+        Status = LeadStatus.Discarded;
+        _domainEvents.Add(new SubscriptionLeadDiscarded(Id, reason, DateTimeOffset.UtcNow));
+    }
 
----
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+```
 
-## 5.8. Bounded Context: Digital Twin Synchronization
+**Value Objects y enumeraciones**
 
-_(Misma estructura)_
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Model;
+
+public sealed record SubscriptionLeadId(string Value);
+
+public enum LeadStatus { Viewing, PlanSelected, Contacted, Converted, Discarded }
+
+public sealed record ContactInfo(string FullName, string Email, string Company, string Phone)
+{
+    public ContactInfo : this(FullName, Email, Company, Phone)
+    {
+        if (string.IsNullOrWhiteSpace(FullName))
+            throw new ArgumentException("Full name is required");
+        if (string.IsNullOrWhiteSpace(Email) || !Email.Contains('@'))
+            throw new ArgumentException("Valid email is required");
+        if (string.IsNullOrWhiteSpace(Company))
+            throw new ArgumentException("Company is required");
+    }
+}
+
+public enum SubscriptionTier { Basic, Professional, Enterprise }
+
+public static class SubscriptionTierCatalog
+{
+    public static IReadOnlyDictionary<SubscriptionTier, PlanSpecification> Catalog =>
+        new Dictionary<SubscriptionTier, PlanSpecification>
+        {
+            [SubscriptionTier.Basic] = new(
+                Tier: SubscriptionTier.Basic,
+                PresentationName: "Basic — Hasta 500 plazas",
+                MaxSpaces: 500,
+                MonthlyPriceUsd: 99.00m,
+                Features: new[]
+                {
+                    "Dashboard de ocupación en tiempo real",
+                    "App móvil para conductores",
+                    "Hasta 500 plazas"
+                }),
+            [SubscriptionTier.Professional] = new(
+                Tier: SubscriptionTier.Professional,
+                PresentationName: "Professional — Hasta 1,500 plazas",
+                MaxSpaces: 1500,
+                MonthlyPriceUsd: 299.00m,
+                Features: new[]
+                {
+                    "Todo lo del plan Basic",
+                    "Alertas de humo con visualización 3D",
+                    "Monitoreo de flujo vehicular",
+                    "Hasta 1,500 plazas"
+                }),
+            [SubscriptionTier.Enterprise] = new(
+                Tier: SubscriptionTier.Enterprise,
+                PresentationName: "Enterprise — Más de 1,500 plazas",
+                MaxSpaces: int.MaxValue,
+                MonthlyPriceUsd: 799.00m,
+                Features: new[]
+                {
+                    "Todo lo del plan Professional",
+                    "Gestión energética con recomendaciones",
+                    "Soporte 24/7",
+                    "Plazas ilimitadas"
+                })
+        };
+}
+
+public sealed record PlanSpecification(
+    SubscriptionTier Tier,
+    string PresentationName,
+    int MaxSpaces,
+    decimal MonthlyPriceUsd,
+    IReadOnlyList<string> Features);
+```
+
+**Eventos de dominio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Events;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Shared.Kernel;
+
+public sealed record LandingPageViewed(SubscriptionLeadId LeadId, DateTimeOffset OccurredAt)
+    : IDomainEvent, INotification;
+
+public sealed record SubscriptionPlanSelected(
+    SubscriptionLeadId LeadId, SubscriptionTier Tier, DateTimeOffset OccurredAt)
+    : IDomainEvent, INotification;
+
+public sealed record ContactRequestSubmitted(
+    SubscriptionLeadId LeadId, string Email, SubscriptionTier? SelectedTier, DateTimeOffset OccurredAt)
+    : IDomainEvent, INotification;
+
+public sealed record SubscriptionLeadConverted(
+    SubscriptionLeadId LeadId, string OperatorId, DateTimeOffset OccurredAt)
+    : IDomainEvent, INotification;
+
+public sealed record SubscriptionLeadDiscarded(
+    SubscriptionLeadId LeadId, string Reason, DateTimeOffset OccurredAt)
+    : IDomainEvent, INotification;
+```
+
+**Repositorio (puerto)**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Repositories;
+
+public interface ISubscriptionLeadRepository
+{
+    Task<SubscriptionLead?> FindByIdAsync(SubscriptionLeadId id, CancellationToken ct = default);
+    Task<IReadOnlyList<SubscriptionLead>> FindByStatusAsync(LeadStatus status, CancellationToken ct = default);
+    Task SaveAsync(SubscriptionLead lead, CancellationToken ct = default);
+}
+```
+
+### 5.3.2. Application Layer
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Application.Commands;
+
+using MediatR;
+
+public sealed record ViewLandingPageCommand : IRequest<string>;
+
+public sealed record SelectSubscriptionPlanCommand(string LeadId, string Tier) : IRequest;
+
+public sealed record SubmitContactFormCommand(
+    string LeadId,
+    string FullName,
+    string Email,
+    string Company,
+    string Phone,
+    string Message) : IRequest;
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Repositories;
+
+public sealed class ViewLandingPageHandler : IRequestHandler<ViewLandingPageCommand, string>
+{
+    private readonly ISubscriptionLeadRepository _repository;
+    private readonly IPublisher _publisher;
+
+    public ViewLandingPageHandler(ISubscriptionLeadRepository r, IPublisher p)
+    {
+        _repository = r;
+        _publisher = p;
+    }
+
+    public async Task<string> Handle(ViewLandingPageCommand cmd, CancellationToken ct)
+    {
+        var lead = new SubscriptionLead(new SubscriptionLeadId(Guid.NewGuid().ToString()));
+        await _repository.SaveAsync(lead, ct);
+        foreach (var ev in lead.DomainEvents) await _publisher.Publish(ev, ct);
+        lead.ClearDomainEvents();
+        return lead.Id.Value;
+    }
+}
+
+public sealed class SubmitContactFormHandler : IRequestHandler<SubmitContactFormCommand>
+{
+    private readonly ISubscriptionLeadRepository _repository;
+    private readonly IPublisher _publisher;
+
+    public SubmitContactFormHandler(ISubscriptionLeadRepository r, IPublisher p)
+    {
+        _repository = r;
+        _publisher = p;
+    }
+
+    public async Task Handle(SubmitContactFormCommand cmd, CancellationToken ct)
+    {
+        var lead = await _repository.FindByIdAsync(new SubscriptionLeadId(cmd.LeadId), ct)
+            ?? throw new SubscriptionLeadNotFoundException(cmd.LeadId);
+
+        var contact = new ContactInfo(cmd.FullName, cmd.Email, cmd.Company, cmd.Phone);
+        lead.SubmitContact(contact, cmd.Message);
+        await _repository.SaveAsync(lead, ct);
+        foreach (var ev in lead.DomainEvents) await _publisher.Publish(ev, ct);
+        lead.ClearDomainEvents();
+    }
+}
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Application.Queries;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Application.Dtos;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Model;
+
+public sealed record GetPlanCatalogQuery : IRequest<IReadOnlyList<PlanDto>>;
+
+public sealed class GetPlanCatalogHandler : IRequestHandler<GetPlanCatalogQuery, IReadOnlyList<PlanDto>>
+{
+    public Task<IReadOnlyList<PlanDto>> Handle(GetPlanCatalogQuery q, CancellationToken ct)
+    {
+        var plans = SubscriptionTierCatalog.Catalog.Values
+            .Select(p => new PlanDto(
+                p.Tier.ToString(),
+                p.PresentationName,
+                p.MaxSpaces == int.MaxValue ? -1 : p.MaxSpaces,
+                p.MonthlyPriceUsd,
+                p.Features.ToList()))
+            .ToList();
+        return Task.FromResult<IReadOnlyList<PlanDto>>(plans);
+    }
+}
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Application.Dtos;
+
+public sealed record PlanDto(
+    string TierCode,
+    string PresentationName,
+    int MaxSpaces,
+    decimal MonthlyPriceUsd,
+    IReadOnlyList<string> Features);
+```
+
+### 5.3.3. Interface Layer
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Application.Queries;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Interfaces.Rest.Dtos;
+
+[ApiController]
+[Route("api/v1/landing")]
+public sealed class LandingController : ControllerBase
+{
+    private readonly IMediator _mediator;
+    public LandingController(IMediator m) => _mediator = m;
+
+    [HttpGet("plans")]
+    public async Task<IActionResult> GetPlans(CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetPlanCatalogQuery(), ct);
+        return Ok(result);
+    }
+
+    [HttpPost("leads")]
+    public async Task<IActionResult> RegisterVisit(CancellationToken ct)
+    {
+        var leadId = await _mediator.Send(new ViewLandingPageCommand(), ct);
+        return CreatedAtAction(nameof(GetLead), new { leadId }, new { leadId });
+    }
+
+    [HttpGet("leads/{leadId}")]
+    public IActionResult GetLead(string leadId) => Ok(new { leadId });
+
+    [HttpPost("leads/{leadId}/plan-selection")]
+    public async Task<IActionResult> SelectPlan(
+        string leadId, [FromBody] SelectPlanRequest request, CancellationToken ct)
+    {
+        await _mediator.Send(new SelectSubscriptionPlanCommand(leadId, request.Tier), ct);
+        return NoContent();
+    }
+
+    [HttpPost("leads/{leadId}/contact")]
+    public async Task<IActionResult> SubmitContact(
+        string leadId, [FromBody] ContactFormRequest request, CancellationToken ct)
+    {
+        await _mediator.Send(new SubmitContactFormCommand(
+            leadId, request.FullName, request.Email, request.Company,
+            request.Phone, request.Message), ct);
+        return Accepted();
+    }
+}
+
+namespace Dtos
+{
+    public sealed record SelectPlanRequest(string Tier);
+    public sealed record ContactFormRequest(
+        string FullName, string Email, string Company, string Phone, string Message);
+}
+```
+
+**Validadores FluentValidation**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Interfaces.Rest.Validation;
+
+using FluentValidation;
+
+public sealed class ContactFormRequestValidator : AbstractValidator<ContactFormRequest>
+{
+    public ContactFormRequestValidator()
+    {
+        RuleFor(x => x.FullName).NotEmpty().MaximumLength(150);
+        RuleFor(x => x.Email).NotEmpty().EmailAddress();
+        RuleFor(x => x.Company).NotEmpty().MaximumLength(200);
+        RuleFor(x => x.Message).NotEmpty().MaximumLength(2000);
+    }
+}
+```
+
+### 5.3.4. Infrastructure Layer
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Repositories;
+
+public sealed class LandingSubscriptionDbContext : DbContext
+{
+    public DbSet<SubscriptionLead> SubscriptionLeads => Set<SubscriptionLead>();
+    public LandingSubscriptionDbContext(DbContextOptions<LandingSubscriptionDbContext> opt) : base(opt) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("landing_subscription");
+        modelBuilder.Entity<SubscriptionLead>(b =>
+        {
+            b.ToTable("subscription_leads");
+            b.HasKey("Id");
+            b.Property(s => s.Id)
+                .HasConversion(id => id.Value, value => new SubscriptionLeadId(value))
+                .HasColumnName("lead_id").HasMaxLength(50);
+            b.Property(s => s.Status).HasConversion<string>().HasMaxLength(20);
+            b.Property(s => s.SelectedPlan).HasConversion<string>().HasMaxLength(20);
+            b.OwnsOne(s => s.Contact, c =>
+            {
+                c.Property(p => p.FullName).HasColumnName("contact_full_name").HasMaxLength(150);
+                c.Property(p => p.Email).HasColumnName("contact_email").HasMaxLength(200);
+                c.Property(p => p.Company).HasColumnName("contact_company").HasMaxLength(200);
+                c.Property(p => p.Phone).HasColumnName("contact_phone").HasMaxLength(20);
+            });
+            b.Ignore(s => s.DomainEvents);
+        });
+    }
+}
+
+public sealed class EfSubscriptionLeadRepository : ISubscriptionLeadRepository
+{
+    private readonly LandingSubscriptionDbContext _context;
+    public EfSubscriptionLeadRepository(LandingSubscriptionDbContext c) => _context = c;
+
+    public Task<SubscriptionLead?> FindByIdAsync(SubscriptionLeadId id, CancellationToken ct = default)
+        => _context.SubscriptionLeads.FirstOrDefaultAsync(s => s.Id == id, ct);
+
+    public async Task<IReadOnlyList<SubscriptionLead>> FindByStatusAsync(LeadStatus status, CancellationToken ct = default)
+        => await _context.SubscriptionLeads.Where(s => s.Status == status).ToListAsync(ct);
+
+    public async Task SaveAsync(SubscriptionLead lead, CancellationToken ct = default)
+    {
+        var existing = await _context.SubscriptionLeads.FindAsync(new object[] { lead.Id }, ct);
+        if (existing is null) await _context.SubscriptionLeads.AddAsync(lead, ct);
+        else _context.Entry(existing).CurrentValues.SetValues(lead);
+        await _context.SaveChangesAsync(ct);
+    }
+}
+```
+
+**Listener para conversión cuando IAM registra al operador**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Infrastructure.Integration;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.LandingSubscription.Domain.Repositories;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Events;
+
+public sealed class OperatorRegistrationListener : INotificationHandler<OperatorAccountRegistered>
+{
+    private readonly ISubscriptionLeadRepository _repository;
+    private readonly IPublisher _publisher;
+
+    public OperatorRegistrationListener(ISubscriptionLeadRepository r, IPublisher p)
+    {
+        _repository = r;
+        _publisher = p;
+    }
+
+    public async Task Handle(OperatorAccountRegistered notification, CancellationToken ct)
+    {
+        if (notification.SourceLeadId is null) return;
+        var lead = await _repository.FindByIdAsync(new SubscriptionLeadId(notification.SourceLeadId), ct);
+        if (lead is null) return;
+        lead.MarkAsConverted(notification.OperatorId);
+        await _repository.SaveAsync(lead, ct);
+        foreach (var ev in lead.DomainEvents) await _publisher.Publish(ev, ct);
+        lead.ClearDomainEvents();
+    }
+}
+```
+
+### 5.3.5. Component Diagram — Landing & Subscription Management
+
+_(Diagrama UML de los componentes)_
+
+![Component Diagram - Landing & Subscription Management](assets/images/chapter-05/component-landing-subscription-management.png)
+
+### 5.3.6. Class Diagram — Landing & Subscription Management
+
+_(Diagrama UML de las clases del Domain Layer, con atributos, métodos, scope, relaciones, multiplicidad.)_
+
+![Class Diagram - Landing & Subscription Management](assets/images/chapter-05/class-landing-subscription-management.png)
+
+### 5.3.7. Database Diagram — Landing & Subscription Management
+
+_(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
+
+![Database Diagram - Landing & Subscription Management](assets/images/chapter-05/db-landing-subscription-management.png)
+
 
 ---
 
