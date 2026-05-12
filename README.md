@@ -223,6 +223,8 @@ _(Pendiente)_
   - [6.2. Information Architecture](#62-information-architecture)
     - [6.2.1. Organization Systems](#621-organization-systems)
     - [6.2.2. Labeling Systems](#622-labeling-systems)
+    - [**Sistema de Iconografía**](#sistema-de-iconografía)
+    - [**Etiquetas por Módulo y Plataforma**](#etiquetas-por-módulo-y-plataforma)
     - [6.2.3. SEO Tags and Meta Tags](#623-seo-tags-and-meta-tags)
     - [6.2.4. Searching Systems](#624-searching-systems)
     - [6.2.5. Navigation Systems](#625-navigation-systems)
@@ -1596,7 +1598,86 @@ La arquitectura de organización de SmartPark está diseñada siguiendo principi
 
 ### 6.2.2. Labeling Systems
 
-_(Etiquetas a utilizar para representar conjuntos de información, con el mínimo número de palabras.)_
+El sistema de etiquetado en SmartPark sigue principios de claridad, consistencia y contexto, asegurando que los usuarios comprendan inmediatamente la función de cada elemento. Se adapta ligeramente entre la plataforma web (operadores) y la aplicación móvil (conductores), manteniendo una base común.
+
+**Principios de Etiquetado**
+
+| Principio | Aplicación en SmartPark |
+|---|---|
+| Lenguaje Natural | Usamos términos del dominio del usuario: "plazas", "niveles", "zonas", "alertas de humo", "flujo vehicular" y "sesión de estacionamiento". |
+| Consistencia | El mismo término significa lo mismo en toda la aplicación. "Disponible" se interpreta igual en web y móvil, y "Ocupado" siempre se representa en rojo. |
+| Jerarquía Visual | El tamaño y peso tipográfico reflejan importancia. Las etiquetas críticas, como "ALERTA DE HUMO", se muestran en mayúsculas y color rojo. |
+| Contexto | Las etiquetas cambian según el módulo y las acciones disponibles. Un operador ve "Gestionar incidentes"; un conductor ve "Mi sesión". |
+| Brevedad | Se usa el mínimo número de palabras sin perder claridad. Por ejemplo, "Plazas libres" en lugar de "Número de espacios de estacionamiento disponibles actualmente". |
+
+### **Sistema de Iconografía**
+
+**Acciones Principales (Web y Móvil)**
+
+| Acción | Etiqueta | Icono sugerido |
+|---|---|---|
+| Agregar/Registrar | "Registrar" / "Guardar ubicación" | ➕ o 📍 |
+| Editar/Modificar | "Editar" / "Modificar" | ✏️ |
+| Eliminar/Descartar | "Eliminar" / "Cancelar" | 🗑️ o ✖️ |
+| Buscar/Filtrar | "Buscar" / "Filtrar" | 🔍 o ⚙️ |
+| Confirmar | "Confirmar" / "Aceptar" | ✓ |
+| Cancelar | "Cancelar" | ✖️ |
+| Cerrar | "Cerrar" | ✖️ |
+| Exportar | "Exportar" / "Descargar" | 📎 o ⬇️ |
+| Refrescar | "Actualizar" | 🔄 |
+| Ver más | "Ver más" / "Ver detalles" | 👁️ o → |
+
+### **Etiquetas por Módulo y Plataforma**
+
+**Plataforma Web (Operadores)**
+
+| Módulo | Etiquetas principales |
+|---|---|
+| Navegación principal | Dashboard / Ocupación / Gemelo 3D / Seguridad / Flujo / Energía / Reportes / Configuración |
+| Dashboard Ocupación | Total de plazas / Ocupadas / Disponibles / Porcentaje de ocupación / Última actualización / Ver por nivel / Ver por zona |
+| Gemelo Digital 3D | Vista 3D / Capas / Ocupación / Seguridad / Flujo / Energía / Zoom / Rotar / Centrar / Reset / Leyenda |
+| Seguridad e Incidentes | Alertas activas / Historial de incidentes / Humo / Congestión / Confirmar / Resolver / Ver ruta de evacuación / Zona afectada / Nivel / Fecha / Hora / Estado / Acciones |
+| Flujo Vehicular | Puntos de acceso / Rampas / Flujo actual (veh/min) / Estado / Normal / Congestión moderada / Congestión severa / Última hora / Pico máximo |
+| Eficiencia Energética | Zona de iluminación / Ocupación / Luminosidad actual / Atenuación recomendada / Ahorro estimado / Ahorro logrado / Aplicar / Programar |
+| Reportes | Generar reporte / Rango de fechas / Tipo de reporte / Incidentes / Ocupación / Flujo / Energía / Exportar a PDF / Exportar a Excel |
+
+**Aplicación Móvil (Conductores)**
+
+| Módulo | Etiquetas principales |
+|---|---|
+| Tab Bar (navegación) | Disponibilidad / Mi Sesión / Alertas / Historial / Perfil |
+| Disponibilidad | Plazas libres / Nivel / Zona / Disponibilidad / % disponible / Ver mapa / Ver lista / Mejor opción |
+| Mi Sesión | Sesión activa / Hora de entrada / Duración / Costo acumulado / Tarifa aplicable / Registrar ubicación / Nivel / Zona / Código de plaza / Escanear QR / Guardar / Encontrar mi vehículo / Finalizar sesión |
+| Alertas | Alertas de seguridad / Alerta de humo / Zona afectada / Nivel / Estado / Activa / Resuelta / Ver más / Acciones recomendadas / Evacuar / Estar atento |
+| Historial | Sesiones pasadas / Fecha / Ubicación / Duración / Costo total / Ver detalle / Comprobante / Repetir visita |
+| Perfil | Mi cuenta / Nombre completo / Correo electrónico / Teléfono / Método de pago / Notificaciones / Activar / Desactivar / Cerrar sesión / Editar perfil |
+
+**Estados del Sistema**
+
+| Estado | Etiqueta | Color asociado | Uso |
+|---|---|---|---|
+| Completado/Éxito | "Completado" / "Éxito" / "Guardado" | Verde (#2E7D32) | Registro exitoso, pago completado, sesión finalizada |
+| Advertencia/Alerta | "Advertencia" / "Atención" / "Precaución" | Amarillo (#FFC107) | Ocupación alta, congestión moderada, batería baja |
+| Error/Problema | "Error" / "Fallo" / "No disponible" | Rojo (#FF3B58) | Sensor fuera de línea, conexión fallida, credenciales inválidas |
+| Procesando/En curso | "Cargando" / "Procesando" / "Actualizando" | Azul (#194756) | Actualización de datos, envío de formulario, escaneo de QR |
+| Información | "Info" / "Nota" / "Ayuda" | Gris (#6C757D) | Mensajes informativos, tooltips, guías contextuales |
+| Inactivo/Deshabilitado | "Inactivo" / "Deshabilitado" / "Sin datos" | Gris claro (#D3D3D3) | Funcionalidad no disponible, sensor sin datos |
+
+**Estados de Plazas y Sensores**
+
+| Entidad | Estado | Etiqueta | Color |
+|---|---|---|---|
+| Plaza | Libre | "Disponible" / "Libre" | Verde |
+| Plaza | Ocupada | "Ocupada" / "En uso" | Rojo o Azul oscuro |
+| Plaza | Reservada | "Reservada" | Amarillo |
+| Plaza | Fuera de servicio | "Fuera de servicio" / "Mantenimiento" | Gris |
+| Detector de humo | Normal | "Normal" / "Sin actividad" | Verde |
+| Detector de humo | Alerta activa | "ALERTA DE HUMO" / "ACTIVO" | Rojo pulsante |
+| Sensor de flujo | Online | "Activo" / "En línea" | Verde |
+| Sensor de flujo | Offline | "Fuera de línea" / "Sin conexión" | Gris |
+| Luminaria | Encendida | "Encendida" / "100%" | Blanco/Azul |
+| Luminaria | Atenuada | "Atenuada" / "X%" | Azul claro |
+
 
 ### 6.2.3. SEO Tags and Meta Tags
 
