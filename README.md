@@ -2240,80 +2240,816 @@ workspace "SmartPark - Deployment Diagram" {
 
 En el presente capítulo se desarrolla el diseño táctico de los nueve bounded contexts de SmartPark. Estos contextos fueron identificados en la sección 4.2 del Capítulo IV. Para cada uno se documentan las cuatro capas arquitectónicas (Domain, Application, Interface, Infrastructure) siguiendo los principios de Domain-Driven Design (Evans, 2003; Vernon, 2013) y la arquitectura hexagonal (ports & adapters), complementadas con un Component Diagram que muestra la estructura interna del módulo, un Class Diagram del modelo de dominio y un Database Diagram que detalla la persistencia.
 
-## 5.1. Bounded Context: Parking Occupancy
+## 5.1. Bounded Context: Parking Operations Monitoring
+
+El contexto **Parking Operations Monitoring** es responsable de supervisar la ocupación, la disponibilidad y la congestión vehicular del estacionamiento del centro comercial. Sus responsabilidades concretas son: (a) mantener el estado de ocupación por nivel, zona y plaza individual; (b) detectar transiciones relevantes —plaza ocupada, plaza liberada, zona llena, capacidad de nivel alcanzada—; (c) monitorear el flujo vehicular en puntos de acceso (entradas, salidas) y rampas internas; (d) aplicar la regla de negocio que define congestión severa (flujo > 80% de capacidad por más de tres minutos consecutivos); (e) exponer endpoints REST para consulta por parte de la Web Application del operador y de la app móvil PowerApps del conductor; y (f) publicar eventos de dominio in-process (`OccupancyUpdated`, `ParkingZoneMarkedFull`, `CongestionAlertRaised`) que el contexto **Digital Twin Management** consume para actualizar la visualización 3D, y que el contexto **Notification Management** consume para evaluar si corresponde notificar a conductores.
+
+Este contexto soporta las historias **US-16** (Dashboard de Ocupación en Tiempo Real), **US-17** (Ocupación por Nivel y Zona), **US-18** (Mapa de Disponibilidad para Conductores), **US-23** (Dashboard de Flujo Vehicular) y **US-24** (Alerta de Congestión Vehicular), y las technical stories **TS-01** (Endpoint de Consulta de Ocupación) y **TS-06** (Endpoint de Consulta de Flujo Vehicular). Recibe insumos del contexto **Telemetry Simulation & Ingestion** mediante el evento de dominio `DigitalTwinStateUpdated`.
 
 ### 5.1.1. Domain Layer
 
-_(Clases que representan el core del bounded context y las reglas de negocio.)_
+La capa de dominio contiene la lógica de negocio pura: agregados, entidades, value objects, eventos de dominio y las interfaces (puertos) de los repositorios. No depende de ningún framework ni de detalles de infraestructura. En este bounded context se identifican dos agregados raíz: `ParkingLot` para la dimensión ocupacional y `AccessPoint` para la dimensión de flujo vehicular.
 
-**Entities:**
-- `ParkingSpace` — Entidad raíz del agregado de ocupación. Atributos: `Id`, `Code`, `Type`, `OccupancyState`, `LastUpdated`. Métodos: `MarkAsOccupied()`, `MarkAsFreed()`, `MarkOutOfService()`.
-- `ParkingZone` — Atributos: `Id`, `Name`, `LevelId`. Métodos: `GetOccupancyRate()`.
-- `ParkingLevel` — Atributos: `Id`, `Name`, `Floor`.
+**Agregado raíz: `ParkingLot`**
 
-**Value Objects:**
-- `OccupancyState` — Free, Occupied, Reserved, OutOfService.
-- `SpaceCode` — Código identificador de plaza con validación de formato.
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Model;
 
-**Aggregates:**
-- `ParkingSpaceAggregate` (raíz: ParkingSpace).
+public sealed class ParkingLot
+{
+    private readonly Dictionary<ZoneId, ParkingZone> _zones = new();
+    private readonly List<IDomainEvent> _domainEvents = new();
 
-**Domain Services:**
-- `OccupancyCalculationService` — Calcula tasas de ocupación agregadas.
+    public ParkingLotId Id { get; }
+    public string Name { get; }
+    public int TotalSpaces { get; }
+    public DateTimeOffset LastUpdatedAt { get; private set; }
+    public IReadOnlyCollection<ParkingZone> Zones => _zones.Values.ToList().AsReadOnly();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-**Repositories (interfaces):**
-- `IParkingSpaceRepository`
-- `IParkingZoneRepository`
+    private ParkingLot() { /* EF Core */ }
 
-### 5.1.2. Interface Layer
+    public ParkingLot(ParkingLotId id, string name, int totalSpaces, IEnumerable<ParkingZone> zones)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name is required", nameof(name));
+        if (totalSpaces <= 0)
+            throw new ArgumentException("Total spaces must be positive", nameof(totalSpaces));
 
-_(Clases del Interface/Presentation Layer.)_
+        Id = id;
+        Name = name;
+        TotalSpaces = totalSpaces;
+        foreach (var z in zones) _zones[z.Id] = z;
+        LastUpdatedAt = DateTimeOffset.UtcNow;
+    }
 
-**Controllers:**
-- `OccupancyController` — Expone `GET /api/v1/occupancy`, `GET /api/v1/occupancy/levels/{levelId}`, `GET /api/v1/occupancy/spaces/{spaceId}`.
+    public void UpdateSpaceState(ZoneId zoneId, SpaceCode spaceCode, OccupancyState newState)
+    {
+        if (!_zones.TryGetValue(zoneId, out var zone))
+            throw new ZoneNotFoundException(zoneId);
 
-### 5.1.3. Application Layer
+        var events = zone.UpdateSpaceState(spaceCode, newState);
+        LastUpdatedAt = DateTimeOffset.UtcNow;
+        _domainEvents.AddRange(events);
 
-**Commands:**
-- `UpdateOccupancyStateCommand`
+        if (newState == OccupancyState.Occupied && IsFullyOccupied())
+            _domainEvents.Add(new ParkingLotCapacityReached(Id, LastUpdatedAt));
+    }
 
-**Command Handlers:**
-- `UpdateOccupancyStateCommandHandler`
+    public OccupancyPercentage OccupancyPercentage()
+    {
+        var occupied = _zones.Values.Sum(z => z.OccupiedCount);
+        return new OccupancyPercentage((occupied * 100.0) / TotalSpaces);
+    }
 
-**Queries:**
-- `GetOccupancyByLevelQuery`
-- `GetOccupancyByZoneQuery`
+    public bool IsFullyOccupied() => OccupancyPercentage().Value >= 100.0;
 
-**Event Handlers:**
-- `TwinOccupancyChangedEventHandler` — Reacciona a eventos del Digital Twin Sync Context.
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+```
+
+**Entidad: `ParkingZone`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Model;
+
+public sealed class ParkingZone
+{
+    private readonly Dictionary<SpaceCode, ParkingSpace> _spaces = new();
+
+    public ZoneId Id { get; }
+    public string Name { get; }
+    public IReadOnlyCollection<ParkingSpace> Spaces => _spaces.Values.ToList().AsReadOnly();
+    public int OccupiedCount => _spaces.Values.Count(s => s.State == OccupancyState.Occupied);
+    public int AvailableCount => _spaces.Count - OccupiedCount;
+
+    private ParkingZone() { /* EF Core */ }
+
+    public ParkingZone(ZoneId id, string name, IEnumerable<ParkingSpace> spaces)
+    {
+        Id = id;
+        Name = name;
+        foreach (var s in spaces) _spaces[s.Code] = s;
+    }
+
+    public List<IDomainEvent> UpdateSpaceState(SpaceCode spaceCode, OccupancyState newState)
+    {
+        if (!_spaces.TryGetValue(spaceCode, out var space))
+            throw new SpaceNotFoundException(spaceCode);
+
+        var oldState = space.State;
+        space.ChangeStateTo(newState);
+
+        var events = new List<IDomainEvent>();
+        if (oldState == OccupancyState.Available && newState == OccupancyState.Occupied)
+            events.Add(new OccupancyUpdated(Id, spaceCode, oldState, newState, DateTimeOffset.UtcNow));
+        else if (oldState == OccupancyState.Occupied && newState == OccupancyState.Available)
+            events.Add(new OccupancyUpdated(Id, spaceCode, oldState, newState, DateTimeOffset.UtcNow));
+
+        if (newState == OccupancyState.Occupied && AvailableCount == 0)
+            events.Add(new ParkingZoneMarkedFull(Id, DateTimeOffset.UtcNow));
+
+        return events;
+    }
+}
+```
+
+**Entidad: `ParkingSpace`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Model;
+
+public sealed class ParkingSpace
+{
+    public SpaceCode Code { get; }
+    public OccupancyState State { get; private set; }
+    public DateTimeOffset LastChangedAt { get; private set; }
+
+    private ParkingSpace() { /* EF Core */ }
+
+    public ParkingSpace(SpaceCode code, OccupancyState initialState)
+    {
+        Code = code;
+        State = initialState;
+        LastChangedAt = DateTimeOffset.UtcNow;
+    }
+
+    public void ChangeStateTo(OccupancyState newState)
+    {
+        if (State == newState) return;
+        State = newState;
+        LastChangedAt = DateTimeOffset.UtcNow;
+    }
+}
+```
+
+**Agregado raíz: `AccessPoint`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Model;
+
+public sealed class AccessPoint
+{
+    private const int MeasurementWindowSize = 10;
+    private const int CongestionConsecutiveMinutes = 3;
+    private const double CongestionRatioThreshold = 0.80;
+
+    private readonly List<FlowMeasurement> _recentMeasurements = new();
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public AccessPointId Id { get; }
+    public string Name { get; }
+    public AccessPointType Type { get; }
+    public FlowThreshold Threshold { get; }
+    public FlowStatus CurrentStatus { get; private set; }
+    public CongestionEvent? ActiveCongestion { get; private set; }
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    private AccessPoint() { /* EF Core */ }
+
+    public AccessPoint(AccessPointId id, string name, AccessPointType type, FlowThreshold threshold)
+    {
+        Id = id;
+        Name = name;
+        Type = type;
+        Threshold = threshold;
+        CurrentStatus = FlowStatus.Normal;
+    }
+
+    public void RecordMeasurement(int vehiclesPerMinute, DateTimeOffset when)
+    {
+        var measurement = new FlowMeasurement(vehiclesPerMinute, when);
+        _recentMeasurements.Add(measurement);
+        if (_recentMeasurements.Count > MeasurementWindowSize)
+            _recentMeasurements.RemoveAt(0);
+
+        CurrentStatus = EvaluateStatus(vehiclesPerMinute);
+
+        if (ShouldRaiseCongestion())
+        {
+            ActiveCongestion = new CongestionEvent(Id, when);
+            _domainEvents.Add(new CongestionAlertRaised(Id, vehiclesPerMinute, when));
+        }
+        else if (ShouldResolveCongestion())
+        {
+            ActiveCongestion = null;
+            _domainEvents.Add(new CongestionResolved(Id, when));
+        }
+    }
+
+    public int CurrentFlowRate => _recentMeasurements.LastOrDefault()?.VehiclesPerMinute ?? 0;
+
+    private FlowStatus EvaluateStatus(int vpm)
+    {
+        var ratio = (double)vpm / Threshold.Capacity;
+        return ratio switch
+        {
+            >= CongestionRatioThreshold => FlowStatus.Congested,
+            >= 0.6 => FlowStatus.Moderate,
+            _ => FlowStatus.Normal
+        };
+    }
+
+    private bool ShouldRaiseCongestion()
+    {
+        if (ActiveCongestion is not null) return false;
+        if (_recentMeasurements.Count < CongestionConsecutiveMinutes) return false;
+        var lastN = _recentMeasurements.TakeLast(CongestionConsecutiveMinutes);
+        return lastN.All(m => (double)m.VehiclesPerMinute / Threshold.Capacity >= CongestionRatioThreshold);
+    }
+
+    private bool ShouldResolveCongestion()
+    {
+        if (ActiveCongestion is null) return false;
+        var latest = _recentMeasurements.Last();
+        return (double)latest.VehiclesPerMinute / Threshold.Capacity < CongestionRatioThreshold;
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+```
+
+**Value Objects**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Model;
+
+public sealed record ParkingLotId(string Value)
+{
+    public ParkingLotId : this(Value)
+    {
+        if (string.IsNullOrWhiteSpace(Value))
+            throw new ArgumentException("Invalid ParkingLotId");
+    }
+}
+
+public sealed record ZoneId(string Value);
+public sealed record SpaceCode(string Value);
+public sealed record AccessPointId(string Value);
+
+public enum OccupancyState { Available, Occupied, Reserved, OutOfService }
+public enum AccessPointType { EntryExitGate, InternalRamp }
+public enum FlowStatus { Normal, Moderate, Congested, Offline }
+
+public sealed record OccupancyPercentage(double Value)
+{
+    public OccupancyPercentage : this(Value)
+    {
+        if (Value < 0.0 || Value > 100.0)
+            throw new ArgumentException("Percentage must be 0..100");
+    }
+}
+
+public sealed record FlowThreshold(int Capacity)
+{
+    public FlowThreshold : this(Capacity)
+    {
+        if (Capacity <= 0) throw new ArgumentException("Capacity must be positive");
+    }
+}
+
+public sealed record FlowMeasurement(int VehiclesPerMinute, DateTimeOffset RecordedAt);
+public sealed record CongestionEvent(AccessPointId AccessPointId, DateTimeOffset StartedAt);
+```
+
+**Eventos de dominio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Events;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Shared.Kernel;
+
+public sealed record OccupancyUpdated(
+    ZoneId ZoneId,
+    SpaceCode SpaceCode,
+    OccupancyState OldState,
+    OccupancyState NewState,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record ParkingZoneMarkedFull(
+    ZoneId ZoneId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record ParkingLotCapacityReached(
+    ParkingLotId ParkingLotId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record CongestionAlertRaised(
+    AccessPointId AccessPointId,
+    int VehiclesPerMinute,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record CongestionResolved(
+    AccessPointId AccessPointId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+```
+
+**Repositorios (puertos)**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Repositories;
+
+public interface IParkingLotRepository
+{
+    Task<ParkingLot?> FindByIdAsync(ParkingLotId id, CancellationToken ct = default);
+    Task<IReadOnlyList<ParkingLot>> FindAllAsync(CancellationToken ct = default);
+    Task SaveAsync(ParkingLot lot, CancellationToken ct = default);
+}
+
+public interface IAccessPointRepository
+{
+    Task<AccessPoint?> FindByIdAsync(AccessPointId id, CancellationToken ct = default);
+    Task<IReadOnlyList<AccessPoint>> FindByTypeAsync(AccessPointType type, CancellationToken ct = default);
+    Task SaveAsync(AccessPoint ap, CancellationToken ct = default);
+}
+```
+
+### 5.1.2. Application Layer
+
+La capa de aplicación orquesta los casos de uso mediante comandos y queries siguiendo CQRS con MediatR. Cada comando representa una intención de cambio de estado; cada query representa una intención de lectura. Los handlers son delgados: cargan agregados, invocan métodos del dominio, persisten y publican eventos.
+
+**Comandos y Queries**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Commands;
+
+using MediatR;
+
+public sealed record UpdateOccupancyStatusCommand(
+    string ParkingLotId,
+    string ZoneId,
+    string SpaceCode,
+    string NewState
+) : IRequest;
+
+public sealed record RecordFlowMeasurementCommand(
+    string AccessPointId,
+    int VehiclesPerMinute,
+    DateTimeOffset RecordedAt
+) : IRequest;
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Queries;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Dtos;
+
+public sealed record GetAllLevelsOccupancyQuery() : IRequest<IReadOnlyList<LevelOccupancyDto>>;
+
+public sealed record GetZoneOccupancyQuery(string ParkingLotId, string ZoneId)
+    : IRequest<ZoneOccupancyDto>;
+
+public sealed record GetAccessPointsFlowQuery(string Type)
+    : IRequest<IReadOnlyList<AccessPointFlowDto>>;
+```
+
+**Command Handlers**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Repositories;
+
+public sealed class UpdateOccupancyStatusHandler : IRequestHandler<UpdateOccupancyStatusCommand>
+{
+    private readonly IParkingLotRepository _repository;
+    private readonly IPublisher _publisher;
+
+    public UpdateOccupancyStatusHandler(IParkingLotRepository repository, IPublisher publisher)
+    {
+        _repository = repository;
+        _publisher = publisher;
+    }
+
+    public async Task Handle(UpdateOccupancyStatusCommand cmd, CancellationToken ct)
+    {
+        var lotId = new ParkingLotId(cmd.ParkingLotId);
+        var lot = await _repository.FindByIdAsync(lotId, ct)
+            ?? throw new ParkingLotNotFoundException(lotId);
+
+        lot.UpdateSpaceState(
+            new ZoneId(cmd.ZoneId),
+            new SpaceCode(cmd.SpaceCode),
+            Enum.Parse<OccupancyState>(cmd.NewState));
+
+        await _repository.SaveAsync(lot, ct);
+
+        foreach (var domainEvent in lot.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+        lot.ClearDomainEvents();
+    }
+}
+
+public sealed class RecordFlowMeasurementHandler : IRequestHandler<RecordFlowMeasurementCommand>
+{
+    private readonly IAccessPointRepository _repository;
+    private readonly IPublisher _publisher;
+
+    public RecordFlowMeasurementHandler(IAccessPointRepository repository, IPublisher publisher)
+    {
+        _repository = repository;
+        _publisher = publisher;
+    }
+
+    public async Task Handle(RecordFlowMeasurementCommand cmd, CancellationToken ct)
+    {
+        var id = new AccessPointId(cmd.AccessPointId);
+        var ap = await _repository.FindByIdAsync(id, ct)
+            ?? throw new AccessPointNotFoundException(id);
+
+        ap.RecordMeasurement(cmd.VehiclesPerMinute, cmd.RecordedAt);
+        await _repository.SaveAsync(ap, ct);
+
+        foreach (var domainEvent in ap.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+        ap.ClearDomainEvents();
+    }
+}
+```
+
+**Query Handlers**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Handlers;
+
+public sealed class GetAllLevelsOccupancyHandler
+    : IRequestHandler<GetAllLevelsOccupancyQuery, IReadOnlyList<LevelOccupancyDto>>
+{
+    private readonly IParkingLotRepository _repository;
+    public GetAllLevelsOccupancyHandler(IParkingLotRepository r) => _repository = r;
+
+    public async Task<IReadOnlyList<LevelOccupancyDto>> Handle(
+        GetAllLevelsOccupancyQuery q, CancellationToken ct)
+    {
+        var lots = await _repository.FindAllAsync(ct);
+        return lots.Select(MapToDto).ToList();
+    }
+
+    private static LevelOccupancyDto MapToDto(ParkingLot lot) =>
+        new(
+            lot.Id.Value,
+            lot.Name,
+            lot.TotalSpaces,
+            lot.Zones.Sum(z => z.OccupiedCount),
+            lot.Zones.Sum(z => z.AvailableCount),
+            lot.OccupancyPercentage().Value,
+            lot.LastUpdatedAt);
+}
+```
+
+**DTOs de aplicación**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Dtos;
+
+public sealed record LevelOccupancyDto(
+    string ParkingLotId,
+    string Name,
+    int TotalSpaces,
+    int OccupiedSpaces,
+    int AvailableSpaces,
+    double OccupancyPercentage,
+    DateTimeOffset LastUpdatedAt);
+
+public sealed record ZoneOccupancyDto(
+    string ZoneId,
+    string ZoneName,
+    int TotalSpaces,
+    int OccupiedSpaces,
+    int AvailableSpaces,
+    IReadOnlyList<SpaceStateDto> Spaces);
+
+public sealed record SpaceStateDto(string Code, string State, DateTimeOffset LastChangedAt);
+
+public sealed record AccessPointFlowDto(
+    string AccessPointId,
+    string Name,
+    int CurrentFlowRate,
+    string Status,
+    DateTimeOffset LastUpdated);
+```
+
+### 5.1.3. Interface Layer
+
+La capa de interfaz expone los casos de uso al exterior mediante controladores REST. Los controladores son delgados: validan el modelo de entrada, envían un comando o query al `IMediator`, y traducen la respuesta a un código HTTP apropiado.
+
+**Controlador**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Queries;
+
+[ApiController]
+[Route("api/v1/occupancy")]
+public sealed class OccupancyController : ControllerBase
+{
+    private readonly IMediator _mediator;
+    public OccupancyController(IMediator mediator) => _mediator = mediator;
+
+    [HttpGet("parking-lots")]
+    public async Task<IActionResult> GetAllLevels(CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetAllLevelsOccupancyQuery(), ct);
+        return Ok(result);
+    }
+
+    [HttpGet("parking-lots/{parkingLotId}/zones/{zoneId}")]
+    public async Task<IActionResult> GetZone(
+        string parkingLotId, string zoneId, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetZoneOccupancyQuery(parkingLotId, zoneId), ct);
+        return Ok(result);
+    }
+
+    [HttpPatch("parking-lots/{parkingLotId}/zones/{zoneId}/spaces/{spaceCode}")]
+    public async Task<IActionResult> UpdateSpaceState(
+        string parkingLotId, string zoneId, string spaceCode,
+        [FromBody] UpdateSpaceRequest request, CancellationToken ct)
+    {
+        await _mediator.Send(new UpdateOccupancyStatusCommand(
+            parkingLotId, zoneId, spaceCode, request.NewState), ct);
+        return NoContent();
+    }
+}
+
+[ApiController]
+[Route("api/v1/traffic")]
+public sealed class TrafficController : ControllerBase
+{
+    private readonly IMediator _mediator;
+    public TrafficController(IMediator mediator) => _mediator = mediator;
+
+    [HttpGet("access-points")]
+    public async Task<IActionResult> GetAccessPoints(CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetAccessPointsFlowQuery("EntryExitGate"), ct);
+        return Ok(result);
+    }
+
+    [HttpGet("ramps")]
+    public async Task<IActionResult> GetRamps(CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetAccessPointsFlowQuery("InternalRamp"), ct);
+        return Ok(result);
+    }
+
+    [HttpPost("access-points/{accessPointId}/measurements")]
+    public async Task<IActionResult> RecordMeasurement(
+        string accessPointId,
+        [FromBody] RecordFlowRequest request, CancellationToken ct)
+    {
+        await _mediator.Send(new RecordFlowMeasurementCommand(
+            accessPointId, request.VehiclesPerMinute, request.RecordedAt), ct);
+        return Accepted();
+    }
+}
+```
+
+**Request DTOs y validación con FluentValidation**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Interfaces.Rest.Dtos;
+
+public sealed record UpdateSpaceRequest(string NewState);
+public sealed record RecordFlowRequest(int VehiclesPerMinute, DateTimeOffset RecordedAt);
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Interfaces.Rest.Validation;
+
+using FluentValidation;
+
+public sealed class UpdateSpaceRequestValidator : AbstractValidator<UpdateSpaceRequest>
+{
+    public UpdateSpaceRequestValidator()
+    {
+        RuleFor(x => x.NewState)
+            .NotEmpty()
+            .Must(s => new[] { "Available", "Occupied", "Reserved", "OutOfService" }.Contains(s))
+            .WithMessage("Invalid state. Allowed: Available, Occupied, Reserved, OutOfService.");
+    }
+}
+```
+
+**Manejador de excepciones (filter global)**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+
+public sealed class ParkingOperationsExceptionFilter : IExceptionFilter
+{
+    public void OnException(ExceptionContext context)
+    {
+        context.Result = context.Exception switch
+        {
+            ParkingLotNotFoundException ex => new NotFoundObjectResult(
+                new { error = "ParkingLot not found", detail = ex.Message }),
+            ZoneNotFoundException ex => new NotFoundObjectResult(
+                new { error = "Zone not found", detail = ex.Message }),
+            SpaceNotFoundException ex => new NotFoundObjectResult(
+                new { error = "Space not found", detail = ex.Message }),
+            AccessPointNotFoundException ex => new NotFoundObjectResult(
+                new { error = "AccessPoint not found", detail = ex.Message }),
+            _ => context.Result
+        };
+        context.ExceptionHandled = context.Result is not null;
+    }
+}
+```
 
 ### 5.1.4. Infrastructure Layer
 
-**Repository Implementations:**
-- `ParkingSpaceRepository` (EF Core sobre PostgreSQL para metadata, lectura desde ADT para estado en tiempo real).
+La capa de infraestructura implementa los puertos del dominio (repositorios) y gestiona la integración con tecnologías concretas: PostgreSQL vía Entity Framework Core 8 y empuje al dashboard Angular vía SignalR.
 
-**Adapters:**
-- `AzureDigitalTwinsAdapter` — Consume el SDK de Azure.DigitalTwins.Core.
+**DbContext del módulo**
 
-### 5.1.5. Bounded Context Software Architecture Component Level Diagrams
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Infrastructure.Persistence;
 
-_(C4 Level 3: Component Diagram para los containers de este bounded context.)_
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Model;
 
-![Component Diagram - Parking Occupancy](assets/images/chapter-05/component-parking-occupancy.png)
+public sealed class ParkingOperationsDbContext : DbContext
+{
+    public DbSet<ParkingLot> ParkingLots => Set<ParkingLot>();
+    public DbSet<AccessPoint> AccessPoints => Set<AccessPoint>();
 
-### 5.1.6. Bounded Context Software Architecture Code Level Diagrams
+    public ParkingOperationsDbContext(DbContextOptions<ParkingOperationsDbContext> options)
+        : base(options) { }
 
-#### 5.1.6.1. Bounded Context Domain Layer Class Diagrams
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("parking_operations");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ParkingOperationsDbContext).Assembly);
+    }
+}
+```
+
+**Configuración EF Core de `ParkingLot`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Infrastructure.Persistence.Configurations;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+public sealed class ParkingLotConfiguration : IEntityTypeConfiguration<ParkingLot>
+{
+    public void Configure(EntityTypeBuilder<ParkingLot> builder)
+    {
+        builder.ToTable("parking_lots");
+        builder.HasKey("Id");
+        builder.Property(p => p.Id)
+            .HasConversion(id => id.Value, value => new ParkingLotId(value))
+            .HasColumnName("parking_lot_id")
+            .HasMaxLength(50);
+        builder.Property(p => p.Name).HasMaxLength(150).IsRequired();
+        builder.Property(p => p.TotalSpaces).IsRequired();
+        builder.Property(p => p.LastUpdatedAt).IsRequired();
+        builder.OwnsMany<ParkingZone>("_zones", b =>
+        {
+            b.ToTable("parking_zones");
+            b.WithOwner().HasForeignKey("parking_lot_id");
+            b.Property(z => z.Id)
+                .HasConversion(id => id.Value, value => new ZoneId(value))
+                .HasColumnName("zone_id");
+            b.HasKey("parking_lot_id", "Id");
+        });
+        builder.Ignore(p => p.DomainEvents);
+    }
+}
+```
+
+**Implementación del repositorio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Repositories;
+
+public sealed class EfParkingLotRepository : IParkingLotRepository
+{
+    private readonly ParkingOperationsDbContext _context;
+    public EfParkingLotRepository(ParkingOperationsDbContext c) => _context = c;
+
+    public Task<ParkingLot?> FindByIdAsync(ParkingLotId id, CancellationToken ct = default)
+        => _context.ParkingLots
+            .Include("_zones")
+            .FirstOrDefaultAsync(p => p.Id == id, ct);
+
+    public async Task<IReadOnlyList<ParkingLot>> FindAllAsync(CancellationToken ct = default)
+        => await _context.ParkingLots.Include("_zones").ToListAsync(ct);
+
+    public async Task SaveAsync(ParkingLot lot, CancellationToken ct = default)
+    {
+        var existing = await _context.ParkingLots.FindAsync(new object[] { lot.Id }, ct);
+        if (existing is null) await _context.ParkingLots.AddAsync(lot, ct);
+        else _context.Entry(existing).CurrentValues.SetValues(lot);
+        await _context.SaveChangesAsync(ct);
+    }
+}
+```
+
+**Notificador SignalR (consume eventos del dominio y empuja al dashboard Angular)**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Infrastructure.RealTime;
+
+using MediatR;
+using Microsoft.AspNetCore.SignalR;
+using ApexTwin.SmartPark.WebApi.Shared.Infrastructure.SignalR;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Events;
+
+public sealed class OccupancyUpdatedNotifier : INotificationHandler<OccupancyUpdated>
+{
+    private readonly IHubContext<DashboardHub> _hub;
+    public OccupancyUpdatedNotifier(IHubContext<DashboardHub> hub) => _hub = hub;
+
+    public Task Handle(OccupancyUpdated notification, CancellationToken ct)
+        => _hub.Clients.Group("operators").SendAsync("OccupancyChanged", new
+        {
+            zoneId = notification.ZoneId.Value,
+            spaceCode = notification.SpaceCode.Value,
+            newState = notification.NewState.ToString(),
+            occurredAt = notification.OccurredAt
+        }, ct);
+}
+
+public sealed class CongestionAlertNotifier : INotificationHandler<CongestionAlertRaised>
+{
+    private readonly IHubContext<DashboardHub> _hub;
+    public CongestionAlertNotifier(IHubContext<DashboardHub> hub) => _hub = hub;
+
+    public Task Handle(CongestionAlertRaised notification, CancellationToken ct)
+        => _hub.Clients.Group("operators").SendAsync("CongestionAlert", new
+        {
+            accessPointId = notification.AccessPointId.Value,
+            vehiclesPerMinute = notification.VehiclesPerMinute,
+            occurredAt = notification.OccurredAt
+        }, ct);
+}
+```
+
+**Registro del módulo**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingOperations;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Domain.Repositories;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Infrastructure.Persistence;
+
+public static class ParkingOperationsModule
+{
+    public static IServiceCollection AddParkingOperationsModule(
+        this IServiceCollection services, IConfiguration config)
+    {
+        services.AddDbContext<ParkingOperationsDbContext>(opt =>
+            opt.UseNpgsql(config.GetConnectionString("SmartParkDb")));
+        services.AddScoped<IParkingLotRepository, EfParkingLotRepository>();
+        services.AddScoped<IAccessPointRepository, EfAccessPointRepository>();
+        return services;
+    }
+}
+```
+
+### 5.1.5. Component Diagram — Parking Operations Monitoring
+
+_(Diagrama UML de los componentes)_
+
+![Component Diagram - Parking Operations Monitoring](assets/images/chapter-05/class-parking-occupancy.png)
+
+### 5.1.6. Class Diagram — Parking Operations Monitoring
 
 _(Diagrama UML de las clases del Domain Layer, con atributos, métodos, scope, relaciones, multiplicidad.)_
 
-![Class Diagram - Parking Occupancy](assets/images/chapter-05/class-parking-occupancy.png)
+![Class Diagram - Parking Operations Monitoring](assets/images/chapter-05/class-parking-occupancy.png)
 
-#### 5.1.6.2. Bounded Context Database Design Diagram
+### 5.1.7. Database Diagram — Parking Operations Monitoring
 
 _(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
 
-![DB Diagram - Parking Occupancy](assets/images/chapter-05/db-parking-occupancy.png)
+![Database Diagram - PParking Operations Monitoring](assets/images/chapter-05/db-parking-occupancy.png)
 
 ---
 
