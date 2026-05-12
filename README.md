@@ -3053,25 +3053,419 @@ _(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
 
 ---
 
-## 5.2. Bounded Context: Safety & Incidents
+## 5.2. Bounded Context: Energy Efficiency Management
+
+El contexto **Energy Efficiency Management** transforma datos operativos en recomendaciones de ahorro energético. Sus responsabilidades son: (a) recibir lecturas de luminosidad por zona desde el contexto **Telemetry Simulation & Ingestion**; (b) consultar la ocupación correspondiente desde **Parking Operations Monitoring** mediante un Anti-Corruption Layer; (c) aplicar la regla de negocio que detecta oportunidad de atenuación (ocupación < 20% y luminosidad normalizada > 50%); (d) generar recomendaciones de atenuación con el ahorro energético estimado; y (e) exponer endpoints REST para que el dashboard del operador muestre las recomendaciones contextualizadas en el modelo 3D.
+
+Este contexto soporta las historias **US-25** (Dashboard de Eficiencia Energética) y **US-26** (Visualización de Recomendaciones de Atenuación), y la technical story **TS-07** (Endpoint de Consulta de Gestión Energética).
 
 ### 5.2.1. Domain Layer
-_(Misma estructura)_
 
-### 5.2.2. Interface Layer
-_(Misma estructura)_
+**Agregado raíz: `LightingZone`**
 
-### 5.2.3. Application Layer
-_(Misma estructura)_
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Model;
+
+public sealed class LightingZone
+{
+    private const double OccupancyThreshold = 0.20;
+    private const double LuminosityThreshold = 0.50;
+
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public LightingZoneId Id { get; }
+    public ZoneReference ParkingZoneRef { get; }
+    public LampCount InstalledLamps { get; }
+    public PowerRating RatedPower { get; }
+    public LuminosityReading? CurrentLuminosity { get; private set; }
+    public OccupancyRatio? CurrentOccupancy { get; private set; }
+    public DimmingRecommendation? ActiveRecommendation { get; private set; }
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    private LightingZone() { /* EF Core */ }
+
+    public LightingZone(LightingZoneId id, ZoneReference parkingZoneRef,
+                        LampCount lamps, PowerRating power)
+    {
+        Id = id;
+        ParkingZoneRef = parkingZoneRef;
+        InstalledLamps = lamps;
+        RatedPower = power;
+    }
+
+    public void RecordReading(LuminosityReading luminosity, OccupancyRatio occupancy)
+    {
+        CurrentLuminosity = luminosity;
+        CurrentOccupancy = occupancy;
+        _domainEvents.Add(new LowOccupancyZoneDetected(Id, occupancy, DateTimeOffset.UtcNow));
+
+        if (ShouldRecommendDimming() && ActiveRecommendation is null)
+        {
+            var savings = CalculateEstimatedSavings();
+            ActiveRecommendation = new DimmingRecommendation(Id, savings, DateTimeOffset.UtcNow);
+            _domainEvents.Add(new DimmingRecommendationGenerated(Id, savings, DateTimeOffset.UtcNow));
+        }
+        else if (!ShouldRecommendDimming() && ActiveRecommendation is not null)
+        {
+            ActiveRecommendation = null;
+            _domainEvents.Add(new DimmingRecommendationCleared(Id, DateTimeOffset.UtcNow));
+        }
+    }
+
+    private bool ShouldRecommendDimming()
+    {
+        if (CurrentLuminosity is null || CurrentOccupancy is null) return false;
+        return CurrentOccupancy.Value < OccupancyThreshold
+            && CurrentLuminosity.NormalizedValue > LuminosityThreshold;
+    }
+
+    private EstimatedSavings CalculateEstimatedSavings()
+    {
+        var currentConsumption = InstalledLamps.Count * RatedPower.Watts
+                                 * CurrentLuminosity!.NormalizedValue;
+        var dimmedConsumption = InstalledLamps.Count * RatedPower.Watts * 0.30;
+        var savedWatts = currentConsumption - dimmedConsumption;
+        var savedPercentage = (savedWatts / currentConsumption) * 100;
+        return new EstimatedSavings(savedWatts, savedPercentage);
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+```
+
+**Value Objects**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Model;
+
+public sealed record LightingZoneId(string Value);
+
+public sealed record ZoneReference(string ParkingLotId, string ZoneId)
+{
+    public ZoneReference : this(ParkingLotId, ZoneId)
+    {
+        if (string.IsNullOrWhiteSpace(ParkingLotId) || string.IsNullOrWhiteSpace(ZoneId))
+            throw new ArgumentException("Invalid ZoneReference");
+    }
+}
+
+public sealed record LampCount(int Count)
+{
+    public LampCount : this(Count)
+    {
+        if (Count <= 0) throw new ArgumentException("Lamp count must be positive");
+    }
+}
+
+public sealed record PowerRating(double Watts)
+{
+    public PowerRating : this(Watts)
+    {
+        if (Watts <= 0) throw new ArgumentException("Power must be positive");
+    }
+}
+
+public sealed record LuminosityReading(int LuxValue)
+{
+    private const int MaxLux = 1000;
+
+    public LuminosityReading : this(LuxValue)
+    {
+        if (LuxValue < 0) throw new ArgumentException("Lux cannot be negative");
+    }
+
+    public double NormalizedValue => Math.Min((double)LuxValue / MaxLux, 1.0);
+}
+
+public sealed record OccupancyRatio(double Value)
+{
+    public OccupancyRatio : this(Value)
+    {
+        if (Value < 0.0 || Value > 1.0)
+            throw new ArgumentException("Ratio must be 0..1");
+    }
+}
+
+public sealed record EstimatedSavings(double SavedWatts, double SavedPercentage);
+
+public sealed record DimmingRecommendation(
+    LightingZoneId ZoneId,
+    EstimatedSavings Savings,
+    DateTimeOffset RecommendedAt);
+```
+
+**Eventos de dominio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Events;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Shared.Kernel;
+
+public sealed record LowOccupancyZoneDetected(
+    LightingZoneId ZoneId,
+    OccupancyRatio Occupancy,
+    DateTimeOffset OccurredAt) : IDomainEvent, INotification;
+
+public sealed record DimmingRecommendationGenerated(
+    LightingZoneId ZoneId,
+    EstimatedSavings Savings,
+    DateTimeOffset OccurredAt) : IDomainEvent, INotification;
+
+public sealed record DimmingRecommendationCleared(
+    LightingZoneId ZoneId,
+    DateTimeOffset OccurredAt) : IDomainEvent, INotification;
+```
+
+**Puertos (repository + ACL)**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Repositories;
+
+public interface ILightingZoneRepository
+{
+    Task<LightingZone?> FindByIdAsync(LightingZoneId id, CancellationToken ct = default);
+    Task<IReadOnlyList<LightingZone>> FindAllAsync(CancellationToken ct = default);
+    Task SaveAsync(LightingZone zone, CancellationToken ct = default);
+}
+
+// Anti-Corruption Layer hacia Parking Operations Monitoring
+public interface IParkingOccupancyGateway
+{
+    Task<OccupancyRatio> FetchOccupancyForZoneAsync(ZoneReference reference, CancellationToken ct = default);
+}
+```
+
+### 5.2.2. Application Layer
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Application.Commands;
+
+using MediatR;
+
+public sealed record AnalyzeLightingByZoneCommand(string LightingZoneId, int LuxValue) : IRequest;
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Repositories;
+
+public sealed class AnalyzeLightingByZoneHandler : IRequestHandler<AnalyzeLightingByZoneCommand>
+{
+    private readonly ILightingZoneRepository _repository;
+    private readonly IParkingOccupancyGateway _occupancyGateway;
+    private readonly IPublisher _publisher;
+
+    public AnalyzeLightingByZoneHandler(
+        ILightingZoneRepository repository,
+        IParkingOccupancyGateway occupancyGateway,
+        IPublisher publisher)
+    {
+        _repository = repository;
+        _occupancyGateway = occupancyGateway;
+        _publisher = publisher;
+    }
+
+    public async Task Handle(AnalyzeLightingByZoneCommand cmd, CancellationToken ct)
+    {
+        var id = new LightingZoneId(cmd.LightingZoneId);
+        var zone = await _repository.FindByIdAsync(id, ct)
+            ?? throw new LightingZoneNotFoundException(id);
+
+        // ACL: fetch occupancy from sibling module
+        var occupancy = await _occupancyGateway.FetchOccupancyForZoneAsync(zone.ParkingZoneRef, ct);
+        var reading = new LuminosityReading(cmd.LuxValue);
+
+        zone.RecordReading(reading, occupancy);
+        await _repository.SaveAsync(zone, ct);
+
+        foreach (var domainEvent in zone.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+        zone.ClearDomainEvents();
+    }
+}
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Application.Queries;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Application.Dtos;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Repositories;
+
+public sealed record GetAllEnergyZonesQuery : IRequest<IReadOnlyList<EnergyZoneDto>>;
+
+public sealed class GetAllEnergyZonesHandler
+    : IRequestHandler<GetAllEnergyZonesQuery, IReadOnlyList<EnergyZoneDto>>
+{
+    private readonly ILightingZoneRepository _repository;
+    public GetAllEnergyZonesHandler(ILightingZoneRepository r) => _repository = r;
+
+    public async Task<IReadOnlyList<EnergyZoneDto>> Handle(
+        GetAllEnergyZonesQuery q, CancellationToken ct)
+    {
+        var zones = await _repository.FindAllAsync(ct);
+        return zones.Select(z => new EnergyZoneDto(
+            z.Id.Value,
+            z.ParkingZoneRef.ParkingLotId,
+            z.ParkingZoneRef.ZoneId,
+            (z.CurrentOccupancy?.Value ?? 0.0) * 100,
+            z.CurrentLuminosity?.LuxValue ?? 0,
+            z.ActiveRecommendation is not null,
+            z.ActiveRecommendation?.Savings.SavedPercentage ?? 0.0
+        )).ToList();
+    }
+}
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Application.Dtos;
+
+public sealed record EnergyZoneDto(
+    string LightingZoneId,
+    string ParkingLotId,
+    string ParkingZoneId,
+    double OccupancyPercentage,
+    int CurrentLuminosity,
+    bool DimmingRecommended,
+    double EstimatedSavingsPercentage);
+```
+
+### 5.2.3. Interface Layer
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Application.Queries;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Interfaces.Rest.Dtos;
+
+[ApiController]
+[Route("api/v1/energy")]
+public sealed class EnergyController : ControllerBase
+{
+    private readonly IMediator _mediator;
+    public EnergyController(IMediator m) => _mediator = m;
+
+    [HttpGet("zones")]
+    public async Task<IActionResult> GetZones(CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetAllEnergyZonesQuery(), ct);
+        return Ok(result);
+    }
+
+    [HttpPost("zones/{lightingZoneId}/readings")]
+    public async Task<IActionResult> RecordReading(
+        string lightingZoneId,
+        [FromBody] RecordLuminosityRequest request,
+        CancellationToken ct)
+    {
+        await _mediator.Send(new AnalyzeLightingByZoneCommand(lightingZoneId, request.LuxValue), ct);
+        return Accepted();
+    }
+}
+
+namespace Dtos { public sealed record RecordLuminosityRequest(int LuxValue); }
+```
 
 ### 5.2.4. Infrastructure Layer
-_(Misma estructura)_
 
-### 5.2.5. Bounded Context Software Architecture Component Level Diagrams
-_(Misma estructura)_
+**DbContext y repositorio**
 
-### 5.2.6. Bounded Context Software Architecture Code Level Diagrams
-_(Misma estructura)_
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Model;
+
+public sealed class EnergyEfficiencyDbContext : DbContext
+{
+    public DbSet<LightingZone> LightingZones => Set<LightingZone>();
+
+    public EnergyEfficiencyDbContext(DbContextOptions<EnergyEfficiencyDbContext> options)
+        : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("energy_efficiency");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(EnergyEfficiencyDbContext).Assembly);
+    }
+}
+
+public sealed class EfLightingZoneRepository : ILightingZoneRepository
+{
+    private readonly EnergyEfficiencyDbContext _context;
+    public EfLightingZoneRepository(EnergyEfficiencyDbContext c) => _context = c;
+
+    public Task<LightingZone?> FindByIdAsync(LightingZoneId id, CancellationToken ct = default)
+        => _context.LightingZones.FirstOrDefaultAsync(z => z.Id == id, ct);
+
+    public async Task<IReadOnlyList<LightingZone>> FindAllAsync(CancellationToken ct = default)
+        => await _context.LightingZones.ToListAsync(ct);
+
+    public async Task SaveAsync(LightingZone zone, CancellationToken ct = default)
+    {
+        var existing = await _context.LightingZones.FindAsync(new object[] { zone.Id }, ct);
+        if (existing is null) await _context.LightingZones.AddAsync(zone, ct);
+        else _context.Entry(existing).CurrentValues.SetValues(zone);
+        await _context.SaveChangesAsync(ct);
+    }
+}
+```
+
+**Implementación del ACL hacia Parking Operations Monitoring**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Infrastructure.Acl;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.EnergyEfficiency.Domain.Repositories;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Queries;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingOperations.Application.Dtos;
+
+public sealed class ParkingOccupancyGateway : IParkingOccupancyGateway
+{
+    private readonly IMediator _mediator;
+    public ParkingOccupancyGateway(IMediator m) => _mediator = m;
+
+    public async Task<OccupancyRatio> FetchOccupancyForZoneAsync(
+        ZoneReference reference, CancellationToken ct = default)
+    {
+        // ACL: query the Parking Operations module via in-process mediator
+        // and translate the external representation into our domain VO.
+        ZoneOccupancyDto external = await _mediator.Send(
+            new GetZoneOccupancyQuery(reference.ParkingLotId, reference.ZoneId), ct);
+        var ratio = (double)external.OccupiedSpaces / external.TotalSpaces;
+        return new OccupancyRatio(ratio);
+    }
+}
+```
+
+### 5.2.5. Component Diagram — Energy Efficiency Management
+
+_(Diagrama UML de los componentes)_
+
+![Component Diagram - Energy Efficiency Management](assets/images/chapter-05/component-energy-efficiency.png)
+
+### 5.2.6. Class Diagram — Energy Efficiency Management
+
+_(Diagrama UML de las clases del Domain Layer, con atributos, métodos, scope, relaciones, multiplicidad.)_
+
+![Class Diagram - Energy Efficiency Management](assets/images/chapter-05/class-energy-efficiency.png)
+
+### 5.2.7. Database Diagram — Energy Efficiency Management
+
+_(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
+
+![Database Diagram - Energy Efficiency Management](assets/images/chapter-05/db-energy-efficiency.png)
+
 
 ---
 
