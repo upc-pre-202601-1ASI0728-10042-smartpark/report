@@ -226,6 +226,9 @@ _(Pendiente)_
     - [**Sistema de Iconografía**](#sistema-de-iconografía)
     - [**Etiquetas por Módulo y Plataforma**](#etiquetas-por-módulo-y-plataforma)
     - [6.2.3. SEO Tags and Meta Tags](#623-seo-tags-and-meta-tags)
+    - [**SEO Tags para Landing Pages**](#seo-tags-para-landing-pages)
+    - [**Header Tags Estructurados**](#header-tags-estructurados)
+    - [**Meta Tags Optimizadas**](#meta-tags-optimizadas)
     - [6.2.4. Searching Systems](#624-searching-systems)
     - [6.2.5. Navigation Systems](#625-navigation-systems)
   - [6.3. Landing Page UI Design](#63-landing-page-ui-design)
@@ -1678,23 +1681,88 @@ El sistema de etiquetado en SmartPark sigue principios de claridad, consistencia
 | Luminaria | Encendida | "Encendida" / "100%" | Blanco/Azul |
 | Luminaria | Atenuada | "Atenuada" / "X%" | Azul claro |
 
-
 ### 6.2.3. SEO Tags and Meta Tags
+
+SEO (Search Engine Optimization) Tags son elementos de HTML que ayudan a los motores de búsqueda a entender el contenido y la estructura de una página web. Estos tags influyen en cómo los motores de búsqueda indexan y clasifican tu sitio en los resultados de búsqueda.
+
+A continuación, se definen los tags SEO para las páginas de aterrizaje (Landing Pages) de SmartPark y los elementos ASO (App Store Optimization) para la aplicación móvil desarrollada en Microsoft PowerApps.
+
+### **SEO Tags para Landing Pages**
 
 | Página | Title | Description | Keywords | Author |
 |---|---|---|---|---|
-| Landing Home | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| Landing For Operators | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| Landing For Drivers | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| Web App Dashboard | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
+| Landing Home | SmartPark - Gestión Inteligente de Estacionamientos con Gemelo Digital | Plataforma SaaS con gemelo digital 3D para centros comerciales. Optimiza ocupación, seguridad, flujo vehicular y eficiencia energética en tiempo real. | gemelo digital estacionamiento, smart parking, gestión estacionamientos, Azure Digital Twins, IoT estacionamiento, centros comerciales Lima | Apex Twin |
+| Landing For Operators | SmartPark para Operadores - Dashboard y Gemelo Digital 3D | Controla tu estacionamiento desde un gemelo digital 3D. Monitoreo en tiempo real, alertas de humo geolocalizadas, flujo vehicular y ahorro energético. | operadores estacionamiento, dashboard gestión, alertas humo geolocalizadas, flujo vehicular, eficiencia energética estacionamiento | Apex Twin |
+| Landing For Drivers | SmartPark para Conductores - Encuentra tu plaza fácil y seguro | App móvil para conductores: consulta disponibilidad, registra tu ubicación, monitorea costo acumulado y recibe alertas de seguridad. Descarga gratis. | app estacionamiento, encontrar plaza libre, registrar ubicación vehículo, alertas seguridad estacionamiento, costo acumulado | Apex Twin |
+| Web App Dashboard | SmartPark Dashboard - Panel de Control para Operadores | Panel de control en tiempo real para gestión de estacionamientos. Visualización 3D, gestión de incidentes, reportes y analytics. | dashboard estacionamiento, gemelo digital, gestión incidentes, reportes ocupación, analytics estacionamiento | Apex Twin |
 
-**ASO Elements (PowerApps):**
-| Field | Value |
-|---|---|
-| App Title | _(...)_ |
-| App Subtitle | _(...)_ |
-| App Keywords | _(...)_ |
-| App Description | _(...)_ |
+### **Header Tags Estructurados**
+**Landing Home**
+
+```html
+<h1>SmartPark - Gestión Inteligente de Estacionamientos con Gemelo Digital 3D</h1>
+<h2>La plataforma SaaS que transforma la gestión operativa de estacionamientos en centros comerciales</h2>
+<h3>Monitoreo en tiempo real de ocupación, seguridad, flujo vehicular y eficiencia energética</h3>
+```
+
+**Landing For Operators**
+```html
+<h1>SmartPark para Operadores - Control Total desde un Gemelo Digital 3D</h1>
+<h2>Visualiza, analiza y actúa sobre el estado integral de tu estacionamiento en tiempo real</h2>
+<h3>Alertas de humo con localización espacial | Flujo vehicular | Eficiencia energética</h3>
+```
+**Landing For Drivers**
+```html
+<h1>SmartPark para Conductores - Encuentra tu plaza fácil y seguro</h1>
+<h2>La app móvil que te acompaña desde que ingresas hasta que retiras tu vehículo</h2>
+<h3>Disponibilidad en tiempo real | Registro de ubicación | Costo acumulado | Alertas de seguridad</h3>
+```
+
+### **Meta Tags Optimizadas**
+**Landing Home**
+
+```html
+<meta name="description" content="SmartPark - Plataforma SaaS con gemelo digital 3D para centros comerciales. Optimiza ocupación, seguridad, flujo vehicular y eficiencia energética en tiempo real. Ideal para operadores y conductores." />
+<meta name="keywords" content="gemelo digital estacionamiento, smart parking, gestión estacionamientos, Azure Digital Twins, IoT estacionamiento, centros comerciales Lima, Apex Twin" />
+<meta name="author" content="Apex Twin" />
+<meta name="robots" content="index, follow" />
+```
+**Landing For Operators**
+```html
+<meta name="description" content="Controla tu estacionamiento desde un gemelo digital 3D. Monitoreo en tiempo real, alertas de humo geolocalizadas, flujo vehicular y ahorro energético. Solicita una demo." />
+<meta name="keywords" content="operadores estacionamiento, dashboard gestión, alertas humo geolocalizadas, flujo vehicular, eficiencia energética estacionamiento, centro comercial" />
+<meta name="author" content="Apex Twin" />
+<meta name="robots" content="index, follow" />
+```
+**Landing For Drivers**
+```html
+<meta name="description" content="Encuentra estacionamiento fácil y seguro. Consulta disponibilidad en tiempo real, registra la ubicación de tu vehículo, monitorea el costo acumulado y recibe alertas de seguridad. Descarga gratis." />
+<meta name="keywords" content="app estacionamiento, encontrar plaza libre, registrar ubicación vehículo, alertas seguridad estacionamiento, costo acumulado, conductores" />
+<meta name="author" content="Apex Twin" />
+<meta name="robots" content="index, follow" />
+```
+**Web App Dashboard**
+```html
+<meta name="description" content="Panel de control en tiempo real para gestión de estacionamientos. Visualización 3D, gestión de incidentes, reportes y analytics. Acceso exclusivo para operadores." />
+<meta name="keywords" content="dashboard estacionamiento, gemelo digital, gestión incidentes, reportes ocupación, analytics estacionamiento" />
+<meta name="author" content="Apex Twin" />
+<meta name="robots" content="noindex, nofollow" />
+```
+
+**Open Graph Tags para Redes Sociales (Landing Home)**
+```html
+<meta property="og:title" content="SmartPark - Gestión Inteligente de Estacionamientos con Gemelo Digital 3D" />
+<meta property="og:description" content="Plataforma SaaS que transforma la gestión de estacionamientos en centros comerciales. Ocupación, seguridad, flujo y energía en tiempo real." />
+<meta property="og:image" content="https://www.smartpark.com/assets/social-preview.png" />
+<meta property="og:url" content="https://www.smartpark.com" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SmartPark by Apex Twin" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SmartPark - Gestión Inteligente de Estacionamientos" />
+<meta name="twitter:description" content="Gemelo digital 3D para centros comerciales. Optimiza ocupación, seguridad, flujo y energía." />
+<meta name="twitter:image" content="https://www.smartpark.com/assets/twitter-preview.png" />
+```
 
 ### 6.2.4. Searching Systems
 
