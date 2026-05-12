@@ -2238,7 +2238,7 @@ workspace "SmartPark - Deployment Diagram" {
 
 # Capítulo V: Tactical-Level Software Design
 
-_(En este capítulo se incluye una sección por cada Bounded Context con el detalle táctico de su diseño. La numeración usa 5.1, 5.2, etc. por cada BC.)_
+En el presente capítulo se desarrolla el diseño táctico de los nueve bounded contexts de SmartPark. Estos contextos fueron identificados en la sección 4.2 del Capítulo IV. Para cada uno se documentan las cuatro capas arquitectónicas (Domain, Application, Interface, Infrastructure) siguiendo los principios de Domain-Driven Design (Evans, 2003; Vernon, 2013) y la arquitectura hexagonal (ports & adapters), complementadas con un Component Diagram que muestra la estructura interna del módulo, un Class Diagram del modelo de dominio y un Database Diagram que detalla la persistencia.
 
 ## 5.1. Bounded Context: Parking Occupancy
 
@@ -3194,6 +3194,10 @@ Kigo. (2025). *Kigo - Parkimovil - Apps en Google Play* [Mobile app]. Google Pla
 San Francisco Municipal Transportation Agency (SFMTA). (2014). *SFpark: Putting theory into practice*. Citado en BID (2020).
 
 Shoup, D. C. (2006). Cruising for parking. *Transport Policy*, *13*(6), 479–486. Citado en BID (2020).
+
+Evans, E. (2003). *Domain-Driven Design: Tackling complexity in the heart of software*. Addison-Wesley Professional. https://www.oreilly.com/library/view/domain-driven-design/0321125215/
+
+Vernon, V. (2013). *Implementing Domain-Driven Design*. Addison-Wesley Professional. https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/
 
 ---
 
