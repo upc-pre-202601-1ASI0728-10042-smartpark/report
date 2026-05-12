@@ -233,6 +233,9 @@ _(Pendiente)_
     - [**Sistema de Búsqueda para Operadores (Web)**](#sistema-de-búsqueda-para-operadores-web)
     - [**Sistema de Búsqueda para Conductores (Móvil)**](#sistema-de-búsqueda-para-conductores-móvil)
     - [6.2.5. Navigation Systems](#625-navigation-systems)
+    - [**Patrones de Navegación - Plataforma Web (Operadores)**](#patrones-de-navegación---plataforma-web-operadores)
+    - [**Patrones de Navegación - Aplicación Móvil (Conductores - PowerApps)**](#patrones-de-navegación---aplicación-móvil-conductores---powerapps)
+    - [**Patrones de Navegación - Landing Page (Web Pública)**](#patrones-de-navegación---landing-page-web-pública)
   - [6.3. Landing Page UI Design](#63-landing-page-ui-design)
     - [6.3.1. Landing Page Wireframe](#631-landing-page-wireframe)
       - [Desktop Web Browser](#desktop-web-browser)
@@ -1828,7 +1831,82 @@ El sistema de búsqueda de SmartPark está diseñado para ser intuitivo y eficie
 
 ### 6.2.5. Navigation Systems
 
-_(Acciones y técnicas de navegación a través del Landing Page y aplicaciones.)_
+El sistema de navegación de SmartPark está optimizado para cada plataforma y usuario, priorizando la accesibilidad, la eficiencia en las tareas diarias y la claridad en la ubicación del usuario.
+
+### **Patrones de Navegación - Plataforma Web (Operadores)**
+**Navegación Principal (Sidebar Lateral):**
+
+La navegación principal se organiza en una barra lateral fija (sidebar) con los siguientes módulos:
+- Dashboard   
+- Ocupación   
+- Gemelo 3D   
+- Seguridad   
+- Flujo      
+- Energía     
+- Reportes    
+- Configuración
+
+| Elemento | Especificación |
+|---|---|
+| Posición | Izquierda, fija al hacer scroll |
+| Ancho | 260px (expandido) / 72px (colapsado en íconos) |
+| Fondo | Primary (#194756) |
+| Texto | Blanco |
+| Ícono activo | Resaltado con acento blanco y fondo semitransparente (opacidad 0.2) |
+| Tooltip | En modo colapsado, mostrar nombre del módulo al hacer hover |
+
+### **Patrones de Navegación - Aplicación Móvil (Conductores - PowerApps)**
+**Navegación Principal (Bottom Tab Bar):**
+
+La navegación principal se organiza en una barra inferior (tab bar) con 5 opciones principales:
+- Dispon.  
+- Sesión  
+- Alertas  
+- Historial  
+- Perfil    
+  
+| Elemento | Especificación |
+|---|---|
+| Posición | Inferior, fija |
+| Altura | 56px |
+| Fondo | Blanco (#FFFFFF) |
+| Ícono activo | Primary (#194756) |
+| Ícono inactivo | Neutral Gray (#6C757D) |
+| Texto | 12px, debajo del ícono |
+
+Navegación por Gestos (Móvil):
+
+| Gesto | Acción |
+|---|---|
+| Deslizar hacia la derecha | Volver a pantalla anterior (solo en pantallas secundarias) |
+| Deslizar hacia abajo | Recargar / actualizar contenido (pull-to-refresh) |
+| Deslizar hacia arriba | Scroll para ver más resultados |
+| Toque largo | Opciones contextuales (ej. eliminar del historial) |
+| Deslizar elemento lateral | En listas (historial), deslizar para eliminar o repetir |
+
+### **Patrones de Navegación - Landing Page (Web Pública)**
+**Navegación Principal (Header Superior):**
+
+[Logo] SmartPark  [Funcionalidades]  [Precios] [Contacto] 
+                                              [Demo] [Idioma] 
+
+| Elemento | Especificación |
+|---|---|
+| Posición | Superior, fija al hacer scroll (sticky) |
+| Fondo | Blanco con sombra ligera |
+| CTA principal | Botón "Solicitar demo" (Primary) |
+| Selector de idioma | ES / EN |
+| Responsive | En móvil, colapsar a menú hamburguesa (☰) |
+
+**Navegación por Call-to-Action (CTA):**
+
+| CTA | Destino |
+|---|---|
+| "Solicitar demo" (operadores) | Formulario de contacto para operadores |
+| "Descargar app" (conductores) | Enlace a PowerApps / Google Play / App Store |
+| "Ver planes" | Scroll a sección de precios |
+| "Contactar" | Scroll a formulario de contacto |
+
 
 ## 6.3. Landing Page UI Design
 
