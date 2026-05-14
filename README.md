@@ -1913,10 +1913,10 @@ Navegación por Gestos (Móvil):
 ### 6.3.1. Landing Page Wireframe
 
 #### Desktop Web Browser
-![Landing Wireframe Desktop](assets/images/chapter-06/landing-wireframe-desktop.png)
+![Landing Wireframe Desktop](assets/images/chapter-06/Wireframe-Desktop1.png)
 
 #### Mobile Web Browser
-![Landing Wireframe Mobile](assets/images/chapter-06/landing-wireframe-mobile.png)
+![Landing Wireframe Mobile](assets/images/chapter-06/Mobile%20Web%20Browser%20(2).png)
 
 ### 6.3.2. Landing Page Mock-up
 
