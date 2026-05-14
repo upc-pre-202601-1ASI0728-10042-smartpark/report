@@ -1921,10 +1921,10 @@ Navegación por Gestos (Móvil):
 ### 6.3.2. Landing Page Mock-up
 
 #### Desktop Web Browser
-![Landing Mockup Desktop](assets/images/chapter-06/landing-mockup-desktop.png)
+![Landing Mockup Desktop](assets/images/chapter-06/Wireframe-Desktop.png)
 
 #### Mobile Web Browser
-![Landing Mockup Mobile](assets/images/chapter-06/landing-mockup-mobile.png)
+![Landing Mockup Mobile](assets/images/chapter-06/Mobile%20Web%20Browser.png)
 
 ## 6.4. Applications UX/UI Design
 
