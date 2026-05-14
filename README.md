@@ -2474,13 +2474,32 @@ _(Acciones y técnicas de navegación a través del Landing Page y aplicaciones.
 
 Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
 
+#### Wireframe de Inicio de Sesión (Login)
+Interfaz que permite a los usuarios acceder a su cuenta mediante credenciales (correo y contraseña) o a través de opciones de autenticación social. Incluye enlaces para recuperación de contraseña y creación de cuenta.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/login-wireframe-mobile.png" alt="Wireframe Login">
+  <br>
+  <b>Figura:</b> Esquema de la pantalla de acceso y autenticación.
+</p>
+
+
+#### Wireframe de Registro de Usuario
+Formulario diseñado para captar los datos esenciales del nuevo conductor, incluyendo validación de contraseña y aceptación de términos y condiciones para la creación de una nueva cuenta.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/register-wireframe-mobile.png" alt="Wireframe Register">
+  <br>
+  <b>Figura:</b> Maqueta del formulario de registro para nuevos usuarios.
+</p>
+
 #### Wireframe de Inicio (Dashboard)
 Representación esquemática de la vista principal que organiza los módulos de disponibilidad de zonas y el resumen de la sesión de estacionamiento activa.
 
 <p align="center">
   <img src="./assets/images/chapter-06/home-wireframe-mobile.png" alt="Wireframe Home">
   <br>
-  <b>Figura 1:</b> Esquema del dashboard principal y estado de ocupación.
+  <b>Figura:</b> Esquema del dashboard principal y estado de ocupación.
 </p>
 
 
@@ -2490,7 +2509,7 @@ Maqueta funcional de la navegación por niveles, mostrando la distribución de e
 <p align="center">
   <img src="./assets/images/chapter-06/maps-wireframe-mobile.png" alt="Wireframe Maps">
   <br>
-  <b>Figura 2:</b> Estructura visual del mapa de niveles y spots.
+  <b>Figura:</b> Estructura visual del mapa de niveles y spots.
 </p>
 
 #### Wireframe de Localizador de Vehículo
@@ -2499,7 +2518,7 @@ Esquema diseñado para priorizar la información de ubicación del auto, integra
 <p align="center">
   <img src="./assets/images/chapter-06/locator-wireframe-mobile.png" alt="Wireframe Locator">
   <br>
-  <b>Figura 3:</b> Maqueta de la interfaz de localización y asistencia remota.
+  <b>Figura:</b> Maqueta de la interfaz de localización y asistencia remota.
 </p>
 
 #### Wireframe de Gestión de Pagos
@@ -2508,7 +2527,7 @@ Estructura del módulo financiero que detalla el desglose de costos, la selecci�
 <p align="center">
   <img src="./assets/images/chapter-06/payments-wireframe-mobile.png" alt="Wireframe Payments">
   <br>
-  <b>Figura 4:</b> Diseño estructural del centro de pagos y recibos.
+  <b>Figura:</b> Diseño estructural del centro de pagos y recibos.
 </p>
 
 #### Wireframe de Centro de Alertas
@@ -2517,7 +2536,7 @@ Maqueta de la lista de notificaciones, organizada de forma cronológica para mos
 <p align="center">
   <img src="./assets/images/chapter-06/alerts-wireframe-mobile.png" alt="Wireframe Alerts">
   <br>
-  <b>Figura 5:</b> Esquema del registro de notificaciones y alertas.
+  <b>Figura:</b> Esquema del registro de notificaciones y alertas.
 </p>
 
 #### Wireframe de Perfil de Usuario
@@ -2526,7 +2545,7 @@ Representación de la cuenta del usuario, jerarquizando la información del miem
 <p align="center">
   <img src="./assets/images/chapter-06/profile-wireframe-mobile.png" alt="Wireframe Profile">
   <br>
-  <b>Figura 6:</b> Estructura del perfil de usuario y gestión de flota.
+  <b>Figura:</b> Estructura del perfil de usuario y gestión de flota.
 </p>
 
 #### Wireframe de Edición de Perfil
@@ -2535,7 +2554,7 @@ Esquema del formulario de actualización de datos, diseñado para facilitar la e
 <p align="center">
   <img src="./assets/images/chapter-06/edit-profile-wireframe-mobile.png" alt="Wireframe Edit Profile">
   <br>
-  <b>Figura 7:</b> Maqueta del formulario de edición de información personal.
+  <b>Figura:</b> Maqueta del formulario de edición de información personal.
 </p>
 
 #### Wireframe de Menú Lateral
@@ -2544,7 +2563,7 @@ Diseño del panel desplegable que organiza los accesos secundarios a configuraci
 <p align="center">
   <img src="./assets/images/chapter-06/menu-wireframe-mobile.png" alt="Wireframe Menu">
   <br>
-  <b>Figura 8:</b> Estructura del menú de navegación y ajustes de cuenta.
+  <b>Figura:</b> Estructura del menú de navegación y ajustes de cuenta.
 </p>
 
 ### 6.4.2. Applications Wireflow Diagrams
@@ -2554,10 +2573,37 @@ Diseño del panel desplegable que organiza los accesos secundarios a configuraci
 
 ![Wireflow Operator Smoke Alert](assets/images/chapter-06/wireflow-operator-smoke.png)
 
-#### Wireflow: Driver finds and registers a parking space
-**User Goal:** Localizar un espacio libre y registrar la ubicación del vehículo.
+### Wireflow Driver 
 
-![Wireflow Driver Park](assets/images/chapter-06/wireflow-driver-park.png)
+#### Wireflow Driver: Registro de cuenta e inicio de sesión
+
+Este wireflow presenta el proceso general que sigue un usuario nuevo para registrarse en SmartPark e iniciar sesión en la aplicación. El flujo parte desde la creación de cuenta, continúa con la validación de los datos ingresados y finaliza con el acceso a la pantalla principal cuando las credenciales son correctas. Además, se considera el escenario alternativo en el que el sistema detecta datos inválidos y solicita al usuario corregir la información antes de continuar.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/wireflow-driver-auth.png" alt="Wireflow Authentication">
+  <br>
+  <b>Figura:</b> Flujo de registro, validación e inicio de sesión en la aplicación.
+</p>
+
+#### Wireflow Driver: Búsqueda y registro de espacio de estacionamiento
+
+Este wireflow describe el recorrido principal del conductor para buscar un espacio de estacionamiento disponible dentro de SmartPark. El usuario inicia desde la pantalla principal, accede al mapa, selecciona una plaza y el sistema valida su disponibilidad antes de registrar la sesión. También se contempla el caso en que el espacio deje de estar disponible, permitiendo al conductor recibir una alerta y elegir una alternativa cercana.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/wireflow-driver-parking-session.png" alt="Wireflow Parking Session">
+  <br>
+  <b>Figura:</b> Flujo de búsqueda, selección y registro de un espacio de estacionamiento en la aplicación.
+</p>
+
+#### Wireflow Driver: Gestión de perfil y preferencias
+
+Este wireflow muestra el proceso general mediante el cual un conductor registrado consulta, edita y actualiza la información de su perfil dentro de SmartPark. El flujo permite visualizar los datos del usuario, modificar información personal o de cuenta, y acceder a opciones relacionadas desde el menú lateral. Asimismo, se considera la validación de campos para asegurar que los cambios ingresados sean correctos antes de guardarlos.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/wireflow-driver-profile.png" alt="Wireflow Profile Management">
+  <br>
+  <b>Figura:</b> Flujo de gestión, validación y actualización del perfil del conductor en la aplicación.
+</p>
 
 ### 6.4.3. Applications Mock-ups
 
