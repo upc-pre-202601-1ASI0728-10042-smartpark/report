@@ -2471,7 +2471,81 @@ _(Acciones y técnicas de navegación a través del Landing Page y aplicaciones.
 ![Web App Wireframes](assets/images/chapter-06/webapp-wireframes.png)
 
 #### Mobile Application (Conductor — PowerApps)
-![Mobile App Wireframes](assets/images/chapter-06/mobile-wireframes.png)
+
+Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
+
+#### Wireframe de Inicio (Dashboard)
+Representación esquemática de la vista principal que organiza los módulos de disponibilidad de zonas y el resumen de la sesión de estacionamiento activa.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/home-wireframe-mobile.png" alt="Wireframe Home">
+  <br>
+  <b>Figura 1:</b> Esquema del dashboard principal y estado de ocupación.
+</p>
+
+
+#### Wireframe de Mapas Interactivos
+Maqueta funcional de la navegación por niveles, mostrando la distribución de espacios y la jerarquía de los elementos de búsqueda.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/maps-wireframe-mobile.png" alt="Wireframe Maps">
+  <br>
+  <b>Figura 2:</b> Estructura visual del mapa de niveles y spots.
+</p>
+
+#### Wireframe de Localizador de Vehículo
+Esquema diseñado para priorizar la información de ubicación del auto, integrando el espacio para la imagen de referencia y botones de acción rápida.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/locator-wireframe-mobile.png" alt="Wireframe Locator">
+  <br>
+  <b>Figura 3:</b> Maqueta de la interfaz de localización y asistencia remota.
+</p>
+
+#### Wireframe de Gestión de Pagos
+Estructura del módulo financiero que detalla el desglose de costos, la selección de métodos de pago y el listado de transacciones históricas.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/payments-wireframe-mobile.png" alt="Wireframe Payments">
+  <br>
+  <b>Figura 4:</b> Diseño estructural del centro de pagos y recibos.
+</p>
+
+#### Wireframe de Centro de Alertas
+Maqueta de la lista de notificaciones, organizada de forma cronológica para mostrar avisos de seguridad, mantenimiento y promociones.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/alerts-wireframe-mobile.png" alt="Wireframe Alerts">
+  <br>
+  <b>Figura 5:</b> Esquema del registro de notificaciones y alertas.
+</p>
+
+#### Wireframe de Perfil de Usuario
+Representación de la cuenta del usuario, jerarquizando la información del miembro, los vehículos registrados y los detalles de la suscripción.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/profile-wireframe-mobile.png" alt="Wireframe Profile">
+  <br>
+  <b>Figura 6:</b> Estructura del perfil de usuario y gestión de flota.
+</p>
+
+#### Wireframe de Edición de Perfil
+Esquema del formulario de actualización de datos, diseñado para facilitar la entrada de texto y el cambio de la imagen de perfil.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/edit-profile-wireframe-mobile.png" alt="Wireframe Edit Profile">
+  <br>
+  <b>Figura 7:</b> Maqueta del formulario de edición de información personal.
+</p>
+
+#### Wireframe de Menú Lateral
+Diseño del panel desplegable que organiza los accesos secundarios a configuraciones, métodos de pago y soporte técnico.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/menu-wireframe-mobile.png" alt="Wireframe Menu">
+  <br>
+  <b>Figura 8:</b> Estructura del menú de navegación y ajustes de cuenta.
+</p>
 
 ### 6.4.2. Applications Wireflow Diagrams
 
