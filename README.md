@@ -3352,7 +3352,16 @@ _(Introducción y descripción del contenido del video. Tono consistente con el 
 5. **El equipo cumplió con la distribución de responsabilidades planificada para TB1.** Los cinco integrantes cubrieron la totalidad de los capítulos I al IV del informe, con evidencia de colaboración continua en el repositorio GitHub (24 commits no-merge sobre develop desde el 15 de abril al 26 de abril de 2026). La arquitectura del repositorio, el historial de ramas y los pull requests reflejan un flujo de trabajo colaborativo basado en feature branches con integración continua hacia develop.
 
 #### TP1
-_(Conclusiones acumulables.)_
+
+1. **El avance de TP1 permitió consolidar la transición del diseño estratégico hacia una propuesta visual y técnica más concreta.** A partir de las correcciones recibidas en TB1, el equipo refinó el informe, actualizó el registro de versiones y fortaleció la coherencia entre los capítulos previos y los nuevos entregables. Esto permitió que SmartPark evolucione desde una definición conceptual basada en Lean UX, DDD y arquitectura estratégica hacia una representación más clara de sus aplicaciones, flujos de interacción y componentes tácticos.
+
+2. **El Capítulo V permitió detallar el diseño táctico de los bounded contexts más importantes de la solución.** Se desarrollaron las capas de dominio, interfaz, aplicación e infraestructura para los contextos de Parking Occupancy, Traffic Flow, Energy Management, Landing & Subscription, Safety & Incidents, Parking Session, Notifications, Identity & Access Management y Digital Twin Synchronization. Esta descomposición permitió evidenciar una arquitectura modular, alineada al dominio del negocio y preparada para soportar funcionalidades críticas como monitoreo de ocupación, alertas, gestión de sesiones y sincronización con el gemelo digital.
+
+3. **El Capítulo VI fortaleció la experiencia de usuario de SmartPark mediante lineamientos visuales, arquitectura de información y diseño de interfaces.** Se completaron las guías de estilo generales, así como los lineamientos para web, mobile y dispositivos. Además, se definieron sistemas de etiquetado, búsqueda, navegación, SEO y meta tags, lo cual aporta consistencia a la experiencia digital. Los wireframes y wireflows desarrollados para la Web App del Operador y la Mobile App del Conductor permitieron representar de manera clara los principales recorridos de uso del sistema.
+
+4. **Los wireframes y wireflows permitieron validar la coherencia funcional entre los segmentos objetivo del proyecto.** Para el operador, los flujos representaron acciones clave como el registro, inicio de sesión, monitoreo de ocupación, gestión de alertas de humo, análisis de flujo vehicular y eficiencia energética. Para el conductor, se modelaron procesos como registro e inicio de sesión, búsqueda de estacionamiento, registro de sesión y gestión de perfil. Esto permitió conectar los requerimientos definidos en capítulos anteriores con pantallas y recorridos comprensibles para los usuarios finales.
+
+5. **El avance de TP1 evidencia una mejora en la organización colaborativa del equipo.** Cada integrante asumió responsabilidades específicas y complementarias: diseño UX/UI, wireframes, wireflows, tactical design de bounded contexts, actualización de conclusiones, bibliografía, anexos, performance report, collaboration insights, student outcome y correcciones derivadas de la retroalimentación docente. Esta distribución permitió cubrir componentes técnicos, visuales y documentales de forma ordenada, manteniendo la trazabilidad del trabajo realizado en el informe.
 
 #### TB2
 _(Conclusiones acumulables.)_
@@ -3371,6 +3380,16 @@ _(Conclusiones finales del proyecto.)_
 4. **Establecer un acuerdo de piloto con al menos un centro comercial de Lima Metropolitana para TB2.** La Hypothesis Statement 6 establece como criterio de éxito la firma de 5 contratos en 12 meses. Para alcanzar esa meta, el equipo debe iniciar conversaciones comerciales en paralelo al desarrollo técnico, utilizando el demo con datos simulados como herramienta de prospección. La arquitectura multi-tenant definida en el Container Diagram facilita este despliegue desde la fase de piloto.
 
 5. **Incorporar analítica predictiva de ocupación como diferenciador competitivo en TF1.** Ninguno de los competidores analizados en la sección 2.1 —ParkHelp, Cleverciti, SpotHero ni Park Assist— ofrece predicción de demanda basada en históricos. Integrar modelos de series de tiempo sobre los datos acumulados por el gemelo digital representaría una ventaja competitiva sostenible y daría sustento cuantitativo a la Business Assumption 9.
+
+6. **Refinar los diagramas tácticos del Capítulo V antes de avanzar a la implementación.** Aunque ya se definieron capas, componentes, clases y modelos de base de datos para los bounded contexts principales, se recomienda revisar la consistencia entre nombres de entidades, comandos, consultas, repositorios y eventos de dominio. Esto permitirá evitar inconsistencias cuando se implementen los servicios en código.
+
+7. **Mantener alineados los wireflows con los user stories y bounded contexts correspondientes.** Los flujos de operador y conductor deben seguir conectándose con las épicas, user stories y módulos definidos en el Product Backlog. Esta trazabilidad facilitará justificar cada pantalla y recorrido desde una necesidad real del usuario y no solo desde una decisión visual.
+
+8. **Completar los mock-ups de alta fidelidad tomando como base los wireframes aprobados.** Para las siguientes entregas, se recomienda evolucionar los wireframes hacia interfaces más cercanas al producto final, respetando las guías de estilo, navegación, colores, tipografía y estructura de información definidas en la sección 6.1 y 6.2.
+
+9. **Actualizar progresivamente los anexos con evidencias del avance del equipo.** Se recomienda registrar enlaces a videos, capturas de keynote, evidencias de colaboración, reportes de performance y archivos complementarios utilizados durante TP1. Esto permitirá respaldar mejor el avance del proyecto y facilitar la revisión del docente.
+
+10. **Preparar la validación de usabilidad de los flujos principales.** Los wireflows ya definen recorridos clave para operador y conductor; por ello, el siguiente paso debe ser validar si los usuarios entienden las pantallas, si los nombres de las opciones son claros y si el flujo permite completar tareas sin fricción.
 
 ## Video About-the-Team
 
