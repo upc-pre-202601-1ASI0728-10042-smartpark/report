@@ -2683,6 +2683,16 @@ Este wireflow muestra el proceso mediante el cual el operador analiza el flujo d
   <b>Figura:</b> Flujo de análisis del tráfico de entradas y salidas de vehículos.
 </p>
 
+#### Wireflow Operador: Eficiencia Energética
+
+Este wireflow detalla el flujo de seguimiento del consumo energético del estacionamiento por parte del operador. Desde el panel principal accede al módulo energético, revisa indicadores de uso y consulta comparativas históricas para optimizar la operación.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-05%20Eficiencia%20Energ_tica.png" alt="Wireflow Operador Eficiencia Energética">
+  <br>
+  <b>Figura:</b> Flujo de monitoreo y análisis del consumo energético del estacionamiento.
+</p>
+
 ### Wireflow Driver 
 
 #### Wireflow Driver: Registro de cuenta e inicio de sesión
