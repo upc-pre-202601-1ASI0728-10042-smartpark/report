@@ -2480,6 +2480,15 @@ Pantalla de acceso para el operador, con campos de credenciales y opciones de re
   <b>Figura:</b> Esquema de la pantalla de autenticación del operador.
 </p>
 
+#### Wireframe de Registro
+Formulario para el alta de nuevos operadores, contemplando los datos esenciales y la validación necesaria para crear una cuenta administrativa.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-02%20Registro.png" alt="Wireframe Web Registro">
+  <br>
+  <b>Figura:</b> Maqueta del formulario de registro de operadores.
+</p>
+
 #### Mobile Application (Conductor — PowerApps)
 
 Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
