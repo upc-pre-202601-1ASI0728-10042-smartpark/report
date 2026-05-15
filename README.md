@@ -2673,6 +2673,16 @@ Este wireflow representa el flujo que sigue el operador al recibir una alerta de
   <b>Figura:</b> Flujo de identificación, localización y atención de una alerta de humo.
 </p>
 
+#### Wireflow Operador: Flujo Vehicular
+
+Este wireflow muestra el proceso mediante el cual el operador analiza el flujo de entradas y salidas de vehículos. Permite consultar métricas temporales, identificar picos de tráfico y revisar patrones de movimiento dentro del estacionamiento.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-04%20Flujo%20Vehicular.png" alt="Wireflow Operador Flujo Vehicular">
+  <br>
+  <b>Figura:</b> Flujo de análisis del tráfico de entradas y salidas de vehículos.
+</p>
+
 ### Wireflow Driver 
 
 #### Wireflow Driver: Registro de cuenta e inicio de sesión
