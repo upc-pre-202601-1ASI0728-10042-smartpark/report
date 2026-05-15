@@ -75,7 +75,8 @@
 ### Evidencias de colaboración
 
 #### TB1
-_(Pendiente)_
+
+![tb1.png](assets/images/contributions/tb1.png)
 
 #### TP1
 _(Pendiente)_
@@ -358,13 +359,13 @@ El modelo de negocio se sustenta en una suscripción mensual por centro comercia
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
-| Foto                                                                         | Nombre completo                  | Código     | Carrera                | Aporte al equipo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|------------------------------------------------------------------------------|----------------------------------|------------|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![elmer-riva.png](assets/images/chapter-01/foto-integrantes/elmer-riva.png)  | Riva Rodriguez, Elmer Augusto    | U202220829 | Ingeniería de Software | Soy estudiante de Ingeniería de Software con experiencia en desarrollo backend con Java y Spring Boot, y C# con ASP.NET Core, así como en frontend con Angular. Manejo bases de datos relacionales como MySQL y PostgreSQL, y cuento con experiencia en soluciones cloud sobre Microsoft Azure, incluyendo despliegue y configuración de servicios. Tengo familiaridad con IoT y desarrollo mobile con Flutter. En lo arquitectónico, aplico principios de Domain-Driven Design para estructurar soluciones en bounded contexts bien definidos. A nivel de equipo, asumo roles de liderazgo técnico, contribuyendo a las decisiones arquitectónicas y a la coordinación del grupo a lo largo del ciclo de vida del proyecto.  |
-| _(Imagen)_                                                                   | Morales Calderon, Hernan Emilio  | u202216263 | Ingeniería de Software | _(Conocimientos técnicos y habilidades que aporta)_                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ![britney-qqueso.jpg](assets/images/chapter-01/foto-integrantes/britney-qqueso.jpg)| Qqueso Rodriguez, Britney Delhy  | U20211g671 | Ingeniería de Software | Soy estudiante de Ingeniería de Software en la UPC, enfocada en el desarrollo de soluciones creativas y eficientes. Me considero una persona autodidacta y organizada, con conocimientos en desarrollo web y ciencia de datos, lo que me permite adaptarme rápido a distintas tecnologías y metodologías de trabajo. Me comprometo con el equipo a trabajar de forma proactiva, aportar en el desarrollo técnico y apoyar constantemente en la gestión de las tareas para asegurar que alcancemos nuestras metas y el éxito del proyecto. |
-| ![camila-san.jpg](assets/images/chapter-01/foto-integrantes/fotocam.png)                                                                   | Sanchez Rios, Camila Cristina    | U202210973 | Ingeniería de Software | Soy estudiante de la carrera de Ingeniería de Software en la Universidad Peruana de Ciencias Aplicadas, actualmente me encuentro en el octavo ciclo. Poseo conocimientos sólidos en el desarrollo de aplicaciones web y de escritorio utilizando lenguajes como HTML, Java y C#, aplicando principios de diseño orientados al dominio (Domain Driven Design) y metodologías de desarrollo modernas. Además, tengo experiencia en diseño de interfaces y prototipado con Figma, lo que me permite aportar al equipo en la creación de soluciones visualmente coherentes, funcionales y centradas en la experiencia del usuario (UI/UX)._                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ![andres-valle.jpeg](assets/images/chapter-01/foto-integrantes/andres-valle.jpeg)| Valle Zuta, Abel Andrés          | U202210297 | Ingeniería de Software | Soy estudiante de la carrera de Ingeniería de Software en la Universidad Peruana de Ciencias Aplicadas (UPC), tengo 21 años y actualmente estoy cursando el 8vo ciclo en la sede de Monterrico. Sé desarrollar aplicaciones web, móviles, tengo conocimientos de IoT, RPA, creación de Agentes de IA y Gestión de Proyectos. Además, sé resolver problemas, trabajar en equipo y lograr unir más al grupo. Mis hobbies son jugar básquet, fútbol, tenis, videojuegos, escuchar música, salir a pasear con mis amigos, ver películas, nadar, hacer ejercicio, pasear a mis mascotas y pasar tiempo con mi familia. Finalmente, siempre estoy dispuesto a trabajar y terminar a tiempo los deberes, esforzándome para aprender y comprender lo máximo posible y finalizar con éxito todos mis objetivos, por lo que considero que puedo aportar al equipo en lograr terminar a tiempo nuestros deberes, alcanzar nuestras metas y aportar en el desarrollo tecnológico del proyecto. |
+| Foto                                                                                | Nombre completo                  | Código     | Carrera                | Aporte al equipo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|-------------------------------------------------------------------------------------|----------------------------------|------------|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![elmer-riva.png](assets/images/chapter-01/foto-integrantes/elmer-riva.png)         | Riva Rodriguez, Elmer Augusto    | U202220829 | Ingeniería de Software | Soy estudiante de Ingeniería de Software con experiencia en desarrollo backend con Java y Spring Boot, y C# con ASP.NET Core, así como en frontend con Angular. Manejo bases de datos relacionales como MySQL y PostgreSQL, y cuento con experiencia en soluciones cloud sobre Microsoft Azure, incluyendo despliegue y configuración de servicios. Tengo familiaridad con IoT y desarrollo mobile con Flutter. En lo arquitectónico, aplico principios de Domain-Driven Design para estructurar soluciones en bounded contexts bien definidos. A nivel de equipo, asumo roles de liderazgo técnico, contribuyendo a las decisiones arquitectónicas y a la coordinación del grupo a lo largo del ciclo de vida del proyecto.                                                                                                                                                                                                                                                                                                                     |
+| ![hernan.jpeg](assets/images/chapter-01/foto-integrantes/hernan.jpeg)               | Morales Calderon, Hernan Emilio  | u202216263 | Ingeniería de Software | Cuento con formación en Universidad Peruana de Ciencias Aplicadas dentro de la carrera de Ingeniería de Software, lo que me ha permitido desarrollar competencias en diseño, desarrollo e implementación de soluciones tecnológicas. Tengo experiencia en aplicaciones web y móviles, aplicando buenas prácticas de programación y enfoque centrado en el usuario. Además, poseo conocimientos en Internet de las Cosas (IoT), automatización mediante RPA y creación de Agentes de IA, integrando tecnologías modernas para optimizar procesos e innovar en proyectos. También manejo fundamentos de gestión de proyectos, lo que me permite organizar tareas, priorizar actividades y trabajar orientado a resultados y cumplimiento de plazos. Me adapto con facilidad a nuevas herramientas y tecnologías según las necesidades del proyecto. En cuanto a habilidades blandas, destaco por mi capacidad para resolver problemas, trabajar en equipo y fortalecer la integración del grupo mediante una comunicación positiva y colaborativa. |
+| ![britney-qqueso.jpg](assets/images/chapter-01/foto-integrantes/britney-qqueso.jpg) | Qqueso Rodriguez, Britney Delhy  | U20211g671 | Ingeniería de Software | Soy estudiante de Ingeniería de Software en la UPC, enfocada en el desarrollo de soluciones creativas y eficientes. Me considero una persona autodidacta y organizada, con conocimientos en desarrollo web y ciencia de datos, lo que me permite adaptarme rápido a distintas tecnologías y metodologías de trabajo. Me comprometo con el equipo a trabajar de forma proactiva, aportar en el desarrollo técnico y apoyar constantemente en la gestión de las tareas para asegurar que alcancemos nuestras metas y el éxito del proyecto.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ![camila-san.jpg](assets/images/chapter-01/foto-integrantes/fotocam.png)            | Sanchez Rios, Camila Cristina    | U202210973 | Ingeniería de Software | Soy estudiante de la carrera de Ingeniería de Software en la Universidad Peruana de Ciencias Aplicadas, actualmente me encuentro en el octavo ciclo. Poseo conocimientos sólidos en el desarrollo de aplicaciones web y de escritorio utilizando lenguajes como HTML, Java y C#, aplicando principios de diseño orientados al dominio (Domain Driven Design) y metodologías de desarrollo modernas. Además, tengo experiencia en diseño de interfaces y prototipado con Figma, lo que me permite aportar al equipo en la creación de soluciones visualmente coherentes, funcionales y centradas en la experiencia del usuario (UI/UX)._                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ![andres-valle.jpeg](assets/images/chapter-01/foto-integrantes/andres-valle.jpeg)   | Valle Zuta, Abel Andrés          | U202210297 | Ingeniería de Software | Soy estudiante de la carrera de Ingeniería de Software en la Universidad Peruana de Ciencias Aplicadas (UPC), tengo 21 años y actualmente estoy cursando el 8vo ciclo en la sede de Monterrico. Sé desarrollar aplicaciones web, móviles, tengo conocimientos de IoT, RPA, creación de Agentes de IA y Gestión de Proyectos. Además, sé resolver problemas, trabajar en equipo y lograr unir más al grupo. Mis hobbies son jugar básquet, fútbol, tenis, videojuegos, escuchar música, salir a pasear con mis amigos, ver películas, nadar, hacer ejercicio, pasear a mis mascotas y pasar tiempo con mi familia. Finalmente, siempre estoy dispuesto a trabajar y terminar a tiempo los deberes, esforzándome para aprender y comprender lo máximo posible y finalizar con éxito todos mis objetivos, por lo que considero que puedo aportar al equipo en lograr terminar a tiempo nuestros deberes, alcanzar nuestras metas y aportar en el desarrollo tecnológico del proyecto.                                                               |
 
 ## 1.2. Solution Profile
 
@@ -2467,22 +2468,262 @@ _(Acciones y técnicas de navegación a través del Landing Page y aplicaciones.
 ### 6.4.1. Applications Wireframes
 
 #### Web Application (Operador)
-![Web App Wireframes](assets/images/chapter-06/webapp-wireframes.png)
+
+Esta sección presenta los wireframes de baja fidelidad de la aplicación web destinada al operador, mostrando la estructura y jerarquía de los módulos de monitoreo y gestión del estacionamiento.
+
+#### Wireframe de Inicio de Sesión (Login)
+Pantalla de acceso para el operador, con campos de credenciales y opciones de recuperación de contraseña para ingresar al panel administrativo.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-01%20Login.png" alt="Wireframe Web Login">
+  <br>
+  <b>Figura:</b> Esquema de la pantalla de autenticación del operador.
+</p>
+
+#### Wireframe de Registro
+Formulario para el alta de nuevos operadores, contemplando los datos esenciales y la validación necesaria para crear una cuenta administrativa.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-02%20Registro.png" alt="Wireframe Web Registro">
+  <br>
+  <b>Figura:</b> Maqueta del formulario de registro de operadores.
+</p>
+
+#### Wireframe de Dashboard Principal
+Vista general del panel de control, que centraliza los indicadores clave de desempeño y el resumen del estado operativo del estacionamiento.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-03%20Dashboard%20Principal.png" alt="Wireframe Web Dashboard">
+  <br>
+  <b>Figura:</b> Esquema del tablero principal de monitoreo.
+</p>
+
+#### Wireframe de Ocupación por Nivel
+Representación visual de la distribución de espacios ocupados y disponibles por cada nivel del estacionamiento, facilitando la lectura del estado en tiempo real.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-04%20Ocupaci%C3%B3n%20por%20Nivel.png" alt="Wireframe Web Ocupación por Nivel">
+  <br>
+  <b>Figura:</b> Estructura del módulo de ocupación por niveles.
+</p>
+
+#### Wireframe de Alertas de Seguridad
+Listado cronológico de las alertas de seguridad detectadas, organizadas por prioridad y tipo de evento para una rápida atención del operador.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-05%20Alertas%20de%20Seguridad.png" alt="Wireframe Web Alertas de Seguridad">
+  <br>
+  <b>Figura:</b> Esquema del centro de alertas de seguridad.
+</p>
+
+#### Wireframe de Flujo Vehicular
+Visualización del flujo de entradas y salidas de vehículos, presentando métricas temporales y picos de movimiento dentro del estacionamiento.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-06%20Flujo%20Vehicular.png" alt="Wireframe Web Flujo Vehicular">
+  <br>
+  <b>Figura:</b> Maqueta del módulo de análisis de flujo vehicular.
+</p>
+
+#### Wireframe de Eficiencia Energética
+Panel de seguimiento del consumo energético del estacionamiento, mostrando indicadores de uso, ahorro y comparativas históricas.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-07%20Eficiencia%20Energ%C3%A9tica.png" alt="Wireframe Web Eficiencia Energética">
+  <br>
+  <b>Figura:</b> Estructura del módulo de eficiencia energética.
+</p>
+
+#### Wireframe de Historial de Incidentes
+Registro detallado de incidentes ocurridos, con filtros por fecha, tipo y estado para auditoría y seguimiento por parte del operador.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-08%20Historial%20de%20Incidentes.png" alt="Wireframe Web Historial de Incidentes">
+  <br>
+  <b>Figura:</b> Esquema del historial de incidentes registrados.
+</p>
 
 #### Mobile Application (Conductor — PowerApps)
-![Mobile App Wireframes](assets/images/chapter-06/mobile-wireframes.png)
+
+Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
+
+#### Wireframe de Inicio de Sesión (Login)
+Interfaz que permite a los usuarios acceder a su cuenta mediante credenciales (correo y contraseña) o a través de opciones de autenticación social. Incluye enlaces para recuperación de contraseña y creación de cuenta.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/login-wireframe-mobile.png" alt="Wireframe Login">
+  <br>
+  <b>Figura:</b> Esquema de la pantalla de acceso y autenticación.
+</p>
+
+
+#### Wireframe de Registro de Usuario
+Formulario diseñado para captar los datos esenciales del nuevo conductor, incluyendo validación de contraseña y aceptación de términos y condiciones para la creación de una nueva cuenta.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/register-wireframe-mobile.png" alt="Wireframe Register">
+  <br>
+  <b>Figura:</b> Maqueta del formulario de registro para nuevos usuarios.
+</p>
+
+#### Wireframe de Inicio (Dashboard)
+Representación esquemática de la vista principal que organiza los módulos de disponibilidad de zonas y el resumen de la sesión de estacionamiento activa.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/home-wireframe-mobile.png" alt="Wireframe Home">
+  <br>
+  <b>Figura:</b> Esquema del dashboard principal y estado de ocupación.
+</p>
+
+
+#### Wireframe de Mapas Interactivos
+Maqueta funcional de la navegación por niveles, mostrando la distribución de espacios y la jerarquía de los elementos de búsqueda.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/maps-wireframe-mobile.png" alt="Wireframe Maps">
+  <br>
+  <b>Figura:</b> Estructura visual del mapa de niveles y spots.
+</p>
+
+#### Wireframe de Localizador de Vehículo
+Esquema diseñado para priorizar la información de ubicación del auto, integrando el espacio para la imagen de referencia y botones de acción rápida.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/locator-wireframe-mobile.png" alt="Wireframe Locator">
+  <br>
+  <b>Figura:</b> Maqueta de la interfaz de localización y asistencia remota.
+</p>
+
+#### Wireframe de Gestión de Pagos
+Estructura del módulo financiero que detalla el desglose de costos, la selección de métodos de pago y el listado de transacciones históricas.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/payments-wireframe-mobile.png" alt="Wireframe Payments">
+  <br>
+  <b>Figura:</b> Diseño estructural del centro de pagos y recibos.
+</p>
+
+#### Wireframe de Centro de Alertas
+Maqueta de la lista de notificaciones, organizada de forma cronológica para mostrar avisos de seguridad, mantenimiento y promociones.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/alerts-wireframe-mobile.png" alt="Wireframe Alerts">
+  <br>
+  <b>Figura:</b> Esquema del registro de notificaciones y alertas.
+</p>
+
+#### Wireframe de Perfil de Usuario
+Representación de la cuenta del usuario, jerarquizando la información del miembro, los vehículos registrados y los detalles de la suscripción.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/profile-wireframe-mobile.png" alt="Wireframe Profile">
+  <br>
+  <b>Figura:</b> Estructura del perfil de usuario y gestión de flota.
+</p>
+
+#### Wireframe de Edición de Perfil
+Esquema del formulario de actualización de datos, diseñado para facilitar la entrada de texto y el cambio de la imagen de perfil.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/edit-profile-wireframe-mobile.png" alt="Wireframe Edit Profile">
+  <br>
+  <b>Figura:</b> Maqueta del formulario de edición de información personal.
+</p>
+
+#### Wireframe de Menú Lateral
+Diseño del panel desplegable que organiza los accesos secundarios a configuraciones, métodos de pago y soporte técnico.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/menu-wireframe-mobile.png" alt="Wireframe Menu">
+  <br>
+  <b>Figura:</b> Estructura del menú de navegación y ajustes de cuenta.
+</p>
 
 ### 6.4.2. Applications Wireflow Diagrams
 
-#### Wireflow: Operator views smoke alert and locates affected zone
-**User Goal:** Identificar la ubicación exacta de un incidente de humo para coordinar respuesta.
+### Wireflow Operador
 
-![Wireflow Operator Smoke Alert](assets/images/chapter-06/wireflow-operator-smoke.png)
+#### Wireflow Operador: Registro e Inicio de Sesión
 
-#### Wireflow: Driver finds and registers a parking space
-**User Goal:** Localizar un espacio libre y registrar la ubicación del vehículo.
+Este wireflow representa el proceso que sigue un nuevo operador para registrarse en la plataforma e iniciar sesión en el panel administrativo. El flujo parte del formulario de registro, valida los datos ingresados y, una vez confirmados, redirige al dashboard principal. También contempla el escenario alternativo donde credenciales inválidas obligan al usuario a corregir los datos.
 
-![Wireflow Driver Park](assets/images/chapter-06/wireflow-driver-park.png)
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-01%20Registro%20e%20Inicio%20de%20Sesi_n.png" alt="Wireflow Operador Registro e Inicio de Sesión">
+  <br>
+  <b>Figura:</b> Flujo de registro, validación e inicio de sesión del operador.
+</p>
+
+#### Wireflow Operador: Monitoreo de Ocupación
+
+Este wireflow describe el recorrido que realiza el operador para consultar el estado de ocupación del estacionamiento por niveles. Desde el dashboard principal, accede al módulo de ocupación, filtra por nivel y obtiene métricas en tiempo real sobre la disponibilidad de espacios.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-02%20Monitoreo%20de%20Ocupaci_n.png" alt="Wireflow Operador Monitoreo de Ocupación">
+  <br>
+  <b>Figura:</b> Flujo de consulta y análisis de la ocupación por niveles.
+</p>
+
+#### Wireflow Operador: Gestión de Alerta de Humo
+
+Este wireflow representa el flujo que sigue el operador al recibir una alerta de humo dentro del estacionamiento. Desde el centro de alertas accede al detalle del evento, identifica la zona afectada y ejecuta el protocolo de atención correspondiente para mitigar el incidente.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-03%20Gesti_n%20de%20Alerta%20de%20Humo.png" alt="Wireflow Operador Gestión de Alerta de Humo">
+  <br>
+  <b>Figura:</b> Flujo de identificación, localización y atención de una alerta de humo.
+</p>
+
+#### Wireflow Operador: Flujo Vehicular
+
+Este wireflow muestra el proceso mediante el cual el operador analiza el flujo de entradas y salidas de vehículos. Permite consultar métricas temporales, identificar picos de tráfico y revisar patrones de movimiento dentro del estacionamiento.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-04%20Flujo%20Vehicular.png" alt="Wireflow Operador Flujo Vehicular">
+  <br>
+  <b>Figura:</b> Flujo de análisis del tráfico de entradas y salidas de vehículos.
+</p>
+
+#### Wireflow Operador: Eficiencia Energética
+
+Este wireflow detalla el flujo de seguimiento del consumo energético del estacionamiento por parte del operador. Desde el panel principal accede al módulo energético, revisa indicadores de uso y consulta comparativas históricas para optimizar la operación.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-05%20Eficiencia%20Energ_tica.png" alt="Wireflow Operador Eficiencia Energética">
+  <br>
+  <b>Figura:</b> Flujo de monitoreo y análisis del consumo energético del estacionamiento.
+</p>
+
+### Wireflow Driver 
+
+#### Wireflow Driver: Registro de cuenta e inicio de sesión
+
+Este wireflow presenta el proceso general que sigue un usuario nuevo para registrarse en SmartPark e iniciar sesión en la aplicación. El flujo parte desde la creación de cuenta, continúa con la validación de los datos ingresados y finaliza con el acceso a la pantalla principal cuando las credenciales son correctas. Además, se considera el escenario alternativo en el que el sistema detecta datos inválidos y solicita al usuario corregir la información antes de continuar.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/wireflow-driver-auth.png" alt="Wireflow Authentication">
+  <br>
+  <b>Figura:</b> Flujo de registro, validación e inicio de sesión en la aplicación.
+</p>
+
+#### Wireflow Driver: Búsqueda y registro de espacio de estacionamiento
+
+Este wireflow describe el recorrido principal del conductor para buscar un espacio de estacionamiento disponible dentro de SmartPark. El usuario inicia desde la pantalla principal, accede al mapa, selecciona una plaza y el sistema valida su disponibilidad antes de registrar la sesión. También se contempla el caso en que el espacio deje de estar disponible, permitiendo al conductor recibir una alerta y elegir una alternativa cercana.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/wireflow-driver-parking-session.png" alt="Wireflow Parking Session">
+  <br>
+  <b>Figura:</b> Flujo de búsqueda, selección y registro de un espacio de estacionamiento en la aplicación.
+</p>
+
+#### Wireflow Driver: Gestión de perfil y preferencias
+
+Este wireflow muestra el proceso general mediante el cual un conductor registrado consulta, edita y actualiza la información de su perfil dentro de SmartPark. El flujo permite visualizar los datos del usuario, modificar información personal o de cuenta, y acceder a opciones relacionadas desde el menú lateral. Asimismo, se considera la validación de campos para asegurar que los cambios ingresados sean correctos antes de guardarlos.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/wireflow-driver-profile.png" alt="Wireflow Profile Management">
+  <br>
+  <b>Figura:</b> Flujo de gestión, validación y actualización del perfil del conductor en la aplicación.
+</p>
 
 ### 6.4.3. Applications Mock-ups
 
@@ -3096,12 +3337,19 @@ _(Introducción y descripción del contenido del video. Tono consistente con el 
 
 ## Conclusiones y recomendaciones
 
-_(Conclusiones sobre el trabajo, contrastando con los Problem Statements, Assumptions, Hypothesis Statements y criterios de éxito definidos en el proceso Lean UX. Recomendaciones sobre roadmap futuro de los productos digitales.)_
-
 ### Conclusiones por entrega
 
 #### TB1
-_(Conclusiones acumulables.)_
+
+1. **Los Problem Statements fueron validados empíricamente mediante las entrevistas.** Las seis entrevistas realizadas a operadores y conductores confirmaron los pain points identificados en el Lean UX: errores en el conteo de vehículos, ausencia de visibilidad en tiempo real por zonas, tiempos de búsqueda de plaza de entre 5 y 30 minutos, y desconfianza en los indicadores luminosos existentes. Esta triangulación entre la hipótesis inicial y el testimonio real de los usuarios otorga solidez al planteamiento del problema y justifica la inversión en la solución.
+
+2. **Las Hypothesis Statements guiaron directamente el diseño de los User Stories y la arquitectura de bounded contexts.** Los seis enunciados de hipótesis —reducción del tiempo de respuesta ante incidentes (H1), reducción del tiempo de búsqueda de plaza (H2), optimización energética (H3), localización del vehículo (H4), seguridad proactiva (H5) y adopción comercial (H6)— se materializaron en las épicas EP-01 a EP-10 del Product Backlog, y cada una de ellas encontró correspondencia directa en los bounded contexts definidos en la sección 4.2: Safety & Incidents (H1), Parking Occupancy (H2), Energy Management (H3), Parking Session (H4), Notifications (H5) e Identity & Access Management (H6).
+
+3. **El Attribute-Driven Design (ADD) demostró que la arquitectura puede acomodar los quality attribute scenarios más críticos sin sacrificar la modularidad.** Los escenarios priorizados —disponibilidad del 99,5 %, latencia de telemetría inferior a 500 ms y desacoplamiento entre bounded contexts— se satisfacen mediante una arquitectura de microservicios con Azure Digital Twins como núcleo de sincronización, mensajería asíncrona vía Azure Service Bus y despliegue en contenedores sobre Azure Kubernetes Service. Estas decisiones de diseño fueron tomadas con base en trade-offs explícitos documentados en la sección 4.1.4.
+
+4. **El proceso de Domain-Driven Design alineó el modelo de dominio con el lenguaje de los usuarios.** El EventStorming reveló nueve bounded contexts cohesivos y con responsabilidades claras, sin acoplamiento innecesario. El Context Map definió relaciones de Customer/Supplier y Conformist que protegen la integridad del Digital Twin Synchronization Context como núcleo estratégico de la plataforma. El Ubiquitous Language formalizado en la sección 2.4 garantiza que los términos de dominio como *Parking Session*, *Occupancy State* o *Smoke Alert* sean consistentes entre el equipo técnico y los stakeholders.
+
+5. **El equipo cumplió con la distribución de responsabilidades planificada para TB1.** Los cinco integrantes cubrieron la totalidad de los capítulos I al IV del informe, con evidencia de colaboración continua en el repositorio GitHub (24 commits no-merge sobre develop desde el 15 de abril al 26 de abril de 2026). La arquitectura del repositorio, el historial de ramas y los pull requests reflejan un flujo de trabajo colaborativo basado en feature branches con integración continua hacia develop.
 
 #### TP1
 _(Conclusiones acumulables.)_
@@ -3114,7 +3362,15 @@ _(Conclusiones finales del proyecto.)_
 
 ### Recomendaciones de roadmap
 
-_(Próximos pasos para escalar la solución: integración con sensores IoT reales, expansión a múltiples centros comerciales, pasarela de pagos, integración con sistemas de gestión del centro comercial, analítica predictiva, etc.)_
+1. **Priorizar la implementación del Parking Occupancy y Safety & Incidents bounded contexts en TP1.** Estos dos contextos son los de mayor impacto validado en las entrevistas y los que sustentan las hipótesis H1 y H2. Contar con un prototipo funcional —aunque sea con sensores simulados— permitirá realizar pruebas de usabilidad con operadores reales y obtener feedback cuantitativo para contrastar las métricas de éxito definidas en el Lean UX.
+
+2. **Avanzar en la integración del simulador IoT antes de involucrar hardware real.** La Business Assumption 11 establece explícitamente que el piloto debe demostrar valor sin inversión inicial en hardware. Desarrollar un simulador de telemetría realista que alimente el Azure Digital Twin permitirá demostrar la propuesta de valor a centros comerciales potenciales sin barreras de infraestructura, reduciendo el ciclo de ventas.
+
+3. **Diseñar y ejecutar pruebas de usabilidad con conductores para la aplicación móvil PowerApps.** Los User Personas y el As-Is Scenario Mapping evidencian que los conductores interactúan con la app en condiciones de baja iluminación y alta carga cognitiva. Las pruebas deben evaluar específicamente el tiempo de registro de ubicación (meta: menos de 15 segundos, un toque) y la comprensibilidad del mapa de disponibilidad por zona.
+
+4. **Establecer un acuerdo de piloto con al menos un centro comercial de Lima Metropolitana para TB2.** La Hypothesis Statement 6 establece como criterio de éxito la firma de 5 contratos en 12 meses. Para alcanzar esa meta, el equipo debe iniciar conversaciones comerciales en paralelo al desarrollo técnico, utilizando el demo con datos simulados como herramienta de prospección. La arquitectura multi-tenant definida en el Container Diagram facilita este despliegue desde la fase de piloto.
+
+5. **Incorporar analítica predictiva de ocupación como diferenciador competitivo en TF1.** Ninguno de los competidores analizados en la sección 2.1 —ParkHelp, Cleverciti, SpotHero ni Park Assist— ofrece predicción de demanda basada en históricos. Integrar modelos de series de tiempo sobre los datos acumulados por el gemelo digital representaría una ventaja competitiva sostenible y daría sustento cuantitativo a la Business Assumption 9.
 
 ## Video About-the-Team
 
