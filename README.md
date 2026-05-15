@@ -2507,6 +2507,15 @@ Representación visual de la distribución de espacios ocupados y disponibles po
   <b>Figura:</b> Estructura del módulo de ocupación por niveles.
 </p>
 
+#### Wireframe de Alertas de Seguridad
+Listado cronológico de las alertas de seguridad detectadas, organizadas por prioridad y tipo de evento para una rápida atención del operador.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-05%20Alertas%20de%20Seguridad.png" alt="Wireframe Web Alertas de Seguridad">
+  <br>
+  <b>Figura:</b> Esquema del centro de alertas de seguridad.
+</p>
+
 #### Mobile Application (Conductor — PowerApps)
 
 Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
