@@ -2525,6 +2525,15 @@ Visualización del flujo de entradas y salidas de vehículos, presentando métri
   <b>Figura:</b> Maqueta del módulo de análisis de flujo vehicular.
 </p>
 
+#### Wireframe de Eficiencia Energética
+Panel de seguimiento del consumo energético del estacionamiento, mostrando indicadores de uso, ahorro y comparativas históricas.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-07%20Eficiencia%20Energ%C3%A9tica.png" alt="Wireframe Web Eficiencia Energética">
+  <br>
+  <b>Figura:</b> Estructura del módulo de eficiencia energética.
+</p>
+
 #### Mobile Application (Conductor — PowerApps)
 
 Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
