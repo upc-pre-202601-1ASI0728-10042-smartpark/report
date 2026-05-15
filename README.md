@@ -2653,6 +2653,16 @@ Este wireflow representa el proceso que sigue un nuevo operador para registrarse
   <b>Figura:</b> Flujo de registro, validación e inicio de sesión del operador.
 </p>
 
+#### Wireflow Operador: Monitoreo de Ocupación
+
+Este wireflow describe el recorrido que realiza el operador para consultar el estado de ocupación del estacionamiento por niveles. Desde el dashboard principal, accede al módulo de ocupación, filtra por nivel y obtiene métricas en tiempo real sobre la disponibilidad de espacios.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-02%20Monitoreo%20de%20Ocupaci_n.png" alt="Wireflow Operador Monitoreo de Ocupación">
+  <br>
+  <b>Figura:</b> Flujo de consulta y análisis de la ocupación por niveles.
+</p>
+
 ### Wireflow Driver 
 
 #### Wireflow Driver: Registro de cuenta e inicio de sesión
