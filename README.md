@@ -2663,6 +2663,16 @@ Este wireflow describe el recorrido que realiza el operador para consultar el es
   <b>Figura:</b> Flujo de consulta y análisis de la ocupación por niveles.
 </p>
 
+#### Wireflow Operador: Gestión de Alerta de Humo
+
+Este wireflow representa el flujo que sigue el operador al recibir una alerta de humo dentro del estacionamiento. Desde el centro de alertas accede al detalle del evento, identifica la zona afectada y ejecuta el protocolo de atención correspondiente para mitigar el incidente.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-03%20Gesti_n%20de%20Alerta%20de%20Humo.png" alt="Wireflow Operador Gestión de Alerta de Humo">
+  <br>
+  <b>Figura:</b> Flujo de identificación, localización y atención de una alerta de humo.
+</p>
+
 ### Wireflow Driver 
 
 #### Wireflow Driver: Registro de cuenta e inicio de sesión
