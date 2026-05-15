@@ -3035,21 +3035,15 @@ public static class ParkingOperationsModule
 
 ### 5.1.5. Component Diagram — Parking Operations Monitoring
 
-_(Diagrama UML de los componentes)_
-
-![Component Diagram - Parking Operations Monitoring](assets/images/chapter-05/class-parking-occupancy.png)
+![Component Diagram - Parking Operations Monitoring](assets/images/chapter-05/01_parking_operations_monitoring_component.png)
 
 ### 5.1.6. Class Diagram — Parking Operations Monitoring
 
-_(Diagrama UML de las clases del Domain Layer, con atributos, métodos, scope, relaciones, multiplicidad.)_
-
-![Class Diagram - Parking Operations Monitoring](assets/images/chapter-05/class-parking-occupancy.png)
+![Class Diagram - Parking Operations Monitoring](assets/images/chapter-05/02_parking_operations_monitoring_class.png)
 
 ### 5.1.7. Database Diagram — Parking Operations Monitoring
 
-_(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
-
-![Database Diagram - PParking Operations Monitoring](assets/images/chapter-05/db-parking-occupancy.png)
+![Database Diagram - PParking Operations Monitoring](assets/images/chapter-05/03_parking_operations_monitoring_database.png)
 
 ---
 
@@ -3450,21 +3444,15 @@ public sealed class ParkingOccupancyGateway : IParkingOccupancyGateway
 
 ### 5.2.5. Component Diagram — Energy Efficiency Management
 
-_(Diagrama UML de los componentes)_
-
-![Component Diagram - Energy Efficiency Management](assets/images/chapter-05/component-energy-efficiency.png)
+![Component Diagram - Energy Efficiency Management](assets/images/chapter-05/04_energy_efficiency_management_component.png)
 
 ### 5.2.6. Class Diagram — Energy Efficiency Management
 
-_(Diagrama UML de las clases del Domain Layer, con atributos, métodos, scope, relaciones, multiplicidad.)_
-
-![Class Diagram - Energy Efficiency Management](assets/images/chapter-05/class-energy-efficiency.png)
+![Class Diagram - Energy Efficiency Management](assets/images/chapter-05/05_energy_efficiency_management_class.png)
 
 ### 5.2.7. Database Diagram — Energy Efficiency Management
 
-_(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
-
-![Database Diagram - Energy Efficiency Management](assets/images/chapter-05/db-energy-efficiency.png)
+![Database Diagram - Energy Efficiency Management](assets/images/chapter-05/06_energy_efficiency_management_database.png)
 
 
 ---
@@ -3953,21 +3941,15 @@ public sealed class OperatorRegistrationListener : INotificationHandler<Operator
 
 ### 5.3.5. Component Diagram — Landing & Subscription Management
 
-_(Diagrama UML de los componentes)_
-
-![Component Diagram - Landing & Subscription Management](assets/images/chapter-05/component-landing-subscription-management.png)
+![Component Diagram - Landing & Subscription Management](assets/images/chapter-05/07_landing_subscription_management_component.png)
 
 ### 5.3.6. Class Diagram — Landing & Subscription Management
 
-_(Diagrama UML de las clases del Domain Layer, con atributos, métodos, scope, relaciones, multiplicidad.)_
-
-![Class Diagram - Landing & Subscription Management](assets/images/chapter-05/class-landing-subscription-management.png)
+![Class Diagram - Landing & Subscription Management](assets/images/chapter-05/08_landing_subscription_management_class.png)
 
 ### 5.3.7. Database Diagram — Landing & Subscription Management
 
-_(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
-
-![Database Diagram - Landing & Subscription Management](assets/images/chapter-05/db-landing-subscription-management.png)
+![Database Diagram - Landing & Subscription Management](assets/images/chapter-05/09_landing_subscription_management_database.png)
 
 
 ---
@@ -4400,21 +4382,15 @@ public sealed class AdtDigitalTwinPatcher : IDigitalTwinPatcher
 
 ### 5.4.5. Component Diagram — Telemetry Simulation & Ingestion
 
-_(Diagrama UML de los componentes)_
-
-![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/component-telemetry-simulation-ingestion.png)
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/10_telemetry_simulation_ingestion_component.png)
 
 ### 5.4.6. Class Diagram — Telemetry Simulation & Ingestion
 
-_(Diagrama UML de las clases del Domain Layer, con atributos, métodos, scope, relaciones, multiplicidad.)_
-
-![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/class-telemetry-simulation-ingestion.png)
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/11_telemetry_simulation_ingestion_class.png)
 
 ### 5.4.7. Database Diagram — Telemetry Simulation & Ingestion
 
-_(Diagrama de base de datos con tablas, columnas, constraints, relaciones.)_
-
-![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/db-telemetry-simulation-ingestion.png)
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/12_telemetry_simulation_ingestion_database.png)
 
 
 
