@@ -2489,6 +2489,15 @@ Formulario para el alta de nuevos operadores, contemplando los datos esenciales 
   <b>Figura:</b> Maqueta del formulario de registro de operadores.
 </p>
 
+#### Wireframe de Dashboard Principal
+Vista general del panel de control, que centraliza los indicadores clave de desempeño y el resumen del estado operativo del estacionamiento.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-03%20Dashboard%20Principal.png" alt="Wireframe Web Dashboard">
+  <br>
+  <b>Figura:</b> Esquema del tablero principal de monitoreo.
+</p>
+
 #### Mobile Application (Conductor — PowerApps)
 
 Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
