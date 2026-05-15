@@ -2468,7 +2468,17 @@ _(Acciones y técnicas de navegación a través del Landing Page y aplicaciones.
 ### 6.4.1. Applications Wireframes
 
 #### Web Application (Operador)
-![Web App Wireframes](assets/images/chapter-06/webapp-wireframes.png)
+
+Esta sección presenta los wireframes de baja fidelidad de la aplicación web destinada al operador, mostrando la estructura y jerarquía de los módulos de monitoreo y gestión del estacionamiento.
+
+#### Wireframe de Inicio de Sesión (Login)
+Pantalla de acceso para el operador, con campos de credenciales y opciones de recuperación de contraseña para ingresar al panel administrativo.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-01%20Login.png" alt="Wireframe Web Login">
+  <br>
+  <b>Figura:</b> Esquema de la pantalla de autenticación del operador.
+</p>
 
 #### Mobile Application (Conductor — PowerApps)
 
