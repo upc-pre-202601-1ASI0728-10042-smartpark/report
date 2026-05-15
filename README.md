@@ -227,12 +227,24 @@ _(Pendiente)_
   - [6.1. Style Guidelines](#61-style-guidelines)
     - [6.1.1. General Style Guidelines](#611-general-style-guidelines)
     - [6.1.2. Web, Mobile \& Devices Style Guidelines](#612-web-mobile--devices-style-guidelines)
+    - [**Web Platform (Operadores)**](#web-platform-operadores)
+    - [**Mobile Platform (Conductores)**](#mobile-platform-conductores)
   - [6.2. Information Architecture](#62-information-architecture)
     - [6.2.1. Organization Systems](#621-organization-systems)
     - [6.2.2. Labeling Systems](#622-labeling-systems)
+    - [**Sistema de Iconografía**](#sistema-de-iconografía)
+    - [**Etiquetas por Módulo y Plataforma**](#etiquetas-por-módulo-y-plataforma)
     - [6.2.3. SEO Tags and Meta Tags](#623-seo-tags-and-meta-tags)
+    - [**SEO Tags para Landing Pages**](#seo-tags-para-landing-pages)
+    - [**Header Tags Estructurados**](#header-tags-estructurados)
+    - [**Meta Tags Optimizadas**](#meta-tags-optimizadas)
     - [6.2.4. Searching Systems](#624-searching-systems)
+    - [**Sistema de Búsqueda para Operadores (Web)**](#sistema-de-búsqueda-para-operadores-web)
+    - [**Sistema de Búsqueda para Conductores (Móvil)**](#sistema-de-búsqueda-para-conductores-móvil)
     - [6.2.5. Navigation Systems](#625-navigation-systems)
+    - [**Patrones de Navegación - Plataforma Web (Operadores)**](#patrones-de-navegación---plataforma-web-operadores)
+    - [**Patrones de Navegación - Aplicación Móvil (Conductores - PowerApps)**](#patrones-de-navegación---aplicación-móvil-conductores---powerapps)
+    - [**Patrones de Navegación - Landing Page (Web Pública)**](#patrones-de-navegación---landing-page-web-pública)
   - [6.3. Landing Page UI Design](#63-landing-page-ui-design)
     - [6.3.1. Landing Page Wireframe](#631-landing-page-wireframe)
       - [Desktop Web Browser](#desktop-web-browser)
@@ -2381,87 +2393,531 @@ _(Misma estructura)_
 
 ### 6.1.1. General Style Guidelines
 
-_(Decisiones sobre Branding, Typography, Colors, Spacing y tono de comunicación: Formal/Casual, Respetuoso/Irreverente, etc.)_
+A continuación, se definen las decisiones de diseño visual y comunicacional que guiarán la construcción de la interfaz de usuario de SmartPark, tanto para la plataforma web (operadores) como para la aplicación móvil (conductores). 
 
 **Branding:**
-- Nombre del producto: _(...)_
-- Logotipo: _(insertar)_
-- Tagline: _(...)_
+- Nombre del producto: SmartPark
+- Logotipo: 
+
+![Logo](assets/images/chapter-06/logo%20emergentes.png)
+
+- Tagline: Digital Twin Solutions
+- Propuesta visual: Modernidad, tecnología, confianza y precisión. Transmite control inteligente a través de gemelos digitales.
 
 **Typography:**
-- Fuente primaria: _(Roboto / Inter / etc.)_
-- Fuente secundaria: _(...)_
-- Escala tipográfica: _(...)_
+
+La elección tipográfica para SmartPark es un componente esencial que complementa la identidad visual de la marca. Se han seleccionado dos familias tipográficas que juntas ofrecen versatilidad y coherencia, asegurando que la comunicación sea clara y efectiva en todos los medios.
+- Fuente primaria: 
+  - Inter (sans-serif) - Limpia, moderna, altamente legible en pantallas de escritorio y móviles.
+- Fuente secundaria: 
+  - Inter (misma familia) para consistencia, variando pesos (Regular 400, Medium 500, Bold 700).
+- Escala tipográfica: Tamaños basados en progresión 1.25 (major third)
+  - Títulos principales (H1): 32px / 40px (web) - 24px / 32px (móvil)
+  - Subtítulos (H2): 24px / 32px (web) - 20px / 28px (móvil)
+  - Encabezados de sección (H3): 20px / 28px (web) - 18px / 24px (móvil)
+  - Texto base (Body): 16px / 24px
+  - Texto pequeño (Caption): 14px / 20px
+  - Texto auxiliar (Helper): 12px / 16px
 
 **Colors:**
-| Token | Color | Uso |
+
+![Logo](assets/images/chapter-06/colores.png)
+
+| Token | Color | Uso Principal |
 |---|---|---|
-| Primary | #_(hex)_ | _(...)_ |
-| Secondary | #_(hex)_ | _(...)_ |
-| Accent | #_(hex)_ | _(...)_ |
-| Alert/Danger | #_(hex)_ | _(...)_ |
-| Success | #_(hex)_ | _(...)_ |
+| Primary | #194756 | Botones principales, encabezados, enlaces, elementos de navegación activos. |
+| Secondary | #54736E | Fondos secundarios, bordes, elementos de soporte, íconos no principales.|
+| Background Light | #F2EABC | Fondos de secciones alternas, tarjetas destacadas, modales informativos.|
+| Dark / Text | #080000 | Texto principal sobre fondos claros, elementos de alto contraste. |
+| Alert/Danger | #FF3B58 | Alertas de humo, errores críticos, estados de emergencia, notificaciones de alta prioridad. |
+| Success | #2E7D32 | Estados de éxito, confirmaciones, plazas disponibles, operación normal. |
+| Warning | #FFC107 | Advertencias, congestión moderada, atención preventiva. |
+| Neutral Gray | #6C757D | Texto secundario, placeholders, deshabilitados, separadores. |
+| White | #FFFFFF | Fondos principales, tarjetas, contenedores de contenido. |
 
 **Spacing:** Sistema basado en múltiplos de 8px (8, 16, 24, 32, 48, 64).
 
-**Tono de comunicación:** Profesional, claro, orientado a acción. Formal pero accesible.
+| Token | Valor | Uso |
+|---|---|---|
+| spacing-1 | 4px | Espaciado mínimo entre elementos muy cercanos |
+| spacing-2 | 8px| Espaciado interno de componentes pequeños (padding) |
+| spacing-3 | 16px | Espaciado estándar entre elementos relacionados |
+| spacing-4 | 24px | Margen entre secciones, padding de tarjetas |
+| spacing-5 | 32px | Separación entre bloques funcionales |
+| spacing-6 | 48px | Separación entre secciones principales |
+| spacing-7 | 64px| Separación entre pantallas o grandes bloques |
+
+**Grillas:** Sistema de 12 columnas para web (con gutters de 24px) y 4 columnas para móvil.
+
+**Tono de comunicación:** 
+
+| Aspecto | Decisión | 
+|---|---|
+| Estilo general| Profesional, claro, orientado a acción. |
+| Formalidad | Formal pero accesible. No excesivamente técnico. |
+| Para operadores | Tono directo, preciso, orientado a datos y eficiencia. Uso de términos como "monitoreo", "alerta", "reporte", "optimización". |
+| Para conductores| Tono amigable, cercano, útil. Uso de términos como "encontrar mi auto", "cuánto voy pagando", "estoy seguro".|
+| Comunicación de errores/alertas | Clara, urgente pero no alarmista. Acción recomendada siempre presente. | 
+| Mensajes de éxito | Positivos, breves, reforzantes. | 
+
+**Ejemplos de tono:**
+|Contexto | Ejemplo de mensaje | 
+|---|---|
+| Alerta de humo (operador) | "Alerta de humo detectada en Zona B, Nivel B2. Haga clic para ver ubicación exacta." | 
+|Alerta de humo (conductor) | "Alerta de seguridad: humo detectado en su zona de estacionamiento. Diríjase a la salida más cercana." |
+|Registro exitoso de ubicación | "¡Ubicación guardada! Nivel B2, Zona A. ¿Necesitas encontrarlo? Usa 'Encontrar mi vehículo'." |
+|Consulta de disponibilidad | "Hay 24 plazas disponibles en Nivel B1. ¿Te diriges allí?" |
+|Error de conexión | "No pudimos cargar los datos. Verifica tu conexión e intenta de nuevo." |
 
 ### 6.1.2. Web, Mobile & Devices Style Guidelines
 
-_(Decisiones sobre estándares visuales y de interacción para responsive web e interfaces móviles.)_
+A continuación, se definen los estilos particulares para cada plataforma, considerando los diferentes contextos de uso, dispositivos y necesidades de cada segmento objetivo.
+
+### **Web Platform (Operadores)**
+**Contexto de uso:** Centro de control del estacionamiento, PC de escritorio con monitor grande, jornadas laborales de 8-12 horas.
+
+|Elemento | Especificación | 
+|---|---|
+|Resolución objetivo | 1920 x 1080 (Full HD). Mínimo soportado: 1366 x 768. | 
+|Layout principal | Dashboard con barra lateral fija (sidebar) + área de contenido principal. | 
+|Header | Altura 64px. Fondo blanco. Sombra sutil. Contiene: selector de nivel, fecha/hora, perfil de usuario.  | 
+| Visor 3D (Gemelo Digital) | Ocupa al menos 60% del área principal. Resolución mínima 800x600. Controles de zoom, rotación y desplazamiento.  | 
+| Paneles de datos | Tarjetas blancas con sombra ligera (box-shadow: 0 2px 8px rgba(0,0,0,0.08)). Bordes redondeados 8px.  | 
+| Tipografía web | Inter, tamaños: Títulos (20px/28px), Body (14px/20px), Auxiliar (12px/16px). | 
+| Espaciado web |  | 
+|Estado de alerta (humo) | Fondo pulsante rojo (#FF3B58 con opacidad 0.2) + borde rojo + icono de alerta. | 
+| Tablas de datos| Bordes horizontales. Filas alternadas con fondo #F9FAFB. Hover con fondo #F2EABC. | 
+|Botones de peligro | Fondo #FF3B58, texto blanco. Para resolución de alertas.  | 
+| Indicadores de flujo | Círculo de color: Verde (#2E7D32) = Normal, Amarillo (#FFC107) = Moderado, Rojo (#FF3B58) = Congestionado.  | 
+
+### **Mobile Platform (Conductores)**
+**Contexto de uso:** En el vehículo o caminando, sesiones cortas (30 seg - 2 min), condiciones de baja luminación (estacionamientos subterráneos).
+
+|Elemento | Especificación | 
+|---|---|
+|SO objetivo |	iOS 15+ y Android 11+ | 
+|Tamaños de pantalla |	375 x 667 (iPhone SE) a 428 x 926 (iPhone 14 Pro Max). Soporte a tablets con adaptación responsiva. | 
+|Layout principal	| Tab bar inferior (4-5 íconos) + área de contenido. Sin sidebar. | 
+|Tab bar	|  Fondo blanco, íconos Primary #194756 (activo) o Neutral Gray #6C757D (inactivo). Altura 56px. | 
+|Modo oscuro | 	No requerido en fase inicial, pero se recomienda adaptación a modo oscuro del sistema para uso nocturno. | 
+|Tipografía móvil	| Inter, tamaños: Títulos (22px/28px), Body (16px/24px), Auxiliar (13px/18px). Mínimo 16px para texto legible. | 
+|Mapa de disponibilidad	| Vista simplificada. Niveles como cards expandibles. Porcentaje de disponibilidad en círculo de color. | 
+|Registro de ubicación |	Botón flotante grande (FAB) de 56x56px, fondo Primary #194756, ícono blanco de ubicación. Fácil de alcanzar con el pulgar. | 
+|Costo acumulado	|  Tarjeta fija o sticky en parte inferior (o superior) mostrando costo actualizado automáticamente. | 
+|Push notifications | 	Alerta de humo: título "Alerta de Seguridad", cuerpo con zona y acción recomendada. Al tocar, abre la app en pantalla de alerta. | 
+|Alerta de humo en app	|  Banner rojo fijo en parte superior. Fondo #FF3B58, texto blanco. Botón "Ver más" o "Evacuar". | 
+|Encontrar mi vehículo | 	Pantalla con mapa simple de la zona guardada. Indicación de nivel, zona y código de plaza. Botón "Iniciar ruta" (abre Google Maps / Waze con coordenadas aproximadas). | 
 
 ## 6.2. Information Architecture
 
+La arquitectura de la información, también conocida como Information Architecture (IA), implica la organización de la información de manera clara y lógica, de modo que los usuarios puedan comprender su ubicación, lo que han descubierto, qué pueden esperar y qué está disponible a su alrededor. Esto tiene como objetivo permitir a los usuarios encontrar con facilidad lo que están buscando, y a los clientes, comprender las capacidades de la plataforma. Además, la arquitectura de la información posibilita la incorporación de nuevas funciones y la expansión del producto sin generar una estructura compleja o de difícil comprensión (Rosenfeld, Morville & Arango 2015).
+
 ### 6.2.1. Organization Systems
 
-_(Esquemas de organización aplicados: jerárquica, secuencial, matricial. Esquemas de categorización: alfabético, cronológico, por tópicos, según audiencia.)_
+La arquitectura de organización de SmartPark está diseñada siguiendo principios de agrupación lógica y progresiva de la información, permitiendo a los usuarios acceder rápidamente a las funciones necesarias según su rol (operador o conductor) y contexto de uso.
+
+**Esquemas de organización aplicados**
+
+| Esquema | Aplicación en SmartPark |
+|---|---|
+| Jerárquica | Navegación principal del dashboard web del operador: Niveles > Zonas > Plazas individuales. |
+| Secuencial | Flujo del conductor en la app móvil: Ingreso > Buscar plaza > Estacionar > Registrar ubicación > Finalizar sesión. |
+| Matricial | Panel de gestión de incidentes: cruce entre tipo de incidente (humo, congestión) y ubicación (nivel, zona, rampa). |
+| Por tópicos | Módulos del dashboard: Ocupación, Seguridad, Flujo vehicular y Eficiencia energética. |
+| Cronológico | Historial de incidentes del operador y sesiones del conductor ordenados por fecha descendente. |
+| Por audiencia | Diferenciación entre contenido para operadores (dashboard web) y conductores (app móvil). |
+
+**Estructura organizacional principal**
+
+**Plataforma Web (Operadores)**
+
+| Módulo | Descripción | Funciones Principales | Acceso por Rol |
+|---|---|---|---|
+| Dashboard Ocupación | Vista consolidada del estado del estacionamiento en tiempo real | Resumen ejecutivo de ocupación; mapa de calor por nivel y zona; estado por plaza individual; métricas en tiempo real | Jefe de Operaciones, Supervisor |
+| Gemelo Digital 3D | Visualización interactiva del estacionamiento en modelo 3D | Visor 3D con zoom, rotación y desplazamiento; capas de datos (ocupación, seguridad, flujo, energía); geolocalización de alertas de humo | Jefe de Operaciones, Supervisor |
+| Seguridad e Incidentes | Gestión de alertas de humo y otros incidentes | Panel de alertas activas; localización espacial en mapa 3D; rutas de evacuación comprometidas; historial de incidentes con filtros por fecha, zona y estado | Jefe de Operaciones, Supervisor de Seguridad |
+| Flujo Vehicular | Monitoreo de tráfico interno en accesos y rampas | Indicadores de flujo por punto de acceso y rampa; alertas de congestión; historial de congestión por horario | Jefe de Operaciones |
+| Eficiencia Energética | Gestión de iluminación por zona | Ocupación vs luminosidad por zona; recomendaciones de atenuación; ahorro energético estimado y logrado | Jefe de Operaciones, Facility Manager |
+| Reportes | Generación y exportación de datos históricos | Reportes de incidentes, ocupación y flujo; exportación a PDF/Excel; análisis de patrones de congestión | Jefe de Operaciones, Gerencia |
+
+**Aplicación Móvil (Conductores)**
+
+| Módulo | Descripción | Funciones Principales | Acceso por Rol |
+|---|---|---|---|
+| Disponibilidad | Consulta de plazas libres antes de ingresar | Mapa simplificado de disponibilidad por nivel y zona; porcentaje de disponibilidad por nivel; zona con mayor disponibilidad resaltada | Conductor (usuario autenticado) |
+| Mi Sesión | Gestión de la sesión de estacionamiento activa | Registro de ubicación del vehículo (nivel + zona + QR); visualización de ubicación guardada; costo acumulado en tiempo real; botón Finalizar sesión | Conductor (usuario autenticado) |
+| Alertas | Notificaciones de seguridad y eventos | Alerta de humo en zona del vehículo; recomendaciones de evacuación; historial de alertas recibidas | Conductor (usuario autenticado) |
+| Historial | Registro de sesiones pasadas | Lista de sesiones anteriores; detalle de cada sesión; comprobante de pago | Conductor (usuario autenticado) |
+| Perfil | Configuración de cuenta y preferencias | Datos personales; preferencias de notificación; método de pago predeterminado; cerrar sesión | Conductor (usuario autenticado) |
+
+**Principios de organización aplicados**
+
+| Principio | Aplicación en SmartPark |
+|---|---|
+| Agrupación por funcionalidad | Las características se organizan según su propósito común: ocupación, seguridad, flujo y energía. Cada módulo agrupa funciones relacionadas, reduciendo la carga cognitiva. |
+| Jerarquía visual progresiva | La información se presenta desde lo general hacia lo específico: resumen general > nivel > zona > plaza individual, con drill-down controlado. |
+| Contextualización dinámica | Las opciones disponibles se adaptan según el rol del usuario y el módulo activo. Un conductor no ve opciones de gestión operativa y un operador no ve opciones de pago. |
+| Consistencia transversal | Los mismos patrones organizativos se aplican en todos los módulos. Por ejemplo, los indicadores de estado usan el mismo código de colores (verde/amarillo/rojo) en ocupación, flujo y energía. |
+| Priorización de tareas críticas | Las funciones más importantes, como alertas de humo y congestión severa, se presentan de forma prominente y accesible desde cualquier módulo. |
+
+**Organización de contenido por módulo**
+
+**Módulo de Ocupación (Operador - Web)**
+
+| Nivel de agrupación | Criterio |
+|---|---|
+| Agrupación primaria | Por nivel de estacionamiento (Nivel B1, B2, B3, etc.) |
+| Agrupación secundaria | Por zona dentro del nivel (Zona A, B, C, D) |
+| Agrupación terciaria | Por plaza individual (código de plaza + estado) |
+| Agrupación por estado | Plazas disponibles, ocupadas, reservadas, fuera de servicio |
+
+**Módulo de Seguridad e Incidentes (Operador - Web)**
+
+| Nivel de agrupación | Criterio |
+|---|---|
+| Agrupación primaria | Por estado de alerta (Activa, Confirmada, Resuelta) |
+| Agrupación secundaria | Por tipo de incidente (Humo, Congestión, Otro) |
+| Agrupación terciaria | Por ubicación (Nivel > Zona > Detector específico) |
+| Agrupación temporal | Por fecha y hora de detección (cronológico descendente) |
+
+**Módulo de Disponibilidad (Conductor - Móvil)**
+
+| Nivel de agrupación | Criterio |
+|---|---|
+| Agrupación primaria | Por nivel de estacionamiento (ordenado por disponibilidad descendente) |
+| Agrupación secundaria | Por zona dentro del nivel |
+| Destacado visual | Zona con mayor disponibilidad resaltada en verde |
+| Indicador | Porcentaje de disponibilidad en círculo de color |
+
+**Módulo de Historial de Sesiones (Conductor - Móvil)**
+
+| Nivel de agrupación | Criterio |
+|---|---|
+| Agrupación primaria | Cronológico descendente (más reciente primero) |
+| Agrupación secundaria | Por centro comercial (si aplica múltiples sedes) |
+| Filtros sugeridos | Por rango de fechas (semana, mes, personalizado) |
 
 ### 6.2.2. Labeling Systems
 
-_(Etiquetas a utilizar para representar conjuntos de información, con el mínimo número de palabras.)_
+El sistema de etiquetado en SmartPark sigue principios de claridad, consistencia y contexto, asegurando que los usuarios comprendan inmediatamente la función de cada elemento. Se adapta ligeramente entre la plataforma web (operadores) y la aplicación móvil (conductores), manteniendo una base común.
+
+**Principios de Etiquetado**
+
+| Principio | Aplicación en SmartPark |
+|---|---|
+| Lenguaje Natural | Usamos términos del dominio del usuario: "plazas", "niveles", "zonas", "alertas de humo", "flujo vehicular" y "sesión de estacionamiento". |
+| Consistencia | El mismo término significa lo mismo en toda la aplicación. "Disponible" se interpreta igual en web y móvil, y "Ocupado" siempre se representa en rojo. |
+| Jerarquía Visual | El tamaño y peso tipográfico reflejan importancia. Las etiquetas críticas, como "ALERTA DE HUMO", se muestran en mayúsculas y color rojo. |
+| Contexto | Las etiquetas cambian según el módulo y las acciones disponibles. Un operador ve "Gestionar incidentes"; un conductor ve "Mi sesión". |
+| Brevedad | Se usa el mínimo número de palabras sin perder claridad. Por ejemplo, "Plazas libres" en lugar de "Número de espacios de estacionamiento disponibles actualmente". |
+
+### **Sistema de Iconografía**
+
+**Acciones Principales (Web y Móvil)**
+
+| Acción | Etiqueta | Icono sugerido |
+|---|---|---|
+| Agregar/Registrar | "Registrar" / "Guardar ubicación" | ➕ o 📍 |
+| Editar/Modificar | "Editar" / "Modificar" | ✏️ |
+| Eliminar/Descartar | "Eliminar" / "Cancelar" | 🗑️ o ✖️ |
+| Buscar/Filtrar | "Buscar" / "Filtrar" | 🔍 o ⚙️ |
+| Confirmar | "Confirmar" / "Aceptar" | ✓ |
+| Cancelar | "Cancelar" | ✖️ |
+| Cerrar | "Cerrar" | ✖️ |
+| Exportar | "Exportar" / "Descargar" | 📎 o ⬇️ |
+| Refrescar | "Actualizar" | 🔄 |
+| Ver más | "Ver más" / "Ver detalles" | 👁️ o → |
+
+### **Etiquetas por Módulo y Plataforma**
+
+**Plataforma Web (Operadores)**
+
+| Módulo | Etiquetas principales |
+|---|---|
+| Navegación principal | Dashboard / Ocupación / Gemelo 3D / Seguridad / Flujo / Energía / Reportes / Configuración |
+| Dashboard Ocupación | Total de plazas / Ocupadas / Disponibles / Porcentaje de ocupación / Última actualización / Ver por nivel / Ver por zona |
+| Gemelo Digital 3D | Vista 3D / Capas / Ocupación / Seguridad / Flujo / Energía / Zoom / Rotar / Centrar / Reset / Leyenda |
+| Seguridad e Incidentes | Alertas activas / Historial de incidentes / Humo / Congestión / Confirmar / Resolver / Ver ruta de evacuación / Zona afectada / Nivel / Fecha / Hora / Estado / Acciones |
+| Flujo Vehicular | Puntos de acceso / Rampas / Flujo actual (veh/min) / Estado / Normal / Congestión moderada / Congestión severa / Última hora / Pico máximo |
+| Eficiencia Energética | Zona de iluminación / Ocupación / Luminosidad actual / Atenuación recomendada / Ahorro estimado / Ahorro logrado / Aplicar / Programar |
+| Reportes | Generar reporte / Rango de fechas / Tipo de reporte / Incidentes / Ocupación / Flujo / Energía / Exportar a PDF / Exportar a Excel |
+
+**Aplicación Móvil (Conductores)**
+
+| Módulo | Etiquetas principales |
+|---|---|
+| Tab Bar (navegación) | Disponibilidad / Mi Sesión / Alertas / Historial / Perfil |
+| Disponibilidad | Plazas libres / Nivel / Zona / Disponibilidad / % disponible / Ver mapa / Ver lista / Mejor opción |
+| Mi Sesión | Sesión activa / Hora de entrada / Duración / Costo acumulado / Tarifa aplicable / Registrar ubicación / Nivel / Zona / Código de plaza / Escanear QR / Guardar / Encontrar mi vehículo / Finalizar sesión |
+| Alertas | Alertas de seguridad / Alerta de humo / Zona afectada / Nivel / Estado / Activa / Resuelta / Ver más / Acciones recomendadas / Evacuar / Estar atento |
+| Historial | Sesiones pasadas / Fecha / Ubicación / Duración / Costo total / Ver detalle / Comprobante / Repetir visita |
+| Perfil | Mi cuenta / Nombre completo / Correo electrónico / Teléfono / Método de pago / Notificaciones / Activar / Desactivar / Cerrar sesión / Editar perfil |
+
+**Estados del Sistema**
+
+| Estado | Etiqueta | Color asociado | Uso |
+|---|---|---|---|
+| Completado/Éxito | "Completado" / "Éxito" / "Guardado" | Verde (#2E7D32) | Registro exitoso, pago completado, sesión finalizada |
+| Advertencia/Alerta | "Advertencia" / "Atención" / "Precaución" | Amarillo (#FFC107) | Ocupación alta, congestión moderada, batería baja |
+| Error/Problema | "Error" / "Fallo" / "No disponible" | Rojo (#FF3B58) | Sensor fuera de línea, conexión fallida, credenciales inválidas |
+| Procesando/En curso | "Cargando" / "Procesando" / "Actualizando" | Azul (#194756) | Actualización de datos, envío de formulario, escaneo de QR |
+| Información | "Info" / "Nota" / "Ayuda" | Gris (#6C757D) | Mensajes informativos, tooltips, guías contextuales |
+| Inactivo/Deshabilitado | "Inactivo" / "Deshabilitado" / "Sin datos" | Gris claro (#D3D3D3) | Funcionalidad no disponible, sensor sin datos |
+
+**Estados de Plazas y Sensores**
+
+| Entidad | Estado | Etiqueta | Color |
+|---|---|---|---|
+| Plaza | Libre | "Disponible" / "Libre" | Verde |
+| Plaza | Ocupada | "Ocupada" / "En uso" | Rojo o Azul oscuro |
+| Plaza | Reservada | "Reservada" | Amarillo |
+| Plaza | Fuera de servicio | "Fuera de servicio" / "Mantenimiento" | Gris |
+| Detector de humo | Normal | "Normal" / "Sin actividad" | Verde |
+| Detector de humo | Alerta activa | "ALERTA DE HUMO" / "ACTIVO" | Rojo pulsante |
+| Sensor de flujo | Online | "Activo" / "En línea" | Verde |
+| Sensor de flujo | Offline | "Fuera de línea" / "Sin conexión" | Gris |
+| Luminaria | Encendida | "Encendida" / "100%" | Blanco/Azul |
+| Luminaria | Atenuada | "Atenuada" / "X%" | Azul claro |
 
 ### 6.2.3. SEO Tags and Meta Tags
 
+SEO (Search Engine Optimization) Tags son elementos de HTML que ayudan a los motores de búsqueda a entender el contenido y la estructura de una página web. Estos tags influyen en cómo los motores de búsqueda indexan y clasifican tu sitio en los resultados de búsqueda.
+
+A continuación, se definen los tags SEO para las páginas de aterrizaje (Landing Pages) de SmartPark y los elementos ASO (App Store Optimization) para la aplicación móvil desarrollada en Microsoft PowerApps.
+
+### **SEO Tags para Landing Pages**
+
 | Página | Title | Description | Keywords | Author |
 |---|---|---|---|---|
-| Landing Home | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| Landing For Operators | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| Landing For Drivers | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
-| Web App Dashboard | _(...)_ | _(...)_ | _(...)_ | _(...)_ |
+| Landing Home | SmartPark - Gestión Inteligente de Estacionamientos con Gemelo Digital | Plataforma SaaS con gemelo digital 3D para centros comerciales. Optimiza ocupación, seguridad, flujo vehicular y eficiencia energética en tiempo real. | gemelo digital estacionamiento, smart parking, gestión estacionamientos, Azure Digital Twins, IoT estacionamiento, centros comerciales Lima | Apex Twin |
+| Landing For Operators | SmartPark para Operadores - Dashboard y Gemelo Digital 3D | Controla tu estacionamiento desde un gemelo digital 3D. Monitoreo en tiempo real, alertas de humo geolocalizadas, flujo vehicular y ahorro energético. | operadores estacionamiento, dashboard gestión, alertas humo geolocalizadas, flujo vehicular, eficiencia energética estacionamiento | Apex Twin |
+| Landing For Drivers | SmartPark para Conductores - Encuentra tu plaza fácil y seguro | App móvil para conductores: consulta disponibilidad, registra tu ubicación, monitorea costo acumulado y recibe alertas de seguridad. Descarga gratis. | app estacionamiento, encontrar plaza libre, registrar ubicación vehículo, alertas seguridad estacionamiento, costo acumulado | Apex Twin |
+| Web App Dashboard | SmartPark Dashboard - Panel de Control para Operadores | Panel de control en tiempo real para gestión de estacionamientos. Visualización 3D, gestión de incidentes, reportes y analytics. | dashboard estacionamiento, gemelo digital, gestión incidentes, reportes ocupación, analytics estacionamiento | Apex Twin |
 
-**ASO Elements (PowerApps):**
-| Field | Value |
-|---|---|
-| App Title | _(...)_ |
-| App Subtitle | _(...)_ |
-| App Keywords | _(...)_ |
-| App Description | _(...)_ |
+### **Header Tags Estructurados**
+**Landing Home**
+
+```html
+<h1>SmartPark - Gestión Inteligente de Estacionamientos con Gemelo Digital 3D</h1>
+<h2>La plataforma SaaS que transforma la gestión operativa de estacionamientos en centros comerciales</h2>
+<h3>Monitoreo en tiempo real de ocupación, seguridad, flujo vehicular y eficiencia energética</h3>
+```
+
+**Landing For Operators**
+```html
+<h1>SmartPark para Operadores - Control Total desde un Gemelo Digital 3D</h1>
+<h2>Visualiza, analiza y actúa sobre el estado integral de tu estacionamiento en tiempo real</h2>
+<h3>Alertas de humo con localización espacial | Flujo vehicular | Eficiencia energética</h3>
+```
+**Landing For Drivers**
+```html
+<h1>SmartPark para Conductores - Encuentra tu plaza fácil y seguro</h1>
+<h2>La app móvil que te acompaña desde que ingresas hasta que retiras tu vehículo</h2>
+<h3>Disponibilidad en tiempo real | Registro de ubicación | Costo acumulado | Alertas de seguridad</h3>
+```
+
+### **Meta Tags Optimizadas**
+**Landing Home**
+
+```html
+<meta name="description" content="SmartPark - Plataforma SaaS con gemelo digital 3D para centros comerciales. Optimiza ocupación, seguridad, flujo vehicular y eficiencia energética en tiempo real. Ideal para operadores y conductores." />
+<meta name="keywords" content="gemelo digital estacionamiento, smart parking, gestión estacionamientos, Azure Digital Twins, IoT estacionamiento, centros comerciales Lima, Apex Twin" />
+<meta name="author" content="Apex Twin" />
+<meta name="robots" content="index, follow" />
+```
+**Landing For Operators**
+```html
+<meta name="description" content="Controla tu estacionamiento desde un gemelo digital 3D. Monitoreo en tiempo real, alertas de humo geolocalizadas, flujo vehicular y ahorro energético. Solicita una demo." />
+<meta name="keywords" content="operadores estacionamiento, dashboard gestión, alertas humo geolocalizadas, flujo vehicular, eficiencia energética estacionamiento, centro comercial" />
+<meta name="author" content="Apex Twin" />
+<meta name="robots" content="index, follow" />
+```
+**Landing For Drivers**
+```html
+<meta name="description" content="Encuentra estacionamiento fácil y seguro. Consulta disponibilidad en tiempo real, registra la ubicación de tu vehículo, monitorea el costo acumulado y recibe alertas de seguridad. Descarga gratis." />
+<meta name="keywords" content="app estacionamiento, encontrar plaza libre, registrar ubicación vehículo, alertas seguridad estacionamiento, costo acumulado, conductores" />
+<meta name="author" content="Apex Twin" />
+<meta name="robots" content="index, follow" />
+```
+**Web App Dashboard**
+```html
+<meta name="description" content="Panel de control en tiempo real para gestión de estacionamientos. Visualización 3D, gestión de incidentes, reportes y analytics. Acceso exclusivo para operadores." />
+<meta name="keywords" content="dashboard estacionamiento, gemelo digital, gestión incidentes, reportes ocupación, analytics estacionamiento" />
+<meta name="author" content="Apex Twin" />
+<meta name="robots" content="noindex, nofollow" />
+```
+
+**Open Graph Tags para Redes Sociales (Landing Home)**
+```html
+<meta property="og:title" content="SmartPark - Gestión Inteligente de Estacionamientos con Gemelo Digital 3D" />
+<meta property="og:description" content="Plataforma SaaS que transforma la gestión de estacionamientos en centros comerciales. Ocupación, seguridad, flujo y energía en tiempo real." />
+<meta property="og:image" content="https://www.smartpark.com/assets/social-preview.png" />
+<meta property="og:url" content="https://www.smartpark.com" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SmartPark by Apex Twin" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SmartPark - Gestión Inteligente de Estacionamientos" />
+<meta name="twitter:description" content="Gemelo digital 3D para centros comerciales. Optimiza ocupación, seguridad, flujo y energía." />
+<meta name="twitter:image" content="https://www.smartpark.com/assets/twitter-preview.png" />
+```
 
 ### 6.2.4. Searching Systems
 
-_(Opciones de búsqueda, filtros disponibles, presentación de resultados.)_
+El sistema de búsqueda de SmartPark está diseñado para ser intuitivo y eficiente, permitiendo a los usuarios encontrar rápidamente la información que necesitan según su rol y contexto de uso. Se diferencia entre la plataforma web (operadores) y la aplicación móvil (conductores), adaptando las opciones de búsqueda y filtros a las necesidades específicas de cada segmento.
+
+### **Sistema de Búsqueda para Operadores (Web)**
+
+**Características generales:**
+
+| Característica | Descripción |
+|---|---|
+| Búsqueda global | Barra de búsqueda en el header, accesible desde cualquier módulo. |
+| Búsqueda inteligente | Búsqueda por texto libre en múltiples campos. |
+| Búsqueda predictiva | Sugerencias en tiempo real mientras el usuario escribe. |
+| Resultados agrupados | Los resultados se agrupan por categoría (plazas, incidentes, zonas). |
+| Acceso rápido | Atajo de teclado Ctrl + K para abrir la búsqueda. |
+
+**Campos de búsqueda por módulo:**
+
+| Módulo | Campos de búsqueda |
+|---|---|
+| Ocupación | Nivel, Zona, Código de plaza, Estado (libre/ocupada/reservada) |
+| Seguridad | Tipo (humo/congestión), Estado (activa/confirmada/resuelta), Zona, Fecha |
+| Flujo | Punto de acceso, Rampa, Estado (normal/moderado/severo) |
+| Energía | Zona de iluminación, Estado (atenuación recomendada/óptimo) |
+| Reportes | Rango de fechas, Tipo de reporte, Zona |
+
+**Filtros disponibles:**
+
+| Módulo | Filtros |
+|---|---|
+| Ocupación | Por nivel, zona, estado de plaza, rango de ocupación (<30% / 30-60% / 60-85% / >85%) |
+| Seguridad | Por tipo, estado, nivel, zona, rango de fechas (Hoy / 7 días / 30 días / Personalizado) |
+| Flujo | Por tipo (accesos/rampas), estado, nivel |
+| Energía | Por nivel, zona, estado de atenuación |
+
+### **Sistema de Búsqueda para Conductores (Móvil)**
+**Características generales:**
+
+| Característica | Descripción |
+|---|---|
+| Búsqueda simplificada | Enfocada en encontrar centro comercial o nivel rápidamente. |
+| Ubicación GPS | Detección automática del centro comercial más cercano. |
+| Resultados táctiles | Tarjetas grandes y fáciles de tocar. |
+
+**Campos de búsqueda por módulo:**
+
+| Módulo | Campos de búsqueda |
+|---|---|
+| Disponibilidad | Centro comercial, Nivel (búsqueda por texto o GPS) |
+| Historial | Centro comercial, Rango de fechas (semana / mes / personalizado) |
+| Alertas | Estado (activa/resuelta), Fecha |
+
+**Filtros disponibles:**
+
+| Módulo | Filtros |
+|---|---|
+| Disponibilidad | Por nivel (ordenado por disponibilidad), "Mostrar solo niveles con plazas libres" (toggle) |
+| Historial | Por rango de fechas, por centro comercial |
+| Alertas | Por estado (activas/resueltas), por fecha |
 
 ### 6.2.5. Navigation Systems
 
-_(Acciones y técnicas de navegación a través del Landing Page y aplicaciones.)_
+El sistema de navegación de SmartPark está optimizado para cada plataforma y usuario, priorizando la accesibilidad, la eficiencia en las tareas diarias y la claridad en la ubicación del usuario.
+
+### **Patrones de Navegación - Plataforma Web (Operadores)**
+**Navegación Principal (Sidebar Lateral):**
+
+La navegación principal se organiza en una barra lateral fija (sidebar) con los siguientes módulos:
+- Dashboard   
+- Ocupación   
+- Gemelo 3D   
+- Seguridad   
+- Flujo      
+- Energía     
+- Reportes    
+- Configuración
+
+| Elemento | Especificación |
+|---|---|
+| Posición | Izquierda, fija al hacer scroll |
+| Ancho | 260px (expandido) / 72px (colapsado en íconos) |
+| Fondo | Primary (#194756) |
+| Texto | Blanco |
+| Ícono activo | Resaltado con acento blanco y fondo semitransparente (opacidad 0.2) |
+| Tooltip | En modo colapsado, mostrar nombre del módulo al hacer hover |
+
+### **Patrones de Navegación - Aplicación Móvil (Conductores - PowerApps)**
+**Navegación Principal (Bottom Tab Bar):**
+
+La navegación principal se organiza en una barra inferior (tab bar) con 5 opciones principales:
+- Dispon.  
+- Sesión  
+- Alertas  
+- Historial  
+- Perfil    
+  
+| Elemento | Especificación |
+|---|---|
+| Posición | Inferior, fija |
+| Altura | 56px |
+| Fondo | Blanco (#FFFFFF) |
+| Ícono activo | Primary (#194756) |
+| Ícono inactivo | Neutral Gray (#6C757D) |
+| Texto | 12px, debajo del ícono |
+
+Navegación por Gestos (Móvil):
+
+| Gesto | Acción |
+|---|---|
+| Deslizar hacia la derecha | Volver a pantalla anterior (solo en pantallas secundarias) |
+| Deslizar hacia abajo | Recargar / actualizar contenido (pull-to-refresh) |
+| Deslizar hacia arriba | Scroll para ver más resultados |
+| Toque largo | Opciones contextuales (ej. eliminar del historial) |
+| Deslizar elemento lateral | En listas (historial), deslizar para eliminar o repetir |
+
+### **Patrones de Navegación - Landing Page (Web Pública)**
+**Navegación Principal (Header Superior):**
+
+[Logo] SmartPark  [Funcionalidades]  [Precios] [Contacto] 
+                                              [Demo] [Idioma] 
+
+| Elemento | Especificación |
+|---|---|
+| Posición | Superior, fija al hacer scroll (sticky) |
+| Fondo | Blanco con sombra ligera |
+| CTA principal | Botón "Solicitar demo" (Primary) |
+| Selector de idioma | ES / EN |
+| Responsive | En móvil, colapsar a menú hamburguesa (☰) |
+
+**Navegación por Call-to-Action (CTA):**
+
+| CTA | Destino |
+|---|---|
+| "Solicitar demo" (operadores) | Formulario de contacto para operadores |
+| "Descargar app" (conductores) | Enlace a PowerApps / Google Play / App Store |
+| "Ver planes" | Scroll a sección de precios |
+| "Contactar" | Scroll a formulario de contacto |
+
 
 ## 6.3. Landing Page UI Design
 
 ### 6.3.1. Landing Page Wireframe
 
 #### Desktop Web Browser
-![Landing Wireframe Desktop](assets/images/chapter-06/landing-wireframe-desktop.png)
+![Landing Wireframe Desktop](assets/images/chapter-06/Wireframe-Desktop1.png)
 
 #### Mobile Web Browser
-![Landing Wireframe Mobile](assets/images/chapter-06/landing-wireframe-mobile.png)
+![Landing Wireframe Mobile](assets/images/chapter-06/Mobile%20Web%20Browser%20(2).png)
 
 ### 6.3.2. Landing Page Mock-up
 
 #### Desktop Web Browser
-![Landing Mockup Desktop](assets/images/chapter-06/landing-mockup-desktop.png)
+![Landing Mockup Desktop](assets/images/chapter-06/Wireframe-Desktop.png)
 
 #### Mobile Web Browser
-![Landing Mockup Mobile](assets/images/chapter-06/landing-mockup-mobile.png)
+![Landing Mockup Mobile](assets/images/chapter-06/Mobile%20Web%20Browser.png)
 
 ## 6.4. Applications UX/UI Design
 
