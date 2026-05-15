@@ -2498,6 +2498,15 @@ Vista general del panel de control, que centraliza los indicadores clave de dese
   <b>Figura:</b> Esquema del tablero principal de monitoreo.
 </p>
 
+#### Wireframe de Ocupación por Nivel
+Representación visual de la distribución de espacios ocupados y disponibles por cada nivel del estacionamiento, facilitando la lectura del estado en tiempo real.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-04%20Ocupaci%C3%B3n%20por%20Nivel.png" alt="Wireframe Web Ocupación por Nivel">
+  <br>
+  <b>Figura:</b> Estructura del módulo de ocupación por niveles.
+</p>
+
 #### Mobile Application (Conductor — PowerApps)
 
 Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
