@@ -2516,6 +2516,15 @@ Listado cronológico de las alertas de seguridad detectadas, organizadas por pri
   <b>Figura:</b> Esquema del centro de alertas de seguridad.
 </p>
 
+#### Wireframe de Flujo Vehicular
+Visualización del flujo de entradas y salidas de vehículos, presentando métricas temporales y picos de movimiento dentro del estacionamiento.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-06%20Flujo%20Vehicular.png" alt="Wireframe Web Flujo Vehicular">
+  <br>
+  <b>Figura:</b> Maqueta del módulo de análisis de flujo vehicular.
+</p>
+
 #### Mobile Application (Conductor — PowerApps)
 
 Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
