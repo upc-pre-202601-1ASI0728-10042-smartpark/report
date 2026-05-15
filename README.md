@@ -2534,6 +2534,15 @@ Panel de seguimiento del consumo energético del estacionamiento, mostrando indi
   <b>Figura:</b> Estructura del módulo de eficiencia energética.
 </p>
 
+#### Wireframe de Historial de Incidentes
+Registro detallado de incidentes ocurridos, con filtros por fecha, tipo y estado para auditoría y seguimiento por parte del operador.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/W-08%20Historial%20de%20Incidentes.png" alt="Wireframe Web Historial de Incidentes">
+  <br>
+  <b>Figura:</b> Esquema del historial de incidentes registrados.
+</p>
+
 #### Mobile Application (Conductor — PowerApps)
 
 Esta sección detalla la arquitectura de información y el diseño estructural de baja fidelidad (wireframes) de la aplicación móvil.
