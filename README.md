@@ -2641,10 +2641,17 @@ Diseño del panel desplegable que organiza los accesos secundarios a configuraci
 
 ### 6.4.2. Applications Wireflow Diagrams
 
-#### Wireflow: Operator views smoke alert and locates affected zone
-**User Goal:** Identificar la ubicación exacta de un incidente de humo para coordinar respuesta.
+### Wireflow Operador
 
-![Wireflow Operator Smoke Alert](assets/images/chapter-06/wireflow-operator-smoke.png)
+#### Wireflow Operador: Registro e Inicio de Sesión
+
+Este wireflow representa el proceso que sigue un nuevo operador para registrarse en la plataforma e iniciar sesión en el panel administrativo. El flujo parte del formulario de registro, valida los datos ingresados y, una vez confirmados, redirige al dashboard principal. También contempla el escenario alternativo donde credenciales inválidas obligan al usuario a corregir los datos.
+
+<p align="center">
+  <img src="./assets/images/chapter-06/web-application/wireflows/WF-01%20Registro%20e%20Inicio%20de%20Sesi_n.png" alt="Wireflow Operador Registro e Inicio de Sesión">
+  <br>
+  <b>Figura:</b> Flujo de registro, validación e inicio de sesión del operador.
+</p>
 
 ### Wireflow Driver 
 
