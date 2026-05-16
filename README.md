@@ -4910,9 +4910,12 @@ public sealed class IncidentCreatedNotifier : INotificationHandler<IncidentCreat
 
 ### 5.5.5 Component Diagram — Safety & Incidents
 
-![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/SafetyIncidentsComponentDiagram.png)
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente1.png)
 
 ### 5.5.6 Class Diagram — Safety & Incidents
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram1.png)
+
 ### 5.5.7 Database Diagram — Safety & Incidents
 
 ## 5.6 Bounded Context: Parking Session
@@ -5296,9 +5299,12 @@ public sealed class EfParkingSessionRepository : IParkingSessionRepository
 
 ### 5.6.5. Component Diagram — Parking Session
 
-![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/ParkingSessionComponentDiagram.png)
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente2.png)
 
 ### 5.6.6. Class Diagram — Parking Session
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram2.png)
+
 ### 5.6.7. Database Diagram — Parking Session
 
 ## 5.7. Bounded Context: Notifications
@@ -5678,7 +5684,12 @@ public sealed class EfNotificationRepository : INotificationRepository
 
 ### 5.7.5. Component Diagram — Notifications
 
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente3.png)
+
+
 ### 5.7.6. Class Diagram — Notifications
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram3.png)
 
 ### 5.7.7. Database Diagram — Notifications
 
@@ -6111,7 +6122,12 @@ public interface IJwtTokenService
 
 ### 5.8.5. Component Diagram — Identity & Access Management
 
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente4.png)
+
+
 ### 5.8.6. Class Diagram — Identity & Access Management
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram4.png)
 
 ### 5.8.7. Database Diagram — Identity & Access Management
 
@@ -6538,7 +6554,12 @@ public sealed class AzureDigitalTwinClient : IDigitalTwinClient
 
 ### 5.9.5. Component Diagram — Digital Twin Synchronization
 
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente5.png)
+
+
 ### 5.9.6. Class Diagram — Digital Twin Synchronization
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram5.png)
 
 ### 5.9.7. Database Diagram — Digital Twin Synchronization
 
