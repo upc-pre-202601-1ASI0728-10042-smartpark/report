@@ -4918,6 +4918,9 @@ public sealed class IncidentCreatedNotifier : INotificationHandler<IncidentCreat
 
 ### 5.5.7 Database Diagram — Safety & Incidents
 
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram1.png)
+
+
 ## 5.6 Bounded Context: Parking Session
 
 El contexto Parking Session es responsable de gestionar la sesión de estacionamiento del conductor desde el ingreso hasta la finalización de su permanencia. Sus responsabilidades concretas son: (a) iniciar una sesión de estacionamiento asociada a un conductor y vehículo; (b) registrar la ubicación del vehículo dentro del estacionamiento; (c) consultar la sesión activa del conductor; (d) finalizar la sesión cuando el conductor abandona el estacionamiento; y (e) publicar eventos que pueden ser consumidos por Notifications y Parking Operations Monitoring.
@@ -5307,6 +5310,9 @@ public sealed class EfParkingSessionRepository : IParkingSessionRepository
 
 ### 5.6.7. Database Diagram — Parking Session
 
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram2.png)
+
+
 ## 5.7. Bounded Context: Notifications
 
 El contexto **Notifications** es responsable de gestionar la creación, envío, seguimiento y lectura de notificaciones dirigidas a operadores y conductores. Sus responsabilidades concretas son: (a) recibir solicitudes de notificación desde otros bounded contexts; (b) clasificar las notificaciones según canal, prioridad y destinatario; (c) enviar alertas mediante SignalR o Firebase Cloud Messaging; (d) registrar intentos de entrega; y (e) permitir que los usuarios consulten y marquen sus notificaciones como leídas.
@@ -5692,6 +5698,9 @@ public sealed class EfNotificationRepository : INotificationRepository
 ![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram3.png)
 
 ### 5.7.7. Database Diagram — Notifications
+
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram3.png)
+
 
 ## 5.8. Bounded Context: Identity & Access Management
 
@@ -6131,6 +6140,9 @@ public interface IJwtTokenService
 
 ### 5.8.7. Database Diagram — Identity & Access Management
 
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram4.png)
+
+
 ## 5.9. Bounded Context: Digital Twin Synchronization
 
 El contexto Digital Twin Synchronization es responsable de mantener sincronizado el estado operativo de SmartPark con el gemelo digital del estacionamiento. Sus responsabilidades concretas son: (a) recibir solicitudes de actualización de estado; (b) construir operaciones de actualización compatibles con Azure Digital Twins; (c) aplicar cambios sobre el twin correspondiente; (d) registrar snapshots del estado sincronizado; y (e) exponer endpoints para consultar el estado y el historial de sincronización.
@@ -6563,6 +6575,7 @@ public sealed class AzureDigitalTwinClient : IDigitalTwinClient
 
 ### 5.9.7. Database Diagram — Digital Twin Synchronization
 
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram5.png)
 
 
 # Capítulo VI: Solution UX Design
