@@ -4429,7 +4429,7 @@ El contexto **Safety & Incidents** es responsable de gestionar la detección, re
 
 Este contexto soporta las historias relacionadas con la visualización de alertas de humo, gestión de incidentes de seguridad y notificación de eventos críticos al operador y al conductor. Además, se integra con **Digital Twin Synchronization** mediante eventos de actualización de estado y con **Notifications** mediante eventos como `IncidentCreated` e `IncidentResolved`.
 
-### 5.5.1 Domain Layer
+### 5.5.1. Domain Layer
 
 La capa de dominio contiene la lógica de negocio relacionada con el ciclo de vida de los incidentes de seguridad. En este bounded context se identifica como agregado raíz `Incident`, encargado de registrar la alerta inicial, controlar el estado del incidente, gestionar su severidad y almacenar su resolución.
 
@@ -4938,24 +4938,24 @@ public sealed class IncidentCreatedNotifier : INotificationHandler<IncidentCreat
 
 ```
 
-### 5.5.5 Component Diagram — Safety & Incidents
+### 5.5.5. Component Diagram — Safety & Incidents
 
 ![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente1.png)
 
-### 5.5.6 Class Diagram — Safety & Incidents
+### 5.5.6. Class Diagram — Safety & Incidents
 
 ![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram1.png)
 
-### 5.5.7 Database Diagram — Safety & Incidents
+### 5.5.7. Database Diagram — Safety & Incidents
 
 ![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram1.png)
 
 
-## 5.6 Bounded Context: Parking Session
+## 5.6. Bounded Context: Parking Session
 
 El contexto Parking Session es responsable de gestionar la sesión de estacionamiento del conductor desde el ingreso hasta la finalización de su permanencia. Sus responsabilidades concretas son: (a) iniciar una sesión de estacionamiento asociada a un conductor y vehículo; (b) registrar la ubicación del vehículo dentro del estacionamiento; (c) consultar la sesión activa del conductor; (d) finalizar la sesión cuando el conductor abandona el estacionamiento; y (e) publicar eventos que pueden ser consumidos por Notifications y Parking Operations Monitoring.
 
-## 5.6.1 Domain Layer
+### 5.6.1. Domain Layer
 
 La capa de dominio contiene la lógica relacionada con el ciclo de vida de una sesión de estacionamiento. El agregado raíz es ParkingSession, encargado de controlar el inicio, registro de ubicación y cierre de la sesión.
 
@@ -5270,7 +5270,7 @@ public sealed record RegisterVehicleLocationRequest(
     string SpaceCode);
 ```
 
-### 5.6.4 Infrastructure Layer
+### 5.6.4. Infrastructure Layer
 
 **DbContext del módulo**
 
@@ -5594,7 +5594,7 @@ public sealed record NotificationDto(
     DateTimeOffset? ReadAt);
 ```
 
-### 5.7.3. 
+### 5.7.3. Interface Layer
 
 **Controlador**
 
@@ -5736,7 +5736,7 @@ public sealed class EfNotificationRepository : INotificationRepository
 
 El contexto Identity & Access Management es responsable de gestionar la identidad, autenticación, autorización y control de acceso de los usuarios de SmartPark. Sus responsabilidades concretas son: (a) registrar cuentas de operadores y conductores; (b) autenticar usuarios mediante credenciales; (c) asignar roles y permisos; (d) emitir tokens de acceso; y (e) publicar eventos de dominio cuando una cuenta es registrada, autenticada o actualizada.
 
-## 5.8.1. Domain Layer
+### 5.8.1. Domain Layer
 
 La capa de dominio contiene las reglas relacionadas con la cuenta de usuario, sus credenciales, roles y estado. El agregado raíz es UserAccount, encargado de controlar la identidad principal del usuario dentro del sistema.
 
