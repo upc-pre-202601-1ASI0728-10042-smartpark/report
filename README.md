@@ -4423,8 +4423,2190 @@ public sealed class AdtDigitalTwinPatcher : IDigitalTwinPatcher
 ![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/12_telemetry_simulation_ingestion_database.png)
 
 
+## 5.5. Bounded Context: Safety & Incidents
 
----
+El contexto **Safety & Incidents** es responsable de gestionar la detección, registro, seguimiento, escalamiento y resolución de incidentes de seguridad dentro del estacionamiento inteligente. Sus responsabilidades concretas son: (a) recibir alertas de humo provenientes del sistema de telemetría; (b) transformar dichas alertas en incidentes operativos; (c) clasificar los incidentes según severidad, ubicación y estado; (d) permitir que el operador confirme, escale o resuelva incidentes desde la Web Application; y (e) publicar eventos de dominio que el contexto **Notifications** consume para alertar a operadores y conductores afectados, y que **Digital Twin Synchronization** utiliza para reflejar el incidente dentro del modelo 3D.
+
+Este contexto soporta las historias relacionadas con la visualización de alertas de humo, gestión de incidentes de seguridad y notificación de eventos críticos al operador y al conductor. Además, se integra con **Digital Twin Synchronization** mediante eventos de actualización de estado y con **Notifications** mediante eventos como `IncidentCreated` e `IncidentResolved`.
+
+### 5.5.1 Domain Layer
+
+La capa de dominio contiene la lógica de negocio relacionada con el ciclo de vida de los incidentes de seguridad. En este bounded context se identifica como agregado raíz `Incident`, encargado de registrar la alerta inicial, controlar el estado del incidente, gestionar su severidad y almacenar su resolución.
+
+**Agregado raíz: `Incident`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Model;
+
+public sealed class Incident
+{
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public IncidentId Id { get; }
+    public SmokeAlert Alert { get; }
+    public LocationReference Location { get; }
+    public IncidentSeverity Severity { get; private set; }
+    public IncidentStatus Status { get; private set; }
+    public DateTimeOffset CreatedAt { get; }
+    public DateTimeOffset? ResolvedAt { get; private set; }
+    public IncidentResolution? Resolution { get; private set; }
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    private Incident() { }
+
+    public Incident(IncidentId id, SmokeAlert alert, LocationReference location, IncidentSeverity severity)
+    {
+        Id = id;
+        Alert = alert;
+        Location = location;
+        Severity = severity;
+        Status = IncidentStatus.Active;
+        CreatedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new IncidentCreated(Id, Location, Severity, CreatedAt));
+    }
+
+    public void Escalate(IncidentSeverity newSeverity)
+    {
+        if (Status == IncidentStatus.Resolved)
+            throw new InvalidOperationException("Resolved incidents cannot be escalated");
+
+        Severity = newSeverity;
+        _domainEvents.Add(new IncidentEscalated(Id, Severity, DateTimeOffset.UtcNow));
+    }
+
+    public void Resolve(string operatorId, string notes)
+    {
+        if (Status == IncidentStatus.Resolved)
+            return;
+
+        Resolution = new IncidentResolution(operatorId, notes, DateTimeOffset.UtcNow);
+        Status = IncidentStatus.Resolved;
+        ResolvedAt = Resolution.ResolvedAt;
+        _domainEvents.Add(new IncidentResolved(Id, operatorId, ResolvedAt.Value));
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+
+```
+
+**Entidad: `SmokeAlert`**
+
+```csharp
+
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Model;
+
+public sealed class SmokeAlert
+{
+    public SmokeAlertId Id { get; }
+    public string SensorId { get; }
+    public double SmokeLevel { get; }
+    public DateTimeOffset DetectedAt { get; }
+
+    private SmokeAlert() { }
+
+    public SmokeAlert(SmokeAlertId id, string sensorId, double smokeLevel)
+    {
+        Id = id;
+        SensorId = sensorId;
+        SmokeLevel = smokeLevel;
+        DetectedAt = DateTimeOffset.UtcNow;
+    }
+}
+
+```
+
+**Entidad: `IncidentResolution`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Model;
+
+public sealed class IncidentResolution
+{
+    public string OperatorId { get; }
+    public string Notes { get; }
+    public DateTimeOffset ResolvedAt { get; }
+
+    private IncidentResolution() { }
+
+    public IncidentResolution(string operatorId, string notes, DateTimeOffset resolvedAt)
+    {
+        OperatorId = operatorId;
+        Notes = notes;
+        ResolvedAt = resolvedAt;
+    }
+}
+```
+
+
+**Value Objects y enumeraciones**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Events;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Shared.Kernel;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Model;
+
+public sealed record SmokeDetected(
+    SmokeAlertId AlertId,
+    string SensorId,
+    double SmokeLevel,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record IncidentCreated(
+    IncidentId IncidentId,
+    LocationReference Location,
+    IncidentSeverity Severity,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record IncidentEscalated(
+    IncidentId IncidentId,
+    IncidentSeverity Severity,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record IncidentResolved(
+    IncidentId IncidentId,
+    string OperatorId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+```
+
+
+
+**Repositorio**
+
+```csharp
+
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Repositories;
+
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Model;
+
+public interface IIncidentRepository
+{
+    Task<Incident?> FindByIdAsync(IncidentId id, CancellationToken ct = default);
+    Task<IReadOnlyList<Incident>> FindActiveAsync(CancellationToken ct = default);
+    Task SaveAsync(Incident incident, CancellationToken ct = default);
+}
+
+```
+
+### 5.5.2. Application Layer
+
+La capa de aplicación orquesta los casos de uso mediante comandos, queries y handlers. Los comandos modifican el estado del incidente, mientras que las queries permiten consultar incidentes activos o revisar el detalle de un incidente específico.
+
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Commands;
+
+using MediatR;
+
+public sealed record RegisterSmokeAlertCommand(
+    string SensorId,
+    double SmokeLevel,
+    string ParkingLotId,
+    string ZoneId,
+    string? SpaceCode
+) : IRequest<string>;
+
+public sealed record ResolveIncidentCommand(
+    string IncidentId,
+    string OperatorId,
+    string Notes
+) : IRequest;
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Queries;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Dtos;
+
+public sealed record GetActiveIncidentsQuery() : IRequest<IReadOnlyList<IncidentDto>>;
+
+public sealed record GetIncidentByIdQuery(string IncidentId) : IRequest<IncidentDto>;
+```
+
+
+
+**Command Handlers**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Repositories;
+
+public sealed class RegisterSmokeAlertHandler : IRequestHandler<RegisterSmokeAlertCommand, string>
+{
+    private readonly IIncidentRepository _repository;
+    private readonly IPublisher _publisher;
+
+    public RegisterSmokeAlertHandler(IIncidentRepository repository, IPublisher publisher)
+    {
+        _repository = repository;
+        _publisher = publisher;
+    }
+
+    public async Task<string> Handle(RegisterSmokeAlertCommand cmd, CancellationToken ct)
+    {
+        var alert = new SmokeAlert(
+            new SmokeAlertId(Guid.NewGuid().ToString()),
+            cmd.SensorId,
+            cmd.SmokeLevel);
+
+        var location = new LocationReference(cmd.ParkingLotId, cmd.ZoneId, cmd.SpaceCode);
+        var severity = cmd.SmokeLevel >= 80 ? IncidentSeverity.Critical : IncidentSeverity.High;
+
+        var incident = new Incident(
+            new IncidentId(Guid.NewGuid().ToString()),
+            alert,
+            location,
+            severity);
+
+        await _repository.SaveAsync(incident, ct);
+
+        foreach (var domainEvent in incident.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+
+        incident.ClearDomainEvents();
+        return incident.Id.Value;
+    }
+}
+
+public sealed class ResolveIncidentHandler : IRequestHandler<ResolveIncidentCommand>
+{
+    private readonly IIncidentRepository _repository;
+    private readonly IPublisher _publisher;
+
+    public ResolveIncidentHandler(IIncidentRepository repository, IPublisher publisher)
+    {
+        _repository = repository;
+        _publisher = publisher;
+    }
+
+    public async Task Handle(ResolveIncidentCommand cmd, CancellationToken ct)
+    {
+        var id = new IncidentId(cmd.IncidentId);
+        var incident = await _repository.FindByIdAsync(id, ct)
+            ?? throw new InvalidOperationException("Incident not found");
+
+        incident.Resolve(cmd.OperatorId, cmd.Notes);
+        await _repository.SaveAsync(incident, ct);
+
+        foreach (var domainEvent in incident.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+
+        incident.ClearDomainEvents();
+    }
+}
+
+```
+
+**Query Handlers**
+
+```csharp
+
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Dtos;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Queries;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Repositories;
+
+public sealed class GetActiveIncidentsHandler
+    : IRequestHandler<GetActiveIncidentsQuery, IReadOnlyList<IncidentDto>>
+{
+    private readonly IIncidentRepository _repository;
+
+    public GetActiveIncidentsHandler(IIncidentRepository repository)
+    {
+        _repository = repository;
+    }
+
+    public async Task<IReadOnlyList<IncidentDto>> Handle(GetActiveIncidentsQuery query, CancellationToken ct)
+    {
+        var incidents = await _repository.FindActiveAsync(ct);
+        return incidents.Select(i => new IncidentDto(
+            i.Id.Value,
+            i.Location.ParkingLotId,
+            i.Location.ZoneId,
+            i.Location.SpaceCode,
+            i.Severity.ToString(),
+            i.Status.ToString(),
+            i.CreatedAt,
+            i.ResolvedAt
+        )).ToList();
+    }
+}
+```
+**DTOs de aplicación**
+
+```csharp
+
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Dtos;
+
+public sealed record IncidentDto(
+    string IncidentId,
+    string ParkingLotId,
+    string ZoneId,
+    string? SpaceCode,
+    string Severity,
+    string Status,
+    DateTimeOffset CreatedAt,
+    DateTimeOffset? ResolvedAt);
+
+public sealed record SmokeAlertDto(
+    string AlertId,
+    string SensorId,
+    double SmokeLevel,
+    DateTimeOffset DetectedAt);
+```
+
+### 5.5.3. Interface Layer
+
+La capa de interfaz expone los casos de uso mediante controladores REST. Los controladores reciben solicitudes desde la Web Application del operador, envían comandos o queries mediante MediatR y devuelven respuestas HTTP adecuadas.
+
+**Controlador**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Application.Queries;
+
+[ApiController]
+[Route("api/v1/incidents")]
+public sealed class IncidentsController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public IncidentsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetActiveIncidents(CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetActiveIncidentsQuery(), ct);
+        return Ok(result);
+    }
+
+    [HttpGet("{incidentId}")]
+    public async Task<IActionResult> GetIncidentById(string incidentId, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetIncidentByIdQuery(incidentId), ct);
+        return Ok(result);
+    }
+
+    [HttpPost("smoke-alerts")]
+    public async Task<IActionResult> RegisterSmokeAlert(
+        [FromBody] RegisterSmokeAlertRequest request,
+        CancellationToken ct)
+    {
+        var incidentId = await _mediator.Send(new RegisterSmokeAlertCommand(
+            request.SensorId,
+            request.SmokeLevel,
+            request.ParkingLotId,
+            request.ZoneId,
+            request.SpaceCode), ct);
+
+        return Accepted(new { incidentId });
+    }
+
+    [HttpPatch("{incidentId}/resolve")]
+    public async Task<IActionResult> ResolveIncident(
+        string incidentId,
+        [FromBody] ResolveIncidentRequest request,
+        CancellationToken ct)
+    {
+        await _mediator.Send(new ResolveIncidentCommand(
+            incidentId,
+            request.OperatorId,
+            request.Notes), ct);
+
+        return NoContent();
+    }
+}
+
+```
+
+
+**Request DTOs y validación**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Interfaces.Rest.Dtos;
+
+public sealed record RegisterSmokeAlertRequest(
+    string SensorId,
+    double SmokeLevel,
+    string ParkingLotId,
+    string ZoneId,
+    string? SpaceCode);
+
+public sealed record ResolveIncidentRequest(
+    string OperatorId,
+    string Notes);
+
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Interfaces.Rest.Validation;
+
+using FluentValidation;
+
+public sealed class RegisterSmokeAlertRequestValidator : AbstractValidator<RegisterSmokeAlertRequest>
+{
+    public RegisterSmokeAlertRequestValidator()
+    {
+        RuleFor(x => x.SensorId).NotEmpty();
+        RuleFor(x => x.SmokeLevel).GreaterThanOrEqualTo(0);
+        RuleFor(x => x.ParkingLotId).NotEmpty();
+        RuleFor(x => x.ZoneId).NotEmpty();
+    }
+}
+
+```
+
+### 5.5.4. Infrastructure Layer
+
+La capa de infraestructura implementa los puertos del dominio y gestiona la persistencia mediante Entity Framework Core. También integra SignalR para informar incidentes en tiempo real al dashboard del operador.
+
+**DbContext del módulo**
+
+```csharp
+
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Model;
+
+public sealed class SafetyIncidentsDbContext : DbContext
+{
+    public DbSet<Incident> Incidents => Set<Incident>();
+
+    public SafetyIncidentsDbContext(DbContextOptions<SafetyIncidentsDbContext> options)
+        : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("safety_incidents");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(SafetyIncidentsDbContext).Assembly);
+    }
+}
+```
+
+**Notificador SignalR**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Infrastructure.RealTime;
+
+using MediatR;
+using Microsoft.AspNetCore.SignalR;
+using ApexTwin.SmartPark.WebApi.Shared.Infrastructure.SignalR;
+using ApexTwin.SmartPark.WebApi.Modules.SafetyIncidents.Domain.Events;
+
+public sealed class IncidentCreatedNotifier : INotificationHandler<IncidentCreated>
+{
+    private readonly IHubContext<DashboardHub> _hub;
+
+    public IncidentCreatedNotifier(IHubContext<DashboardHub> hub)
+    {
+        _hub = hub;
+    }
+
+    public Task Handle(IncidentCreated notification, CancellationToken ct)
+        => _hub.Clients.Group("operators").SendAsync("IncidentCreated", new
+        {
+            incidentId = notification.IncidentId.Value,
+            parkingLotId = notification.Location.ParkingLotId,
+            zoneId = notification.Location.ZoneId,
+            spaceCode = notification.Location.SpaceCode,
+            severity = notification.Severity.ToString(),
+            occurredAt = notification.OccurredAt
+        }, ct);
+}
+
+```
+
+### 5.5.5 Component Diagram — Safety & Incidents
+
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente1.png)
+
+### 5.5.6 Class Diagram — Safety & Incidents
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram1.png)
+
+### 5.5.7 Database Diagram — Safety & Incidents
+
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram1.png)
+
+
+## 5.6 Bounded Context: Parking Session
+
+El contexto Parking Session es responsable de gestionar la sesión de estacionamiento del conductor desde el ingreso hasta la finalización de su permanencia. Sus responsabilidades concretas son: (a) iniciar una sesión de estacionamiento asociada a un conductor y vehículo; (b) registrar la ubicación del vehículo dentro del estacionamiento; (c) consultar la sesión activa del conductor; (d) finalizar la sesión cuando el conductor abandona el estacionamiento; y (e) publicar eventos que pueden ser consumidos por Notifications y Parking Operations Monitoring.
+
+## 5.6.1 Domain Layer
+
+La capa de dominio contiene la lógica relacionada con el ciclo de vida de una sesión de estacionamiento. El agregado raíz es ParkingSession, encargado de controlar el inicio, registro de ubicación y cierre de la sesión.
+
+**Entidad: `SmokeAlert`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Model;
+
+public sealed class ParkingSession
+{
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public ParkingSessionId Id { get; }
+    public DriverId DriverId { get; }
+    public Vehicle Vehicle { get; }
+    public ParkingSpaceReference? AssignedSpace { get; private set; }
+    public SessionStatus Status { get; private set; }
+    public DateTimeOffset StartedAt { get; }
+    public DateTimeOffset? FinishedAt { get; private set; }
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    private ParkingSession() { }
+
+    public ParkingSession(ParkingSessionId id, DriverId driverId, Vehicle vehicle)
+    {
+        Id = id;
+        DriverId = driverId;
+        Vehicle = vehicle;
+        Status = SessionStatus.Active;
+        StartedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new ParkingSessionStarted(Id, DriverId, Vehicle.Plate, StartedAt));
+    }
+
+    public void RegisterLocation(ParkingSpaceReference space)
+    {
+        if (Status != SessionStatus.Active)
+            throw new InvalidOperationException("Only active sessions can register location");
+
+        AssignedSpace = space;
+        _domainEvents.Add(new VehicleLocationRegistered(Id, DriverId, space, DateTimeOffset.UtcNow));
+    }
+
+    public void Finish()
+    {
+        if (Status == SessionStatus.Finished)
+            return;
+
+        Status = SessionStatus.Finished;
+        FinishedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new ParkingSessionFinished(Id, DriverId, FinishedAt.Value));
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+```
+
+**Entidad: `Vehicle`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Model;
+
+public sealed class Vehicle
+{
+    public VehiclePlate Plate { get; }
+    public string? Brand { get; }
+    public string? Color { get; }
+
+    private Vehicle() { }
+
+    public Vehicle(VehiclePlate plate, string? brand, string? color)
+    {
+        Plate = plate;
+        Brand = brand;
+        Color = color;
+    }
+}
+```
+
+**Value Objects y enumeraciones**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Model;
+
+public sealed record ParkingSessionId(string Value);
+public sealed record DriverId(string Value);
+public sealed record VehiclePlate(string Value);
+public sealed record ParkingSpaceReference(string ParkingLotId, string ZoneId, string SpaceCode);
+
+public enum SessionStatus { Active, Finished, Cancelled }
+```
+
+**Eventos de dominio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Events;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Shared.Kernel;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Model;
+
+public sealed record ParkingSessionStarted(
+    ParkingSessionId SessionId,
+    DriverId DriverId,
+    VehiclePlate Plate,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record VehicleLocationRegistered(
+    ParkingSessionId SessionId,
+    DriverId DriverId,
+    ParkingSpaceReference Space,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record ParkingSessionFinished(
+    ParkingSessionId SessionId,
+    DriverId DriverId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+```
+
+**Repositorio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Repositories;
+
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Model;
+
+public interface IParkingSessionRepository
+{
+    Task<ParkingSession?> FindByIdAsync(ParkingSessionId id, CancellationToken ct = default);
+    Task<ParkingSession?> FindActiveByDriverAsync(DriverId driverId, CancellationToken ct = default);
+    Task SaveAsync(ParkingSession session, CancellationToken ct = default);
+}
+```
+
+### 5.6.2. Application Layer
+
+
+**Comandos y Queries**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Application.Commands;
+
+using MediatR;
+
+public sealed record StartParkingSessionCommand(
+    string DriverId,
+    string Plate,
+    string? Brand,
+    string? Color
+) : IRequest<string>;
+
+public sealed record RegisterVehicleLocationCommand(
+    string SessionId,
+    string ParkingLotId,
+    string ZoneId,
+    string SpaceCode
+) : IRequest;
+
+public sealed record FinishParkingSessionCommand(string SessionId) : IRequest;
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Application.Queries;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Application.Dtos;
+
+public sealed record GetParkingSessionByIdQuery(string SessionId) : IRequest<ParkingSessionDto>;
+
+public sealed record GetActiveSessionByDriverQuery(string DriverId) : IRequest<ParkingSessionDto?>;
+```
+
+**EntiCommand Handler**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Repositories;
+
+public sealed class StartParkingSessionHandler : IRequestHandler<StartParkingSessionCommand, string>
+{
+    private readonly IParkingSessionRepository _repository;
+    private readonly IPublisher _publisher;
+
+    public StartParkingSessionHandler(IParkingSessionRepository repository, IPublisher publisher)
+    {
+        _repository = repository;
+        _publisher = publisher;
+    }
+
+    public async Task<string> Handle(StartParkingSessionCommand cmd, CancellationToken ct)
+    {
+        var session = new ParkingSession(
+            new ParkingSessionId(Guid.NewGuid().ToString()),
+            new DriverId(cmd.DriverId),
+            new Vehicle(new VehiclePlate(cmd.Plate), cmd.Brand, cmd.Color));
+
+        await _repository.SaveAsync(session, ct);
+
+        foreach (var domainEvent in session.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+
+        session.ClearDomainEvents();
+        return session.Id.Value;
+    }
+}
+```
+
+**DTOs de aplicación**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Application.Dtos;
+
+public sealed record ParkingSessionDto(
+    string SessionId,
+    string DriverId,
+    string Plate,
+    string? ParkingLotId,
+    string? ZoneId,
+    string? SpaceCode,
+    string Status,
+    DateTimeOffset StartedAt,
+    DateTimeOffset? FinishedAt);
+```
+
+### 5.6.3. Interface Layer
+
+
+**Controlador**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Application.Queries;
+
+[ApiController]
+[Route("api/v1/parking-sessions")]
+public sealed class ParkingSessionsController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public ParkingSessionsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> StartSession([FromBody] StartParkingSessionRequest request, CancellationToken ct)
+    {
+        var sessionId = await _mediator.Send(new StartParkingSessionCommand(
+            request.DriverId,
+            request.Plate,
+            request.Brand,
+            request.Color), ct);
+
+        return CreatedAtAction(nameof(GetSessionById), new { sessionId }, new { sessionId });
+    }
+
+    [HttpGet("{sessionId}")]
+    public async Task<IActionResult> GetSessionById(string sessionId, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetParkingSessionByIdQuery(sessionId), ct);
+        return Ok(result);
+    }
+
+    [HttpPatch("{sessionId}/location")]
+    public async Task<IActionResult> RegisterLocation(
+        string sessionId,
+        [FromBody] RegisterVehicleLocationRequest request,
+        CancellationToken ct)
+    {
+        await _mediator.Send(new RegisterVehicleLocationCommand(
+            sessionId,
+            request.ParkingLotId,
+            request.ZoneId,
+            request.SpaceCode), ct);
+
+        return NoContent();
+    }
+
+    [HttpPatch("{sessionId}/finish")]
+    public async Task<IActionResult> FinishSession(string sessionId, CancellationToken ct)
+    {
+        await _mediator.Send(new FinishParkingSessionCommand(sessionId), ct);
+        return NoContent();
+    }
+}
+```
+
+**Request DTOs**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Interfaces.Rest.Dtos;
+
+public sealed record StartParkingSessionRequest(
+    string DriverId,
+    string Plate,
+    string? Brand,
+    string? Color);
+
+public sealed record RegisterVehicleLocationRequest(
+    string ParkingLotId,
+    string ZoneId,
+    string SpaceCode);
+```
+
+### 5.6.4 Infrastructure Layer
+
+**DbContext del módulo**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Model;
+
+public sealed class ParkingSessionsDbContext : DbContext
+{
+    public DbSet<ParkingSession> ParkingSessions => Set<ParkingSession>();
+
+    public ParkingSessionsDbContext(DbContextOptions<ParkingSessionsDbContext> options)
+        : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("parking_sessions");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ParkingSessionsDbContext).Assembly);
+    }
+}
+```
+
+**Implementación del repositorio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.ParkingSessions.Domain.Repositories;
+
+public sealed class EfParkingSessionRepository : IParkingSessionRepository
+{
+    private readonly ParkingSessionsDbContext _context;
+
+    public EfParkingSessionRepository(ParkingSessionsDbContext context)
+    {
+        _context = context;
+    }
+
+    public Task<ParkingSession?> FindByIdAsync(ParkingSessionId id, CancellationToken ct = default)
+        => _context.ParkingSessions.FirstOrDefaultAsync(s => s.Id == id, ct);
+
+    public Task<ParkingSession?> FindActiveByDriverAsync(DriverId driverId, CancellationToken ct = default)
+        => _context.ParkingSessions.FirstOrDefaultAsync(
+            s => s.DriverId == driverId && s.Status == SessionStatus.Active, ct);
+
+    public async Task SaveAsync(ParkingSession session, CancellationToken ct = default)
+    {
+        var existing = await _context.ParkingSessions.FindAsync(new object[] { session.Id }, ct);
+        if (existing is null) await _context.ParkingSessions.AddAsync(session, ct);
+        else _context.Entry(existing).CurrentValues.SetValues(session);
+        await _context.SaveChangesAsync(ct);
+    }
+}
+```
+
+### 5.6.5. Component Diagram — Parking Session
+
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente2.png)
+
+### 5.6.6. Class Diagram — Parking Session
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram2.png)
+
+### 5.6.7. Database Diagram — Parking Session
+
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram2.png)
+
+
+## 5.7. Bounded Context: Notifications
+
+El contexto **Notifications** es responsable de gestionar la creación, envío, seguimiento y lectura de notificaciones dirigidas a operadores y conductores. Sus responsabilidades concretas son: (a) recibir solicitudes de notificación desde otros bounded contexts; (b) clasificar las notificaciones según canal, prioridad y destinatario; (c) enviar alertas mediante SignalR o Firebase Cloud Messaging; (d) registrar intentos de entrega; y (e) permitir que los usuarios consulten y marquen sus notificaciones como leídas.
+
+Este contexto consume eventos como `IncidentCreated`, `IncidentResolved`, `ParkingSessionStarted` y `VehicleLocationRegistered`, provenientes de los contextos **Safety & Incidents** y **Parking Session**.
+
+### 5.7.1. Domain Layer
+
+La capa de dominio contiene la lógica relacionada con el ciclo de vida de una notificación. El agregado raíz es `Notification`, encargado de controlar el contenido, destinatario, prioridad, estado y canal de entrega.
+
+**Agregado raíz: `Notification`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Model;
+
+public sealed class Notification
+{
+    private readonly List<DeliveryAttempt> _attempts = new();
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public NotificationId Id { get; }
+    public RecipientId RecipientId { get; }
+    public string Title { get; }
+    public string Message { get; }
+    public NotificationChannel Channel { get; }
+    public NotificationPriority Priority { get; }
+    public NotificationStatus Status { get; private set; }
+    public DateTimeOffset CreatedAt { get; }
+    public DateTimeOffset? ReadAt { get; private set; }
+    public IReadOnlyCollection<DeliveryAttempt> Attempts => _attempts.AsReadOnly();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    private Notification() { }
+
+    public Notification(NotificationId id, RecipientId recipientId, string title, string message, NotificationChannel channel, NotificationPriority priority)
+    {
+        Id = id;
+        RecipientId = recipientId;
+        Title = title;
+        Message = message;
+        Channel = channel;
+        Priority = priority;
+        Status = NotificationStatus.Pending;
+        CreatedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new NotificationRequested(Id, RecipientId, Channel, CreatedAt));
+    }
+
+    public void MarkAsSent()
+    {
+        Status = NotificationStatus.Sent;
+        _attempts.Add(new DeliveryAttempt(Channel, true, DateTimeOffset.UtcNow));
+        _domainEvents.Add(new NotificationSent(Id, RecipientId, DateTimeOffset.UtcNow));
+    }
+
+    public void MarkAsFailed(string reason)
+    {
+        Status = NotificationStatus.Failed;
+        _attempts.Add(new DeliveryAttempt(Channel, false, DateTimeOffset.UtcNow, reason));
+        _domainEvents.Add(new NotificationFailed(Id, RecipientId, reason, DateTimeOffset.UtcNow));
+    }
+
+    public void MarkAsRead()
+    {
+        if (Status == NotificationStatus.Read)
+            return;
+
+        Status = NotificationStatus.Read;
+        ReadAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new NotificationRead(Id, RecipientId, ReadAt.Value));
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+```
+
+**Entidad: `DeliveryAttempt`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Model;
+
+public sealed class DeliveryAttempt
+{
+    public NotificationChannel Channel { get; }
+    public bool Success { get; }
+    public DateTimeOffset AttemptedAt { get; }
+    public string? FailureReason { get; }
+
+    private DeliveryAttempt() { }
+
+    public DeliveryAttempt(NotificationChannel channel, bool success, DateTimeOffset attemptedAt, string? failureReason = null)
+    {
+        Channel = channel;
+        Success = success;
+        AttemptedAt = attemptedAt;
+        FailureReason = failureReason;
+    }
+}
+```
+
+**Value Objects y enumeraciones**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Model;
+
+public sealed record NotificationId(string Value);
+public sealed record RecipientId(string Value);
+
+public enum NotificationChannel { SignalR, FirebasePush, Email }
+public enum NotificationPriority { Low, Normal, High, Critical }
+public enum NotificationStatus { Pending, Sent, Failed, Read }
+```
+
+**Eventos de dominio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Events;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Shared.Kernel;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Model;
+
+public sealed record NotificationRequested(
+    NotificationId NotificationId,
+    RecipientId RecipientId,
+    NotificationChannel Channel,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record NotificationSent(
+    NotificationId NotificationId,
+    RecipientId RecipientId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record NotificationFailed(
+    NotificationId NotificationId,
+    RecipientId RecipientId,
+    string Reason,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record NotificationRead(
+    NotificationId NotificationId,
+    RecipientId RecipientId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+```
+
+**Repositorio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Repositories;
+
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Model;
+
+public interface INotificationRepository
+{
+    Task<Notification?> FindByIdAsync(NotificationId id, CancellationToken ct = default);
+    Task<IReadOnlyList<Notification>> FindByRecipientAsync(RecipientId recipientId, CancellationToken ct = default);
+    Task SaveAsync(Notification notification, CancellationToken ct = default);
+}
+```
+
+### 5.7.2. Application Layer
+
+**Comandos y Queries**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Application.Commands;
+
+using MediatR;
+
+public sealed record RequestNotificationCommand(
+    string RecipientId,
+    string Title,
+    string Message,
+    string Channel,
+    string Priority
+) : IRequest<string>;
+
+public sealed record MarkNotificationAsReadCommand(string NotificationId) : IRequest;
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Application.Queries;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Application.Dtos;
+
+public sealed record GetUserNotificationsQuery(string RecipientId) : IRequest<IReadOnlyList<NotificationDto>>;
+```
+
+**Command Handler**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Repositories;
+
+public sealed class RequestNotificationHandler : IRequestHandler<RequestNotificationCommand, string>
+{
+    private readonly INotificationRepository _repository;
+    private readonly IPublisher _publisher;
+
+    public RequestNotificationHandler(INotificationRepository repository, IPublisher publisher)
+    {
+        _repository = repository;
+        _publisher = publisher;
+    }
+
+    public async Task<string> Handle(RequestNotificationCommand cmd, CancellationToken ct)
+    {
+        var notification = new Notification(
+            new NotificationId(Guid.NewGuid().ToString()),
+            new RecipientId(cmd.RecipientId),
+            cmd.Title,
+            cmd.Message,
+            Enum.Parse<NotificationChannel>(cmd.Channel),
+            Enum.Parse<NotificationPriority>(cmd.Priority));
+
+        await _repository.SaveAsync(notification, ct);
+
+        foreach (var domainEvent in notification.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+
+        notification.ClearDomainEvents();
+        return notification.Id.Value;
+    }
+}
+```
+
+**DTOs de aplicación**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Application.Dtos;
+
+public sealed record NotificationDto(
+    string NotificationId,
+    string RecipientId,
+    string Title,
+    string Message,
+    string Channel,
+    string Priority,
+    string Status,
+    DateTimeOffset CreatedAt,
+    DateTimeOffset? ReadAt);
+```
+
+### 5.7.3. 
+
+**Controlador**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Application.Queries;
+
+[ApiController]
+[Route("api/v1/notifications")]
+public sealed class NotificationsController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public NotificationsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpGet("user/{recipientId}")]
+    public async Task<IActionResult> GetUserNotifications(string recipientId, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetUserNotificationsQuery(recipientId), ct);
+        return Ok(result);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RequestNotification([FromBody] RequestNotificationRequest request, CancellationToken ct)
+    {
+        var notificationId = await _mediator.Send(new RequestNotificationCommand(
+            request.RecipientId,
+            request.Title,
+            request.Message,
+            request.Channel,
+            request.Priority), ct);
+
+        return Accepted(new { notificationId });
+    }
+
+    [HttpPatch("{notificationId}/read")]
+    public async Task<IActionResult> MarkAsRead(string notificationId, CancellationToken ct)
+    {
+        await _mediator.Send(new MarkNotificationAsReadCommand(notificationId), ct);
+        return NoContent();
+    }
+}
+```
+
+**Request DTOs**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Interfaces.Rest.Dtos;
+
+public sealed record RequestNotificationRequest(
+    string RecipientId,
+    string Title,
+    string Message,
+    string Channel,
+    string Priority);
+```
+
+### 5.7.4. Infrastructure Layer
+
+**DbContext del módulo**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Model;
+
+public sealed class NotificationsDbContext : DbContext
+{
+    public DbSet<Notification> Notifications => Set<Notification>();
+
+    public NotificationsDbContext(DbContextOptions<NotificationsDbContext> options)
+        : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("notifications");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(NotificationsDbContext).Assembly);
+    }
+}
+```
+
+**Implementación del repositorio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.Notifications.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.Notifications.Domain.Repositories;
+
+public sealed class EfNotificationRepository : INotificationRepository
+{
+    private readonly NotificationsDbContext _context;
+
+    public EfNotificationRepository(NotificationsDbContext context)
+    {
+        _context = context;
+    }
+
+    public Task<Notification?> FindByIdAsync(NotificationId id, CancellationToken ct = default)
+        => _context.Notifications.FirstOrDefaultAsync(n => n.Id == id, ct);
+
+    public async Task<IReadOnlyList<Notification>> FindByRecipientAsync(RecipientId recipientId, CancellationToken ct = default)
+        => await _context.Notifications.Where(n => n.RecipientId == recipientId).ToListAsync(ct);
+
+    public async Task SaveAsync(Notification notification, CancellationToken ct = default)
+    {
+        var existing = await _context.Notifications.FindAsync(new object[] { notification.Id }, ct);
+        if (existing is null) await _context.Notifications.AddAsync(notification, ct);
+        else _context.Entry(existing).CurrentValues.SetValues(notification);
+        await _context.SaveChangesAsync(ct);
+    }
+}
+```
+
+### 5.7.5. Component Diagram — Notifications
+
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente3.png)
+
+
+### 5.7.6. Class Diagram — Notifications
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram3.png)
+
+### 5.7.7. Database Diagram — Notifications
+
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram3.png)
+
+
+## 5.8. Bounded Context: Identity & Access Management
+
+El contexto Identity & Access Management es responsable de gestionar la identidad, autenticación, autorización y control de acceso de los usuarios de SmartPark. Sus responsabilidades concretas son: (a) registrar cuentas de operadores y conductores; (b) autenticar usuarios mediante credenciales; (c) asignar roles y permisos; (d) emitir tokens de acceso; y (e) publicar eventos de dominio cuando una cuenta es registrada, autenticada o actualizada.
+
+## 5.8.1. Domain Layer
+
+La capa de dominio contiene las reglas relacionadas con la cuenta de usuario, sus credenciales, roles y estado. El agregado raíz es UserAccount, encargado de controlar la identidad principal del usuario dentro del sistema.
+
+**Agregado raíz: `UserAccount`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Model;
+
+public sealed class UserAccount
+{
+    private readonly List<Role> _roles = new();
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public UserId Id { get; }
+    public EmailAddress Email { get; }
+    public PasswordHash PasswordHash { get; private set; }
+    public AccountStatus Status { get; private set; }
+    public DateTimeOffset CreatedAt { get; }
+    public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    private UserAccount() { }
+
+    public UserAccount(UserId id, EmailAddress email, PasswordHash passwordHash)
+    {
+        Id = id;
+        Email = email;
+        PasswordHash = passwordHash;
+        Status = AccountStatus.Active;
+        CreatedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new UserRegistered(Id, Email, CreatedAt));
+    }
+
+    public void AssignRole(Role role)
+    {
+        if (_roles.Any(r => r.Name == role.Name))
+            return;
+
+        _roles.Add(role);
+        _domainEvents.Add(new UserRoleChanged(Id, role.Name, DateTimeOffset.UtcNow));
+    }
+
+    public void Disable()
+    {
+        Status = AccountStatus.Disabled;
+        _domainEvents.Add(new AccountDisabled(Id, DateTimeOffset.UtcNow));
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+```
+
+**Entidad: `Role`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Model;
+
+public sealed class Role
+{
+    private readonly List<Permission> _permissions = new();
+
+    public RoleName Name { get; }
+    public IReadOnlyCollection<Permission> Permissions => _permissions.AsReadOnly();
+
+    private Role() { }
+
+    public Role(RoleName name, IEnumerable<Permission> permissions)
+    {
+        Name = name;
+        _permissions.AddRange(permissions);
+    }
+}
+```
+
+**Entidad: `Permission`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Model;
+
+public sealed class Permission
+{
+    public string Code { get; }
+    public string Description { get; }
+
+    private Permission() { }
+
+    public Permission(string code, string description)
+    {
+        Code = code;
+        Description = description;
+    }
+}
+```
+
+**Value Objects y enumeraciones**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Model;
+
+public sealed record UserId(string Value);
+public sealed record EmailAddress(string Value);
+public sealed record PasswordHash(string Value);
+public sealed record RoleName(string Value);
+
+public enum AccountStatus { Active, Disabled, Locked }
+```
+
+**Eventos de dominio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Events;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Shared.Kernel;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Model;
+
+public sealed record UserRegistered(
+    UserId UserId,
+    EmailAddress Email,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record UserLoggedIn(
+    UserId UserId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record UserRoleChanged(
+    UserId UserId,
+    RoleName Role,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record AccountDisabled(
+    UserId UserId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+```
+
+**Repositorio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Repositories;
+
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Model;
+
+public interface IUserAccountRepository
+{
+    Task<UserAccount?> FindByIdAsync(UserId id, CancellationToken ct = default);
+    Task<UserAccount?> FindByEmailAsync(EmailAddress email, CancellationToken ct = default);
+    Task SaveAsync(UserAccount account, CancellationToken ct = default);
+}
+```
+### 5.8.2. Application Layer
+
+
+**Comandos y Queries**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Commands;
+
+using MediatR;
+
+public sealed record RegisterUserCommand(
+    string Email,
+    string Password,
+    string Role
+) : IRequest<string>;
+
+public sealed record LoginUserCommand(
+    string Email,
+    string Password
+) : IRequest<AuthResponseDto>;
+
+public sealed record AssignRoleCommand(
+    string UserId,
+    string Role
+) : IRequest;
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Queries;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Dtos;
+
+public sealed record GetUserProfileQuery(string UserId) : IRequest<UserProfileDto>;
+```
+
+
+**Command Handler**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Repositories;
+
+public sealed class RegisterUserHandler : IRequestHandler<RegisterUserCommand, string>
+{
+    private readonly IUserAccountRepository _repository;
+    private readonly IPasswordHasher _passwordHasher;
+    private readonly IPublisher _publisher;
+
+    public RegisterUserHandler(IUserAccountRepository repository, IPasswordHasher passwordHasher, IPublisher publisher)
+    {
+        _repository = repository;
+        _passwordHasher = passwordHasher;
+        _publisher = publisher;
+    }
+
+    public async Task<string> Handle(RegisterUserCommand cmd, CancellationToken ct)
+    {
+        var account = new UserAccount(
+            new UserId(Guid.NewGuid().ToString()),
+            new EmailAddress(cmd.Email),
+            new PasswordHash(_passwordHasher.Hash(cmd.Password)));
+
+        account.AssignRole(new Role(new RoleName(cmd.Role), Array.Empty<Permission>()));
+
+        await _repository.SaveAsync(account, ct);
+
+        foreach (var domainEvent in account.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+
+        account.ClearDomainEvents();
+        return account.Id.Value;
+    }
+}
+```
+
+**DTOs de aplicación**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Dtos;
+
+public sealed record AuthResponseDto(
+    string UserId,
+    string Email,
+    string AccessToken,
+    IReadOnlyList<string> Roles);
+
+public sealed record UserProfileDto(
+    string UserId,
+    string Email,
+    string Status,
+    IReadOnlyList<string> Roles);
+```
+
+### 5.8.3. Interface Layer
+
+**Controlador**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Queries;
+
+[ApiController]
+[Route("api/v1/auth")]
+public sealed class AuthController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public AuthController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterUserRequest request, CancellationToken ct)
+    {
+        var userId = await _mediator.Send(new RegisterUserCommand(
+            request.Email,
+            request.Password,
+            request.Role), ct);
+
+        return Created("", new { userId });
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginUserRequest request, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new LoginUserCommand(request.Email, request.Password), ct);
+        return Ok(result);
+    }
+}
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Application.Queries;
+
+[ApiController]
+[Route("api/v1/users")]
+public sealed class UsersController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public UsersController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> GetProfile(string userId, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetUserProfileQuery(userId), ct);
+        return Ok(result);
+    }
+
+    [HttpPatch("{userId}/roles")]
+    public async Task<IActionResult> AssignRole(string userId, [FromBody] AssignRoleRequest request, CancellationToken ct)
+    {
+        await _mediator.Send(new AssignRoleCommand(userId, request.Role), ct);
+        return NoContent();
+    }
+}
+```
+
+**Request DTOs**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Interfaces.Rest.Dtos;
+
+public sealed record RegisterUserRequest(
+    string Email,
+    string Password,
+    string Role);
+
+public sealed record LoginUserRequest(
+    string Email,
+    string Password);
+
+public sealed record AssignRoleRequest(string Role);
+```
+
+### 5.8.4. Infrastructure Layer
+
+**DbContext del módulo**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Model;
+
+public sealed class IdentityAccessDbContext : DbContext
+{
+    public DbSet<UserAccount> UserAccounts => Set<UserAccount>();
+
+    public IdentityAccessDbContext(DbContextOptions<IdentityAccessDbContext> options)
+        : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("identity_access");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(IdentityAccessDbContext).Assembly);
+    }
+}
+```
+
+**Implementación del repositorio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Domain.Repositories;
+
+public sealed class EfUserAccountRepository : IUserAccountRepository
+{
+    private readonly IdentityAccessDbContext _context;
+
+    public EfUserAccountRepository(IdentityAccessDbContext context)
+    {
+        _context = context;
+    }
+
+    public Task<UserAccount?> FindByIdAsync(UserId id, CancellationToken ct = default)
+        => _context.UserAccounts.FirstOrDefaultAsync(u => u.Id == id, ct);
+
+    public Task<UserAccount?> FindByEmailAsync(EmailAddress email, CancellationToken ct = default)
+        => _context.UserAccounts.FirstOrDefaultAsync(u => u.Email == email, ct);
+
+    public async Task SaveAsync(UserAccount account, CancellationToken ct = default)
+    {
+        var existing = await _context.UserAccounts.FindAsync(new object[] { account.Id }, ct);
+        if (existing is null) await _context.UserAccounts.AddAsync(account, ct);
+        else _context.Entry(existing).CurrentValues.SetValues(account);
+        await _context.SaveChangesAsync(ct);
+    }
+}
+```
+
+**Servicios de seguridad**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.IdentityAccess.Infrastructure.Security;
+
+public interface IPasswordHasher
+{
+    string Hash(string password);
+    bool Verify(string password, string hash);
+}
+
+public interface IJwtTokenService
+{
+    string GenerateToken(string userId, string email, IReadOnlyList<string> roles);
+}
+```
+
+### 5.8.5. Component Diagram — Identity & Access Management
+
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente4.png)
+
+
+### 5.8.6. Class Diagram — Identity & Access Management
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram4.png)
+
+### 5.8.7. Database Diagram — Identity & Access Management
+
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram4.png)
+
+
+## 5.9. Bounded Context: Digital Twin Synchronization
+
+El contexto Digital Twin Synchronization es responsable de mantener sincronizado el estado operativo de SmartPark con el gemelo digital del estacionamiento. Sus responsabilidades concretas son: (a) recibir solicitudes de actualización de estado; (b) construir operaciones de actualización compatibles con Azure Digital Twins; (c) aplicar cambios sobre el twin correspondiente; (d) registrar snapshots del estado sincronizado; y (e) exponer endpoints para consultar el estado y el historial de sincronización.
+
+### 5.9.1. Domain Layer
+
+La capa de dominio contiene la lógica relacionada con las sincronizaciones del gemelo digital. El agregado raíz es TwinSynchronization, encargado de controlar la solicitud, aplicación y resultado de una sincronización.
+
+**EnAgregado raíz: `TwinSynchronization`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+
+public sealed class TwinSynchronization
+{
+    private readonly List<TwinPatchOperation> _operations = new();
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public SynchronizationId Id { get; }
+    public TwinId TwinId { get; }
+    public PatchStatus Status { get; private set; }
+    public DateTimeOffset RequestedAt { get; }
+    public DateTimeOffset? AppliedAt { get; private set; }
+    public IReadOnlyCollection<TwinPatchOperation> Operations => _operations.AsReadOnly();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    private TwinSynchronization() { }
+
+    public TwinSynchronization(SynchronizationId id, TwinId twinId, IEnumerable<TwinPatchOperation> operations)
+    {
+        Id = id;
+        TwinId = twinId;
+        _operations.AddRange(operations);
+        Status = PatchStatus.Pending;
+        RequestedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new TwinPatchRequested(Id, TwinId, RequestedAt));
+    }
+
+    public void MarkAsApplied()
+    {
+        Status = PatchStatus.Applied;
+        AppliedAt = DateTimeOffset.UtcNow;
+        _domainEvents.Add(new TwinPatchApplied(Id, TwinId, AppliedAt.Value));
+    }
+
+    public void MarkAsFailed(string reason)
+    {
+        Status = PatchStatus.Failed;
+        _domainEvents.Add(new TwinSynchronizationFailed(Id, TwinId, reason, DateTimeOffset.UtcNow));
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+```
+
+**Entidad: `TwinPatchOperation`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+
+public sealed class TwinPatchOperation
+{
+    public string Path { get; }
+    public string Operation { get; }
+    public object Value { get; }
+
+    private TwinPatchOperation() { }
+
+    public TwinPatchOperation(string path, string operation, object value)
+    {
+        Path = path;
+        Operation = operation;
+        Value = value;
+    }
+}
+```
+
+**Entidad: `TwinStateSnapshot`**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+
+public sealed class TwinStateSnapshot
+{
+    public TwinId TwinId { get; }
+    public string SerializedState { get; }
+    public DateTimeOffset CapturedAt { get; }
+
+    private TwinStateSnapshot() { }
+
+    public TwinStateSnapshot(TwinId twinId, string serializedState)
+    {
+        TwinId = twinId;
+        SerializedState = serializedState;
+        CapturedAt = DateTimeOffset.UtcNow;
+    }
+}
+```
+
+**Value Objects y enumeraciones**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+
+public sealed record SynchronizationId(string Value);
+public sealed record TwinId(string Value);
+public sealed record TwinModelReference(string Value);
+
+public enum PatchStatus { Pending, Applied, Failed }
+```
+
+**Eventos de dominio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Events;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Shared.Kernel;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+
+public sealed record TwinPatchRequested(
+    SynchronizationId SynchronizationId,
+    TwinId TwinId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record TwinPatchApplied(
+    SynchronizationId SynchronizationId,
+    TwinId TwinId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record TwinSynchronizationFailed(
+    SynchronizationId SynchronizationId,
+    TwinId TwinId,
+    string Reason,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+
+public sealed record TwinStateSnapshotCreated(
+    TwinId TwinId,
+    DateTimeOffset OccurredAt
+) : IDomainEvent, INotification;
+```
+**Repositorio y puerto externo**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Repositories;
+
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+
+public interface ITwinSynchronizationRepository
+{
+    Task<TwinSynchronization?> FindByIdAsync(SynchronizationId id, CancellationToken ct = default);
+    Task<IReadOnlyList<TwinSynchronization>> FindByTwinIdAsync(TwinId twinId, CancellationToken ct = default);
+    Task SaveAsync(TwinSynchronization synchronization, CancellationToken ct = default);
+}
+
+public interface IDigitalTwinClient
+{
+    Task ApplyPatchAsync(TwinId twinId, IReadOnlyCollection<TwinPatchOperation> operations, CancellationToken ct = default);
+    Task<string> GetStateAsync(TwinId twinId, CancellationToken ct = default);
+}
+```
+
+### 5.9.2. Application Layer
+
+**Comandos y Queries**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Application.Commands;
+
+using MediatR;
+
+public sealed record RequestTwinSynchronizationCommand(
+    string TwinId,
+    IReadOnlyList<TwinPatchOperationDto> Operations
+) : IRequest<string>;
+
+public sealed record CreateTwinStateSnapshotCommand(string TwinId) : IRequest;
+```
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Application.Queries;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Application.Dtos;
+
+public sealed record GetTwinStateQuery(string TwinId) : IRequest<TwinStateDto>;
+
+public sealed record GetSynchronizationHistoryQuery(string TwinId) : IRequest<IReadOnlyList<TwinSynchronizationDto>>;
+```
+
+**Command Handler**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Application.Handlers;
+
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Repositories;
+
+public sealed class RequestTwinSynchronizationHandler : IRequestHandler<RequestTwinSynchronizationCommand, string>
+{
+    private readonly ITwinSynchronizationRepository _repository;
+    private readonly IDigitalTwinClient _client;
+    private readonly IPublisher _publisher;
+
+    public RequestTwinSynchronizationHandler(
+        ITwinSynchronizationRepository repository,
+        IDigitalTwinClient client,
+        IPublisher publisher)
+    {
+        _repository = repository;
+        _client = client;
+        _publisher = publisher;
+    }
+
+    public async Task<string> Handle(RequestTwinSynchronizationCommand cmd, CancellationToken ct)
+    {
+        var operations = cmd.Operations
+            .Select(o => new TwinPatchOperation(o.Path, o.Operation, o.Value))
+            .ToList();
+
+        var synchronization = new TwinSynchronization(
+            new SynchronizationId(Guid.NewGuid().ToString()),
+            new TwinId(cmd.TwinId),
+            operations);
+
+        try
+        {
+            await _client.ApplyPatchAsync(synchronization.TwinId, operations, ct);
+            synchronization.MarkAsApplied();
+        }
+        catch (Exception ex)
+        {
+            synchronization.MarkAsFailed(ex.Message);
+        }
+
+        await _repository.SaveAsync(synchronization, ct);
+
+        foreach (var domainEvent in synchronization.DomainEvents)
+            await _publisher.Publish(domainEvent, ct);
+
+        synchronization.ClearDomainEvents();
+        return synchronization.Id.Value;
+    }
+}
+```
+
+**EnDTOs de aplicación**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Application.Dtos;
+
+public sealed record TwinPatchOperationDto(
+    string Path,
+    string Operation,
+    object Value);
+
+public sealed record TwinStateDto(
+    string TwinId,
+    string SerializedState,
+    DateTimeOffset RetrievedAt);
+
+public sealed record TwinSynchronizationDto(
+    string SynchronizationId,
+    string TwinId,
+    string Status,
+    DateTimeOffset RequestedAt,
+    DateTimeOffset? AppliedAt);
+```
+
+### 5.9.3. Interface Layer
+
+
+
+**Controlador**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Interfaces.Rest;
+
+using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Application.Commands;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Application.Queries;
+
+[ApiController]
+[Route("api/v1/digital-twins")]
+public sealed class DigitalTwinsController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public DigitalTwinsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpPost("{twinId}/sync")]
+    public async Task<IActionResult> SynchronizeTwin(
+        string twinId,
+        [FromBody] SynchronizeTwinRequest request,
+        CancellationToken ct)
+    {
+        var synchronizationId = await _mediator.Send(new RequestTwinSynchronizationCommand(
+            twinId,
+            request.Operations), ct);
+
+        return Accepted(new { synchronizationId });
+    }
+
+    [HttpGet("{twinId}/state")]
+    public async Task<IActionResult> GetTwinState(string twinId, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetTwinStateQuery(twinId), ct);
+        return Ok(result);
+    }
+
+    [HttpGet("{twinId}/synchronizations")]
+    public async Task<IActionResult> GetSynchronizationHistory(string twinId, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetSynchronizationHistoryQuery(twinId), ct);
+        return Ok(result);
+    }
+}
+```
+
+**Request DTOs**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Interfaces.Rest.Dtos;
+
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Application.Dtos;
+
+public sealed record SynchronizeTwinRequest(
+    IReadOnlyList<TwinPatchOperationDto> Operations);
+```
+
+### 5.9.4. Infrastructure Layer
+
+**DbContext del módulo**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+
+public sealed class DigitalTwinSynchronizationDbContext : DbContext
+{
+    public DbSet<TwinSynchronization> TwinSynchronizations => Set<TwinSynchronization>();
+    public DbSet<TwinStateSnapshot> TwinStateSnapshots => Set<TwinStateSnapshot>();
+
+    public DigitalTwinSynchronizationDbContext(DbContextOptions<DigitalTwinSynchronizationDbContext> options)
+        : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("digital_twin_synchronization");
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DigitalTwinSynchronizationDbContext).Assembly);
+    }
+}
+```
+
+**Implementación del repositorio**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Infrastructure.Persistence;
+
+using Microsoft.EntityFrameworkCore;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Repositories;
+
+public sealed class EfTwinSynchronizationRepository : ITwinSynchronizationRepository
+{
+    private readonly DigitalTwinSynchronizationDbContext _context;
+
+    public EfTwinSynchronizationRepository(DigitalTwinSynchronizationDbContext context)
+    {
+        _context = context;
+    }
+
+    public Task<TwinSynchronization?> FindByIdAsync(SynchronizationId id, CancellationToken ct = default)
+        => _context.TwinSynchronizations.FirstOrDefaultAsync(s => s.Id == id, ct);
+
+    public async Task<IReadOnlyList<TwinSynchronization>> FindByTwinIdAsync(TwinId twinId, CancellationToken ct = default)
+        => await _context.TwinSynchronizations.Where(s => s.TwinId == twinId).ToListAsync(ct);
+
+    public async Task SaveAsync(TwinSynchronization synchronization, CancellationToken ct = default)
+    {
+        var existing = await _context.TwinSynchronizations.FindAsync(new object[] { synchronization.Id }, ct);
+        if (existing is null) await _context.TwinSynchronizations.AddAsync(synchronization, ct);
+        else _context.Entry(existing).CurrentValues.SetValues(synchronization);
+        await _context.SaveChangesAsync(ct);
+    }
+}
+```
+
+**Cliente de Azure Digital Twins**
+
+```csharp
+namespace ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Infrastructure.Adt;
+
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Model;
+using ApexTwin.SmartPark.WebApi.Modules.DigitalTwinSynchronization.Domain.Repositories;
+
+public sealed class AzureDigitalTwinClient : IDigitalTwinClient
+{
+    public Task ApplyPatchAsync(TwinId twinId, IReadOnlyCollection<TwinPatchOperation> operations, CancellationToken ct = default)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task<string> GetStateAsync(TwinId twinId, CancellationToken ct = default)
+    {
+        return Task.FromResult("{}");
+    }
+}
+```
+
+### 5.9.5. Component Diagram — Digital Twin Synchronization
+
+![Component Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/diagramacomponente5.png)
+
+
+### 5.9.6. Class Diagram — Digital Twin Synchronization
+
+![Class Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/classdiagram5.png)
+
+### 5.9.7. Database Diagram — Digital Twin Synchronization
+
+![Database Diagram - Telemetry Simulation & Ingestion](assets/images/chapter-05/databasediagram5.png)
+
 
 # Capítulo VI: Solution UX Design
 
