@@ -8029,7 +8029,16 @@ _(Introducción y descripción del contenido del video. Tono consistente con el 
 5. **El equipo cumplió con la distribución de responsabilidades planificada para TB1.** Los cinco integrantes cubrieron la totalidad de los capítulos I al IV del informe, con evidencia de colaboración continua en el repositorio GitHub (24 commits no-merge sobre develop desde el 15 de abril al 26 de abril de 2026). La arquitectura del repositorio, el historial de ramas y los pull requests reflejan un flujo de trabajo colaborativo basado en feature branches con integración continua hacia develop.
 
 #### TP1
-_(Conclusiones acumulables.)_
+
+1. **El diseño táctico confirmó que la descomposición estratégica en bounded contexts es implementable sin acoplamiento innecesario.** Los nueve bounded contexts identificados en el Capítulo IV —Parking Operations Monitoring, Energy Efficiency Management, Landing & Subscription Management, Telemetry Simulation & Ingestion, Safety & Incidents, Parking Session, Notifications, Identity & Access Management y Digital Twin Synchronization— se materializaron en el Capítulo V con sus capas Domain, Application, Interface e Infrastructure plenamente definidas, lo que valida que los límites de dominio trazados en el EventStorming y el Context Map eran cohesivos y de responsabilidad única.
+
+2. **La arquitectura en capas adoptada para cada bounded context garantiza la mantenibilidad y la testabilidad de la solución.** La separación explícita entre el modelo de dominio, los casos de uso de la capa de aplicación, los controladores de la capa de interfaz y los repositorios de la capa de infraestructura permite que la lógica de negocio permanezca aislada de los detalles tecnológicos (ASP.NET Core, Entity Framework Core, Azure Digital Twins). Esto hace que la futura sustitución de sensores simulados por sensores físicos no impacte el núcleo del dominio, en coherencia con el Design Purpose definido en la sección 4.1.1.
+
+3. **Los Component, Class y Database Diagrams aportan trazabilidad verificable entre el diseño y la futura implementación.** Cada bounded context cuenta con su diagrama de componentes, de clases y de base de datos, lo que reduce la ambigüedad de cara a la fase de construcción (Capítulo VII) y permite estimar con mayor precisión el esfuerzo de desarrollo de cada módulo del modular monolith.
+
+4. **El diseño UX/UI del Capítulo VI alinea la experiencia de ambos segmentos con los User Personas y los hallazgos del needfinding.** Las Style Guidelines, la Information Architecture, el Landing Page UI Design y los wireframes y wireflows de las aplicaciones web (operador) y móvil (conductor) traducen las User Stories priorizadas del Product Backlog en interfaces concretas. La diferenciación de patrones de navegación, búsqueda y etiquetado entre la plataforma web y la aplicación PowerApps responde a los perfiles opuestos de los User Personas: un operador con uso de tecnología intermedio y un conductor con adaptación tecnológica alta.
+
+5. **El equipo sostuvo el flujo de trabajo colaborativo planificado para el TP1.** Los cinco integrantes cubrieron el Capítulo V y el Capítulo VI mediante feature branches integradas a develop por pull requests, manteniendo la trazabilidad del proceso. La incorporación de las correcciones del TB1 a partir de la retroalimentación del docente evidencia un ciclo de mejora continua sobre el informe.
 
 #### TB2
 _(Conclusiones acumulables.)_
