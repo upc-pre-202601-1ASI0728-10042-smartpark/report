@@ -1,39 +1,49 @@
+<strong>
+<p align="center">
+Universidad Peruana de Ciencias Aplicadas - Ingeniería de Software<br>
+<img src="assets/images/chapter-01/upcLogo.png" alt="UPC Logo"><br>
+<br>SI728 - Arquitecturas de Software Emergentes<br>
+Ciclo 202601 - Sección 10042<br>
+Rojas Malasquez, Royer Edelwer<br>
+<br>Informe de Trabajo Final<br>
+Startup: Apex Twin<br>Producto: SmartPark<br>
+<br>Plataforma de gestión inteligente de estacionamientos en centros comerciales basada en Digital Twins
+</p>
+</strong>
+
 <div align="center">
-
-# UNIVERSIDAD PERUANA DE CIENCIAS APLICADAS
-
-## Facultad de Ingeniería
-### Carrera de Ingeniería de Software
-
-**CICLO:** 202601  
-**CURSO:** Arquitecturas de Software Emergentes  
-**SECCIÓN:** 10042  
-**PROFESOR:** Royer Edelwer Rojas Malasquez
-
----
-
-## INFORME DE TRABAJO FINAL
-
-**Startup:** _Apex Twin_  
-**Producto:** _SmartPark_
-
-### Plataforma de gestión inteligente de estacionamientos en centros comerciales basada en Digital Twins
-
----
-
-### Relación de Integrantes
-
-| Código     | Apellidos y Nombres             |
-|------------|---------------------------------|
-| U202220829 | Riva Rodriguez, Elmer Augusto   |
-| u202216263 | Morales Calderon, Hernan Emilio |
-| U20211g671 | Qqueso Rodriguez, Britney Delhy |
-| U202210973 | Sanchez Rios, Camila Cristina   |
-| U202210297 | Valle Zuta, Abel Andrés         |
-
-**Lima, Perú — Abril de 2026**
-
+<h3 align="center">Team Members:</h3>
+<table align="center" style="margin-left: auto; margin-right: auto;">
+<tr>
+<th align="center">Estudiante</th>
+<th align="center">Código</th>
+</tr>
+<tr>
+<td align="center">Riva Rodríguez, Elmer Augusto</td>
+<td align="center">U202220829</td>
+</tr>
+<tr>
+<td align="center">Morales Calderón, Hernan Emilio</td>
+<td align="center">u202216263</td>
+</tr>
+<tr>
+<td align="center">Qqueso Rodríguez, Britney Delhy</td>
+<td align="center">U20211g671</td>
+</tr>
+<tr>
+<td align="center">Sánchez Ríos, Camila Cristina</td>
+<td align="center">U202210973</td>
+</tr>
+<tr>
+<td align="center">Valle Zuta, Abel Andrés</td>
+<td align="center">U202210297</td>
+</tr>
+</table>
 </div>
+
+<p align="center">Lima, Perú — Abril de 2026</p>
+
+<div style="page-break-after: always;"></div>
 
 ---
 
