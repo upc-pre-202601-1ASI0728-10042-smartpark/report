@@ -252,13 +252,13 @@ _(Pendiente)_
     - [6.2.2. Labeling Systems](#622-labeling-systems)
     - [**Sistema de Iconografía**](#sistema-de-iconografía)
     - [**Etiquetas por Módulo y Plataforma**](#etiquetas-por-módulo-y-plataforma)
-    - [6.2.3. SEO Tags and Meta Tags](#623-seo-tags-and-meta-tags)
+    - [6.2.3. Searching Systems](#623-searching-systems)
+    - [**Sistema de Búsqueda para Operadores (Web)**](#sistema-de-búsqueda-para-operadores-web)
+    - [**Sistema de Búsqueda para Conductores (Móvil)**](#sistema-de-búsqueda-para-conductores-móvil)
+    - [6.2.4. SEO Tags and Meta Tags](#624-seo-tags-and-meta-tags)
     - [**SEO Tags para Landing Pages**](#seo-tags-para-landing-pages)
     - [**Header Tags Estructurados**](#header-tags-estructurados)
     - [**Meta Tags Optimizadas**](#meta-tags-optimizadas)
-    - [6.2.4. Searching Systems](#624-searching-systems)
-    - [**Sistema de Búsqueda para Operadores (Web)**](#sistema-de-búsqueda-para-operadores-web)
-    - [**Sistema de Búsqueda para Conductores (Móvil)**](#sistema-de-búsqueda-para-conductores-móvil)
     - [6.2.5. Navigation Systems](#625-navigation-systems)
     - [**Patrones de Navegación - Plataforma Web (Operadores)**](#patrones-de-navegación---plataforma-web-operadores)
     - [**Patrones de Navegación - Aplicación Móvil (Conductores - PowerApps)**](#patrones-de-navegación---aplicación-móvil-conductores---powerapps)
@@ -6900,7 +6900,67 @@ El sistema de etiquetado en SmartPark sigue principios de claridad, consistencia
 | Luminaria | Encendida | "Encendida" / "100%" | Blanco/Azul |
 | Luminaria | Atenuada | "Atenuada" / "X%" | Azul claro |
 
-### 6.2.3. SEO Tags and Meta Tags
+### 6.2.3. Searching Systems
+
+El sistema de búsqueda de SmartPark está diseñado para ser intuitivo y eficiente, permitiendo a los usuarios encontrar rápidamente la información que necesitan según su rol y contexto de uso. Se diferencia entre la plataforma web (operadores) y la aplicación móvil (conductores), adaptando las opciones de búsqueda y filtros a las necesidades específicas de cada segmento.
+
+### **Sistema de Búsqueda para Operadores (Web)**
+
+**Características generales:**
+
+| Característica | Descripción |
+|---|---|
+| Búsqueda global | Barra de búsqueda en el header, accesible desde cualquier módulo. |
+| Búsqueda inteligente | Búsqueda por texto libre en múltiples campos. |
+| Búsqueda predictiva | Sugerencias en tiempo real mientras el usuario escribe. |
+| Resultados agrupados | Los resultados se agrupan por categoría (plazas, incidentes, zonas). |
+| Acceso rápido | Atajo de teclado Ctrl + K para abrir la búsqueda. |
+
+**Campos de búsqueda por módulo:**
+
+| Módulo | Campos de búsqueda |
+|---|---|
+| Ocupación | Nivel, Zona, Código de plaza, Estado (libre/ocupada/reservada) |
+| Seguridad | Tipo (humo/congestión), Estado (activa/confirmada/resuelta), Zona, Fecha |
+| Flujo | Punto de acceso, Rampa, Estado (normal/moderado/severo) |
+| Energía | Zona de iluminación, Estado (atenuación recomendada/óptimo) |
+| Reportes | Rango de fechas, Tipo de reporte, Zona |
+
+**Filtros disponibles:**
+
+| Módulo | Filtros |
+|---|---|
+| Ocupación | Por nivel, zona, estado de plaza, rango de ocupación (<30% / 30-60% / 60-85% / >85%) |
+| Seguridad | Por tipo, estado, nivel, zona, rango de fechas (Hoy / 7 días / 30 días / Personalizado) |
+| Flujo | Por tipo (accesos/rampas), estado, nivel |
+| Energía | Por nivel, zona, estado de atenuación |
+
+### **Sistema de Búsqueda para Conductores (Móvil)**
+**Características generales:**
+
+| Característica | Descripción |
+|---|---|
+| Búsqueda simplificada | Enfocada en encontrar centro comercial o nivel rápidamente. |
+| Ubicación GPS | Detección automática del centro comercial más cercano. |
+| Resultados táctiles | Tarjetas grandes y fáciles de tocar. |
+
+**Campos de búsqueda por módulo:**
+
+| Módulo | Campos de búsqueda |
+|---|---|
+| Disponibilidad | Centro comercial, Nivel (búsqueda por texto o GPS) |
+| Historial | Centro comercial, Rango de fechas (semana / mes / personalizado) |
+| Alertas | Estado (activa/resuelta), Fecha |
+
+**Filtros disponibles:**
+
+| Módulo | Filtros |
+|---|---|
+| Disponibilidad | Por nivel (ordenado por disponibilidad), "Mostrar solo niveles con plazas libres" (toggle) |
+| Historial | Por rango de fechas, por centro comercial |
+| Alertas | Por estado (activas/resueltas), por fecha |
+
+### 6.2.4. SEO Tags and Meta Tags
 
 SEO (Search Engine Optimization) Tags son elementos de HTML que ayudan a los motores de búsqueda a entender el contenido y la estructura de una página web. Estos tags influyen en cómo los motores de búsqueda indexan y clasifican tu sitio en los resultados de búsqueda.
 
@@ -6982,66 +7042,6 @@ A continuación, se definen los tags SEO para las páginas de aterrizaje (Landin
 <meta name="twitter:description" content="Gemelo digital 3D para centros comerciales. Optimiza ocupación, seguridad, flujo y energía." />
 <meta name="twitter:image" content="https://www.smartpark.com/assets/twitter-preview.png" />
 ```
-
-### 6.2.4. Searching Systems
-
-El sistema de búsqueda de SmartPark está diseñado para ser intuitivo y eficiente, permitiendo a los usuarios encontrar rápidamente la información que necesitan según su rol y contexto de uso. Se diferencia entre la plataforma web (operadores) y la aplicación móvil (conductores), adaptando las opciones de búsqueda y filtros a las necesidades específicas de cada segmento.
-
-### **Sistema de Búsqueda para Operadores (Web)**
-
-**Características generales:**
-
-| Característica | Descripción |
-|---|---|
-| Búsqueda global | Barra de búsqueda en el header, accesible desde cualquier módulo. |
-| Búsqueda inteligente | Búsqueda por texto libre en múltiples campos. |
-| Búsqueda predictiva | Sugerencias en tiempo real mientras el usuario escribe. |
-| Resultados agrupados | Los resultados se agrupan por categoría (plazas, incidentes, zonas). |
-| Acceso rápido | Atajo de teclado Ctrl + K para abrir la búsqueda. |
-
-**Campos de búsqueda por módulo:**
-
-| Módulo | Campos de búsqueda |
-|---|---|
-| Ocupación | Nivel, Zona, Código de plaza, Estado (libre/ocupada/reservada) |
-| Seguridad | Tipo (humo/congestión), Estado (activa/confirmada/resuelta), Zona, Fecha |
-| Flujo | Punto de acceso, Rampa, Estado (normal/moderado/severo) |
-| Energía | Zona de iluminación, Estado (atenuación recomendada/óptimo) |
-| Reportes | Rango de fechas, Tipo de reporte, Zona |
-
-**Filtros disponibles:**
-
-| Módulo | Filtros |
-|---|---|
-| Ocupación | Por nivel, zona, estado de plaza, rango de ocupación (<30% / 30-60% / 60-85% / >85%) |
-| Seguridad | Por tipo, estado, nivel, zona, rango de fechas (Hoy / 7 días / 30 días / Personalizado) |
-| Flujo | Por tipo (accesos/rampas), estado, nivel |
-| Energía | Por nivel, zona, estado de atenuación |
-
-### **Sistema de Búsqueda para Conductores (Móvil)**
-**Características generales:**
-
-| Característica | Descripción |
-|---|---|
-| Búsqueda simplificada | Enfocada en encontrar centro comercial o nivel rápidamente. |
-| Ubicación GPS | Detección automática del centro comercial más cercano. |
-| Resultados táctiles | Tarjetas grandes y fáciles de tocar. |
-
-**Campos de búsqueda por módulo:**
-
-| Módulo | Campos de búsqueda |
-|---|---|
-| Disponibilidad | Centro comercial, Nivel (búsqueda por texto o GPS) |
-| Historial | Centro comercial, Rango de fechas (semana / mes / personalizado) |
-| Alertas | Estado (activa/resuelta), Fecha |
-
-**Filtros disponibles:**
-
-| Módulo | Filtros |
-|---|---|
-| Disponibilidad | Por nivel (ordenado por disponibilidad), "Mostrar solo niveles con plazas libres" (toggle) |
-| Historial | Por rango de fechas, por centro comercial |
-| Alertas | Por estado (activas/resueltas), por fecha |
 
 ### 6.2.5. Navigation Systems
 
