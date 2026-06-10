@@ -1930,8 +1930,36 @@ Navegación por Gestos (Móvil):
 
 ### 6.4.1. Applications Wireframes
 
+**Pantalla de Login y Registro para ambos segmentos**
+
+![Web App Wireframes](assets/images/chapter-06/wireframe-login%20y%20registro.jpeg)
+
 #### Web Application (Operador)
-![Web App Wireframes](assets/images/chapter-06/webapp-wireframes.png)
+
+**Dashboard**
+
+![Web App Wireframes](assets/images/chapter-06/wireframe-dashboard.jpeg)
+
+**Seguridad e incidentes**
+
+![Web App Wireframes](assets/images/chapter-06/wireframe-seguridad%20e%20incidentes.jpeg)
+
+**Flujo vehicular**
+
+![Web App Wireframes](assets/images/chapter-06/wireframe-flujo%20vehicular.jpeg)
+
+**Eficiencia energética**
+
+![Web App Wireframes](assets/images/chapter-06/wireframe-eficiencia%20energetica.jpeg)
+
+**Gemelo Digital 3D**
+
+![Web App Wireframes](assets/images/chapter-06/wireframe-gemelo%20digital.jpeg)
+
+**Reportes**
+
+![Web App Wireframes](assets/images/chapter-06/wireframe-reportes.jpeg)
+
 
 #### Mobile Application (Conductor — PowerApps)
 ![Mobile App Wireframes](assets/images/chapter-06/mobile-wireframes.png)
