@@ -1978,8 +1978,35 @@ Navegación por Gestos (Móvil):
 
 ### 6.4.3. Applications Mock-ups
 
+**Pantalla de Login y Registro para ambos segmentos**
+![Web App Mockups](assets/images/chapter-06/mock%20up%20login%20y%20registro.png)
+
 #### Web Application (Operador)
-![Web App Mockups](assets/images/chapter-06/webapp-mockups.png)
+
+**Dashboard**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-dashboard.png)
+
+**Seguridad e incidentes**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-seguridad%20e%20incidentes.png)
+
+**Flujo vehicular**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-flujo%20vehicular.png)
+
+**Eficiencia energética**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-eficiencia%20energetica.png)
+
+**Gemelo Digital 3D**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-gemelo%20digital.png)
+
+**Reportes**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-reportes.png)
+
 
 #### Mobile Application (Conductor)
 ![Mobile App Mockups](assets/images/chapter-06/mobile-mockups.png)
