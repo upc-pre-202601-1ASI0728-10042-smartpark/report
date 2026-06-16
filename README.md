@@ -246,7 +246,7 @@ _(Pendiente)_
   - [6.4. Applications UX/UI Design](#64-applications-uxui-design)
     - [6.4.1. Applications Wireframes](#641-applications-wireframes)
       - [Web Application (Operador)](#web-application-operador)
-      - [Mobile Application (Conductor — PowerApps)](#mobile-application-conductor--powerapps)
+      - [Mobile Application (Conductor — PowerApps)    ---- falta wire app](#mobile-application-conductor--powerapps---------falta-wire-app)
     - [6.4.2. Applications Wireflow Diagrams](#642-applications-wireflow-diagrams)
     - [6.4.3. Applications Mock-ups](#643-applications-mock-ups)
       - [Web Application (Operador)](#web-application-operador-1)
@@ -1959,7 +1959,7 @@ Navegación por Gestos (Móvil):
 ![Web App Wireframes](assets/images/chapter-06/wireframe-reportes.jpeg)
 
 
-#### Mobile Application (Conductor — PowerApps)
+#### Mobile Application (Conductor — PowerApps)    ---- falta wire app
 ![Mobile App Wireframes](assets/images/chapter-06/mobile-wireframes.png)
 
 ### 6.4.2. Applications Wireflow Diagrams
@@ -2022,7 +2022,26 @@ Navegación por Gestos (Móvil):
 
 
 #### Mobile Application (Conductor)
-![Mobile App Mockups](assets/images/chapter-06/mobile-mockups.png)
+
+**Home**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20Home.png)  
+
+**“Mi Sesión”**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20Mi%20sesion.png)  
+
+**Alertas**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20Alertas.png)  
+
+**Historial de Sesiones**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20historial.png)  
+
+**Perfil y Configuración**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20perfil.png)  
 
 ### 6.4.4. Applications User Flow Diagrams
 
