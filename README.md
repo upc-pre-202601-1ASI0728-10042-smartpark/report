@@ -253,7 +253,7 @@ _(Pendiente)_
       - [Mobile Application (Conductor)](#mobile-application-conductor)
     - [6.4.4. Applications User Flow Diagrams](#644-applications-user-flow-diagrams)
       - [Aplicación Web – Operador](#aplicación-web--operador)
-- [User Flow: Operator monitors real-time occupancy by level and zone](#user-flow-operator-monitors-real-time-occupancy-by-level-and-zone)
+    - [User Flow: Operator monitors real-time occupancy by level and zone](#user-flow-operator-monitors-real-time-occupancy-by-level-and-zone)
     - [Caso alternativo](#caso-alternativo)
 - [User Flow: Operator manages an active smoke incident](#user-flow-operator-manages-an-active-smoke-incident)
 - [User Flow: Operator views and analyzes incident history](#user-flow-operator-views-and-analyzes-incident-history)
@@ -1980,15 +1980,15 @@ Navegación por Gestos (Móvil):
 
 **Home**
 
-![Mobile App Mockups](assets/images/chapter-06)  
+![Mobile App Mockups](assets/images/chapter-06/wire%20mob%20-home.png)  
 
 **“Mi Sesión”**
 
-![Mobile App Mockups](assets/images/chapter-06)  
+![Mobile App Mockups](assets/images/chapter-06/wire%20-%20mob%20mi%20sesion.png)  
 
 **Alertas**
 
-![Mobile App Mockups](assets/images/chapter-06g)  
+![Mobile App Mockups](assets/images/chapter-06/wire%20mob%20-%20altertas.png)  
 
 **Historial de Sesiones**
 
@@ -2085,7 +2085,7 @@ Navegación por Gestos (Móvil):
 A continuación, se presentan los User Flow Diagrams para la Aplicación Web del Operador y la Aplicación Móvil del Conductor (PowerApps). Cada flujo describe la secuencia de pasos que un usuario realiza para completar una tarea específica, incluyendo decisiones y caminos alternativos.
 
 #### Aplicación Web – Operador
-# User Flow: Operator monitors real-time occupancy by level and zone
+### User Flow: Operator monitors real-time occupancy by level and zone
 
 **User Goal:** Visualizar el estado de ocupación del estacionamiento desglosado por nivel y zona para identificar áreas con disponibilidad o congestión.
 
