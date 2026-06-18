@@ -275,14 +275,29 @@ _(Pendiente)_
       - [Web Application (Operador)](#web-application-operador)
       - [Mobile Application (Conductor — PowerApps)](#mobile-application-conductor--powerapps)
     - [6.4.2. Applications Wireflow Diagrams](#642-applications-wireflow-diagrams)
-      - [Wireflow: Operator views smoke alert and locates affected zone](#wireflow-operator-views-smoke-alert-and-locates-affected-zone)
-      - [Wireflow: Driver finds and registers a parking space](#wireflow-driver-finds-and-registers-a-parking-space)
     - [6.4.3. Applications Mock-ups](#643-applications-mock-ups)
       - [Web Application (Operador)](#web-application-operador-1)
       - [Mobile Application (Conductor)](#mobile-application-conductor)
     - [6.4.4. Applications User Flow Diagrams](#644-applications-user-flow-diagrams)
-      - [User Flow: Operator manages an active smoke incident](#user-flow-operator-manages-an-active-smoke-incident)
-      - [User Flow: Driver completes a parking session](#user-flow-driver-completes-a-parking-session)
+      - [Aplicación Web – Operador](#aplicación-web--operador)
+    - [User Flow: Operator monitors real-time occupancy by level and zone](#user-flow-operator-monitors-real-time-occupancy-by-level-and-zone)
+    - [Caso alternativo](#caso-alternativo)
+- [User Flow: Operator manages an active smoke incident](#user-flow-operator-manages-an-active-smoke-incident)
+- [User Flow: Operator views and analyzes incident history](#user-flow-operator-views-and-analyzes-incident-history)
+- [User Flow: Operator monitors vehicle flow and sets congestion thresholds](#user-flow-operator-monitors-vehicle-flow-and-sets-congestion-thresholds)
+- [User Flow: Operator generates and exports a custom report](#user-flow-operator-generates-and-exports-a-custom-report)
+- [User Flow: Operator navigates the 3D Digital Twin with layers](#user-flow-operator-navigates-the-3d-digital-twin-with-layers)
+- [User Flow: Operator manages energy efficiency recommendations](#user-flow-operator-manages-energy-efficiency-recommendations)
+      - [Aplicación Móvil – Conductor (PowerApps)](#aplicación-móvil--conductor-powerapps)
+- [User Flow: Driver registers and logs in to the mobile app](#user-flow-driver-registers-and-logs-in-to-the-mobile-app)
+- [User Flow: Driver checks parking availability before entering](#user-flow-driver-checks-parking-availability-before-entering)
+- [User Flow: Driver registers vehicle location and starts session](#user-flow-driver-registers-vehicle-location-and-starts-session)
+- [User Flow: Driver finds vehicle using stored location](#user-flow-driver-finds-vehicle-using-stored-location)
+- [User Flow: Driver monitors accumulated cost during stay](#user-flow-driver-monitors-accumulated-cost-during-stay)
+- [User Flow: Driver ends parking session and pays](#user-flow-driver-ends-parking-session-and-pays)
+- [User Flow: Driver views parking session history](#user-flow-driver-views-parking-session-history)
+- [User Flow: Driver receives and views a smoke alert notification](#user-flow-driver-receives-and-views-a-smoke-alert-notification)
+- [User Flow: Driver manages notification preferences](#user-flow-driver-manages-notification-preferences)
   - [6.5. Applications Prototyping](#65-applications-prototyping)
     - [Prototype: Web Application (Operador)](#prototype-web-application-operador)
     - [Prototype: Mobile Application (Conductor)](#prototype-mobile-application-conductor)
@@ -7402,29 +7417,398 @@ Este wireflow muestra el proceso general mediante el cual un conductor registrad
   <b>Figura:</b> Flujo de gestión, validación y actualización del perfil del conductor en la aplicación.
 </p>
 
+### 6.4.2. Applications Wireflow Diagrams
+
+**Wireflow:** Operator monitors real-time occupancy by level and zone
+
+**User Goal:** Visualizar la ocupación desglosada por nivel y zona para identificar áreas con disponibilidad o congestión.
+
+![Wireflow Driver Park](assets/images/chapter-06/tobe%20-%20Wireflow%201.jpg)
+
+**Wireflow:** Operator confirms and resolves a smoke alert with evacuation routes
+
+**User Goal:** Gestionar completamente un incidente de humo, documentando acciones y actualizando el estado.
+
+![Wireflow Driver Park](assets/images/chapter-06/tobe%20-%20Wireflow%204.jpg)
+
+**Wireflow:** Operator monitors vehicle flow and sets congestion alerts
+
+**User Goal:** Visualizar el flujo vehicular en accesos y rampas, y configurar umbrales de congestión.
+
+![Wireflow Driver Park](assets/images/chapter-06/tobe%20-%20Wireflow%202.jpg)
+
+**Wireflow:** Operator generates and exports an occupancy report
+
+**User Goal:** Generar un informe de ocupación personalizado y exportarlo para análisis o presentación a gerencia.
+
+![Wireflow Driver Park](assets/images/chapter-06/tobe%20-%20Wireflow%203.jpg)
+
+
 ### 6.4.3. Applications Mock-ups
 
+**Pantalla de Login y Registro para ambos segmentos**
+![Web App Mockups](assets/images/chapter-06/mock%20up%20login%20y%20registro.png)
+
 #### Web Application (Operador)
-![Web App Mockups](assets/images/chapter-06/webapp-mockups.png)
+
+**Dashboard**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-dashboard.png)
+
+**Seguridad e incidentes**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-seguridad%20e%20incidentes.png)
+
+**Flujo vehicular**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-flujo%20vehicular.png)
+
+**Eficiencia energética**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-eficiencia%20energetica.png)
+
+**Gemelo Digital 3D**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-gemelo%20digital.png)
+
+**Reportes**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-reportes.png)
+
 
 #### Mobile Application (Conductor)
-![Mobile App Mockups](assets/images/chapter-06/mobile-mockups.png)
+
+**Home**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20Home.png)  
+
+**“Mi Sesión”**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20Mi%20sesion.png)  
+
+**Alertas**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20Alertas.png)  
+
+**Historial de Sesiones**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20historial.png)  
+
+**Perfil y Configuración**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20perfil.png)  
 
 ### 6.4.4. Applications User Flow Diagrams
 
-#### User Flow: Operator manages an active smoke incident
-**User Goal:** Gestionar un incidente de humo desde detección hasta resolución.
+A continuación, se presentan los User Flow Diagrams para la Aplicación Web del Operador y la Aplicación Móvil del Conductor (PowerApps). Cada flujo describe la secuencia de pasos que un usuario realiza para completar una tarea específica, incluyendo decisiones y caminos alternativos.
+
+#### Aplicación Web – Operador
+### User Flow: Operator monitors real-time occupancy by level and zone
+
+**User Goal:** Visualizar el estado de ocupación del estacionamiento desglosado por nivel y zona para identificar áreas con disponibilidad o congestión.
+
+- El operador inicia sesión con sus credenciales y accede al Dashboard principal.
+- El sistema muestra las tarjetas resumen con total de plazas, ocupadas, disponibles y porcentaje general, actualizándose automáticamente cada 5 segundos.
+- El operador selecciona un nivel específico desde el selector de niveles en el header.
+- El sistema actualiza la vista para mostrar únicamente las zonas del nivel seleccionado, cada una con su porcentaje de ocupación y un indicador de color: verde para ocupación baja (<60%), amarillo para ocupación media (60-85%) y rojo para ocupación alta (>85%).
+- El operador hace clic en una zona para ver el detalle.
+- El sistema muestra un plano de plazas individuales con su estado: verde (libre), gris oscuro (ocupada), amarillo (reservada), gris claro (fuera de servicio).
+
+### Caso alternativo
+
+- Si un nivel no ha recibido datos de sensores en los últimos 60 segundos, el sistema muestra un ícono de advertencia junto al nombre del nivel y un tooltip indica la última actualización disponible.
+
+![User Flow Operator](assets/images/chapter-06/)
+
+# User Flow: Operator manages an active smoke incident
+
+**User Goal:** Gestionar un incidente de humo desde la detección hasta la resolución completa, documentando acciones y coordinando respuesta.
+
+- El operador inicia sesión y accede al Dashboard principal.
+- Un detector de humo en una zona específica se activa. El sistema muestra una notificación de alerta de alta prioridad con sonido audible y banner rojo en el panel de alertas.
+- El operador hace clic en la notificación o navega a la pestaña "Alertas activas".
+- El sistema muestra la lista de incidentes no resueltos, con la nueva alerta resaltada en rojo.
+- El operador selecciona la alerta para ver el detalle.
+- El sistema navega al módulo Gemelo Digital 3D, activa automáticamente la capa de seguridad, centra la cámara en el detector afectado y resalta la zona en rojo. Las rutas de evacuación comprometidas se muestran en rojo y las alternativas en verde.
+- El operador hace clic en "Confirmar recepción". El estado cambia de "Activa" a "Confirmada", registrando el nombre del operador y la marca de tiempo. Se habilita un campo de notas para documentar acciones.
+- El operador documenta las acciones tomadas en el campo de notas.
+- El operador hace clic en "Resolver".
+- El sistema cambia el estado a "Resuelta", registra la marca de tiempo de resolución, mueve la alerta al historial y elimina el resaltado del modelo 3D.
+
+Caso alternativo 1
+
+- Si el operador intenta resolver sin confirmar primero, el sistema muestra un mensaje de error: "Debe confirmar la recepción de la alerta antes de resolverla".
+
+ Caso alternativo 2
+
+- Si se activan dos detectores simultáneamente, el sistema muestra ambas alertas en el panel, ordenadas por hora, y el operador puede hacer clic en cada una para centrar el visor en cada zona.
 
 ![User Flow Operator](assets/images/chapter-06/userflow-operator.png)
 
-#### User Flow: Driver completes a parking session
-**User Goal:** Completar una sesión de estacionamiento desde ingreso hasta pago de salida.
+# User Flow: Operator views and analyzes incident history
 
+**User Goal:** Acceder al historial de incidentes para analizar patrones y generar reportes de seguridad.
+
+- El operador inicia sesión y navega al módulo Seguridad.
+- El sistema muestra la vista de incidentes con dos pestañas: "Alertas activas" e "Historial".
+- El operador selecciona la pestaña "Historial".
+- El sistema muestra una tabla con todos los incidentes pasados, incluyendo columnas: fecha/hora, tipo, zona, nivel, estado, operador que confirmó y notas de resolución. Los incidentes están ordenados por fecha descendente por defecto.
+- El operador aplica filtros para acotar la búsqueda: selecciona un rango de fechas, tipo de incidente y/o estado.
+- El sistema actualiza la tabla mostrando únicamente los incidentes que coinciden con los filtros aplicados.
+- El operador hace clic en un incidente para ver el detalle completo.
+
+Caso alternativo
+
+- Si no hay incidentes registrados, el sistema muestra un mensaje: "No se han registrado incidentes".
+
+# User Flow: Operator monitors vehicle flow and sets congestion thresholds
+
+**User Goal:** Visualizar el flujo vehicular en accesos y rampas, y configurar umbrales de congestión para recibir alertas proactivas.
+
+- El operador inicia sesión y navega al módulo Flujo Vehicular.
+- El sistema muestra una tabla con todos los puntos de acceso y rampas, cada uno con su nombre, tasa de flujo actual (vehículos por minuto) y un indicador circular de color: verde para flujo normal (<200 veh/min), amarillo para congestión moderada (200-300 veh/min) y rojo para congestión severa (>300 veh/min). Los datos se actualizan cada 5 segundos.
+- El operador hace clic en "Configurar alertas automáticas".
+- El sistema abre un panel lateral con campos para ajustar umbrales: "Umbral moderado (veh/min)" y "Umbral congestión (veh/min)", además de opciones de notificación (sistema, correo, SMS).
+- El operador modifica los valores y selecciona los canales de notificación deseados.
+- El operador hace clic en "Guardar configuración". El sistema guarda los cambios y aplica los nuevos umbrales.
+
+Condición:
+
+- Si una rampa supera el umbral de congestión por más de 3 minutos, el sistema agrega automáticamente una notificación al panel de alertas y cambia el indicador de esa rampa a rojo.
+- El operador hace clic en la notificación para ver los detalles y la sugerencia de acción.
+
+Caso alternativo:
+
+- Si un sensor de flujo no envía datos por más de 120 segundos, el sistema muestra el punto de acceso correspondiente con un indicador "Fuera de línea" y el último valor conocido con un ícono de advertencia.
+
+# User Flow: Operator generates and exports a custom report
+
+**User Goal:** Generar un informe personalizado de ocupación y exportarlo para presentación a gerencia o análisis posterior.
+
+- El operador inicia sesión y navega al módulo Reportes.
+- El sistema muestra la pantalla de reportes con dos secciones: "Informes personalizados" y "Reportes predefinidos".
+- El operador configura el reporte seleccionando: tipo de dato (ocupación, incidentes, flujo o energía), rango de fechas, nivel, zona y agrupación (día, semana, mes).
+- El operador hace clic en "Generar reporte".
+- El sistema consulta la API y muestra un resumen con métricas clave (ocupación promedio, máxima, mínima, total de plazas) y gráficos de barras de ocupación por día, por nivel y por hora. Debajo, una tabla detallada con todas las filas de datos.
+- El operador revisa el reporte generado.
+- El operador hace clic en "Exportar PDF" o "Exportar Excel" según el formato deseado.
+- El sistema genera y descarga el archivo con el contenido del reporte.
+
+Caso alternativo 1:
+
+- Si no hay datos para el período seleccionado, el sistema muestra un mensaje: "No hay datos para el período seleccionado".
+
+Caso alternativo 2:
+
+- El operador puede hacer clic en "Guardar reporte" para almacenar la configuración y poder ejecutarlo nuevamente sin volver a configurar todos los parámetros.
+
+# User Flow: Operator navigates the 3D Digital Twin with layers
+
+**User Goal:** Explorar el gemelo digital 3D del estacionamiento y activar diferentes capas de datos para obtener contexto espacial de ocupación, seguridad, flujo y energía.
+
+- El operador inicia sesión y navega al módulo Gemelo 3D.
+- El sistema carga y renderiza el modelo 3D del estacionamiento, mostrando todos los niveles, zonas, puntos de acceso y rampas. El visor permite interacciones de zoom, desplazamiento y rotación.
+- El operador selecciona una capa de datos desde la barra de herramientas (ej. "Ocupación", "Seguridad", "Flujo", "Energía").
+- El sistema actualiza el modelo 3D con la codificación por color correspondiente a la capa seleccionada y muestra una leyenda explicativa.
+- El operador hace clic en una zona específica del modelo 3D.
+- El sistema muestra un tooltip o panel de detalle con información contextual según la capa activa: conteo de ocupación y porcentaje (capa ocupación), estado de detectores y rutas de evacuación (capa seguridad), tasa de flujo (capa flujo), o luminosidad y ahorro estimado (capa energía).
+
+Caso alternativo:
+
+- Si el modelo 3D no puede cargar debido a un problema con Azure Digital Twins, el sistema muestra un mensaje: "Modelo 3D temporalmente no disponible", pero los paneles de datos del dashboard permanecen funcionales.
+
+# User Flow: Operator manages energy efficiency recommendations
+
+**User Goal:** Visualizar recomendaciones de atenuación de iluminación y aplicarlas para reducir el consumo energético.
+
+- El operador inicia sesión y navega al módulo Eficiencia Energética.
+- El sistema muestra un panel con todas las zonas de iluminación, indicando el porcentaje de ocupación actual, el nivel de luminosidad y una columna con la recomendación de atenuación (Sí/No) junto al ahorro estimado.
+- El operador activa la capa de energía en el visor 3D para ver las recomendaciones en contexto espacial.
+- El sistema sombrea en azul las zonas donde se recomienda atenuar (ocupación <20% y luminosidad >50%).
+- El operador hace clic en una zona recomendada.
+- El sistema muestra un panel de detalle con:
+  - ocupación actual (%),
+  - nivel de luminosidad actual,
+  - ahorro energético estimado si se atenúa,
+  - marca de tiempo de la última actualización.
+
+- El operador hace clic en "Aplicar atenuación".
+- El sistema aplica la atenuación en la zona seleccionada y actualiza el estado en el dashboard.
+
+Caso alternativo:
+
+- Si todas las zonas tienen ocupación superior al 50%, el sistema muestra un mensaje: "Todas las zonas tienen ocupación adecuada. Sin recomendaciones de atenuación en este momento".
+
+
+#### Aplicación Móvil – Conductor (PowerApps)
+
+# User Flow: Driver registers and logs in to the mobile app
+
+**User Goal:** Crear una cuenta e iniciar sesión en la aplicación móvil para acceder a las funcionalidades de estacionamiento.
+
+- El conductor abre la aplicación móvil por primera vez.
+- El sistema muestra la pantalla de bienvenida con el logo, el botón "Iniciar sesión" y el botón "Registrarse".
+- El conductor selecciona "Registrarse".
+- El sistema muestra el formulario de registro con campos obligatorios: nombre completo, correo electrónico, número de teléfono y contraseña.
+- El conductor completa todos los campos y toca "Crear cuenta".
+- El sistema valida que el email no esté registrado previamente. Si es válido, crea la cuenta y redirige al conductor a la pantalla principal de Disponibilidad.
+
+Caso alternativo 1:
+
+- Si el email ya está registrado, el sistema muestra un mensaje de error: "Este email ya está registrado" y no permite avanzar.
+
+Caso alternativo 2:
+
+- Si el conductor no tiene conexión a internet, el sistema muestra un mensaje: "Sin conexión a internet. Por favor intente más tarde".
+- En el inicio de sesión, el conductor ingresa sus credenciales y toca "Iniciar sesión".
+- El sistema autentica al usuario y, si es correcto, redirige a la pantalla principal de Disponibilidad. La sesión persiste entre aperturas de la app.
+
+# User Flow: Driver checks parking availability before entering
+
+**User Goal:** Consultar la disponibilidad de plazas por nivel y zona antes de ingresar al estacionamiento para dirigirse directamente al área con más espacios libres.
+
+- El conductor ha iniciado sesión y la aplicación muestra la pantalla principal de Disponibilidad.
+- El sistema detecta automáticamente el centro comercial más cercano mediante GPS o el conductor selecciona uno manualmente desde un desplegable.
+- El sistema muestra una lista (o mapa simplificado) de los niveles del estacionamiento con su porcentaje de disponibilidad. Los niveles están ordenados de mayor a menor disponibilidad.
+- El conductor toca un nivel para ver el detalle de sus zonas.
+- El sistema muestra las zonas dentro del nivel con el conteo de plazas disponibles por zona. La zona con mayor disponibilidad se resalta visualmente.
+- El conductor visualiza la información y decide dirigirse a la zona más disponible.
+
+Caso alternativo 1:
+
+- Si todos los niveles están al 100% de ocupación, el sistema muestra un mensaje: "No hay plazas disponibles en este momento. Por favor intente de nuevo en unos minutos", junto con la hora de la última actualización.
+
+Caso alternativo 2:
+
+- Si el conductor no tiene conexión a internet, el sistema muestra un mensaje: "No se pudieron cargar los datos de disponibilidad. Verifique su conexión".
+
+# User Flow: Driver registers vehicle location and starts session
+
+**User Goal:** Registrar la ubicación exacta donde se estacionó el vehículo e iniciar una nueva sesión de estacionamiento.
+
+- El conductor ha estacionado su vehículo y abre la aplicación en la pantalla "Mi Sesión".
+- El sistema muestra un mensaje: "No hay sesión activa. Registre su ubicación para comenzar" y un botón flotante (FAB) con el ícono de ubicación.
+- El conductor toca el FAB "Registrar Mi Ubicación".
+- El sistema muestra un formulario simple con: selector de nivel (desplegable), selector de zona (dinámico según el nivel), y un campo opcional para ingresar el código de plaza.
+- El conductor selecciona el nivel, la zona y opcionalmente ingresa el código de plaza.
+- El conductor toca "Confirmar".
+- El sistema valida que se haya seleccionado al menos el nivel. Si es correcto, guarda la ubicación, inicia una nueva sesión con la marca de tiempo actual, y muestra un mensaje de confirmación: "Ubicación guardada: Nivel B2, Zona A".
+- El sistema redirige automáticamente a la pantalla "Mi Sesión" mostrando: hora de entrada, duración transcurrida, tarifa aplicable, costo acumulado y la ubicación guardada.
+
+ Caso alternativo 1:
+
+- Si el conductor intenta confirmar sin seleccionar nivel, el sistema muestra un mensaje de error: "Por favor seleccione un nivel de estacionamiento".
+
+Caso alternativo 2.
+
+- Si el conductor ya tiene una sesión activa, el sistema muestra un mensaje: "Ya tiene una sesión activa en [ubicación anterior]. ¿Desea finalizarla e iniciar una nueva?" y permite elegir.
+
+# User Flow: Driver finds vehicle using stored location
+
+**User Goal:** Consultar la ubicación registrada del vehículo al regresar de las compras para encontrarlo rápidamente.
+
+- El conductor ha iniciado sesión y tiene una sesión de estacionamiento activa.
+- El conductor abre la aplicación y navega a la pantalla "Mi Sesión".
+- El sistema muestra los detalles de la sesión activa incluyendo la ubicación guardada (nivel, zona, código de plaza).
+- El conductor toca el botón "Encontrar mi vehículo".
+- El sistema muestra una pantalla con la ubicación registrada de forma clara y destacada, con indicación visual del nivel y zona. Si la app está configurada con coordenadas, puede abrir Google Maps o Waze con la ubicación del acceso más cercano.
+- El conductor visualiza la información y se dirige a la ubicación indicada.
+
+Caso alternativo 1:
+
+- Si el conductor no tiene una sesión activa, el sistema muestra un mensaje: "No hay sesión de estacionamiento activa. Registre su ubicación cuando estacione".
+
+Caso alternativo 2.
+
+- Si la sesión fue registrada hace más de 24 horas, el sistema muestra una advertencia: "Esta sesión comenzó hace más de 24 horas. ¿Su vehículo sigue aquí?".
+
+# User Flow: Driver monitors accumulated cost during stay
+
+**User Goal:** Consultar el costo acumulado de la estancia en tiempo real para anticipar el monto a pagar al salir.
+
+- El conductor ha iniciado sesión y tiene una sesión de estacionamiento activa.
+- El conductor abre la aplicación y navega a la pantalla "Mi Sesión".
+- El sistema muestra: hora de entrada, duración transcurrida (en minutos), tarifa aplicable (valor por minuto o por hora) y costo acumulado actualizado automáticamente cada minuto.
+- El conductor visualiza el costo acumulado en tiempo real.
+
+Caso alternativo 1:
+
+- Si el conductor no tiene una sesión activa, el sistema muestra un mensaje: "No hay sesión activa. Inicie una sesión registrando su ubicación de estacionamiento".
+
+Caso alternativo 2.
+
+- Si la tarifa cambia durante la sesión (ej. de estándar a pico), el sistema refleja el cálculo combinado con ambas tarifas y muestra una nota: "La tarifa cambió a las [hora]".
+
+# User Flow: Driver ends parking session and pays
+
+**User Goal:** Finalizar la sesión de estacionamiento, visualizar el costo total y realizar el pago digital desde la aplicación.
+
+- El conductor está listo para retirarse y abre la aplicación en la pantalla "Mi Sesión".
+- El sistema muestra los detalles de la sesión activa y el costo acumulado actualizado.
+- El conductor toca el botón "Finalizar sesión".
+- El sistema muestra un modal de confirmación: "¿Está seguro de que desea finalizar su sesión?".
+- El conductor confirma.
+- El sistema marca la sesión como completada con la marca de tiempo de salida y muestra un resumen con: hora de entrada, hora de salida, duración total y costo total.
+- El conductor toca "Pagar ahora".
+- El sistema redirige al flujo de pago integrado (Yape, Plin, tarjeta) y procesa el pago.
+- El sistema muestra un comprobante de pago y guarda la sesión en el historial.
+
+Caso alternativo 1:
+
+- Si el conductor toca "Cancelar" en el modal de confirmación, la sesión permanece activa.
+
+Caso alternativo 2.
+
+- Si el conductor ya ha finalizado la sesión y toca el botón nuevamente, el sistema muestra un mensaje: "Esta sesión ya ha sido completada".
+
+# User Flow: Driver views parking session history
+
+**User Goal:** Consultar el historial de sesiones de estacionamiento anteriores para llevar control de visitas y gastos.
+
+- El conductor ha iniciado sesión y navega a la pestaña "Historial" en la barra inferior.
+- El sistema muestra una lista de sesiones pasadas, cada una mostrando: fecha, nombre de la instalación, nivel/zona, duración y costo total. Las sesiones están ordenadas por fecha descendente (más reciente primero).
+- El conductor toca una sesión para ver el detalle completo.
+- El sistema muestra información detallada de la sesión seleccionada y el comprobante de pago.
+
+Caso alternativo:
+
+- Si el conductor no tiene sesiones pasadas, el sistema muestra un mensaje: "Aún no tiene sesiones de estacionamiento. Sus sesiones aparecerán aquí después de su primera visita".
+
+# User Flow: Driver receives and views a smoke alert notification
+
+**User Goal:** Recibir una notificación push ante un incidente de humo en la zona donde está estacionado el vehículo y visualizar los detalles para tomar acción.
+
+- El conductor tiene una sesión de estacionamiento activa en una zona específica (ej. Zona B, Nivel B2).
+- Un detector de humo en la misma zona se activa.
+- El sistema procesa el evento y envía una notificación push al dispositivo del conductor a través de Firebase Cloud Messaging.
+- El dispositivo del conductor recibe la notificación. El título es "Alerta de Seguridad - Humo Detectado" y el cuerpo indica la zona, nivel y una acción recomendada (ej. "Diríjase a la salida más cercana").
+- El conductor toca la notificación.
+- El sistema abre la aplicación directamente en la pantalla de detalle de la alerta, mostrando: tipo de alerta, zona y nivel afectados, marca de tiempo, estado actual y acciones recomendadas.
+- El conductor visualiza la información y sigue las instrucciones de evacuación si es necesario.
+
+Caso alternativo 1:
+
+- Si el conductor ha desactivado las notificaciones push, al abrir la aplicación se muestra un banner de alerta dentro de la app con la información de la alerta.
+
+Caso alternativo 2:
+
+- Si la alerta ha sido resuelta antes de que el conductor la consulte, el sistema muestra el estado como "Resuelta" con la marca de tiempo de resolución y un mensaje: "Esta alerta ha sido resuelta. Las operaciones normales se han reanudado".
+
+# User Flow: Driver manages notification preferences
+
+**User Goal:** Configurar las preferencias de notificaciones para controlar qué alertas se reciben.
+
+- El conductor ha iniciado sesión y navega a la pestaña "Perfil".
+- El sistema muestra la pantalla de perfil con opciones de edición de datos personales, gestión de métodos de pago y configuración de notificaciones.
+- El conductor encuentra la sección de Preferencias de notificación con toggles para activar/desactivar diferentes tipos de alertas.
+- El conductor activa el toggle de "Alertas de Seguridad" para recibir notificaciones push de incidentes de humo.
+- El sistema guarda la preferencia y confirma el cambio.
+- El conductor desactiva el toggle de "Actualizaciones de Disponibilidad" para dejar de recibir notificaciones sobre cambios de disponibilidad.
+- El sistema guarda la preferencia, pero mantiene las alertas de seguridad activas independientemente de esta configuración (las alertas de seguridad no se pueden desactivar).
+  
 ![User Flow Driver](assets/images/chapter-06/userflow-driver.png)
 
 ## 6.5. Applications Prototyping
-
-_(Prototipos de UI con simulación de interacción y navegación. Para cada aplicación: 1 screenshot del video y enlace al video subido en Microsoft Stream.)_
 
 ### Prototype: Web Application (Operador)
 ![Web App Prototype Screenshot](assets/images/chapter-06/webapp-prototype-screenshot.png)
