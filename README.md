@@ -7419,33 +7419,6 @@ Este wireflow muestra el proceso general mediante el cual un conductor registrad
   <b>Figura:</b> Flujo de gestión, validación y actualización del perfil del conductor en la aplicación.
 </p>
 
-### 6.4.2. Applications Wireflow Diagrams
-
-**Wireflow:** Operator monitors real-time occupancy by level and zone
-
-**User Goal:** Visualizar la ocupación desglosada por nivel y zona para identificar áreas con disponibilidad o congestión.
-
-![Wireflow Driver Park](assets/images/chapter-06/tobe%20-%20Wireflow%201.jpg)
-
-**Wireflow:** Operator confirms and resolves a smoke alert with evacuation routes
-
-**User Goal:** Gestionar completamente un incidente de humo, documentando acciones y actualizando el estado.
-
-![Wireflow Driver Park](assets/images/chapter-06/tobe%20-%20Wireflow%204.jpg)
-
-**Wireflow:** Operator monitors vehicle flow and sets congestion alerts
-
-**User Goal:** Visualizar el flujo vehicular en accesos y rampas, y configurar umbrales de congestión.
-
-![Wireflow Driver Park](assets/images/chapter-06/tobe%20-%20Wireflow%202.jpg)
-
-**Wireflow:** Operator generates and exports an occupancy report
-
-**User Goal:** Generar un informe de ocupación personalizado y exportarlo para análisis o presentación a gerencia.
-
-![Wireflow Driver Park](assets/images/chapter-06/tobe%20-%20Wireflow%203.jpg)
-
-
 ### 6.4.3. Applications Mock-ups
 
 **Pantalla de Login y Registro para ambos segmentos**
