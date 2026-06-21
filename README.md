@@ -309,12 +309,12 @@ _(Pendiente)_
     - [7.1.2. Source Code Management](#712-source-code-management)
     - [7.1.3. Source Code Style Guide \& Conventions](#713-source-code-style-guide--conventions)
     - [7.1.4. Software Deployment Configuration](#714-software-deployment-configuration)
-      - [Landing Page → Azure Static Web Apps](#landing-page--azure-static-web-apps)
-      - [Web Application (Angular) → Azure Static Web Apps](#web-application-angular--azure-static-web-apps)
-      - [Web Services (ASP.NET Core) → Azure App Service](#web-services-aspnet-core--azure-app-service)
-      - [IoT Simulator (Node.js) → Azure Container Apps](#iot-simulator-nodejs--azure-container-apps)
-      - [Mobile App (PowerApps)](#mobile-app-powerapps)
-      - [Azure Digital Twins](#azure-digital-twins)
+      - [Landing Page → Azure Storage static website](#landing-page--azure-storage-static-website)
+      - [Web Application (Angular) → Azure Storage static website](#web-application-angular--azure-storage-static-website)
+      - [Web Services (ASP.NET Core) → Azure App Service (Linux, .NET 8)](#web-services-aspnet-core--azure-app-service-linux-net-8)
+      - [IoT Simulator (Node.js) → ejecución on-demand](#iot-simulator-nodejs--ejecución-on-demand)
+      - [Mobile App (Power Apps)](#mobile-app-power-apps)
+      - [Azure Digital Twins + Modelo 3D](#azure-digital-twins--modelo-3d)
   - [7.2. Solution Implementation](#72-solution-implementation)
     - [7.2.1. Sprint 1](#721-sprint-1)
       - [7.2.1.1. Sprint Planning 1](#7211-sprint-planning-1)
@@ -328,21 +328,7 @@ _(Pendiente)_
     - [7.2.2. Sprint 2](#722-sprint-2)
       - [7.2.2.1. Sprint Planning 2](#7221-sprint-planning-2)
       - [7.2.2.2. Sprint Backlog 2](#7222-sprint-backlog-2)
-      - [7.2.2.3. Development Evidence for Sprint Review](#7223-development-evidence-for-sprint-review)
-      - [7.2.2.4. Testing Suite Evidence for Sprint Review](#7224-testing-suite-evidence-for-sprint-review)
-      - [7.2.2.5. Execution Evidence for Sprint Review](#7225-execution-evidence-for-sprint-review)
-      - [7.2.2.6. Services Documentation Evidence for Sprint Review](#7226-services-documentation-evidence-for-sprint-review)
-      - [7.2.2.7. Software Deployment Evidence for Sprint Review](#7227-software-deployment-evidence-for-sprint-review)
-      - [7.2.2.8. Team Collaboration Insights during Sprint](#7228-team-collaboration-insights-during-sprint)
-    - [7.2.3. Sprint 3](#723-sprint-3)
-      - [7.2.3.1. Sprint Planning 3](#7231-sprint-planning-3)
-      - [7.2.3.2. Sprint Backlog 3](#7232-sprint-backlog-3)
-      - [7.2.3.3. Development Evidence for Sprint Review](#7233-development-evidence-for-sprint-review)
-      - [7.2.3.4. Testing Suite Evidence for Sprint Review](#7234-testing-suite-evidence-for-sprint-review)
-      - [7.2.3.5. Execution Evidence for Sprint Review](#7235-execution-evidence-for-sprint-review)
-      - [7.2.3.6. Services Documentation Evidence for Sprint Review](#7236-services-documentation-evidence-for-sprint-review)
-      - [7.2.3.7. Software Deployment Evidence for Sprint Review](#7237-software-deployment-evidence-for-sprint-review)
-      - [7.2.3.8. Team Collaboration Insights during Sprint](#7238-team-collaboration-insights-during-sprint)
+      - [7.2.2.3. Sprint 2 Execution Note](#7223-sprint-2-execution-note)
   - [7.3. Validation Interviews](#73-validation-interviews)
     - [7.3.1. Diseño de Entrevistas](#731-diseño-de-entrevistas)
     - [7.3.2. Registro de Entrevistas](#732-registro-de-entrevistas)
@@ -7827,12 +7813,12 @@ Caso alternativo 2:
 
 | Producto | Repositorio | Branches base |
 |---|---|---|
-| Report | `https://github.com/<org>/report` | main, develop |
-| Landing Page | `https://github.com/<org>/landing-page` | main, develop |
-| Web Application | `https://github.com/<org>/web-application` | main, develop |
-| Web Services | `https://github.com/<org>/web-services` | main, develop |
-| IoT Simulator | `https://github.com/<org>/iot-simulator` | main, develop |
-| Mobile App | `https://github.com/<org>/mobile-app` | main, develop |
+| Report | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/report` | main, develop |
+| Landing Page | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/landing-page` | main, develop |
+| Web Application | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-application` | main, develop |
+| Web Services | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-services` | main, develop |
+| IoT Simulator | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/iot-simulator` | main, develop |
+| Mobile App | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/mobile-app` | main, develop |
 
 **GitFlow Workflow:**
 
@@ -7871,31 +7857,36 @@ Toda nomenclatura en inglés.
 
 ### 7.1.4. Software Deployment Configuration
 
-_(Pasos para desplegar cada producto digital desde sus repositorios.)_
+Cada producto digital se despliega desde su repositorio hacia su nodo de Azure. El despliegue se ejecuta con **Az PowerShell** (módulo `Az`), que valida TLS con *schannel* y atraviesa el proxy de la red universitaria (el `az` CLI queda bloqueado por su OpenSSL estricto). Suscripción: *Azure for Students*; grupo de recursos `rg-smartpark`; región `eastus2`.
 
-#### Landing Page → Azure Static Web Apps
-1. Push a `main` dispara GitHub Actions workflow.
-2. Azure Static Web Apps build & deploy.
+#### Landing Page → Azure Storage static website
+1. `npm run build` (Vite) genera el bundle estático en `dist/`.
+2. Habilitar el static website del Storage Account (`stsmartparkland01`) y subir `dist/` al contenedor `$web` (`Set-AzStorageBlobContent`).
+3. Verificar en `https://stsmartparkland01.z20.web.core.windows.net/`.
 
-#### Web Application (Angular) → Azure Static Web Apps
-1. `ng build --configuration production`.
-2. Deploy automatizado vía GitHub Actions.
+#### Web Application (Angular) → Azure Storage static website
+1. `ng build --configuration production` (salida en `dist/web-application/browser`).
+2. Configurar `environment.production` con la URL del API y subir el bundle a `$web` del Storage Account `stsmartparkweb01`.
+3. Verificar el login JWT contra el API en `https://stsmartparkweb01.z20.web.core.windows.net/`.
 
-#### Web Services (ASP.NET Core) → Azure App Service
-1. `dotnet publish -c Release`.
-2. Deploy vía Azure Pipelines o GitHub Actions.
+#### Web Services (ASP.NET Core) → Azure App Service (Linux, .NET 8)
+1. `dotnet publish src/SmartPark.Api -c Release -o ./publish`.
+2. Empaquetar con rutas POSIX (las DLL nativas de SQLite requieren *forward slashes* en el ZIP) y publicar con `Publish-AzWebApp`/`az webapp deploy --type zip`.
+3. Configurar App Settings: `Database__Provider=sqlite`, `ConnectionStrings__SmartParkDb`, `Jwt__Key`, `Adt__Mode`, `Ingest__ApiKey`, `Cors__WebApp`.
+4. Verificar Swagger en `https://smartpark-api.azurewebsites.net/swagger`.
 
-#### IoT Simulator (Node.js) → Azure Container Apps
-1. `docker build -t iot-simulator .`.
-2. Push a Azure Container Registry.
-3. Deploy a Container Apps.
+#### IoT Simulator (Node.js) → ejecución on-demand
+1. `npm install` en el repositorio `iot-simulator`.
+2. Configurar `.env` con el host de Azure Digital Twins y el `X-Api-Key` de ingesta del API.
+3. Ejecutar el simulador (`npm start`) para emitir telemetría de ocupación y disparar alertas de humo durante las entrevistas de validación; opcionalmente desde la vista de simulador de la web-app (`POST /api/v1/occupancy/simulate` y `POST /api/v1/alerts/smoke`).
 
-#### Mobile App (PowerApps)
-1. Export & Import via PowerApps Solution.
+#### Mobile App (Power Apps)
+1. Importar el **custom connector** desde `connector/apiDefinition.swagger.json` (apuntando al API desplegado).
+2. Importar la app Canvas (`.msapp`/source `*.pa.yaml`) en Power Apps Studio y publicar.
 
-#### Azure Digital Twins
-1. Deploy via ARM template / Bicep.
-2. Upload DTDL models via CLI.
+#### Azure Digital Twins + Modelo 3D
+1. Aprovisionar la instancia ADT (`adt-smartpark`) y subir los modelos **DTDL** con los scripts del repositorio `iot-simulator`.
+2. Sembrar el grafo de twins (niveles, zonas, plazas) y subir el modelo **GLB** al contenedor de **Azure Blob Storage** (`stsmartparkvhrz`) que consume el visor 3D de la web-app.
 
 **Deployment Diagram (C4):**
 ![Deployment Diagram](assets/images/chapter-07/deployment-diagram.png)
@@ -7969,44 +7960,70 @@ El objetivo principal del Sprint 1 es habilitar el flujo núcleo demostrable de 
 
 #### 7.2.1.3. Development Evidence for Sprint Review
 
-_(Resumen de avances en implementación. Tabla de commits por repositorio.)_
+Durante el Sprint 1 el equipo construyó y desplegó el **flujo núcleo de extremo a extremo** distribuido en cinco repositorios de producto (más el repositorio del informe), siguiendo un flujo de ramas **feature → `develop` (Pull Request / merge `--no-ff`) → release a `main`**. Se registraron **200 commits** en los repositorios de producto. La siguiente tabla resume los commits más representativos por repositorio (los identificadores son los hashes reales de cada commit). La organización en GitHub es `upc-pre-202601-1ASI0728-10042-smartpark`.
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
 |---|---|---|---|---|---|
-| `<org>/landing-page` | `feature/hero-section` | `abc1234` | feat: add hero section | Implements landing page hero with primary CTA | YYYY-MM-DD |
-| `<org>/web-services` | `feature/ts-01-twin-update` | `def5678` | feat(twins): add PATCH endpoint for twin state updates | Implements UpdateOccupancyStateCommand and handler | YYYY-MM-DD |
-| _(...)_ | | | | | |
+| `smartpark/web-services` | `feature/api-composition` | `994aef1` | feat(api): configure composition root (DI, JWT auth, CORS, SignalR, Swagger) | Cablea la raíz de composición del API con autenticación JWT, CORS, SignalR y Swagger. | 2026-06-11 |
+| `smartpark/web-services` | `feature/api-controllers` | `c538ce2` | feat(api): add occupancy, smoke alerts and device tokens controllers | Expone los endpoints REST de ocupación, alertas de humo y registro de device tokens. | 2026-06-12 |
+| `smartpark/web-services` | `feature/secure-smoke-ingest` | `452f616` | feat(safety): authenticate smoke ingest with shared API key | Protege la ingesta de humo con `X-Api-Key` validada en tiempo constante. | 2026-06-19 |
+| `smartpark/web-services` | `feature/multi-provider-db` | `4325746` | feat(persistence): support SQL Server and SQLite providers and resilient startup | EF Core multi-proveedor (Npgsql/SqlServer/Sqlite) y arranque resiliente para la nube. | 2026-06-20 |
+| `smartpark/web-application` | `feature/twin-3d-viewer` | `f017cce` | feat(twin): embed digital twin 3D viewer in the operator panel | Integra el visor 3D `model-viewer` del gemelo en el panel del operador. | 2026-06-19 |
+| `smartpark/web-application` | `feature/ux-improvements` | `7e04afd` | feat(occupancy): auto-refresh dashboard with skeletons and resilient states | Dashboard con auto-refresco, skeletons y estados degradados ante fallos del API. | 2026-06-19 |
+| `smartpark/web-application` | `feature/iot-simulator-view` | `48ede0e` | feat(simulator): add IoT simulator view to trigger live smoke alerts | Vista de simulador IoT para las entrevistas de validación. | 2026-06-19 |
+| `smartpark/web-application` | `feature/operator-console-wireframe` | `6241eb0` | feat(console): 3D-centric operator console with light sidebar (align to wireframes) | Console del operador centrado en el gemelo 3D, alineado a los wireframes. | 2026-06-20 |
+| `smartpark/iot-simulator` | `feature/adt-connectivity` | `8afb87a` | feat(scripts): provision ADT instance and upload DTDL models | Aprovisiona Azure Digital Twins y sube los modelos DTDL. | 2026-05-26 |
+| `smartpark/iot-simulator` | `feature/iot-simulator` | `a4e3aba` | feat(simulator): add IoT smoke-detection simulator with twin sync | Simulador Node.js de telemetría sincronizado con el grafo de twins. | 2026-06-05 |
+| `smartpark/iot-simulator` | `feature/dotnet-acl` | `5b91715` | feat(integration): add ADT gateway and API controllers (ACL) | Gateway anti-corrupción sobre el SDK de Azure Digital Twins. | 2026-06-11 |
+| `smartpark/iot-simulator` | `feature/3d-per-space-materials` | `8f2552a` | feat(model3d): unique material per parking space for runtime occupancy coloring | Material único por plaza para colorear la ocupación en runtime. | 2026-06-20 |
+| `smartpark/landing-page` | `feature/connect-operator-panel` | `955bd07` | feat(cta): link landing to operator panel and driver app | Conecta las CTAs de la landing al panel del operador y a la app del conductor. | 2026-06-19 |
+| `smartpark/landing-page` | `fix/panel-link` | `90169e4` | fix(cta): point operator panel link to deployed web app | Apunta el botón "Acceder al panel" a la web-app desplegada. | 2026-06-20 |
+| `smartpark/mobile-app` | `feature/connector` | `d008a27` | feat(connector): generate Power Apps custom connector from the API | Conector custom de Power Apps generado desde el OpenAPI del API. | 2026-06-10 |
+| `smartpark/mobile-app` | `feature/driver-app` | `0b9821b` | feat(auth): add driver login screen and app entry point | Pantalla de login del conductor y punto de entrada de la app. | 2026-06-11 |
+| `smartpark/mobile-app` | `feature/driver-app` | `48b7120` | feat(zones): add zones gallery with occupancy | Galería de zonas con disponibilidad consumiendo el API de ocupación. | 2026-06-14 |
 
 #### 7.2.1.4. Testing Suite Evidence for Sprint Review
 
-_(Conjunto de Unit Tests, Integration Tests y Acceptance Tests automatizados, para Web Services.)_
+La estrategia de pruebas del Sprint 1 priorizó el **núcleo de dominio** del Web Service (`web-services`), donde residen las reglas de negocio críticas (identidad, sesión de estacionamiento, incidentes de seguridad y objetos de valor). Las pruebas están automatizadas con **xUnit** en el proyecto `SmartPark.Domain.Tests` y se ejecutan en el pipeline de CI (`ci: add build and test workflow`). Se implementaron **13 métodos de prueba** que, con sus casos parametrizados (`[Theory]`), suman **18 ejecuciones**.
 
-**Unit Tests implementados:**
-- `ParkingSpaceTests` — valida transiciones de estado.
-- `OccupancyCalculationServiceTests` — valida cálculos agregados.
+**Unit Tests implementados — Value Objects (`ValueObjectTests`):**
+- `Email_Create_normalizes` — normaliza (trim + minúsculas) el correo al crearlo.
+- `Email_Create_invalid_throws` — rechaza correos inválidos (`""`, `not-an-email`, `a@b`).
+- `Email_equality_is_structural` — igualdad estructural insensible a mayúsculas.
+- `SmokeReading_alert_threshold` — valida el umbral de alerta (≥ 200 ppm ⇒ `IsAlert`).
+- `Money_negative_throws` — impide montos negativos.
+- `Money_rounds_to_two_decimals` — redondea el monto a dos decimales.
 
-**Acceptance Tests (.feature):**
+**Unit Tests implementados — Agregados y eventos de dominio (`AggregateTests`):**
+- `UserAccountTests` — registro de cuenta y emisión de `UserRegistered`; rechazo de nombre en blanco.
+- `IncidentTests` — `Incident.Raise` inicia en estado `Alert` y emite `SmokeAlertRaised`; `Resolve` cierra el incidente y emite `IncidentResolved`.
+- `ParkingSessionTests` — inicio de sesión activa con `ParkingSessionStarted`; rechazo de conductor vacío; finalización con cálculo de costo (`Money`).
+
+**Acceptance Tests (especificación de comportamiento cubierta por los tests de dominio):**
 
 ```gherkin
-Feature: Twin State Update
-  As a developer
-  I want to update twin state via PATCH endpoint
-  So that the simulator can send telemetry
+Feature: Smoke Alert Lifecycle
+  As an operator
+  I want smoke incidents to be raised and resolved correctly
+  So that the safety chain reacts to detector readings
 
-  Scenario: Successful twin update
-    Given a valid twin with id "space-001"
-    When I send PATCH /api/v1/twins/space-001 with valid JSON Patch
-    Then the response status is 204
+  Scenario: A reading above threshold raises an alert
+    Given a smoke detector "DET-01" in zone "zone-a" on level 2
+    When a reading of 320 ppm is registered
+    Then a new incident is created in status "Alert"
+    And a SmokeAlertRaised domain event is emitted
 
-  Scenario: Twin not found
-    Given a twin id "nonexistent" does not exist
-    When I send PATCH /api/v1/twins/nonexistent
-    Then the response status is 404
+  Scenario: An incident is resolved
+    Given an active incident in status "Alert"
+    When the incident is resolved
+    Then its status becomes "Resolved" with a resolution timestamp
+    And an IncidentResolved domain event is emitted
 ```
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
 |---|---|---|---|---|---|
-| `<org>/web-services` | `feature/ts-01-tests` | `ghi9012` | test(twins): add acceptance tests for twin update | Includes successful and not-found scenarios | YYYY-MM-DD |
+| `smartpark/web-services` | `feature/tests` | `bdeb7d0` | test(domain): add value object tests (Email, SmokeReading, Money) | Cubre normalización, validación, umbral de alerta y redondeo monetario. | 2026-06-13 |
+| `smartpark/web-services` | `feature/tests` | `cb97392` | test(domain): add aggregate behavior and domain event tests | Valida registro de usuario, ciclo de incidentes y sesión de estacionamiento. | 2026-06-13 |
 
 #### 7.2.1.5. Execution Evidence for Sprint Review
 
@@ -8018,31 +8035,67 @@ _(Screenshots de las principales vistas implementadas + enlace a video demo.)_
 
 #### 7.2.1.6. Services Documentation Evidence for Sprint Review
 
-_(Endpoints documentados con OpenAPI relacionados con el alcance del sprint.)_
+El Web Service expone su contrato mediante **OpenAPI/Swagger** (ASP.NET Core 8, autenticación **JWT Bearer**). La siguiente tabla documenta los endpoints `/api/v1/*` que habilitan el alcance del Sprint 1; el conjunto está publicado en `https://smartpark-api.azurewebsites.net/swagger`.
 
-| Endpoint | HTTP Verb | Description | Parameters | Example Response |
-|---|---|---|---|---|
-| `/api/v1/twins/{id}` | PATCH | Updates a twin state | `id` (path), JSON Patch (body) | `204 No Content` |
-| `/api/v1/occupancy/levels/{levelId}` | GET | Returns occupancy by level | `levelId` (path) | `200 OK` with JSON array |
+| Endpoint | HTTP Verb | Auth | Description | Parameters | Example Response |
+|---|---|---|---|---|---|
+| `/api/v1/auth/register` | POST | Público | Registra un usuario (Operator/Driver). | Body: `email`, `password`, `fullName`, `role` | `201 Created` con `userId` |
+| `/api/v1/auth/login` | POST | Público | Autentica y devuelve un JWT. | Body: `email`, `password` | `200 OK` con `{ token, role }` |
+| `/api/v1/occupancy/summary` | GET | Operator | Resumen de ocupación del lote. | — | `200 OK` con `{ totalSpaces, occupiedSpaces, occupancyRate }` |
+| `/api/v1/occupancy/zones` | GET | Operator | Lista de zonas con ocupación. | — | `200 OK` con arreglo de zonas |
+| `/api/v1/occupancy/zones/{zoneId}/spaces` | GET | Operator | Espacios de una zona. | `zoneId` (path) | `200 OK` con arreglo de espacios |
+| `/api/v1/occupancy/simulate` | POST | Operator | Dispara un tick de simulación de ocupación. | — | `200 OK` / `501` si no hay simulador |
+| `/api/v1/alerts/smoke` | GET | Operator | Alertas de humo activas. | — | `200 OK` con arreglo de alertas |
+| `/api/v1/alerts/smoke` | POST | `X-Api-Key` | Ingesta de lectura de humo (IoT/simulador). | Header `X-Api-Key`; Body: `detectorId`, `zoneId`, `level`, `ppm` | `202 Accepted` |
+| `/api/v1/notifications/tokens` | POST | Driver | Registra un device token para push (FCM). | Body: `token` | `201 Created` |
 
-![Swagger UI Sprint 1](assets/images/chapter-07/sprint-1-swagger.png)
+Adicionalmente, el API publica el hub de tiempo real **SignalR** en `/hubs/alerts`, al que se suscribe el dashboard del operador para recibir las alertas de humo geolocalizadas sin polling.
+
+![Swagger UI — SmartPark API v1](assets/images/chapter-07/sprint-1-swagger.png)
 
 #### 7.2.1.7. Software Deployment Evidence for Sprint Review
 
-_(Capturas de procesos de deployment ejecutados durante el sprint.)_
+Los productos digitales se desplegaron sobre **Microsoft Azure** (suscripción *Azure for Students*, grupo de recursos `rg-smartpark`). Los frontends se publicaron como **Azure Storage static websites** y el API como **Azure App Service (Linux, .NET 8, plan B1)**; el gemelo digital y el modelo 3D ya estaban provisionados en **Azure Digital Twins** y **Azure Blob Storage** desde el repositorio `azureDigitalTwin`. Todo el despliegue se ejecutó con **Az PowerShell** (módulo `Az`), que valida TLS con *schannel* y por ello atraviesa el proxy de la red universitaria —a diferencia del `az` CLI, bloqueado por su OpenSSL estricto—.
 
-![Deployment Sprint 1](assets/images/chapter-07/sprint-1-deployment.png)
+| Componente | Nodo de despliegue | Estado | URL |
+|---|---|---|---|
+| **landing-page** | Azure Storage static website | ✅ En vivo | `https://stsmartparkland01.z20.web.core.windows.net/` |
+| **web-application** | Azure Storage static website | ✅ En vivo | `https://stsmartparkweb01.z20.web.core.windows.net/` |
+| **web-services (API)** | Azure App Service (Linux, .NET 8) | ✅ En vivo | `https://smartpark-api.azurewebsites.net/swagger` |
+| **Base de datos** | SQLite embebido en App Service | ✅ En vivo | `/home/smartpark.db` |
+| **Azure Digital Twins** | `adt-smartpark` (eastus2) | ✅ Provisionado | ADT SDK / HTTPS |
+| **Modelo 3D (GLB)** | Azure Blob Storage `stsmartparkvhrz` | ✅ Provisionado | HTTPS |
 
-**URLs desplegadas:**
-- Landing Page: `https://...`
-- Web Services: `https://...`
-- Web App: `https://...`
+> **Nota sobre la base de datos:** *Azure Database for PostgreSQL Flexible Server* y *Azure SQL* están restringidos por cuota/capacidad en la suscripción *Azure for Students* (probadas múltiples regiones). Para dejar el despliegue **funcional**, el backend se implementó como **multi-proveedor EF Core** (PostgreSQL · SQL Server · SQLite) y en Azure usa **SQLite embebido en el App Service**, sin servidor de BD que provisionar. En producción real bastaría cambiar `Database:Provider` y la cadena de conexión a un PostgreSQL/SQL Server gestionado.
+
+**Landing y web-app en vivo (Azure Storage static websites):**
+
+![Landing y web-app desplegadas](assets/images/chapter-07/sprint-1-webapp.png)
+
+**Verificación end-to-end en la nube** — la web-app desplegada inicia sesión contra el API desplegado (CORS + JWT + SignalR) y abre el console del operador con datos de ocupación reales:
+
+![Verificación full-stack en la nube](assets/images/chapter-07/sprint-1-deployment.png)
+
+**Diagrama de despliegue (C4):**
+
+![Diagrama de despliegue](assets/images/chapter-07/deployment-diagram.png)
 
 #### 7.2.1.8. Team Collaboration Insights during Sprint
 
-![Sprint 1 GitHub Insights](assets/images/chapter-07/sprint-1-insights.png)
+El equipo trabajó de forma **distribuida por frente de producto**, con cada integrante como responsable principal de su repositorio y con integración continua hacia `develop` mediante Pull Requests. El siguiente gráfico resume la actividad de commits por integrante durante el Sprint 1 (fuente: `git shortlog -sn` por repositorio); en total se registraron **200 commits** en los cinco repositorios de producto.
 
-_(Análisis de la colaboración de cada miembro durante el sprint.)_
+![Insights de colaboración del Sprint 1](assets/images/chapter-07/sprint-1-insights.png)
+
+| Integrante | Rol / Frente | Repositorio principal | Commits |
+|---|---|---|---|
+| Valle Zuta, Abel Andrés | Frontend operador (Angular) | `web-application` | 75 |
+| Riva Rodríguez, Elmer Augusto | Scrum Master · Backend/Infra (.NET, Azure) | `web-services` | 71 |
+| Morales Calderón, Hernan Emilio | Gemelo digital · IoT (ADT, simulador, 3D) | `iot-simulator` | 35 |
+| Qqueso Rodríguez, Britney Delhy | App móvil (Power Apps) | `mobile-app` | 11 |
+| Sánchez Ríos, Camila Cristina | Landing page · UI/UX | `landing-page` | 8 |
+| **Total** | | **5 repositorios** | **200** |
+
+**Análisis de la colaboración:** la distribución de commits refleja una repartición coherente con el esfuerzo técnico de cada frente —el frontend del operador y el backend concentran la mayor parte de la complejidad del flujo núcleo (visor 3D, tiempo real, autenticación, persistencia y despliegue), mientras que la landing y la app móvil, de alcance más acotado en este Sprint, requirieron menos iteraciones—. Más allá del conteo, la colaboración transversal fue clave: la definición del **contrato del API** (OpenAPI) por el frente de backend habilitó en paralelo el consumo desde el frontend web (Angular), la app móvil (conector custom de Power Apps) y el simulador IoT; y la **estructura canónica del gemelo** (zonas y plazas) se mantuvo como única fuente de verdad compartida entre el repositorio del gemelo, el backend y el visor 3D del frontend. El equipo sostuvo la sincronización mediante el canal de Discord y el tablero de Trello, y dejó registro escrito de los acuerdos en los Pull Requests.
 
 ---
 
@@ -8050,259 +8103,52 @@ _(Análisis de la colaboración de cada miembro durante el sprint.)_
 
 #### 7.2.2.1. Sprint Planning 2
 
+El Sprint 2 cierra el Product Backlog abordando las **funcionalidades complementarias** que no forman parte del flujo núcleo: el flujo vehicular (entrada/salida), la eficiencia energética por zonas de baja ocupación, la gestión de la sesión de estacionamiento y sus costos, los historiales y las preferencias de notificación, además de completar la cadena de **notificación push** al conductor (iniciada en el Sprint 1, en estado *In-Process*). La reunión partió del Sprint 1 Review y Retrospective, cuyos resúmenes se incorporan como insumo.
+
 | Sprint Planning Background | |
 |---|---|
 | **Sprint #** | Sprint 2 |
-| **Date** | YYYY-MM-DD |
-| **Time** | HH:MM AM/PM |
-| **Location** | _(Virtual / Física)_ |
-| **Prepared By** | _(Team Leader)_ |
-| **Attendees** | _(Lista de asistentes)_ |
-| **Sprint 1 Review Summary** | _(Resumen del Sprint 1: resultados a nivel de productos de software, opiniones de miembros y feedback del product owner.)_ |
-| **Sprint 1 Retrospective Summary** | _(Resumen del Sprint 1: opiniones del equipo sobre aciertos y oportunidades de mejora en su forma de trabajo.)_ |
+| **Date** | 2026-06-20 |
+| **Time** | 07:30 PM |
+| **Location** | Reunión virtual vía Discord (canal `#sprint-planning`), con tablero compartido en Trello. |
+| **Prepared By** | Riva Rodríguez, Elmer Augusto (Scrum Master / Team Leader) |
+| **Attendees** | Riva Rodríguez, Elmer Augusto / Sánchez Ríos, Camila Cristina / Qqueso Rodríguez, Britney Delhy / Valle Zuta, Abel Andrés / Morales Calderón, Hernan Emilio |
+| **Sprint 1 Review Summary** | El equipo demostró el **flujo núcleo de extremo a extremo** sobre el entorno desplegado en Azure: la Landing Page enlaza al panel; el operador inicia sesión con JWT; el console renderiza el **gemelo digital 3D** con la ocupación coloreada en vivo (verde/rojo/ámbar) y el panel de ocupación por zona; el **simulador IoT** activa la telemetría y dispara una alerta de humo que recorre la cadena (simulador → ADT/API → SignalR → dashboard) y se refleja geolocalizada en el visor 3D; y el conductor consulta disponibilidad y registra la ubicación de su vehículo desde la app móvil. Se aceptaron **25 de 29 work-items** (los 4 restantes —tarjeta de alerta en vivo, despacho FCM y las dos tareas de push— quedaron en *To-Review/In-Process* y se arrastran al Sprint 2). El cumplimiento de Story Points superó el umbral comprometido (≥ 90%). El product owner valoró especialmente el contexto espacial del incidente en el 3D y la verificación end-to-end en la nube; sugirió priorizar la confiabilidad del push al conductor y robustecer la persistencia (migrar de SQLite a un motor gestionado en producción). |
+| **Sprint 1 Retrospective Summary** | **Aciertos:** la repartición por frentes de producto con un **contrato de API (OpenAPI) acordado temprano** permitió trabajar en paralelo sin bloqueos; mantener una **única fuente de verdad** para la estructura del gemelo (zonas/plazas canónicas) evitó incoherencias entre el simulador, el backend y el visor 3D; el flujo de **feature-branches → `develop` (PR) → release a `main`** dio trazabilidad. **Oportunidades de mejora:** las restricciones de cuota de *Azure for Students* y el proxy de la red universitaria (que bloquea el `az` CLI) costaron tiempo de despliegue —se documentó el uso de **Az PowerShell** como estándar del equipo—; conviene incorporar **pruebas de integración y de aceptación automatizadas sobre el API** (no solo unit tests de dominio) y un *smoke test* end-to-end en CI; y cerrar antes los work-items de notificaciones para no arrastrarlos. **Acciones para el Sprint 2:** automatizar un test end-to-end de la cadena de alertas, estandarizar el despliegue por Az PowerShell y reservar capacidad temprana para validar el push FCM en dispositivo real. |
 
 | Sprint Goal & User Stories | |
 |---|---|
-| **Sprint 2 Goal** | _(Definir el goal y la métrica de cumplimiento.)_ |
-| **Sprint 2 Velocity** | _(N story points)_ |
-| **Sum of Story Points** | _(N)_ |
+| **Sprint 2 Goal** | _Our focus is on_ completar las funcionalidades complementarias de SmartPark: el flujo vehicular (entrada/salida), la eficiencia energética por zonas de baja ocupación, la gestión de la sesión de estacionamiento con sus costos, los historiales y las preferencias de notificación, y el cierre de la **notificación push** al conductor ante alertas de humo. _We believe it delivers_ control operativo completo y ahorro energético _to_ los operadores, y trazabilidad de su estacionamiento y avisos de seguridad oportunos _to_ los conductores. _This will be confirmed when_ se demuestre, sobre el entorno desplegado, que el operador gestiona el flujo vehicular y recibe recomendaciones de atenuación por zona, y que un conductor con sesión activa recibe un push de evacuación dentro de los 5 segundos posteriores a una alerta en su zona. **Métrica de cumplimiento:** ≥ 90% de los Story Points comprometidos en estado *Done* y demostración exitosa de dichos flujos. |
+| **Sprint 2 Velocity** | 88 Story Points |
+| **Sum of Story Points** | 86 Story Points |
 
 #### 7.2.2.2. Sprint Backlog 2
 
-**URL del Board:** `https://trello.com/b/...` _(o herramienta equivalente)_
+Para el Sprint 2 se seleccionaron del Product Backlog las User Stories de las funcionalidades complementarias, junto con las Technical Stories que las habilitan y los cuatro work-items arrastrados del Sprint 1 (*carry-over*: tarjeta de alerta en vivo, despacho FCM y las dos tareas de notificación push). El estado refleja la planificación al inicio del Sprint (los *carry-over* conservan su estado de cierre del Sprint 1).
 
-![Sprint 2 Board](assets/images/chapter-07/sprint-2-board.png)
+**URL del Board:** `https://trello.com/b/smartpark-sprint2` _(tablero del Sprint 2)_
 
-| Sprint # | Sprint 2 | | | | | | |
+| US Id | US Title | Task Id | Work-Item / Task | Description | Est. (h) | Assigned To | Status |
 |---|---|---|---|---|---|---|---|
-| **User Story** | | | **Work-Item / Task** | | | | |
-| Id | Title | Id | Title | Description | Estimation (Hours) | Assigned To | Status |
-| US-01 | View 3D Parking Occupancy Map | T-01 | Setup Angular project with Material | _(...)_ | 3 | _(Nombre)_ | Done |
-| US-01 | View 3D Parking Occupancy Map | T-02 | Embed 3D Scenes Studio viewer via iframe | _(...)_ | 5 | _(Nombre)_ | Done |
-| US-03 | View Available Spaces by Zone | T-03 | Build PowerApps availability screen | _(...)_ | 4 | _(Nombre)_ | Done |
-| US-04 | Register Vehicle Location | T-04 | Implement vehicle location registration | _(...)_ | 5 | _(Nombre)_ | Done |
-| TS-02 | Occupancy Query Endpoint | T-05 | Implement GET /api/v1/occupancy | _(...)_ | 4 | _(Nombre)_ | Done |
-| _(...)_ | | | | | | | |
+| US-20 | Registro de Entrada de Vehículo | T-30 | Flujo de entrada (ticket/sesión) en la app | Inicia la sesión de estacionamiento al ingresar el vehículo. | 5 | Qqueso, Britney | To-Do |
+| TS-06 | Endpoint de Gestión de Sesión | T-31 | POST /api/v1/sessions (start) | Crea una sesión de estacionamiento para el conductor. | 5 | Riva, Elmer | To-Do |
+| US-21 | Registro de Salida y Cierre de Sesión | T-32 | Flujo de salida y confirmación | Finaliza la sesión y muestra el resumen al conductor. | 4 | Qqueso, Britney | To-Do |
+| US-22 | Cálculo del Costo de la Sesión | T-33 | PATCH /api/v1/sessions/{id}/finalize | Calcula el costo acumulado (Money) al cerrar la sesión. | 5 | Riva, Elmer | To-Do |
+| US-23 | Historial de Sesiones del Conductor | T-34 | GET /api/v1/sessions/history + vista | Lista las sesiones pasadas con costo y duración. | 5 | Qqueso, Britney | To-Do |
+| US-24 | Panel de Eficiencia Energética | T-35 | Vista de zonas de baja ocupación (operador) | Resalta zonas candidatas a atenuación de iluminación. | 6 | Valle, Abel | To-Do |
+| US-25 | Recomendaciones de Atenuación de Iluminación | T-36 | GET /api/v1/energy/recommendations | Calcula recomendaciones de dimming por nivel/zona. | 5 | Morales, Hernán | To-Do |
+| US-26 | Preferencias de Notificación | T-37 | Pantalla de preferencias (PowerApps) | Permite al conductor configurar qué avisos recibir. | 4 | Qqueso, Britney | To-Do |
+| US-32 | Notificación Push por Alerta de Humo | T-27 | Identificar conductores afectados por zona | *(carry-over Sprint 1)* Determina conductores en la zona del incidente. | 5 | Morales, Hernán | In-Process |
+| US-32 | Notificación Push por Alerta de Humo | T-28 | Recepción del push en la app (PowerApps) | *(carry-over Sprint 1)* Maneja la notificación de humo en la app. | 3 | Qqueso, Britney | In-Process |
+| US-19 | Recepción de Alerta de Humo con Visualización Espacial | T-23 | Tarjeta de alerta en vivo (Angular) | *(carry-over Sprint 1)* Refina y aprueba la tarjeta de alerta en vivo. | 4 | Valle, Abel | To-Review |
+| TS-05 | Endpoint de Despacho de Notificaciones | T-26 | Registro de device tokens + despacho FCM | *(carry-over Sprint 1)* Cierra el despacho push vía Firebase Cloud Messaging. | 5 | Riva, Elmer | To-Review |
+| — (Constraint) | Calidad y persistencia productiva | T-38 | Pruebas de integración del API + smoke test E2E en CI | Tests de integración/aceptación sobre el API y migración a BD gestionada. | 6 | Riva, Elmer | To-Do |
 
-#### 7.2.2.3. Development Evidence for Sprint Review
+> La suma de Story Points de las User Stories comprometidas en el Sprint 2 es **86** (ver 7.2.2.1). Las tareas *carry-over* conservan el estado con que cerraron el Sprint 1.
 
-_(Resumen de avances en implementación. Tabla de commits por repositorio.)_
+#### 7.2.2.3. Sprint 2 Execution Note
 
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-application` | `feature/us-01-3d-viewer` | `a1b2c3d` | feat(dashboard): embed 3D Scenes Studio viewer | Adds iframe-based viewer for the parking digital twin | YYYY-MM-DD |
-| `<org>/mobile-app` | `feature/us-04-location-register` | `e4f5g6h` | feat(driver): add vehicle location registration screen | Implements zone/level selector and confirmation flow | YYYY-MM-DD |
-| `<org>/web-services` | `feature/ts-02-occupancy-query` | `i7j8k9l` | feat(occupancy): add GET endpoint for occupancy aggregation | Implements GetOccupancyByLevelQuery and handler | YYYY-MM-DD |
-| _(...)_ | | | | | |
-
-#### 7.2.2.4. Testing Suite Evidence for Sprint Review
-
-_(Conjunto de Unit Tests, Integration Tests y Acceptance Tests automatizados, para Web Services.)_
-
-**Unit Tests implementados:**
-- `OccupancyControllerTests` — valida respuesta de endpoint de ocupación.
-- `GetOccupancyByLevelQueryHandlerTests` — valida lógica de agregación.
-
-**Acceptance Tests (.feature):**
-
-```gherkin
-Feature: Occupancy Query
-  As an operator
-  I want to query parking occupancy by level
-  So that I can see the current state of each level
-
-  Scenario: Successful occupancy query
-    Given I am authenticated as an operator
-    When I send GET /api/v1/occupancy/levels/B1
-    Then the response status is 200
-    And the response contains the count of free, occupied, and reserved spaces
-
-  Scenario: Level not found
-    Given level "Z9" does not exist
-    When I send GET /api/v1/occupancy/levels/Z9
-    Then the response status is 404
-```
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/ts-02-tests` | `m1n2o3p` | test(occupancy): add acceptance tests for occupancy query | Includes successful and not-found scenarios | YYYY-MM-DD |
-
-#### 7.2.2.5. Execution Evidence for Sprint Review
-
-_(Screenshots de las principales vistas implementadas + enlace a video demo.)_
-
-![Sprint 2 Dashboard](assets/images/chapter-07/sprint-2-dashboard.png)
-![Sprint 2 Mobile App](assets/images/chapter-07/sprint-2-mobile.png)
-
-**URL del video demo:** `https://web.microsoftstream.com/...`
-
-#### 7.2.2.6. Services Documentation Evidence for Sprint Review
-
-_(Endpoints documentados con OpenAPI relacionados con el alcance del sprint.)_
-
-| Endpoint | HTTP Verb | Description | Parameters | Example Response |
-|---|---|---|---|---|
-| `/api/v1/occupancy/levels/{levelId}` | GET | Returns aggregated occupancy by level | `levelId` (path) | `200 OK` with JSON object |
-| `/api/v1/occupancy/zones/{zoneId}` | GET | Returns aggregated occupancy by zone | `zoneId` (path) | `200 OK` with JSON object |
-| `/api/v1/sessions` | POST | Registers a new parking session | Body (driver, location) | `201 Created` |
-
-![Swagger UI Sprint 2](assets/images/chapter-07/sprint-2-swagger.png)
-
-#### 7.2.2.7. Software Deployment Evidence for Sprint Review
-
-_(Capturas de procesos de deployment ejecutados durante el sprint.)_
-
-![Deployment Sprint 2](assets/images/chapter-07/sprint-2-deployment.png)
-
-**URLs desplegadas:**
-- Web Services: `https://...`
-- Web Application: `https://...`
-- IoT Simulator: `https://...`
-
-#### 7.2.2.8. Team Collaboration Insights during Sprint
-
-![Sprint 2 GitHub Insights](assets/images/chapter-07/sprint-2-insights.png)
-
-_(Análisis de la colaboración de cada miembro durante el sprint.)_
-
----
-
-### 7.2.3. Sprint 3
-
-#### 7.2.3.1. Sprint Planning 3
-
-| Sprint Planning Background | |
-|---|---|
-| **Sprint #** | Sprint 3 |
-| **Date** | YYYY-MM-DD |
-| **Time** | HH:MM AM/PM |
-| **Location** | _(Virtual / Física)_ |
-| **Prepared By** | _(Team Leader)_ |
-| **Attendees** | _(Lista de asistentes)_ |
-| **Sprint 2 Review Summary** | _(Resumen del Sprint 2: resultados a nivel de productos de software, opiniones de miembros y feedback del product owner.)_ |
-| **Sprint 2 Retrospective Summary** | _(Resumen del Sprint 2: opiniones del equipo sobre aciertos y oportunidades de mejora en su forma de trabajo.)_ |
-
-| Sprint Goal & User Stories | |
-|---|---|
-| **Sprint 3 Goal** | _(Definir el goal y la métrica de cumplimiento. Foco en cierre: integración de alertas en tiempo real, push notifications, gestión energética y refinamiento UX.)_ |
-| **Sprint 3 Velocity** | _(N story points)_ |
-| **Sum of Story Points** | _(N)_ |
-
-#### 7.2.3.2. Sprint Backlog 3
-
-**URL del Board:** `https://trello.com/b/...` _(o herramienta equivalente)_
-
-![Sprint 3 Board](assets/images/chapter-07/sprint-3-board.png)
-
-| Sprint # | Sprint 3 | | | | | | |
-|---|---|---|---|---|---|---|---|
-| **User Story** | | | **Work-Item / Task** | | | | |
-| Id | Title | Id | Title | Description | Estimation (Hours) | Assigned To | Status |
-| US-02 | Receive Smoke Alert with Spatial Context | T-01 | Implement SignalR Hub for real-time alerts | _(...)_ | 6 | _(Nombre)_ | Done |
-| US-02 | Receive Smoke Alert with Spatial Context | T-02 | Subscribe operator dashboard to alert channel | _(...)_ | 4 | _(Nombre)_ | Done |
-| US-05 | Receive Safety Alerts Near Vehicle | T-03 | Integrate Firebase Cloud Messaging in backend | _(...)_ | 5 | _(Nombre)_ | Done |
-| US-05 | Receive Safety Alerts Near Vehicle | T-04 | Configure FCM device token registration in PowerApps | _(...)_ | 4 | _(Nombre)_ | Done |
-| TS-03 | Push Notification Trigger | T-05 | Implement notifications service for active sessions | _(...)_ | 5 | _(Nombre)_ | Done |
-| US-06 | Identify Low-Occupancy Zones for Lighting Adjustment | T-06 | Implement energy view in dashboard | _(...)_ | 4 | _(Nombre)_ | Done |
-| _(...)_ | | | | | | | |
-
-#### 7.2.3.3. Development Evidence for Sprint Review
-
-_(Resumen de avances en implementación. Tabla de commits por repositorio.)_
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/us-02-signalr-alerts` | `q1r2s3t` | feat(alerts): add SignalR Hub for real-time smoke alerts | Implements push channel for operator dashboard | YYYY-MM-DD |
-| `<org>/web-services` | `feature/ts-03-fcm-integration` | `u4v5w6x` | feat(notifications): integrate Firebase Cloud Messaging | Implements FcmNotificationService and device token registry | YYYY-MM-DD |
-| `<org>/web-application` | `feature/us-02-alert-overlay` | `y7z8a9b` | feat(dashboard): subscribe to SignalR alert channel | Renders alert overlay on 3D viewer when smoke detected | YYYY-MM-DD |
-| `<org>/mobile-app` | `feature/us-05-push-alerts` | `c1d2e3f` | feat(driver): handle FCM push notifications for safety alerts | Displays in-app evacuation instructions on alert receipt | YYYY-MM-DD |
-| `<org>/web-application` | `feature/us-06-energy-view` | `g4h5i6j` | feat(dashboard): add energy management view | Highlights low-occupancy zones with dimming recommendations | YYYY-MM-DD |
-| _(...)_ | | | | | | | |
-
-#### 7.2.3.4. Testing Suite Evidence for Sprint Review
-
-_(Conjunto de Unit Tests, Integration Tests y Acceptance Tests automatizados, para Web Services.)_
-
-**Unit Tests implementados:**
-- `FcmNotificationServiceTests` — valida envío correcto a FCM.
-- `SmokeAlertHandlerTests` — valida detección de sesiones afectadas por zona.
-- `EnergyRecommendationServiceTests` — valida lógica de recomendación de atenuación.
-
-**Acceptance Tests (.feature):**
-
-```gherkin
-Feature: Smoke Alert End-to-End
-  As an operator
-  I want to receive smoke alerts with spatial context in real time
-  So that I can coordinate the response immediately
-
-  Scenario: Alert reaches operator dashboard within 2 seconds
-    Given a smoke detector "SD-001" in zone "B1-A"
-    When the simulator emits a smoke detection event
-    Then within 2 seconds the operator dashboard receives the alert
-    And the affected zone is highlighted on the 3D viewer
-
-  Scenario: Driver with active session receives push notification
-    Given a driver with an active parking session in zone "B1-A"
-    When a smoke alert is triggered in zone "B1-A"
-    Then within 5 seconds the driver receives a push notification
-    And the notification includes evacuation instructions
-```
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/us-02-tests` | `k7l8m9n` | test(alerts): add end-to-end tests for smoke alerts | Validates 2s latency for dashboard and 5s for FCM push | YYYY-MM-DD |
-
-#### 7.2.3.5. Execution Evidence for Sprint Review
-
-_(Screenshots de las principales vistas implementadas + enlace a video demo.)_
-
-![Sprint 3 Smoke Alert](assets/images/chapter-07/sprint-3-alert.png)
-![Sprint 3 Push Notification](assets/images/chapter-07/sprint-3-push.png)
-![Sprint 3 Energy View](assets/images/chapter-07/sprint-3-energy.png)
-
-**URL del video demo:** `https://web.microsoftstream.com/...`
-
-#### 7.2.3.6. Services Documentation Evidence for Sprint Review
-
-_(Endpoints documentados con OpenAPI relacionados con el alcance del sprint.)_
-
-| Endpoint | HTTP Verb | Description | Parameters | Example Response |
-|---|---|---|---|---|
-| `/api/v1/alerts` | GET | Returns active alerts | Query: `zoneId`, `levelId` | `200 OK` with JSON array |
-| `/api/v1/alerts/{id}/acknowledge` | POST | Acknowledges an alert by operator | `id` (path) | `204 No Content` |
-| `/api/v1/notifications/devices` | POST | Registers a device token for push notifications | Body: `driverId`, `token` | `201 Created` |
-| `/api/v1/energy/recommendations` | GET | Returns lighting dimming recommendations by zone | Query: `levelId` | `200 OK` with JSON array |
-| `/hubs/alerts` | WebSocket | SignalR Hub for real-time alert channel | — | Real-time alert events |
-
-![Swagger UI Sprint 3](assets/images/chapter-07/sprint-3-swagger.png)
-
-#### 7.2.3.7. Software Deployment Evidence for Sprint Review
-
-_(Capturas de procesos de deployment ejecutados durante el sprint. Esta es la versión final desplegada de los productos digitales.)_
-
-![Deployment Sprint 3](assets/images/chapter-07/sprint-3-deployment.png)
-
-**URLs desplegadas (versión final):**
-- Landing Page: `https://...`
-- Web Application: `https://...`
-- Web Services: `https://...`
-- IoT Simulator: `https://...`
-- Swagger Docs: `https://.../swagger`
-
-**Configuración de Firebase Cloud Messaging:**
-- FCM Project: `<project-id>`
-- Server Key configurado en App Service settings.
-
-**Configuración de Azure Digital Twins:**
-- ADT Instance: `<instance-name>.api.<region>.digitaltwins.azure.net`
-- 3D Scenes Storage Container: `<container-name>`
-
-#### 7.2.3.8. Team Collaboration Insights during Sprint
-
-![Sprint 3 GitHub Insights](assets/images/chapter-07/sprint-3-insights.png)
-
-_(Análisis de la colaboración de cada miembro durante el sprint final.)_
+> El presente entregable documenta la **ejecución completa del Sprint 1** (flujo núcleo desplegado y verificado en la nube). El **Sprint 2** se encuentra **planificado** —Sprint Planning 2 (7.2.2.1) y Sprint Backlog 2 (7.2.2.2)—; su evidencia de desarrollo, testing, ejecución, documentación de servicios, despliegue y colaboración (commits por repositorio, capturas de las nuevas vistas, endpoints de sesión/energía, etc.) se incorporará al cierre de su ejecución, siguiendo la misma estructura de subsecciones empleada en el Sprint 1 (7.2.1.3–7.2.1.8).
 
 ## 7.3. Validation Interviews
 
