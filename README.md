@@ -8371,6 +8371,8 @@ Feature: Parking Session Lifecycle
 
 A continuación se muestran las capturas de las principales vistas implementadas y desplegadas durante el Sprint 1, tomadas sobre el **entorno en la nube** (Azure). El flujo núcleo es plenamente operativo: la landing enlaza al panel, el operador autentica con JWT, el console renderiza el gemelo 3D con la ocupación coloreada en vivo y el simulador IoT alimenta la cadena de datos y de alertas.
 
+> 💡 **Estas vistas se pueden recorrer en vivo.** Hay una cuenta de operador de demostración para que el evaluador inicie sesión y navegue el panel desplegado — ver el recuadro **🔑 Acceso de demostración** en la sección **7.2.1.7**.
+
 **Landing Page (`landing-page`)** — propuesta de valor y CTA hacia el panel del operador y la app del conductor:
 
 ![Landing Page desplegada](assets/images/chapter-07/sprint-1-landing.png)
@@ -8431,6 +8433,17 @@ Los productos digitales se desplegaron sobre **Microsoft Azure** (suscripción *
 | **Base de datos** | SQLite embebido en App Service | ✅ En vivo | `/home/smartpark.db` |
 | **Azure Digital Twins** | `adt-smartpark` (eastus2) | ✅ Provisionado | ADT SDK / HTTPS |
 | **Modelo 3D (GLB)** | Azure Blob Storage `stsmartparkvhrz` | ✅ Provisionado | HTTPS |
+
+> ### 🔑 Acceso de demostración — para navegar el panel del operador
+>
+> Para que el evaluador pueda **iniciar sesión y recorrer la aplicación web** sobre el entorno en vivo:
+>
+> - **URL del panel:** **https://stsmartparkweb01.z20.web.core.windows.net/**
+> - **Usuario:** `demo@smartpark.pe`
+> - **Contraseña:** `SmartPark2026`
+> - **Rol:** Operador
+>
+> _Cuenta de operador de demostración registrada en el API desplegado y verificada (login OK). El panel incluye el gemelo digital 3D con ocupación en vivo, la ocupación por nivel, las alertas de seguridad y el simulador IoT._
 
 > **Nota sobre la base de datos:** *Azure Database for PostgreSQL Flexible Server* y *Azure SQL* están restringidos por cuota/capacidad en la suscripción *Azure for Students* (probadas múltiples regiones). Para dejar el despliegue **funcional**, el backend se implementó como **multi-proveedor EF Core** (PostgreSQL · SQL Server · SQLite) y en Azure usa **SQLite embebido en el App Service**, sin servidor de BD que provisionar. En producción real bastaría cambiar `Database:Provider` y la cadena de conexión a un PostgreSQL/SQL Server gestionado.
 
