@@ -1,2 +1,5 @@
 .DS_Store
 Thumbs.db
+
+# Imagen temporal materializada por el harness desde adjuntos del chat
+/img.png
