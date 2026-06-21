@@ -102,6 +102,10 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 
 ### Evidencias de colaboración
 
+Como evidencia general de la colaboración del equipo, la siguiente captura corresponde a **Insights → Contributors** del repositorio del informe sobre la rama por defecto (`main`): muestra la actividad de commits por semana de cada integrante a lo largo del proyecto, junto con las líneas añadidas/eliminadas.
+
+![GitHub Contributors del repositorio del informe (rama main)](assets/images/contributions/tb2-collaboration-insights.png)
+
 #### TB1
 
 ![tb1.png](assets/images/contributions/tb1.png)
@@ -112,9 +116,7 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 
 #### TB2
 
-Contribución del equipo durante el TB2 (Sprint 1): **200 commits** distribuidos por frente de producto a través de los repositorios de la organización.
-
-![tb2.png](assets/images/contributions/tb2.png)
+Contribución del equipo durante el TB2 (Sprint 1): **200 commits** distribuidos por frente de producto a través de los repositorios de la organización (ver el detalle por repositorio en la sección 7.2.1.8).
 
 #### TF1
 _(Pendiente)_
