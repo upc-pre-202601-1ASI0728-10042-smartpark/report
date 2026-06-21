@@ -7491,8 +7491,6 @@ A continuación, se presentan los User Flow Diagrams para la Aplicación Web del
 
 - Si un nivel no ha recibido datos de sensores en los últimos 60 segundos, el sistema muestra un ícono de advertencia junto al nombre del nivel y un tooltip indica la última actualización disponible.
 
-![User Flow Operator](assets/images/chapter-06/)
-
 # User Flow: Operator manages an active smoke incident
 
 **User Goal:** Gestionar un incidente de humo desde la detección hasta la resolución completa, documentando acciones y coordinando respuesta.
@@ -7515,8 +7513,6 @@ Caso alternativo 1
  Caso alternativo 2
 
 - Si se activan dos detectores simultáneamente, el sistema muestra ambas alertas en el panel, ordenadas por hora, y el operador puede hacer clic en cada una para centrar el visor en cada zona.
-
-![User Flow Operator](assets/images/chapter-06/userflow-operator.png)
 
 # User Flow: Operator views and analyzes incident history
 
@@ -7784,9 +7780,9 @@ Caso alternativo 2:
 ## 6.5. Applications Prototyping
 
 ### Prototype: Web Application (Operador)
-![Web App Prototype Screenshot](assets/images/chapter-06/webapp-prototype-screenshot.png)
+![Web App Prototype Screenshot](assets/images/chapter-06/webproto.png)
 
-**URL del video:** `https://web.microsoftstream.com/...`
+**URL del video:** `https://canva.link/515c7mgwcyh1xpj`
 
 ### Prototype: Mobile Application (Conductor)
 ![Mobile App Prototype Screenshot](assets/images/chapter-06/mobile-prototype-screenshot.png)
