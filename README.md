@@ -80,6 +80,7 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 
 **URL de la organización GitHub:** `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark`
 
+
 ### Repositorios de productos digitales
 
 | Producto                   | Repositorio                                                                  |
@@ -88,7 +89,7 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 | Web Application (Operador) | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-application` |
 | Web Services (API)         | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-services`    |
 | IoT Simulator              | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/iot-simulator`   |
-| Mobile App (PowerApps)     | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/mobile-app`      |
+| Mobile App (PowerApps)     | `https://apps.powerapps.com/play/e/default-0e0cb060-09ad-49f5-a005-68b9b49aa1f6/a/974c6382-aff6-4674-926a-b7000c839448?tenantId=0e0cb060-09ad-49f5-a005-68b9b49aa1f6&hint=982ef384-9df8-457c-9eb7-05322d878719&sourcetime=1781999148772`      |
 
 ### Evidencias de colaboración
 
@@ -7923,7 +7924,61 @@ _(Análisis de la colaboración de cada miembro durante el sprint final.)_
 
 ### 7.3.1. Diseño de Entrevistas
 
-_(Elementos a validar por segmento objetivo, incluyendo Landing Page y aplicaciones. User flows que formarán parte de la validación.)_
+Se realizarán entrevistas de validación con usuarios de ambos segmentos objetivo para validar la funcionalidad de la solución. Para ello se considerará la prueba del Landing Page, la aplicación web del operador y la aplicación móvil del conductor. Se busca conocer la percepción del usuario sobre la claridad, utilidad y usabilidad de dichos componentes.
+
+**Preguntas sobre la Landing Page**
+
+Para la landing page se considerará los userflows de:
+
+- Ingreso y exploración general del sitio
+- Lectura de la propuesta de valor y de la sección "Sobre Nosotros"
+- Interacción con los botones de contacto o llamada a la acción (CTA)
+
+1. ¿La información presentada en la landing te resulta útil para entender qué ofrece SmartPark?
+2. ¿La sección "Sobre Nosotros" te brinda confianza en la empresa y su producto?
+3. ¿Los botones de contacto o CTA (solicitar demo / contacto) son claros y fáciles de encontrar?
+4. ¿Qué opinas del orden y diseño general de la página?
+5. ¿Los colores, íconos y elementos visuales te resultan atractivos y apropiados?
+
+**Preguntas sobre la Aplicación Web (Segmento: Operadores de estacionamientos)**
+
+Para la aplicación web se considerará los userflows de:
+
+- Inicio de sesión del operador
+- Visualización del dashboard de ocupación en tiempo real y del gemelo digital 3D
+- Gestión de una alerta de humo activa (localización espacial, reconocimiento y resolución del incidente)
+- Consulta del historial de incidentes
+- Revisión de los dashboards de flujo vehicular y eficiencia energética
+
+1. ¿El inicio de sesión te pareció intuitivo y te ubicaste con facilidad dentro del dashboard?
+2. ¿La información de ocupación en tiempo real (plazas totales, ocupadas y disponibles) se entiende rápido?
+3. ¿Te resultó claro identificar en el gemelo digital 3D la ubicación exacta de una alerta de humo y la zona afectada?
+4. ¿El sistema te brinda contexto suficiente (plazas ocupadas, rutas de evacuación) para decidir cómo actuar ante un incidente?
+5. ¿El proceso para reconocer, registrar notas y resolver el incidente te pareció directo y comprensible?
+6. ¿Te resulta fácil acceder al historial de incidentes y filtrar la información que necesitas?
+7. ¿Los dashboards de flujo vehicular y eficiencia energética presentan la información de forma clara y útil?
+8. ¿Sientes que esta herramienta te permitiría tomar decisiones de forma más proactiva que con tus herramientas actuales?
+9. Comparado con los métodos o sistemas que usas hoy, ¿qué ventajas o desventajas encuentras en esta aplicación?
+10. ¿Qué mejorarías en la aplicación para que se adapte mejor a tu trabajo diario?
+
+**Preguntas sobre la Aplicación Móvil (Segmento: Conductores frecuentes)**
+
+Para la aplicación móvil se considerará los userflows de:
+
+- Consulta del mapa de disponibilidad de plazas por nivel y zona
+- Registro de la ubicación del vehículo (inicio de la sesión de estacionamiento)
+- Consulta de "Mi Sesión" (tiempo transcurrido y costo acumulado)
+- Recepción de alertas de seguridad y finalización de la sesión de estacionamiento
+
+1. ¿La navegación por la aplicación te parece fácil y fluida?
+2. ¿El mapa de disponibilidad por nivel y zona te permite entender de inmediato hacia dónde dirigirte?
+3. ¿Te resultó fácil registrar la ubicación de tu vehículo? ¿Confiarías en que esa información te ayudará a encontrarlo al regresar?
+4. ¿La pantalla "Mi Sesión" muestra de forma clara el tiempo transcurrido y el costo acumulado?
+5. ¿Las alertas de seguridad te parecen oportunas y comprensibles?
+6. ¿El proceso para finalizar la sesión y ver el resumen con el costo total te resultó claro y confiable?
+7. ¿Consideras que esta aplicación reduce la incertidumbre que sientes hoy al estacionar en un centro comercial?
+8. ¿Qué mejorarías en la aplicación para que se adapte mejor a tus necesidades?
+
 
 ### 7.3.2. Registro de Entrevistas
 
