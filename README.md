@@ -8672,7 +8672,7 @@ _(Repetir para cada problema identificado.)_
 
 El video **About-the-Product** tiene como público objetivo a los visitantes de la Landing Page que desean conocer la propuesta de SmartPark. Con un tono promocional, resume el modelo de negocio y las principales características y beneficios de la solución —el gemelo digital 3D, la visualización de ocupación en tiempo real y las alertas de humo geolocalizadas para el operador, junto con el mapa de disponibilidad para el conductor—, incluye escenas de interacción con el producto y recoge opiniones de participantes de las entrevistas de validación de ambos segmentos objetivo.
 
-Esta primera versión del video está **incrustada en la Landing Page**, en la sección _"Conoce SmartPark en acción"_, mediante el reproductor de YouTube. La siguiente captura muestra el video presentado dentro de la Landing Page desplegada:
+Esta primera versión del video está **incrustada en la Landing Page**, en la sección _"Conoce SmartPark en acción"_, mediante el reproductor de YouTube. La siguiente captura muestra el video presentado dentro de la Landing Page de SmartPark:
 
 ![Video About-the-Product incrustado en la Landing Page](assets/images/chapter-07/about-product-landing.png)
 
