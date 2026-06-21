@@ -8759,24 +8759,28 @@ _(Conclusiones finales del proyecto.)_
 
 ## Video About-the-Team
 
-_(Resumen del proceso de trabajo, pauta de secuencias con timing, screenshot del video.)_
+El video **About-the-Team** resume el **proceso de trabajo** del equipo Apex Twin durante el desarrollo de SmartPark y los **logros alcanzados** en el Sprint 1. Combina una narración (voz en off) del proceso —la planificación de dos Sprints bajo Scrum, el flujo de ramas *feature → develop → main* coordinado mediante Trello y Discord, y la entrega de los cuatro productos digitales desplegados en Azure— con el **testimonio ante cámara de cada integrante**, que describe las actividades que realizó y las competencias (outcomes) que desarrolló. Esta primera versión está **incrustada en la Landing Page**, en la sección _"Conoce al equipo Apex Twin"_, mediante el reproductor de YouTube.
 
-![Video About-the-Team Screenshot](assets/images/chapter-07/about-team-screenshot.png)
+La siguiente captura muestra el video presentado dentro de la **Landing Page desplegada** (`https://stsmartparkland01.z20.web.core.windows.net/`):
 
-**Pauta de secuencias:**
+![Video About-the-Team incrustado en la Landing Page](assets/images/chapter-07/about-team-landing.png)
+
+**Pauta de secuencias** _(timing referencial; ajustar al corte final del video)_:
 
 | Inicio (hh:mm:ss) | Sección |
 |---|---|
-| 00:00:00 | Introducción |
-| 00:00:30 | Sesiones de trabajo del equipo |
-| 00:02:00 | Testimonio integrante 1 |
-| 00:03:00 | Testimonio integrante 2 |
-| 00:04:00 | Testimonio integrante 3 |
-| 00:05:00 | Testimonio integrante 4 |
-| 00:06:00 | Conclusiones grupales |
+| 00:00:00 | Introducción y presentación del equipo |
+| 00:00:40 | Proceso de trabajo (Scrum, ramas, Trello/Discord) |
+| 00:01:40 | Resultados del Sprint 1 |
+| 00:02:30 | Testimonio — Riva Rodríguez, Elmer Augusto (Team Leader / Backend) |
+| 00:03:20 | Testimonio — Sánchez Ríos, Camila Cristina (Landing / UI-UX) |
+| 00:04:10 | Testimonio — Qqueso Rodríguez, Britney Delhy (App móvil / Validación) |
+| 00:05:00 | Testimonio — Valle Zuta, Abel Andrés (Frontend del operador) |
+| 00:05:50 | Testimonio — Morales Calderón, Hernan Emilio (Gemelo digital / IoT) |
+| 00:06:40 | Retrospectiva y cierre |
 
-- **URL Microsoft Stream:** `https://web.microsoftstream.com/...`
-- **URL YouTube:** `https://youtube.com/...`
+- **URL (Microsoft Stream / SharePoint, evidencia del informe):** `https://upcedupe-my.sharepoint.com/:v:/g/personal/u202220829_upc_edu_pe/IQBYyCsOyCtjSqXgsIBSyeqfAbpMyw0yTR5Jjj5-l_1MbNo?e=eB0M8c`
+- **URL (YouTube, versión incrustada en la Landing Page):** `https://youtu.be/cg5wAB2AWpw`
 
 ---
 
