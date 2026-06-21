@@ -114,9 +114,6 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 
 ![Contribuciones de commits al repositorio del informe (Insights → Contributors, rama main)](assets/images/contributions/tb2-collaboration-insights.png)
 
-#### TF1
-_(Pendiente)_
-
 ---
 
 ## Tabla de Contenidos
@@ -335,10 +332,7 @@ _(Pendiente)_
       - [7.2.1.6. Services Documentation Evidence for Sprint Review](#7216-services-documentation-evidence-for-sprint-review)
       - [7.2.1.7. Software Deployment Evidence for Sprint Review](#7217-software-deployment-evidence-for-sprint-review)
       - [7.2.1.8. Team Collaboration Insights during Sprint](#7218-team-collaboration-insights-during-sprint)
-    - [7.2.2. Sprint 2](#722-sprint-2)
-      - [7.2.2.1. Sprint Planning 2](#7221-sprint-planning-2)
-      - [7.2.2.2. Sprint Backlog 2](#7222-sprint-backlog-2)
-      - [7.2.2.3. Sprint 2 Execution Note](#7223-sprint-2-execution-note)
+      - [7.2.1.9. Sprint 1 Review & Retrospective](#7219-sprint-1-review--retrospective)
   - [7.3. Validation Interviews](#73-validation-interviews)
     - [7.3.1. Diseño de Entrevistas](#731-diseño-de-entrevistas)
     - [7.3.2. Registro de Entrevistas](#732-registro-de-entrevistas)
@@ -357,8 +351,6 @@ _(Pendiente)_
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
   - [Anexo A: Videos de Exposiciones](#anexo-a-videos-de-exposiciones)
-  - [Anexo B: Términos y Condiciones del Servicio](#anexo-b-términos-y-condiciones-del-servicio)
-  - [Anexo C: Configuración de Internacionalización (i18n) y Accesibilidad (a11y)](#anexo-c-configuración-de-internacionalización-i18n-y-accesibilidad-a11y)
   - [Anexo D: DTDL Models de Azure Digital Twins](#anexo-d-dtdl-models-de-azure-digital-twins)
 
 ---
@@ -8499,56 +8491,13 @@ El equipo trabajó de forma **distribuida por frente de producto**, con cada int
 
 ---
 
-### 7.2.2. Sprint 2
+#### 7.2.1.9. Sprint 1 Review & Retrospective
 
-#### 7.2.2.1. Sprint Planning 2
+Como cierre del Sprint 1, el equipo realizó la reunión de Review y la Retrospective; a continuación se resumen sus resultados.
 
-El Sprint 2 cierra el Product Backlog abordando las **funcionalidades complementarias** que no forman parte del flujo núcleo: el flujo vehicular (entrada/salida), la eficiencia energética por zonas de baja ocupación, la gestión de la sesión de estacionamiento y sus costos, los historiales y las preferencias de notificación, además de completar la cadena de **notificación push** al conductor (iniciada en el Sprint 1, en estado *In-Process*). La reunión partió del Sprint 1 Review y Retrospective, cuyos resúmenes se incorporan como insumo.
+**Sprint 1 Review.** El equipo demostró el **flujo núcleo de extremo a extremo** sobre el entorno desplegado en Azure: la Landing Page enlaza al panel; el operador inicia sesión con JWT; el console renderiza el **gemelo digital 3D** con la ocupación coloreada en vivo (verde/rojo/ámbar) y el panel de ocupación por zona; el **simulador IoT** activa la telemetría y dispara una alerta de humo que recorre la cadena (simulador → ADT/API → SignalR → dashboard) y se refleja geolocalizada en el visor 3D; y el conductor consulta disponibilidad y registra la ubicación de su vehículo desde la app móvil. Se aceptaron **25 de 29 work-items** (los 4 restantes —tarjeta de alerta en vivo, despacho FCM y las dos tareas de push— quedaron en *To-Review/In-Process* y se arrastran al Sprint 2). El cumplimiento de Story Points superó el umbral comprometido (≥ 90%). El product owner valoró especialmente el contexto espacial del incidente en el 3D y la verificación end-to-end en la nube; sugirió priorizar la confiabilidad del push al conductor y robustecer la persistencia (migrar de SQLite a un motor gestionado en producción).
 
-| Sprint Planning Background | |
-|---|---|
-| **Sprint #** | Sprint 2 |
-| **Date** | 2026-06-20 |
-| **Time** | 07:30 PM |
-| **Location** | Reunión virtual vía Discord (canal `#sprint-planning`), con tablero compartido en Trello. |
-| **Prepared By** | Riva Rodríguez, Elmer Augusto (Scrum Master / Team Leader) |
-| **Attendees** | Riva Rodríguez, Elmer Augusto / Sánchez Ríos, Camila Cristina / Qqueso Rodríguez, Britney Delhy / Valle Zuta, Abel Andrés / Morales Calderón, Hernan Emilio |
-| **Sprint 1 Review Summary** | El equipo demostró el **flujo núcleo de extremo a extremo** sobre el entorno desplegado en Azure: la Landing Page enlaza al panel; el operador inicia sesión con JWT; el console renderiza el **gemelo digital 3D** con la ocupación coloreada en vivo (verde/rojo/ámbar) y el panel de ocupación por zona; el **simulador IoT** activa la telemetría y dispara una alerta de humo que recorre la cadena (simulador → ADT/API → SignalR → dashboard) y se refleja geolocalizada en el visor 3D; y el conductor consulta disponibilidad y registra la ubicación de su vehículo desde la app móvil. Se aceptaron **25 de 29 work-items** (los 4 restantes —tarjeta de alerta en vivo, despacho FCM y las dos tareas de push— quedaron en *To-Review/In-Process* y se arrastran al Sprint 2). El cumplimiento de Story Points superó el umbral comprometido (≥ 90%). El product owner valoró especialmente el contexto espacial del incidente en el 3D y la verificación end-to-end en la nube; sugirió priorizar la confiabilidad del push al conductor y robustecer la persistencia (migrar de SQLite a un motor gestionado en producción). |
-| **Sprint 1 Retrospective Summary** | **Aciertos:** la repartición por frentes de producto con un **contrato de API (OpenAPI) acordado temprano** permitió trabajar en paralelo sin bloqueos; mantener una **única fuente de verdad** para la estructura del gemelo (zonas/plazas canónicas) evitó incoherencias entre el simulador, el backend y el visor 3D; el flujo de **feature-branches → `develop` (PR) → release a `main`** dio trazabilidad. **Oportunidades de mejora:** las restricciones de cuota de *Azure for Students* y el proxy de la red universitaria (que bloquea el `az` CLI) costaron tiempo de despliegue —se documentó el uso de **Az PowerShell** como estándar del equipo—; conviene incorporar **pruebas de integración y de aceptación automatizadas sobre el API** (no solo unit tests de dominio) y un *smoke test* end-to-end en CI; y cerrar antes los work-items de notificaciones para no arrastrarlos. **Acciones para el Sprint 2:** automatizar un test end-to-end de la cadena de alertas, estandarizar el despliegue por Az PowerShell y reservar capacidad temprana para validar el push FCM en dispositivo real. |
-
-| Sprint Goal & User Stories | |
-|---|---|
-| **Sprint 2 Goal** | _Our focus is on_ completar las funcionalidades complementarias de SmartPark: el flujo vehicular (entrada/salida), la eficiencia energética por zonas de baja ocupación, la gestión de la sesión de estacionamiento con sus costos, los historiales y las preferencias de notificación, y el cierre de la **notificación push** al conductor ante alertas de humo. _We believe it delivers_ control operativo completo y ahorro energético _to_ los operadores, y trazabilidad de su estacionamiento y avisos de seguridad oportunos _to_ los conductores. _This will be confirmed when_ se demuestre, sobre el entorno desplegado, que el operador gestiona el flujo vehicular y recibe recomendaciones de atenuación por zona, y que un conductor con sesión activa recibe un push de evacuación dentro de los 5 segundos posteriores a una alerta en su zona. **Métrica de cumplimiento:** ≥ 90% de los Story Points comprometidos en estado *Done* y demostración exitosa de dichos flujos. |
-| **Sprint 2 Velocity** | 88 Story Points |
-| **Sum of Story Points** | 86 Story Points |
-
-#### 7.2.2.2. Sprint Backlog 2
-
-Para el Sprint 2 se seleccionaron del Product Backlog las User Stories de las funcionalidades complementarias, junto con las Technical Stories que las habilitan y los cuatro work-items arrastrados del Sprint 1 (*carry-over*: tarjeta de alerta en vivo, despacho FCM y las dos tareas de notificación push). El estado refleja la planificación al inicio del Sprint (los *carry-over* conservan su estado de cierre del Sprint 1).
-
-**URL del Board:** `https://trello.com/b/smartpark-sprint2` _(tablero del Sprint 2)_
-
-| US Id | US Title | Task Id | Work-Item / Task | Description | Est. (h) | Assigned To | Status |
-|---|---|---|---|---|---|---|---|
-| US-20 | Registro de Entrada de Vehículo | T-30 | Flujo de entrada (ticket/sesión) en la app | Inicia la sesión de estacionamiento al ingresar el vehículo. | 5 | Qqueso, Britney | To-Do |
-| TS-06 | Endpoint de Gestión de Sesión | T-31 | POST /api/v1/sessions (start) | Crea una sesión de estacionamiento para el conductor. | 5 | Riva, Elmer | To-Do |
-| US-21 | Registro de Salida y Cierre de Sesión | T-32 | Flujo de salida y confirmación | Finaliza la sesión y muestra el resumen al conductor. | 4 | Qqueso, Britney | To-Do |
-| US-22 | Cálculo del Costo de la Sesión | T-33 | PATCH /api/v1/sessions/{id}/finalize | Calcula el costo acumulado (Money) al cerrar la sesión. | 5 | Riva, Elmer | To-Do |
-| US-23 | Historial de Sesiones del Conductor | T-34 | GET /api/v1/sessions/history + vista | Lista las sesiones pasadas con costo y duración. | 5 | Qqueso, Britney | To-Do |
-| US-24 | Panel de Eficiencia Energética | T-35 | Vista de zonas de baja ocupación (operador) | Resalta zonas candidatas a atenuación de iluminación. | 6 | Valle, Abel | To-Do |
-| US-25 | Recomendaciones de Atenuación de Iluminación | T-36 | GET /api/v1/energy/recommendations | Calcula recomendaciones de dimming por nivel/zona. | 5 | Morales, Hernán | To-Do |
-| US-26 | Preferencias de Notificación | T-37 | Pantalla de preferencias (PowerApps) | Permite al conductor configurar qué avisos recibir. | 4 | Qqueso, Britney | To-Do |
-| US-32 | Notificación Push por Alerta de Humo | T-27 | Identificar conductores afectados por zona | *(carry-over Sprint 1)* Determina conductores en la zona del incidente. | 5 | Morales, Hernán | In-Process |
-| US-32 | Notificación Push por Alerta de Humo | T-28 | Recepción del push en la app (PowerApps) | *(carry-over Sprint 1)* Maneja la notificación de humo en la app. | 3 | Qqueso, Britney | In-Process |
-| US-19 | Recepción de Alerta de Humo con Visualización Espacial | T-23 | Tarjeta de alerta en vivo (Angular) | *(carry-over Sprint 1)* Refina y aprueba la tarjeta de alerta en vivo. | 4 | Valle, Abel | To-Review |
-| TS-05 | Endpoint de Despacho de Notificaciones | T-26 | Registro de device tokens + despacho FCM | *(carry-over Sprint 1)* Cierra el despacho push vía Firebase Cloud Messaging. | 5 | Riva, Elmer | To-Review |
-| — (Constraint) | Calidad y persistencia productiva | T-38 | Pruebas de integración del API + smoke test E2E en CI | Tests de integración/aceptación sobre el API y migración a BD gestionada. | 6 | Riva, Elmer | To-Do |
-
-> La suma de Story Points de las User Stories comprometidas en el Sprint 2 es **86** (ver 7.2.2.1). Las tareas *carry-over* conservan el estado con que cerraron el Sprint 1.
-
-#### 7.2.2.3. Sprint 2 Execution Note
-
-> El presente entregable documenta la **ejecución completa del Sprint 1** (flujo núcleo desplegado y verificado en la nube). El **Sprint 2** se encuentra **planificado** —Sprint Planning 2 (7.2.2.1) y Sprint Backlog 2 (7.2.2.2)—; su evidencia de desarrollo, testing, ejecución, documentación de servicios, despliegue y colaboración (commits por repositorio, capturas de las nuevas vistas, endpoints de sesión/energía, etc.) se incorporará al cierre de su ejecución, siguiendo la misma estructura de subsecciones empleada en el Sprint 1 (7.2.1.3–7.2.1.8).
+**Sprint 1 Retrospective.** **Aciertos:** la repartición por frentes de producto con un **contrato de API (OpenAPI) acordado temprano** permitió trabajar en paralelo sin bloqueos; mantener una **única fuente de verdad** para la estructura del gemelo (zonas/plazas canónicas) evitó incoherencias entre el simulador, el backend y el visor 3D; el flujo de **feature-branches → `develop` (PR) → release a `main`** dio trazabilidad. **Oportunidades de mejora:** las restricciones de cuota de *Azure for Students* y el proxy de la red universitaria (que bloquea el `az` CLI) costaron tiempo de despliegue —se documentó el uso de **Az PowerShell** como estándar del equipo—; conviene incorporar **pruebas de integración y de aceptación automatizadas sobre el API** (no solo unit tests de dominio) y un *smoke test* end-to-end en CI; y cerrar antes los work-items de notificaciones para no arrastrarlos. **Acciones para el Sprint 2:** automatizar un test end-to-end de la cadena de alertas, estandarizar el despliegue por Az PowerShell y reservar capacidad temprana para validar el push FCM en dispositivo real.
 
 ## 7.3. Validation Interviews
 
@@ -8848,9 +8797,6 @@ Esta primera versión del video está **incrustada en la Landing Page**, en la s
 
 5. **El equipo sostuvo un proceso ágil y colaborativo, con la primera versión de los productos digitales desplegada y los videos publicados.** Bajo una planificación de dos Sprints y un flujo de ramas *feature → develop → main* coordinado mediante Trello y Discord, los cinco integrantes entregaron los cuatro productos digitales desplegados y verificados, junto con la primera versión de los videos **About-the-Product** (incrustado en la Landing Page) y **About-the-Team**. La incorporación de las correcciones del TP1 evidencia la continuidad del ciclo de mejora del informe.
 
-#### TF1
-_(Conclusiones finales del proyecto.)_
-
 ### Recomendaciones de roadmap
 
 1. **Priorizar la implementación del Parking Occupancy y Safety & Incidents bounded contexts en TP1.** Estos dos contextos son los de mayor impacto validado en las entrevistas y los que sustentan las hipótesis H1 y H2. Contar con un prototipo funcional —aunque sea con sensores simulados— permitirá realizar pruebas de usabilidad con operadores reales y obtener feedback cuantitativo para contrastar las métricas de éxito definidas en el Lean UX.
@@ -8946,14 +8892,6 @@ Vernon, V. (2013). *Implementing Domain-Driven Design*. Addison-Wesley Professio
 | TP1       | `https://web.microsoftstream.com/...`                                                                                                                                                                                                                                                                                   |
 | TB2       | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202220829_upc_edu_pe/IQC9_RcxqPZaR66YCoPqcOP6ARzXIDJizlnFrMlTMxnzsPM?e=CpTZJa&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D                                                                                                                                                                                                                                                                                   |
 | TF1       | `https://web.microsoftstream.com/...`                                                                                                                                                                                                                                                                                   |
-
-## Anexo B: Términos y Condiciones del Servicio
-
-_(Texto completo de los Terms of Service expuestos en el footer del Landing Page y aplicaciones, redactados con responsabilidad ética y profesional según los principios del código de ética de software engineering de ACM/IEEE y del CIP.)_
-
-## Anexo C: Configuración de Internacionalización (i18n) y Accesibilidad (a11y)
-
-_(Detalle de la configuración de i18n para English (en_US) y Latin American Spanish (es_419), y configuración de ARIA attributes en Landing Page y Web Application.)_
 
 ## Anexo D: DTDL Models de Azure Digital Twins
 
