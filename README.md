@@ -8027,11 +8027,33 @@ Feature: Smoke Alert Lifecycle
 
 #### 7.2.1.5. Execution Evidence for Sprint Review
 
-_(Screenshots de las principales vistas implementadas + enlace a video demo.)_
+A continuación se muestran las capturas de las principales vistas implementadas y desplegadas durante el Sprint 1, tomadas sobre el **entorno en la nube** (Azure). El flujo núcleo es plenamente operativo: la landing enlaza al panel, el operador autentica con JWT, el console renderiza el gemelo 3D con la ocupación coloreada en vivo y el simulador IoT alimenta la cadena de datos y de alertas.
 
-![Sprint 1 Landing Hero](assets/images/chapter-07/sprint-1-landing.png)
+**Landing Page (`landing-page`)** — propuesta de valor y CTA hacia el panel del operador y la app del conductor:
 
-**URL del video demo:** `https://web.microsoftstream.com/...`
+![Landing Page desplegada](assets/images/chapter-07/sprint-1-landing.png)
+
+**Inicio de sesión del operador (`web-application`)** — login con JWT, alineado al design system (teal/cream/Inter):
+
+![Login del operador](assets/images/chapter-07/sprint-1-login.png)
+
+**Console del operador** — gemelo digital 3D como elemento central, con la ocupación coloreada en vivo (verde libre · rojo ocupada · ámbar reservada) y el panel de ocupación por zona:
+
+![Console del operador con gemelo 3D](assets/images/chapter-07/sprint-1-console.png)
+
+**Detalle del gemelo 3D** — coloreado por plaza a partir de la ocupación real consultada al API:
+
+![Gemelo 3D con ocupación en vivo](assets/images/chapter-07/sprint-1-twin-occupancy.png)
+
+**Ocupación por nivel y zona** — vista de disponibilidad agregada con indicadores de congestión:
+
+![Ocupación por nivel](assets/images/chapter-07/sprint-1-zones.png)
+
+**Simulador IoT** — vista para activar la telemetría (ocupación) y disparar alertas de humo geolocalizadas durante las entrevistas de validación, con guía de uso:
+
+![Simulador IoT](assets/images/chapter-07/sprint-1-simulator.png)
+
+**URL del video demo:** _(se grabará el recorrido del flujo núcleo sobre el entorno desplegado como parte de la sesión de Sprint Review; las capturas anteriores constituyen la evidencia de ejecución verificada con Playwright sobre la nube.)_
 
 #### 7.2.1.6. Services Documentation Evidence for Sprint Review
 
