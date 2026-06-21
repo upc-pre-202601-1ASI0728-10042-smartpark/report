@@ -71,6 +71,15 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 | 1.6.0   | 2026-05-14 | Riva Rodriguez, Elmer Augusto   | Incorporación de las secciones 6.4.1 Applications Wireframes y 6.4.2 Applications Wireflow Diagrams correspondientes a la aplicación web del operador.                                                                                                                                                                             |
 | 1.7.0   | 2026-05-15 | Qqueso Rodriguez, Britney Delhy | Avance de las secciones de Conclusiones, Bibliografía y Anexos del informe.                                                                                                                                                                                                                                                       |
 | 2.0.0   | 2026-05-15 | Riva Rodriguez, Elmer Augusto   | Versión final para entrega TP1: incorporación del Participant Performance Report, el Project Report Collaboration Insights y el Student Outcome, aplicación de las correcciones del TB1 según la retroalimentación del docente y actualización del Registro de Versiones del Informe.                                              |
+| 2.1.0   | 2026-06-09 | Sánchez Ríos, Camila Cristina   | Inicio del Capítulo VI 6.4 Applications UX/UI Design: Applications Wireframes y Mock-ups de la Web Application del operador. |
+| 2.2.0   | 2026-06-16 | Sánchez Ríos, Camila Cristina   | Continuación del Capítulo VI 6.4: Applications Wireflow Diagrams, Mock-ups de la App móvil del conductor y Applications User Flow Diagrams. |
+| 2.3.0   | 2026-06-18 | Riva Rodriguez, Elmer Augusto   | Inicio del Capítulo VII: secciones 7.2.1.1 Sprint Planning 1 y 7.2.1.2 Sprint Backlog 1. |
+| 2.4.0   | 2026-06-20 | Qqueso Rodriguez, Britney Delhy | Incorporación de la sección 7.3.1 Diseño de Entrevistas de Validación para ambos segmentos objetivo. |
+| 2.5.0   | 2026-06-20 | Valle Zuta, Abel Andrés         | Incorporación de la sección 7.2.1.5 Execution Evidence: capturas de las principales vistas implementadas del operador sobre el entorno desplegado. |
+| 2.6.0   | 2026-06-20 | Riva Rodriguez, Elmer Augusto   | Incorporación de las secciones 7.1.4 Software Deployment Configuration, 7.2.1.3 Development Evidence (tabla completa de los 200 commits del Sprint 1), 7.2.1.4 Testing Suite Evidence (41 métodos / 65 casos), 7.2.1.6 Services Documentation (OpenAPI/Swagger), 7.2.1.7 Software Deployment Evidence (Azure) y 7.2.1.8 Team Collaboration Insights por repositorio. |
+| 2.7.0   | 2026-06-20 | Riva Rodriguez, Elmer Augusto   | Incorporación de la sección 7.2.2 Sprint 2 (Sprint Planning 2 con Sprint 1 Review & Retrospective, y Sprint Backlog 2) y captura del tablero real del Sprint en Trello (7.2.1.2). |
+| 2.8.0   | 2026-06-20 | Sánchez Ríos, Camila Cristina   | Incorporación de la sección 7.4 Video About-the-Product: introducción, URLs (SharePoint y YouTube) y captura del video incrustado en la Landing Page desplegada. |
+| 3.0.0   | 2026-06-21 | Riva Rodriguez, Elmer Augusto   | Versión final para entrega TB2: primera versión desplegada de los productos digitales y publicación de la primera versión de los videos About-the-Product y About-the-Team. Actualización del Registro de Versiones del Informe, el Project Report Collaboration Insights y la sección Student Outcome. |
 
 ---
 
@@ -80,6 +89,7 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 
 **URL de la organización GitHub:** `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark`
 
+
 ### Repositorios de productos digitales
 
 | Producto                   | Repositorio                                                                  |
@@ -88,7 +98,7 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 | Web Application (Operador) | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-application` |
 | Web Services (API)         | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-services`    |
 | IoT Simulator              | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/iot-simulator`   |
-| Mobile App (PowerApps)     | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/mobile-app`      |
+| Mobile App (PowerApps)     | `https://apps.powerapps.com/play/e/default-0e0cb060-09ad-49f5-a005-68b9b49aa1f6/a/974c6382-aff6-4674-926a-b7000c839448?tenantId=0e0cb060-09ad-49f5-a005-68b9b49aa1f6&hint=982ef384-9df8-457c-9eb7-05322d878719&sourcetime=1781999148772`      |
 
 ### Evidencias de colaboración
 
@@ -101,7 +111,10 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 ![tp1.png](assets/images/contributions/tp1.png)
 
 #### TB2
-_(Pendiente)_
+
+Contribución del equipo durante el TB2 (Sprint 1): **200 commits** distribuidos por frente de producto a través de los repositorios de la organización.
+
+![tb2.png](assets/images/contributions/tb2.png)
 
 #### TF1
 _(Pendiente)_
@@ -276,14 +289,29 @@ _(Pendiente)_
       - [Web Application (Operador)](#web-application-operador)
       - [Mobile Application (Conductor — PowerApps)](#mobile-application-conductor--powerapps)
     - [6.4.2. Applications Wireflow Diagrams](#642-applications-wireflow-diagrams)
-      - [Wireflow: Operator views smoke alert and locates affected zone](#wireflow-operator-views-smoke-alert-and-locates-affected-zone)
-      - [Wireflow: Driver finds and registers a parking space](#wireflow-driver-finds-and-registers-a-parking-space)
     - [6.4.3. Applications Mock-ups](#643-applications-mock-ups)
       - [Web Application (Operador)](#web-application-operador-1)
       - [Mobile Application (Conductor)](#mobile-application-conductor)
     - [6.4.4. Applications User Flow Diagrams](#644-applications-user-flow-diagrams)
-      - [User Flow: Operator manages an active smoke incident](#user-flow-operator-manages-an-active-smoke-incident)
-      - [User Flow: Driver completes a parking session](#user-flow-driver-completes-a-parking-session)
+      - [Aplicación Web – Operador](#aplicación-web--operador)
+    - [User Flow: Operator monitors real-time occupancy by level and zone](#user-flow-operator-monitors-real-time-occupancy-by-level-and-zone)
+    - [Caso alternativo](#caso-alternativo)
+- [User Flow: Operator manages an active smoke incident](#user-flow-operator-manages-an-active-smoke-incident)
+- [User Flow: Operator views and analyzes incident history](#user-flow-operator-views-and-analyzes-incident-history)
+- [User Flow: Operator monitors vehicle flow and sets congestion thresholds](#user-flow-operator-monitors-vehicle-flow-and-sets-congestion-thresholds)
+- [User Flow: Operator generates and exports a custom report](#user-flow-operator-generates-and-exports-a-custom-report)
+- [User Flow: Operator navigates the 3D Digital Twin with layers](#user-flow-operator-navigates-the-3d-digital-twin-with-layers)
+- [User Flow: Operator manages energy efficiency recommendations](#user-flow-operator-manages-energy-efficiency-recommendations)
+      - [Aplicación Móvil – Conductor (PowerApps)](#aplicación-móvil--conductor-powerapps)
+- [User Flow: Driver registers and logs in to the mobile app](#user-flow-driver-registers-and-logs-in-to-the-mobile-app)
+- [User Flow: Driver checks parking availability before entering](#user-flow-driver-checks-parking-availability-before-entering)
+- [User Flow: Driver registers vehicle location and starts session](#user-flow-driver-registers-vehicle-location-and-starts-session)
+- [User Flow: Driver finds vehicle using stored location](#user-flow-driver-finds-vehicle-using-stored-location)
+- [User Flow: Driver monitors accumulated cost during stay](#user-flow-driver-monitors-accumulated-cost-during-stay)
+- [User Flow: Driver ends parking session and pays](#user-flow-driver-ends-parking-session-and-pays)
+- [User Flow: Driver views parking session history](#user-flow-driver-views-parking-session-history)
+- [User Flow: Driver receives and views a smoke alert notification](#user-flow-driver-receives-and-views-a-smoke-alert-notification)
+- [User Flow: Driver manages notification preferences](#user-flow-driver-manages-notification-preferences)
   - [6.5. Applications Prototyping](#65-applications-prototyping)
     - [Prototype: Web Application (Operador)](#prototype-web-application-operador)
     - [Prototype: Mobile Application (Conductor)](#prototype-mobile-application-conductor)
@@ -293,12 +321,12 @@ _(Pendiente)_
     - [7.1.2. Source Code Management](#712-source-code-management)
     - [7.1.3. Source Code Style Guide \& Conventions](#713-source-code-style-guide--conventions)
     - [7.1.4. Software Deployment Configuration](#714-software-deployment-configuration)
-      - [Landing Page → Azure Static Web Apps](#landing-page--azure-static-web-apps)
-      - [Web Application (Angular) → Azure Static Web Apps](#web-application-angular--azure-static-web-apps)
-      - [Web Services (ASP.NET Core) → Azure App Service](#web-services-aspnet-core--azure-app-service)
-      - [IoT Simulator (Node.js) → Azure Container Apps](#iot-simulator-nodejs--azure-container-apps)
-      - [Mobile App (PowerApps)](#mobile-app-powerapps)
-      - [Azure Digital Twins](#azure-digital-twins)
+      - [Landing Page → Azure Storage static website](#landing-page--azure-storage-static-website)
+      - [Web Application (Angular 20) → Azure Storage static website](#web-application-angular-20--azure-storage-static-website)
+      - [Web Services (ASP.NET Core 8) → Azure App Service (Linux)](#web-services-aspnet-core-8--azure-app-service-linux)
+      - [IoT Simulator (Node.js) → ejecución on-demand](#iot-simulator-nodejs--ejecución-on-demand)
+      - [Mobile App (Power Apps)](#mobile-app-power-apps)
+      - [Azure Digital Twins + Modelo 3D](#azure-digital-twins--modelo-3d)
   - [7.2. Solution Implementation](#72-solution-implementation)
     - [7.2.1. Sprint 1](#721-sprint-1)
       - [7.2.1.1. Sprint Planning 1](#7211-sprint-planning-1)
@@ -312,21 +340,7 @@ _(Pendiente)_
     - [7.2.2. Sprint 2](#722-sprint-2)
       - [7.2.2.1. Sprint Planning 2](#7221-sprint-planning-2)
       - [7.2.2.2. Sprint Backlog 2](#7222-sprint-backlog-2)
-      - [7.2.2.3. Development Evidence for Sprint Review](#7223-development-evidence-for-sprint-review)
-      - [7.2.2.4. Testing Suite Evidence for Sprint Review](#7224-testing-suite-evidence-for-sprint-review)
-      - [7.2.2.5. Execution Evidence for Sprint Review](#7225-execution-evidence-for-sprint-review)
-      - [7.2.2.6. Services Documentation Evidence for Sprint Review](#7226-services-documentation-evidence-for-sprint-review)
-      - [7.2.2.7. Software Deployment Evidence for Sprint Review](#7227-software-deployment-evidence-for-sprint-review)
-      - [7.2.2.8. Team Collaboration Insights during Sprint](#7228-team-collaboration-insights-during-sprint)
-    - [7.2.3. Sprint 3](#723-sprint-3)
-      - [7.2.3.1. Sprint Planning 3](#7231-sprint-planning-3)
-      - [7.2.3.2. Sprint Backlog 3](#7232-sprint-backlog-3)
-      - [7.2.3.3. Development Evidence for Sprint Review](#7233-development-evidence-for-sprint-review)
-      - [7.2.3.4. Testing Suite Evidence for Sprint Review](#7234-testing-suite-evidence-for-sprint-review)
-      - [7.2.3.5. Execution Evidence for Sprint Review](#7235-execution-evidence-for-sprint-review)
-      - [7.2.3.6. Services Documentation Evidence for Sprint Review](#7236-services-documentation-evidence-for-sprint-review)
-      - [7.2.3.7. Software Deployment Evidence for Sprint Review](#7237-software-deployment-evidence-for-sprint-review)
-      - [7.2.3.8. Team Collaboration Insights during Sprint](#7238-team-collaboration-insights-during-sprint)
+      - [7.2.2.3. Sprint 2 Execution Note](#7223-sprint-2-execution-note)
   - [7.3. Validation Interviews](#73-validation-interviews)
     - [7.3.1. Diseño de Entrevistas](#731-diseño-de-entrevistas)
     - [7.3.2. Registro de Entrevistas](#732-registro-de-entrevistas)
@@ -361,8 +375,8 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 | Criterio específico                                                                                                                                                                       | Acciones realizadas                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Conclusiones                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.**    | **_Sanchez Rios, Camila Cristina_**<br>**TB1**<br>Conduje las entrevistas de diseño correspondientes a ambos segmentos objetivo del proyecto (operadores de estacionamiento y conductores frecuentes de centros comerciales), adaptando el lenguaje técnico del dominio a un vocabulario accesible para cada perfil de entrevistado. Presenté oralmente ante el equipo el análisis de los resultados de las entrevistas, explicando los patrones identificados en el comportamiento de los segmentos y su impacto sobre los artefactos de needfinding. Expuse durante las reuniones internas la propuesta de Lean UX Canvas, articulando de manera clara la relación entre los problem statements, los assumptions y las hypothesis statements, respondiendo a las observaciones del equipo con argumentos sustentados en los hallazgos del trabajo de campo.<br><br>**TP1**<br>Presenté ante el equipo las Style Guidelines y la Information Architecture de la solución (secciones 6.1 y 6.2), explicando oralmente los criterios de organización, etiquetado, búsqueda y navegación adoptados. Expuse el diseño del Landing Page UI durante las sesiones internas de revisión, articulando las decisiones de wireframe y mock-up. Asimismo, coordiné oralmente la elaboración de la keynote del TP1 y participé en la grabación del video de exposición, comunicando ante cámara las decisiones de diseño UX/UI del proyecto.<br><br>**_Valle Zuta, Abel Andrés_**<br>**TB1**<br>Realicé la entrevista correspondiente al Segmento 2 del proyecto (conductores frecuentes de centros comerciales), cuidando adaptar el lenguaje al perfil del entrevistado y traduciendo los conceptos técnicos del proyecto a situaciones cotidianas para que las respuestas resultaran aprovechables por el equipo. Asimismo, participé activamente en las reuniones internas de coordinación, donde expuse oralmente los avances de mi sección del Capítulo IV, recibí observaciones de mis compañeros con apertura y propuse cómo distribuir las tareas según las fortalezas de cada integrante, argumentando las prioridades del entregable y los plazos pertinentes.<br><br>**TP1**<br>Expuse ante el equipo el diseño táctico del Capítulo V correspondiente a los bounded contexts Parking Occupancy, Traffic Flow, Energy Management y Landing & Subscription, explicando oralmente la organización en capas Domain, Application, Interface e Infrastructure y la lógica de los Component, Class y Database Diagrams. Participé en las reuniones de coordinación argumentando la distribución del trabajo del Capítulo V y respondiendo observaciones de mis compañeros durante la validación interna del entregable.<br><br>**_Riva Rodriguez, Elmer Augusto_**<br>**TB1**<br>Lideré las reuniones de coordinación del equipo durante el ciclo TB1, comunicando oralmente los objetivos de cada sesión de trabajo, el estado de avance por integrante y las decisiones de priorización del backlog. Expuse ante el equipo la propuesta de User Stories y Product Backlog de SmartPark, explicando los criterios de priorización por valor de negocio y el uso de story points bajo la secuencia de Fibonacci, respondiendo consultas de mis compañeros sobre los criterios de aceptación Gherkin. También presenté los diagramas C4 de la plataforma —System Landscape, Context, Container y Deployment— explicando las decisiones tecnológicas reflejadas en cada nivel de abstracción a una audiencia con distintos niveles de familiaridad con el modelo C4.<br><br>**TP1**<br>Lideré las reuniones de coordinación del equipo durante el ciclo TP1, comunicando oralmente la distribución de los Capítulos V y VI, el estado de avance por integrante y la estrategia de integración de ramas en el repositorio. Presenté ante el equipo los wireframes y wireflows de la aplicación web del operador (sección 6.4) y expliqué oralmente las correcciones aplicadas al TB1 a partir de la retroalimentación del docente.<br><br>**_Morales Calderón, Hernan Emilio_**<br>**TB1**<br>Realicé la entrevista correspondiente al Segmento 1 del proyecto (operadores de estacionamientos en centros comerciales), adaptando las preguntas y el lenguaje al perfil del entrevistado para obtener información útil sobre operación, seguridad, congestión y necesidades tecnológicas. Asimismo, participé activamente en las reuniones grupales exponiendo los avances del Capítulo IV, explicando la lógica de EventStorming, Candidate Context Discovery, Domain Message Flows, Bounded Context Canvases y Context Mapping para alinear criterios técnicos con el equipo. También sustenté oralmente la propuesta de bounded contexts y relaciones entre dominios, explicando de manera clara cómo cada módulo aporta valor al sistema y respondiendo observaciones de mis compañeros durante la validación interna del entregable.<br><br>**TP1**<br>Expuse ante el equipo el diseño táctico del Capítulo V correspondiente a los bounded contexts Safety & Incidents, Parking Session, Notifications, Identity & Access Management y Digital Twin Synchronization, explicando oralmente la estructura de cada capa y la justificación de los diagramas de componentes, clases y base de datos. Participé en las reuniones de validación interna sustentando las decisiones de diseño táctico de mis bounded contexts y respondiendo las observaciones del equipo.<br><br>**_Qqueso Rodriguez, Britney Delhy_**<br>**TB1**<br>Presenté oralmente ante el equipo los artefactos de needfinding elaborados para el proyecto —User Personas, User Task Matrix, Empathy Maps y As-Is Scenario Maps— explicando la metodología aplicada y la relación directa entre cada artefacto y los datos recolectados en las entrevistas. Expuse el Impact Mapping de SmartPark durante una sesión interna de revisión, comunicando de forma clara los business goals, los actores involucrados y los deliverables asociados a cada hipótesis del modelo de negocio digital. Asimismo, participé en la sustentación del video de exposición del TB1, describiendo ante cámara las actividades realizadas y los artefactos de los que fui responsable.<br><br>**TP1**<br>Presenté ante el equipo los wireframes y wireflows de la aplicación móvil del conductor desarrollada en PowerApps (sección 6.4), explicando oralmente la estructura de navegación de cada pantalla y los flujos modelados. Asimismo, participé en la grabación del video de exposición del TP1, describiendo ante cámara los artefactos UX/UI de los que fui responsable.                                                                                                                                                                                                                                                                            | **TB1**<br>Durante el desarrollo del TB1, los integrantes del equipo demostraron capacidad para comunicar oralmente resultados de ingeniería a audiencias diversas: desde entrevistados sin formación técnica hasta compañeros con conocimiento especializado en arquitectura de software. La distribución de roles expositivos dentro del equipo permitió que cada integrante desarrollara habilidades de comunicación oral en contextos distintos: trabajo de campo con usuarios reales, presentaciones técnicas internas y sustentación en video. En conjunto, el equipo logró articular de manera coherente la visión del producto, las decisiones arquitectónicas y los artefactos de análisis, adaptando el nivel de detalle y el vocabulario según la audiencia.<br><br>**TP1**<br>Durante el TP1, el equipo consolidó sus habilidades de comunicación oral al exponer artefactos de mayor complejidad técnica —el diseño táctico por capas de los bounded contexts, los wireframes y los wireflows— ante una audiencia interna especializada, sustentando las decisiones de diseño táctico y de UX/UI en las reuniones de validación. La grabación del video de exposición exigió adaptar el discurso a una audiencia evaluadora, manteniendo claridad y objetividad en la presentación de los avances. |
-| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | **_Sanchez Rios, Camila Cristina_**<br>**TB1**<br>Redacté el perfil de integrantes del equipo (sección 1.1.2) y el Lean UX Canvas (sección 1.2.2.4), cuidando la precisión del lenguaje para que los artefactos resultaran comprensibles tanto para evaluadores académicos como para stakeholders del dominio. Elaboré el Competitive Analysis Landscape (sección 2.1), documentando de forma estructurada las fortalezas, debilidades, oportunidades y amenazas de SmartPark frente a sus competidores, con sustento en fuentes verificables. Desarrollé el análisis de entrevistas (sección 2.2.3) y el To-Be Scenario Mapping (sección 3.1), redactando los hallazgos con objetividad y trazabilidad hacia los datos recolectados. También elaboré el Registro de Versiones del Informe y las notas de la keynote del TB1, garantizando coherencia entre el documento escrito y la presentación.<br><br>**TP1**<br>Redacté la sección 6.1 Style Guidelines, con los lineamientos generales y los específicos para Web, Mobile & Devices, y la sección 6.2 Information Architecture completa (Organization Systems, Labeling Systems, SEO Tags and Meta Tags, Searching Systems y Navigation Systems), cuidando una redacción clara y estructurada. Documenté la sección 6.3 Landing Page UI Design con el wireframe y el mock-up del Landing Page. También elaboré las notas de la keynote del TP1, garantizando coherencia entre el documento escrito y la presentación.<br><br>**_Valle Zuta, Abel Andrés_**<br>**TB1**<br>Redacté la sección 4.1 del Capítulo IV, correspondiente al Strategic-Level Attribute-Driven Design, cuidando la trazabilidad escrita entre los drivers arquitectónicos identificados y las decisiones de diseño adoptadas. Coordiné por escrito, a través del grupo de WhatsApp del equipo y de comentarios en los documentos compartidos, la organización de las tareas de cada integrante para el TB1, dejando registro permanente de los acuerdos, plazos y responsables. Asimismo, participé activamente en la recolección y validación de las fuentes bibliográficas del informe, verificando que cada referencia citada estuviera correctamente documentada en formato APA 7 y que los enlaces apuntaran a fuentes accesibles y confiables.<br><br>**TP1**<br>Redacté el Capítulo V Tactical-Level Software Design correspondiente a los bounded contexts Parking Occupancy, Traffic Flow, Energy Management y Landing & Subscription, documentando por escrito las capas Domain, Application, Interface e Infrastructure de cada contexto, junto con la descripción de sus Component, Class y Database Diagrams, manteniendo trazabilidad escrita con el diseño estratégico del Capítulo IV.<br><br>**_Riva Rodriguez, Elmer Augusto_**<br>**TB1**<br>Redacté el Capítulo I completo del informe, incluyendo la descripción del startup y misión/visión de Apex Twin, los antecedentes y problemática bajo la técnica 5W+2H con sustento en fuentes cuantitativas verificadas (INRIX, BID, ACCEP, APEIM), el Lean UX Process completo y los segmentos objetivo con datos estadísticos de respaldo (secciones 1.1.1, 1.2.1, 1.2.2.1–1.2.2.3, 1.3). Elaboré la sección 3.2 con las 47 User Stories y Technical Stories de SmartPark, incluyendo criterios de aceptación en formato Gherkin con happy paths, unhappy paths y edge cases, y la sección 3.4 con el Product Backlog priorizado por valor de negocio. Redacté la sección 4.3 con los diagramas de arquitectura de software bajo C4 Model (System Landscape, Context, Container y Deployment), documentando cada decisión tecnológica con su justificación. También elaboré el Participant Performance Report y el Project Report Collaboration Insights del TB1.<br><br>**TP1**<br>Redacté las secciones 6.4.1 Applications Wireframes y 6.4.2 Applications Wireflow Diagrams correspondientes a la aplicación web del operador. Elaboré el Participant Performance Report, el Project Report Collaboration Insights y la sección Student Outcome del TP1, actualicé el Registro de Versiones del Informe e incorporé por escrito las correcciones del TB1 a partir de la retroalimentación del docente.<br><br>**_Morales Calderón, Hernan Emilio_**<br>**TB1**<br>Redacté la sección 4.2 del Capítulo IV correspondiente al Strategic-Level Domain-Driven Design, desarrollando los apartados de EventStorming, Candidate Context Discovery, Domain Message Flows Modeling, Bounded Context Canvases y Context Mapping, manteniendo coherencia técnica y trazabilidad con la arquitectura definida previamente. Asimismo, elaboré tablas comparativas, relaciones entre bounded contexts y descripciones formales de patrones DDD aplicados, cuidando una redacción profesional orientada tanto a lectores técnicos como académicos. También participé en la revisión final del documento verificando consistencia de formato, estructura y calidad general del entregable.<br><br>**TP1**<br>Redacté el Capítulo V Tactical-Level Software Design correspondiente a los bounded contexts Safety & Incidents, Parking Session, Notifications, Identity & Access Management y Digital Twin Synchronization, documentando por escrito las capas Domain, Application, Interface e Infrastructure de cada contexto, junto con sus Component, Class y Database Diagrams, con una redacción técnica precisa orientada a lectores especializados.<br><br>**_Qqueso Rodriguez, Britney Delhy_**<br>**TB1**<br>Redacté la sección 2.3 completa de Needfinding, elaborando las fichas de User Persona para ambos segmentos objetivo con base en los datos recolectados en las entrevistas, el User Task Matrix con análisis de frecuencia e importancia, los Empathy Maps y los As-Is Scenario Maps, garantizando que cada característica de los arquetipos tuviera trazabilidad hacia las entrevistas registradas. Desarrollé el registro de entrevistas (sección 2.2.2), redactando resúmenes descriptivos por entrevistado que incluyeron características objetivas y subjetivas de los segmentos. Elaboré el Impact Mapping (sección 3.3), documentando los business goals SMART, actores, impactos y deliverables del modelo de negocio digital de SmartPark, con la redacción de User Stories asociadas en el formato estándar.<br><br>**TP1**<br>Redacté las secciones 6.4.1 Applications Wireframes y 6.4.2 Applications Wireflow Diagrams correspondientes a la aplicación móvil del conductor desarrollada en PowerApps, describiendo por escrito cada pantalla y flujo modelado. Asimismo, avancé la redacción de las secciones de Conclusiones, Bibliografía y Anexos del informe. | **TB1**<br>A lo largo del TB1, el equipo demostró capacidad para comunicar por escrito resultados de ingeniería con distintos niveles de formalidad y complejidad técnica. Los artefactos redactados —desde User Personas y Empathy Maps hasta drivers arquitectónicos, Quality Attribute Scenarios y diagramas C4— evidencian que cada integrante adaptó el registro escrito a su audiencia: lenguaje accesible para artefactos de needfinding orientados al dominio, y lenguaje técnico preciso para las secciones de diseño arquitectónico. La práctica de dejar registro escrito de acuerdos, asignaciones y plazos en los canales del equipo contribuyó a la trazabilidad del proceso y facilitó la coherencia del informe final.<br><br>**TP1**<br>En el TP1, el equipo evidenció dominio de la comunicación escrita técnica al documentar el diseño táctico de los nueve bounded contexts con notación por capas y diagramas de componentes, clases y base de datos, así como las secciones de diseño UX/UI del Capítulo VI. La incorporación de las correcciones del TB1, la actualización del Registro de Versiones del Informe y la redacción del Performance Report reflejan una práctica de escritura trazable y adaptada a distintas audiencias académicas y técnicas.                                  |
+| **Comunica oralmente sus ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.**    | **_Sanchez Rios, Camila Cristina_**<br>**TB1**<br>Conduje las entrevistas de diseño correspondientes a ambos segmentos objetivo del proyecto (operadores de estacionamiento y conductores frecuentes de centros comerciales), adaptando el lenguaje técnico del dominio a un vocabulario accesible para cada perfil de entrevistado. Presenté oralmente ante el equipo el análisis de los resultados de las entrevistas, explicando los patrones identificados en el comportamiento de los segmentos y su impacto sobre los artefactos de needfinding. Expuse durante las reuniones internas la propuesta de Lean UX Canvas, articulando de manera clara la relación entre los problem statements, los assumptions y las hypothesis statements, respondiendo a las observaciones del equipo con argumentos sustentados en los hallazgos del trabajo de campo.<br><br>**TP1**<br>Presenté ante el equipo las Style Guidelines y la Information Architecture de la solución (secciones 6.1 y 6.2), explicando oralmente los criterios de organización, etiquetado, búsqueda y navegación adoptados. Expuse el diseño del Landing Page UI durante las sesiones internas de revisión, articulando las decisiones de wireframe y mock-up. Asimismo, coordiné oralmente la elaboración de la keynote del TP1 y participé en la grabación del video de exposición, comunicando ante cámara las decisiones de diseño UX/UI del proyecto.<br><br>**TB2**<br>Presenté ante el equipo el video About-the-Product y su incrustación en la Landing Page (sección "Conoce SmartPark en acción"), explicando oralmente las decisiones de diseño y de experiencia; coordiné la elaboración de la keynote del TB2 y participé en la grabación del video de exposición, comunicando ante cámara el diseño UX/UI y la Landing Page de SmartPark.<br><br>**_Valle Zuta, Abel Andrés_**<br>**TB1**<br>Realicé la entrevista correspondiente al Segmento 2 del proyecto (conductores frecuentes de centros comerciales), cuidando adaptar el lenguaje al perfil del entrevistado y traduciendo los conceptos técnicos del proyecto a situaciones cotidianas para que las respuestas resultaran aprovechables por el equipo. Asimismo, participé activamente en las reuniones internas de coordinación, donde expuse oralmente los avances de mi sección del Capítulo IV, recibí observaciones de mis compañeros con apertura y propuse cómo distribuir las tareas según las fortalezas de cada integrante, argumentando las prioridades del entregable y los plazos pertinentes.<br><br>**TP1**<br>Expuse ante el equipo el diseño táctico del Capítulo V correspondiente a los bounded contexts Parking Occupancy, Traffic Flow, Energy Management y Landing & Subscription, explicando oralmente la organización en capas Domain, Application, Interface e Infrastructure y la lógica de los Component, Class y Database Diagrams. Participé en las reuniones de coordinación argumentando la distribución del trabajo del Capítulo V y respondiendo observaciones de mis compañeros durante la validación interna del entregable.<br><br>**TB2**<br>Expuse ante el equipo la aplicación web del operador y el visor 3D del gemelo digital con ocupación en vivo, explicando oralmente la actualización en tiempo real (SignalR) y las alertas de humo geolocalizadas; participé en la grabación del video de exposición del TB2 describiendo ante cámara la evidencia de ejecución de las vistas implementadas.<br><br>**_Riva Rodriguez, Elmer Augusto_**<br>**TB1**<br>Lideré las reuniones de coordinación del equipo durante el ciclo TB1, comunicando oralmente los objetivos de cada sesión de trabajo, el estado de avance por integrante y las decisiones de priorización del backlog. Expuse ante el equipo la propuesta de User Stories y Product Backlog de SmartPark, explicando los criterios de priorización por valor de negocio y el uso de story points bajo la secuencia de Fibonacci, respondiendo consultas de mis compañeros sobre los criterios de aceptación Gherkin. También presenté los diagramas C4 de la plataforma —System Landscape, Context, Container y Deployment— explicando las decisiones tecnológicas reflejadas en cada nivel de abstracción a una audiencia con distintos niveles de familiaridad con el modelo C4.<br><br>**TP1**<br>Lideré las reuniones de coordinación del equipo durante el ciclo TP1, comunicando oralmente la distribución de los Capítulos V y VI, el estado de avance por integrante y la estrategia de integración de ramas en el repositorio. Presenté ante el equipo los wireframes y wireflows de la aplicación web del operador (sección 6.4) y expliqué oralmente las correcciones aplicadas al TB1 a partir de la retroalimentación del docente.<br><br>**TB2**<br>Lideré las ceremonias del Sprint 1 (Planning, Review y Retrospective), comunicando oralmente el objetivo del sprint, el estado del backlog y los acuerdos del equipo; expuse ante el equipo la arquitectura desplegada en Azure, la documentación de servicios (OpenAPI/Swagger) y los resultados de las pruebas, adaptando el nivel técnico a la audiencia, y sustenté ante cámara el flujo núcleo de extremo a extremo en el video de exposición del TB2.<br><br>**_Morales Calderón, Hernan Emilio_**<br>**TB1**<br>Realicé la entrevista correspondiente al Segmento 1 del proyecto (operadores de estacionamientos en centros comerciales), adaptando las preguntas y el lenguaje al perfil del entrevistado para obtener información útil sobre operación, seguridad, congestión y necesidades tecnológicas. Asimismo, participé activamente en las reuniones grupales exponiendo los avances del Capítulo IV, explicando la lógica de EventStorming, Candidate Context Discovery, Domain Message Flows, Bounded Context Canvases y Context Mapping para alinear criterios técnicos con el equipo. También sustenté oralmente la propuesta de bounded contexts y relaciones entre dominios, explicando de manera clara cómo cada módulo aporta valor al sistema y respondiendo observaciones de mis compañeros durante la validación interna del entregable.<br><br>**TP1**<br>Expuse ante el equipo el diseño táctico del Capítulo V correspondiente a los bounded contexts Safety & Incidents, Parking Session, Notifications, Identity & Access Management y Digital Twin Synchronization, explicando oralmente la estructura de cada capa y la justificación de los diagramas de componentes, clases y base de datos. Participé en las reuniones de validación interna sustentando las decisiones de diseño táctico de mis bounded contexts y respondiendo las observaciones del equipo.<br><br>**TB2**<br>Expuse ante el equipo el funcionamiento del simulador IoT y la sincronización con Azure Digital Twins, explicando oralmente la cadena de telemetría y el coloreado de la ocupación en el modelo 3D; participé en la grabación del video de exposición del TB2 describiendo ante cámara el gemelo digital y su integración con la solución.<br><br>**_Qqueso Rodriguez, Britney Delhy_**<br>**TB1**<br>Presenté oralmente ante el equipo los artefactos de needfinding elaborados para el proyecto —User Personas, User Task Matrix, Empathy Maps y As-Is Scenario Maps— explicando la metodología aplicada y la relación directa entre cada artefacto y los datos recolectados en las entrevistas. Expuse el Impact Mapping de SmartPark durante una sesión interna de revisión, comunicando de forma clara los business goals, los actores involucrados y los deliverables asociados a cada hipótesis del modelo de negocio digital. Asimismo, participé en la sustentación del video de exposición del TB1, describiendo ante cámara las actividades realizadas y los artefactos de los que fui responsable.<br><br>**TP1**<br>Presenté ante el equipo los wireframes y wireflows de la aplicación móvil del conductor desarrollada en PowerApps (sección 6.4), explicando oralmente la estructura de navegación de cada pantalla y los flujos modelados. Asimismo, participé en la grabación del video de exposición del TP1, describiendo ante cámara los artefactos UX/UI de los que fui responsable.<br><br>**TB2**<br>Presenté ante el equipo la aplicación móvil del conductor y el diseño de las entrevistas de validación, explicando oralmente los flujos de la app y el plan de validación con usuarios de ambos segmentos; participé en la grabación de los videos About-the-Team y de exposición del TB2, describiendo ante cámara las actividades realizadas.                                                                                                                                                                                                                                                                            | **TB1**<br>Durante el desarrollo del TB1, los integrantes del equipo demostraron capacidad para comunicar oralmente resultados de ingeniería a audiencias diversas: desde entrevistados sin formación técnica hasta compañeros con conocimiento especializado en arquitectura de software. La distribución de roles expositivos dentro del equipo permitió que cada integrante desarrollara habilidades de comunicación oral en contextos distintos: trabajo de campo con usuarios reales, presentaciones técnicas internas y sustentación en video. En conjunto, el equipo logró articular de manera coherente la visión del producto, las decisiones arquitectónicas y los artefactos de análisis, adaptando el nivel de detalle y el vocabulario según la audiencia.<br><br>**TP1**<br>Durante el TP1, el equipo consolidó sus habilidades de comunicación oral al exponer artefactos de mayor complejidad técnica —el diseño táctico por capas de los bounded contexts, los wireframes y los wireflows— ante una audiencia interna especializada, sustentando las decisiones de diseño táctico y de UX/UI en las reuniones de validación. La grabación del video de exposición exigió adaptar el discurso a una audiencia evaluadora, manteniendo claridad y objetividad en la presentación de los avances.<br><br>**TB2**<br>Durante el TB2, el equipo evidenció su capacidad de comunicación oral al sustentar, en las ceremonias ágiles y en el video de exposición, la primera versión desplegada de los productos digitales: cada integrante expuso el funcionamiento de su componente —gemelo 3D, web del operador, app móvil, simulador IoT y backend— adaptando el discurso a una audiencia evaluadora y articulando el flujo de extremo a extremo de SmartPark. |
+| **Comunica en forma escrita ideas y/o resultados con objetividad a público de diferentes especialidades y niveles jerárquicos, en el marco del desarrollo de un proyecto en ingeniería.** | **_Sanchez Rios, Camila Cristina_**<br>**TB1**<br>Redacté el perfil de integrantes del equipo (sección 1.1.2) y el Lean UX Canvas (sección 1.2.2.4), cuidando la precisión del lenguaje para que los artefactos resultaran comprensibles tanto para evaluadores académicos como para stakeholders del dominio. Elaboré el Competitive Analysis Landscape (sección 2.1), documentando de forma estructurada las fortalezas, debilidades, oportunidades y amenazas de SmartPark frente a sus competidores, con sustento en fuentes verificables. Desarrollé el análisis de entrevistas (sección 2.2.3) y el To-Be Scenario Mapping (sección 3.1), redactando los hallazgos con objetividad y trazabilidad hacia los datos recolectados. También elaboré el Registro de Versiones del Informe y las notas de la keynote del TB1, garantizando coherencia entre el documento escrito y la presentación.<br><br>**TP1**<br>Redacté la sección 6.1 Style Guidelines, con los lineamientos generales y los específicos para Web, Mobile & Devices, y la sección 6.2 Information Architecture completa (Organization Systems, Labeling Systems, SEO Tags and Meta Tags, Searching Systems y Navigation Systems), cuidando una redacción clara y estructurada. Documenté la sección 6.3 Landing Page UI Design con el wireframe y el mock-up del Landing Page. También elaboré las notas de la keynote del TP1, garantizando coherencia entre el documento escrito y la presentación.<br><br>**TB2**<br>Redacté la sección 7.4 Video About-the-Product (introducción, URLs y evidencia del video incrustado en la Landing Page) y completé el Capítulo VI 6.4 con los Applications Wireframes, Mock-ups y User Flow Diagrams de la app móvil y la web del operador. Elaboré las notas de la keynote del TB2, garantizando coherencia entre el documento escrito y la presentación.<br><br>**_Valle Zuta, Abel Andrés_**<br>**TB1**<br>Redacté la sección 4.1 del Capítulo IV, correspondiente al Strategic-Level Attribute-Driven Design, cuidando la trazabilidad escrita entre los drivers arquitectónicos identificados y las decisiones de diseño adoptadas. Coordiné por escrito, a través del grupo de WhatsApp del equipo y de comentarios en los documentos compartidos, la organización de las tareas de cada integrante para el TB1, dejando registro permanente de los acuerdos, plazos y responsables. Asimismo, participé activamente en la recolección y validación de las fuentes bibliográficas del informe, verificando que cada referencia citada estuviera correctamente documentada en formato APA 7 y que los enlaces apuntaran a fuentes accesibles y confiables.<br><br>**TP1**<br>Redacté el Capítulo V Tactical-Level Software Design correspondiente a los bounded contexts Parking Occupancy, Traffic Flow, Energy Management y Landing & Subscription, documentando por escrito las capas Domain, Application, Interface e Infrastructure de cada contexto, junto con la descripción de sus Component, Class y Database Diagrams, manteniendo trazabilidad escrita con el diseño estratégico del Capítulo IV.<br><br>**TB2**<br>Redacté la sección 7.2.1.5 Execution Evidence, documentando por escrito las capturas de las principales vistas implementadas del operador (console con gemelo 3D, login, ocupación por nivel y simulador IoT) verificadas sobre el entorno desplegado.<br><br>**_Riva Rodriguez, Elmer Augusto_**<br>**TB1**<br>Redacté el Capítulo I completo del informe, incluyendo la descripción del startup y misión/visión de Apex Twin, los antecedentes y problemática bajo la técnica 5W+2H con sustento en fuentes cuantitativas verificadas (INRIX, BID, ACCEP, APEIM), el Lean UX Process completo y los segmentos objetivo con datos estadísticos de respaldo (secciones 1.1.1, 1.2.1, 1.2.2.1–1.2.2.3, 1.3). Elaboré la sección 3.2 con las 47 User Stories y Technical Stories de SmartPark, incluyendo criterios de aceptación en formato Gherkin con happy paths, unhappy paths y edge cases, y la sección 3.4 con el Product Backlog priorizado por valor de negocio. Redacté la sección 4.3 con los diagramas de arquitectura de software bajo C4 Model (System Landscape, Context, Container y Deployment), documentando cada decisión tecnológica con su justificación. También elaboré el Participant Performance Report y el Project Report Collaboration Insights del TB1.<br><br>**TP1**<br>Redacté las secciones 6.4.1 Applications Wireframes y 6.4.2 Applications Wireflow Diagrams correspondientes a la aplicación web del operador. Elaboré el Participant Performance Report, el Project Report Collaboration Insights y la sección Student Outcome del TP1, actualicé el Registro de Versiones del Informe e incorporé por escrito las correcciones del TB1 a partir de la retroalimentación del docente.<br><br>**TB2**<br>Redacté el Capítulo VII: 7.1.4 Software Deployment Configuration, 7.2.1.1-7.2.1.2 Sprint Planning y Backlog, 7.2.1.3 Development Evidence (los 200 commits del Sprint 1), 7.2.1.4 Testing Suite Evidence, 7.2.1.6 Services Documentation, 7.2.1.7 Software Deployment Evidence y 7.2.1.8 Team Collaboration Insights, además del 7.2.2 Sprint 2. Actualicé el Registro de Versiones del Informe, el Project Report Collaboration Insights y la sección Student Outcome del TB2, y elaboré el Participant Performance Report.<br><br>**_Morales Calderón, Hernan Emilio_**<br>**TB1**<br>Redacté la sección 4.2 del Capítulo IV correspondiente al Strategic-Level Domain-Driven Design, desarrollando los apartados de EventStorming, Candidate Context Discovery, Domain Message Flows Modeling, Bounded Context Canvases y Context Mapping, manteniendo coherencia técnica y trazabilidad con la arquitectura definida previamente. Asimismo, elaboré tablas comparativas, relaciones entre bounded contexts y descripciones formales de patrones DDD aplicados, cuidando una redacción profesional orientada tanto a lectores técnicos como académicos. También participé en la revisión final del documento verificando consistencia de formato, estructura y calidad general del entregable.<br><br>**TP1**<br>Redacté el Capítulo V Tactical-Level Software Design correspondiente a los bounded contexts Safety & Incidents, Parking Session, Notifications, Identity & Access Management y Digital Twin Synchronization, documentando por escrito las capas Domain, Application, Interface e Infrastructure de cada contexto, junto con sus Component, Class y Database Diagrams, con una redacción técnica precisa orientada a lectores especializados.<br><br>**TB2**<br>Documenté por escrito la evidencia del gemelo digital y el simulador IoT integrados en el Capítulo VII (sincronización con Azure Digital Twins mediante JSON Patch, capa anti-corrupción y modelo 3D con material por plaza), manteniendo trazabilidad técnica con el diseño táctico de los capítulos previos.<br><br>**_Qqueso Rodriguez, Britney Delhy_**<br>**TB1**<br>Redacté la sección 2.3 completa de Needfinding, elaborando las fichas de User Persona para ambos segmentos objetivo con base en los datos recolectados en las entrevistas, el User Task Matrix con análisis de frecuencia e importancia, los Empathy Maps y los As-Is Scenario Maps, garantizando que cada característica de los arquetipos tuviera trazabilidad hacia las entrevistas registradas. Desarrollé el registro de entrevistas (sección 2.2.2), redactando resúmenes descriptivos por entrevistado que incluyeron características objetivas y subjetivas de los segmentos. Elaboré el Impact Mapping (sección 3.3), documentando los business goals SMART, actores, impactos y deliverables del modelo de negocio digital de SmartPark, con la redacción de User Stories asociadas en el formato estándar.<br><br>**TP1**<br>Redacté las secciones 6.4.1 Applications Wireframes y 6.4.2 Applications Wireflow Diagrams correspondientes a la aplicación móvil del conductor desarrollada en PowerApps, describiendo por escrito cada pantalla y flujo modelado. Asimismo, avancé la redacción de las secciones de Conclusiones, Bibliografía y Anexos del informe.<br><br>**TB2**<br>Redacté la sección 7.3.1 Diseño de Entrevistas de Validación, documentando por escrito el plan de entrevistas para ambos segmentos objetivo y los user flows a validar; asimismo, avancé la redacción de las secciones de Conclusiones y Anexos del TB2. | **TB1**<br>A lo largo del TB1, el equipo demostró capacidad para comunicar por escrito resultados de ingeniería con distintos niveles de formalidad y complejidad técnica. Los artefactos redactados —desde User Personas y Empathy Maps hasta drivers arquitectónicos, Quality Attribute Scenarios y diagramas C4— evidencian que cada integrante adaptó el registro escrito a su audiencia: lenguaje accesible para artefactos de needfinding orientados al dominio, y lenguaje técnico preciso para las secciones de diseño arquitectónico. La práctica de dejar registro escrito de acuerdos, asignaciones y plazos en los canales del equipo contribuyó a la trazabilidad del proceso y facilitó la coherencia del informe final.<br><br>**TP1**<br>En el TP1, el equipo evidenció dominio de la comunicación escrita técnica al documentar el diseño táctico de los nueve bounded contexts con notación por capas y diagramas de componentes, clases y base de datos, así como las secciones de diseño UX/UI del Capítulo VI. La incorporación de las correcciones del TB1, la actualización del Registro de Versiones del Informe y la redacción del Performance Report reflejan una práctica de escritura trazable y adaptada a distintas audiencias académicas y técnicas.<br><br>**TB2**<br>En el TB2, el equipo demostró comunicación escrita técnica al documentar la ejecución del Sprint 1 -evidencias de desarrollo, pruebas, servicios, despliegue y colaboración-, la configuración de despliegue en Azure y el diseño de validación, con trazabilidad hacia los commits y artefactos reales. La actualización del Registro de Versiones del Informe, del Project Report Collaboration Insights y de la sección Student Outcome refleja una práctica de escritura ordenada y adaptada a audiencias académicas y técnicas.                                  |
 
 ---
 
@@ -7405,32 +7419,370 @@ Este wireflow muestra el proceso general mediante el cual un conductor registrad
 
 ### 6.4.3. Applications Mock-ups
 
+**Pantalla de Login y Registro para ambos segmentos**
+![Web App Mockups](assets/images/chapter-06/mock%20up%20login%20y%20registro.png)
+
 #### Web Application (Operador)
-![Web App Mockups](assets/images/chapter-06/webapp-mockups.png)
+
+**Dashboard**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-dashboard.png)
+
+**Seguridad e incidentes**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-seguridad%20e%20incidentes.png)
+
+**Flujo vehicular**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-flujo%20vehicular.png)
+
+**Eficiencia energética**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-eficiencia%20energetica.png)
+
+**Gemelo Digital 3D**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-gemelo%20digital.png)
+
+**Reportes**
+
+![Web App Wireframes](assets/images/chapter-06/mockup-reportes.png)
+
 
 #### Mobile Application (Conductor)
-![Mobile App Mockups](assets/images/chapter-06/mobile-mockups.png)
+
+**Home**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20Home.png)  
+
+**“Mi Sesión”**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20Mi%20sesion.png)  
+
+**Alertas**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20Alertas.png)  
+
+**Historial de Sesiones**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20historial.png)  
+
+**Perfil y Configuración**
+
+![Mobile App Mockups](assets/images/chapter-06/Mob%20mock%20up%20-%20perfil.png)  
 
 ### 6.4.4. Applications User Flow Diagrams
 
-#### User Flow: Operator manages an active smoke incident
-**User Goal:** Gestionar un incidente de humo desde detección hasta resolución.
+A continuación, se presentan los User Flow Diagrams para la Aplicación Web del Operador y la Aplicación Móvil del Conductor (PowerApps). Cada flujo describe la secuencia de pasos que un usuario realiza para completar una tarea específica, incluyendo decisiones y caminos alternativos.
 
-![User Flow Operator](assets/images/chapter-06/userflow-operator.png)
+#### Aplicación Web – Operador
+### User Flow: Operator monitors real-time occupancy by level and zone
 
-#### User Flow: Driver completes a parking session
-**User Goal:** Completar una sesión de estacionamiento desde ingreso hasta pago de salida.
+**User Goal:** Visualizar el estado de ocupación del estacionamiento desglosado por nivel y zona para identificar áreas con disponibilidad o congestión.
 
+- El operador inicia sesión con sus credenciales y accede al Dashboard principal.
+- El sistema muestra las tarjetas resumen con total de plazas, ocupadas, disponibles y porcentaje general, actualizándose automáticamente cada 5 segundos.
+- El operador selecciona un nivel específico desde el selector de niveles en el header.
+- El sistema actualiza la vista para mostrar únicamente las zonas del nivel seleccionado, cada una con su porcentaje de ocupación y un indicador de color: verde para ocupación baja (<60%), amarillo para ocupación media (60-85%) y rojo para ocupación alta (>85%).
+- El operador hace clic en una zona para ver el detalle.
+- El sistema muestra un plano de plazas individuales con su estado: verde (libre), gris oscuro (ocupada), amarillo (reservada), gris claro (fuera de servicio).
+
+### Caso alternativo
+
+- Si un nivel no ha recibido datos de sensores en los últimos 60 segundos, el sistema muestra un ícono de advertencia junto al nombre del nivel y un tooltip indica la última actualización disponible.
+
+# User Flow: Operator manages an active smoke incident
+
+**User Goal:** Gestionar un incidente de humo desde la detección hasta la resolución completa, documentando acciones y coordinando respuesta.
+
+- El operador inicia sesión y accede al Dashboard principal.
+- Un detector de humo en una zona específica se activa. El sistema muestra una notificación de alerta de alta prioridad con sonido audible y banner rojo en el panel de alertas.
+- El operador hace clic en la notificación o navega a la pestaña "Alertas activas".
+- El sistema muestra la lista de incidentes no resueltos, con la nueva alerta resaltada en rojo.
+- El operador selecciona la alerta para ver el detalle.
+- El sistema navega al módulo Gemelo Digital 3D, activa automáticamente la capa de seguridad, centra la cámara en el detector afectado y resalta la zona en rojo. Las rutas de evacuación comprometidas se muestran en rojo y las alternativas en verde.
+- El operador hace clic en "Confirmar recepción". El estado cambia de "Activa" a "Confirmada", registrando el nombre del operador y la marca de tiempo. Se habilita un campo de notas para documentar acciones.
+- El operador documenta las acciones tomadas en el campo de notas.
+- El operador hace clic en "Resolver".
+- El sistema cambia el estado a "Resuelta", registra la marca de tiempo de resolución, mueve la alerta al historial y elimina el resaltado del modelo 3D.
+
+Caso alternativo 1
+
+- Si el operador intenta resolver sin confirmar primero, el sistema muestra un mensaje de error: "Debe confirmar la recepción de la alerta antes de resolverla".
+
+ Caso alternativo 2
+
+- Si se activan dos detectores simultáneamente, el sistema muestra ambas alertas en el panel, ordenadas por hora, y el operador puede hacer clic en cada una para centrar el visor en cada zona.
+
+# User Flow: Operator views and analyzes incident history
+
+**User Goal:** Acceder al historial de incidentes para analizar patrones y generar reportes de seguridad.
+
+- El operador inicia sesión y navega al módulo Seguridad.
+- El sistema muestra la vista de incidentes con dos pestañas: "Alertas activas" e "Historial".
+- El operador selecciona la pestaña "Historial".
+- El sistema muestra una tabla con todos los incidentes pasados, incluyendo columnas: fecha/hora, tipo, zona, nivel, estado, operador que confirmó y notas de resolución. Los incidentes están ordenados por fecha descendente por defecto.
+- El operador aplica filtros para acotar la búsqueda: selecciona un rango de fechas, tipo de incidente y/o estado.
+- El sistema actualiza la tabla mostrando únicamente los incidentes que coinciden con los filtros aplicados.
+- El operador hace clic en un incidente para ver el detalle completo.
+
+Caso alternativo
+
+- Si no hay incidentes registrados, el sistema muestra un mensaje: "No se han registrado incidentes".
+
+# User Flow: Operator monitors vehicle flow and sets congestion thresholds
+
+**User Goal:** Visualizar el flujo vehicular en accesos y rampas, y configurar umbrales de congestión para recibir alertas proactivas.
+
+- El operador inicia sesión y navega al módulo Flujo Vehicular.
+- El sistema muestra una tabla con todos los puntos de acceso y rampas, cada uno con su nombre, tasa de flujo actual (vehículos por minuto) y un indicador circular de color: verde para flujo normal (<200 veh/min), amarillo para congestión moderada (200-300 veh/min) y rojo para congestión severa (>300 veh/min). Los datos se actualizan cada 5 segundos.
+- El operador hace clic en "Configurar alertas automáticas".
+- El sistema abre un panel lateral con campos para ajustar umbrales: "Umbral moderado (veh/min)" y "Umbral congestión (veh/min)", además de opciones de notificación (sistema, correo, SMS).
+- El operador modifica los valores y selecciona los canales de notificación deseados.
+- El operador hace clic en "Guardar configuración". El sistema guarda los cambios y aplica los nuevos umbrales.
+
+Condición:
+
+- Si una rampa supera el umbral de congestión por más de 3 minutos, el sistema agrega automáticamente una notificación al panel de alertas y cambia el indicador de esa rampa a rojo.
+- El operador hace clic en la notificación para ver los detalles y la sugerencia de acción.
+
+Caso alternativo:
+
+- Si un sensor de flujo no envía datos por más de 120 segundos, el sistema muestra el punto de acceso correspondiente con un indicador "Fuera de línea" y el último valor conocido con un ícono de advertencia.
+
+# User Flow: Operator generates and exports a custom report
+
+**User Goal:** Generar un informe personalizado de ocupación y exportarlo para presentación a gerencia o análisis posterior.
+
+- El operador inicia sesión y navega al módulo Reportes.
+- El sistema muestra la pantalla de reportes con dos secciones: "Informes personalizados" y "Reportes predefinidos".
+- El operador configura el reporte seleccionando: tipo de dato (ocupación, incidentes, flujo o energía), rango de fechas, nivel, zona y agrupación (día, semana, mes).
+- El operador hace clic en "Generar reporte".
+- El sistema consulta la API y muestra un resumen con métricas clave (ocupación promedio, máxima, mínima, total de plazas) y gráficos de barras de ocupación por día, por nivel y por hora. Debajo, una tabla detallada con todas las filas de datos.
+- El operador revisa el reporte generado.
+- El operador hace clic en "Exportar PDF" o "Exportar Excel" según el formato deseado.
+- El sistema genera y descarga el archivo con el contenido del reporte.
+
+Caso alternativo 1:
+
+- Si no hay datos para el período seleccionado, el sistema muestra un mensaje: "No hay datos para el período seleccionado".
+
+Caso alternativo 2:
+
+- El operador puede hacer clic en "Guardar reporte" para almacenar la configuración y poder ejecutarlo nuevamente sin volver a configurar todos los parámetros.
+
+# User Flow: Operator navigates the 3D Digital Twin with layers
+
+**User Goal:** Explorar el gemelo digital 3D del estacionamiento y activar diferentes capas de datos para obtener contexto espacial de ocupación, seguridad, flujo y energía.
+
+- El operador inicia sesión y navega al módulo Gemelo 3D.
+- El sistema carga y renderiza el modelo 3D del estacionamiento, mostrando todos los niveles, zonas, puntos de acceso y rampas. El visor permite interacciones de zoom, desplazamiento y rotación.
+- El operador selecciona una capa de datos desde la barra de herramientas (ej. "Ocupación", "Seguridad", "Flujo", "Energía").
+- El sistema actualiza el modelo 3D con la codificación por color correspondiente a la capa seleccionada y muestra una leyenda explicativa.
+- El operador hace clic en una zona específica del modelo 3D.
+- El sistema muestra un tooltip o panel de detalle con información contextual según la capa activa: conteo de ocupación y porcentaje (capa ocupación), estado de detectores y rutas de evacuación (capa seguridad), tasa de flujo (capa flujo), o luminosidad y ahorro estimado (capa energía).
+
+Caso alternativo:
+
+- Si el modelo 3D no puede cargar debido a un problema con Azure Digital Twins, el sistema muestra un mensaje: "Modelo 3D temporalmente no disponible", pero los paneles de datos del dashboard permanecen funcionales.
+
+# User Flow: Operator manages energy efficiency recommendations
+
+**User Goal:** Visualizar recomendaciones de atenuación de iluminación y aplicarlas para reducir el consumo energético.
+
+- El operador inicia sesión y navega al módulo Eficiencia Energética.
+- El sistema muestra un panel con todas las zonas de iluminación, indicando el porcentaje de ocupación actual, el nivel de luminosidad y una columna con la recomendación de atenuación (Sí/No) junto al ahorro estimado.
+- El operador activa la capa de energía en el visor 3D para ver las recomendaciones en contexto espacial.
+- El sistema sombrea en azul las zonas donde se recomienda atenuar (ocupación <20% y luminosidad >50%).
+- El operador hace clic en una zona recomendada.
+- El sistema muestra un panel de detalle con:
+  - ocupación actual (%),
+  - nivel de luminosidad actual,
+  - ahorro energético estimado si se atenúa,
+  - marca de tiempo de la última actualización.
+
+- El operador hace clic en "Aplicar atenuación".
+- El sistema aplica la atenuación en la zona seleccionada y actualiza el estado en el dashboard.
+
+Caso alternativo:
+
+- Si todas las zonas tienen ocupación superior al 50%, el sistema muestra un mensaje: "Todas las zonas tienen ocupación adecuada. Sin recomendaciones de atenuación en este momento".
+
+
+#### Aplicación Móvil – Conductor (PowerApps)
+
+# User Flow: Driver registers and logs in to the mobile app
+
+**User Goal:** Crear una cuenta e iniciar sesión en la aplicación móvil para acceder a las funcionalidades de estacionamiento.
+
+- El conductor abre la aplicación móvil por primera vez.
+- El sistema muestra la pantalla de bienvenida con el logo, el botón "Iniciar sesión" y el botón "Registrarse".
+- El conductor selecciona "Registrarse".
+- El sistema muestra el formulario de registro con campos obligatorios: nombre completo, correo electrónico, número de teléfono y contraseña.
+- El conductor completa todos los campos y toca "Crear cuenta".
+- El sistema valida que el email no esté registrado previamente. Si es válido, crea la cuenta y redirige al conductor a la pantalla principal de Disponibilidad.
+
+Caso alternativo 1:
+
+- Si el email ya está registrado, el sistema muestra un mensaje de error: "Este email ya está registrado" y no permite avanzar.
+
+Caso alternativo 2:
+
+- Si el conductor no tiene conexión a internet, el sistema muestra un mensaje: "Sin conexión a internet. Por favor intente más tarde".
+- En el inicio de sesión, el conductor ingresa sus credenciales y toca "Iniciar sesión".
+- El sistema autentica al usuario y, si es correcto, redirige a la pantalla principal de Disponibilidad. La sesión persiste entre aperturas de la app.
+
+# User Flow: Driver checks parking availability before entering
+
+**User Goal:** Consultar la disponibilidad de plazas por nivel y zona antes de ingresar al estacionamiento para dirigirse directamente al área con más espacios libres.
+
+- El conductor ha iniciado sesión y la aplicación muestra la pantalla principal de Disponibilidad.
+- El sistema detecta automáticamente el centro comercial más cercano mediante GPS o el conductor selecciona uno manualmente desde un desplegable.
+- El sistema muestra una lista (o mapa simplificado) de los niveles del estacionamiento con su porcentaje de disponibilidad. Los niveles están ordenados de mayor a menor disponibilidad.
+- El conductor toca un nivel para ver el detalle de sus zonas.
+- El sistema muestra las zonas dentro del nivel con el conteo de plazas disponibles por zona. La zona con mayor disponibilidad se resalta visualmente.
+- El conductor visualiza la información y decide dirigirse a la zona más disponible.
+
+Caso alternativo 1:
+
+- Si todos los niveles están al 100% de ocupación, el sistema muestra un mensaje: "No hay plazas disponibles en este momento. Por favor intente de nuevo en unos minutos", junto con la hora de la última actualización.
+
+Caso alternativo 2:
+
+- Si el conductor no tiene conexión a internet, el sistema muestra un mensaje: "No se pudieron cargar los datos de disponibilidad. Verifique su conexión".
+
+# User Flow: Driver registers vehicle location and starts session
+
+**User Goal:** Registrar la ubicación exacta donde se estacionó el vehículo e iniciar una nueva sesión de estacionamiento.
+
+- El conductor ha estacionado su vehículo y abre la aplicación en la pantalla "Mi Sesión".
+- El sistema muestra un mensaje: "No hay sesión activa. Registre su ubicación para comenzar" y un botón flotante (FAB) con el ícono de ubicación.
+- El conductor toca el FAB "Registrar Mi Ubicación".
+- El sistema muestra un formulario simple con: selector de nivel (desplegable), selector de zona (dinámico según el nivel), y un campo opcional para ingresar el código de plaza.
+- El conductor selecciona el nivel, la zona y opcionalmente ingresa el código de plaza.
+- El conductor toca "Confirmar".
+- El sistema valida que se haya seleccionado al menos el nivel. Si es correcto, guarda la ubicación, inicia una nueva sesión con la marca de tiempo actual, y muestra un mensaje de confirmación: "Ubicación guardada: Nivel B2, Zona A".
+- El sistema redirige automáticamente a la pantalla "Mi Sesión" mostrando: hora de entrada, duración transcurrida, tarifa aplicable, costo acumulado y la ubicación guardada.
+
+ Caso alternativo 1:
+
+- Si el conductor intenta confirmar sin seleccionar nivel, el sistema muestra un mensaje de error: "Por favor seleccione un nivel de estacionamiento".
+
+Caso alternativo 2.
+
+- Si el conductor ya tiene una sesión activa, el sistema muestra un mensaje: "Ya tiene una sesión activa en [ubicación anterior]. ¿Desea finalizarla e iniciar una nueva?" y permite elegir.
+
+# User Flow: Driver finds vehicle using stored location
+
+**User Goal:** Consultar la ubicación registrada del vehículo al regresar de las compras para encontrarlo rápidamente.
+
+- El conductor ha iniciado sesión y tiene una sesión de estacionamiento activa.
+- El conductor abre la aplicación y navega a la pantalla "Mi Sesión".
+- El sistema muestra los detalles de la sesión activa incluyendo la ubicación guardada (nivel, zona, código de plaza).
+- El conductor toca el botón "Encontrar mi vehículo".
+- El sistema muestra una pantalla con la ubicación registrada de forma clara y destacada, con indicación visual del nivel y zona. Si la app está configurada con coordenadas, puede abrir Google Maps o Waze con la ubicación del acceso más cercano.
+- El conductor visualiza la información y se dirige a la ubicación indicada.
+
+Caso alternativo 1:
+
+- Si el conductor no tiene una sesión activa, el sistema muestra un mensaje: "No hay sesión de estacionamiento activa. Registre su ubicación cuando estacione".
+
+Caso alternativo 2.
+
+- Si la sesión fue registrada hace más de 24 horas, el sistema muestra una advertencia: "Esta sesión comenzó hace más de 24 horas. ¿Su vehículo sigue aquí?".
+
+# User Flow: Driver monitors accumulated cost during stay
+
+**User Goal:** Consultar el costo acumulado de la estancia en tiempo real para anticipar el monto a pagar al salir.
+
+- El conductor ha iniciado sesión y tiene una sesión de estacionamiento activa.
+- El conductor abre la aplicación y navega a la pantalla "Mi Sesión".
+- El sistema muestra: hora de entrada, duración transcurrida (en minutos), tarifa aplicable (valor por minuto o por hora) y costo acumulado actualizado automáticamente cada minuto.
+- El conductor visualiza el costo acumulado en tiempo real.
+
+Caso alternativo 1:
+
+- Si el conductor no tiene una sesión activa, el sistema muestra un mensaje: "No hay sesión activa. Inicie una sesión registrando su ubicación de estacionamiento".
+
+Caso alternativo 2.
+
+- Si la tarifa cambia durante la sesión (ej. de estándar a pico), el sistema refleja el cálculo combinado con ambas tarifas y muestra una nota: "La tarifa cambió a las [hora]".
+
+# User Flow: Driver ends parking session and pays
+
+**User Goal:** Finalizar la sesión de estacionamiento, visualizar el costo total y realizar el pago digital desde la aplicación.
+
+- El conductor está listo para retirarse y abre la aplicación en la pantalla "Mi Sesión".
+- El sistema muestra los detalles de la sesión activa y el costo acumulado actualizado.
+- El conductor toca el botón "Finalizar sesión".
+- El sistema muestra un modal de confirmación: "¿Está seguro de que desea finalizar su sesión?".
+- El conductor confirma.
+- El sistema marca la sesión como completada con la marca de tiempo de salida y muestra un resumen con: hora de entrada, hora de salida, duración total y costo total.
+- El conductor toca "Pagar ahora".
+- El sistema redirige al flujo de pago integrado (Yape, Plin, tarjeta) y procesa el pago.
+- El sistema muestra un comprobante de pago y guarda la sesión en el historial.
+
+Caso alternativo 1:
+
+- Si el conductor toca "Cancelar" en el modal de confirmación, la sesión permanece activa.
+
+Caso alternativo 2.
+
+- Si el conductor ya ha finalizado la sesión y toca el botón nuevamente, el sistema muestra un mensaje: "Esta sesión ya ha sido completada".
+
+# User Flow: Driver views parking session history
+
+**User Goal:** Consultar el historial de sesiones de estacionamiento anteriores para llevar control de visitas y gastos.
+
+- El conductor ha iniciado sesión y navega a la pestaña "Historial" en la barra inferior.
+- El sistema muestra una lista de sesiones pasadas, cada una mostrando: fecha, nombre de la instalación, nivel/zona, duración y costo total. Las sesiones están ordenadas por fecha descendente (más reciente primero).
+- El conductor toca una sesión para ver el detalle completo.
+- El sistema muestra información detallada de la sesión seleccionada y el comprobante de pago.
+
+Caso alternativo:
+
+- Si el conductor no tiene sesiones pasadas, el sistema muestra un mensaje: "Aún no tiene sesiones de estacionamiento. Sus sesiones aparecerán aquí después de su primera visita".
+
+# User Flow: Driver receives and views a smoke alert notification
+
+**User Goal:** Recibir una notificación push ante un incidente de humo en la zona donde está estacionado el vehículo y visualizar los detalles para tomar acción.
+
+- El conductor tiene una sesión de estacionamiento activa en una zona específica (ej. Zona B, Nivel B2).
+- Un detector de humo en la misma zona se activa.
+- El sistema procesa el evento y envía una notificación push al dispositivo del conductor a través de Firebase Cloud Messaging.
+- El dispositivo del conductor recibe la notificación. El título es "Alerta de Seguridad - Humo Detectado" y el cuerpo indica la zona, nivel y una acción recomendada (ej. "Diríjase a la salida más cercana").
+- El conductor toca la notificación.
+- El sistema abre la aplicación directamente en la pantalla de detalle de la alerta, mostrando: tipo de alerta, zona y nivel afectados, marca de tiempo, estado actual y acciones recomendadas.
+- El conductor visualiza la información y sigue las instrucciones de evacuación si es necesario.
+
+Caso alternativo 1:
+
+- Si el conductor ha desactivado las notificaciones push, al abrir la aplicación se muestra un banner de alerta dentro de la app con la información de la alerta.
+
+Caso alternativo 2:
+
+- Si la alerta ha sido resuelta antes de que el conductor la consulte, el sistema muestra el estado como "Resuelta" con la marca de tiempo de resolución y un mensaje: "Esta alerta ha sido resuelta. Las operaciones normales se han reanudado".
+
+# User Flow: Driver manages notification preferences
+
+**User Goal:** Configurar las preferencias de notificaciones para controlar qué alertas se reciben.
+
+- El conductor ha iniciado sesión y navega a la pestaña "Perfil".
+- El sistema muestra la pantalla de perfil con opciones de edición de datos personales, gestión de métodos de pago y configuración de notificaciones.
+- El conductor encuentra la sección de Preferencias de notificación con toggles para activar/desactivar diferentes tipos de alertas.
+- El conductor activa el toggle de "Alertas de Seguridad" para recibir notificaciones push de incidentes de humo.
+- El sistema guarda la preferencia y confirma el cambio.
+- El conductor desactiva el toggle de "Actualizaciones de Disponibilidad" para dejar de recibir notificaciones sobre cambios de disponibilidad.
+- El sistema guarda la preferencia, pero mantiene las alertas de seguridad activas independientemente de esta configuración (las alertas de seguridad no se pueden desactivar).
+  
 ![User Flow Driver](assets/images/chapter-06/userflow-driver.png)
 
 ## 6.5. Applications Prototyping
 
-_(Prototipos de UI con simulación de interacción y navegación. Para cada aplicación: 1 screenshot del video y enlace al video subido en Microsoft Stream.)_
-
 ### Prototype: Web Application (Operador)
-![Web App Prototype Screenshot](assets/images/chapter-06/webapp-prototype-screenshot.png)
+![Web App Prototype Screenshot](assets/images/chapter-06/webproto.png)
 
-**URL del video:** `https://web.microsoftstream.com/...`
+**URL del video:** `https://canva.link/515c7mgwcyh1xpj`
 
 ### Prototype: Mobile Application (Conductor)
 ![Mobile App Prototype Screenshot](assets/images/chapter-06/mobile-prototype-screenshot.png)
@@ -7469,12 +7821,12 @@ _(Prototipos de UI con simulación de interacción y navegación. Para cada apli
 
 | Producto | Repositorio | Branches base |
 |---|---|---|
-| Report | `https://github.com/<org>/report` | main, develop |
-| Landing Page | `https://github.com/<org>/landing-page` | main, develop |
-| Web Application | `https://github.com/<org>/web-application` | main, develop |
-| Web Services | `https://github.com/<org>/web-services` | main, develop |
-| IoT Simulator | `https://github.com/<org>/iot-simulator` | main, develop |
-| Mobile App | `https://github.com/<org>/mobile-app` | main, develop |
+| Report | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/report` | main, develop |
+| Landing Page | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/landing-page` | main, develop |
+| Web Application | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-application` | main, develop |
+| Web Services | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-services` | main, develop |
+| IoT Simulator | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/iot-simulator` | main, develop |
+| Mobile App | `https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/mobile-app` | main, develop |
 
 **GitFlow Workflow:**
 
@@ -7513,31 +7865,141 @@ Toda nomenclatura en inglés.
 
 ### 7.1.4. Software Deployment Configuration
 
-_(Pasos para desplegar cada producto digital desde sus repositorios.)_
+Cada producto digital se despliega desde su repositorio hacia su nodo de Azure. El despliegue se ejecuta con **Az PowerShell** (módulo `Az`), que valida TLS con *schannel* y atraviesa el proxy de la red universitaria (el `az` CLI queda bloqueado por su OpenSSL estricto). Suscripción: *Azure for Students*; grupo de recursos `rg-smartpark`; región `eastus2`.
 
-#### Landing Page → Azure Static Web Apps
-1. Push a `main` dispara GitHub Actions workflow.
-2. Azure Static Web Apps build & deploy.
+> **Nota sobre los secretos:** los valores sensibles (`Jwt__Key`, `Ingest__ApiKey`, host de ADT, cadenas de conexión) se inyectan como **App Settings** del App Service o variables de entorno locales; nunca se versionan. En los bloques siguientes aparecen como marcadores `<...>`.
 
-#### Web Application (Angular) → Azure Static Web Apps
-1. `ng build --configuration production`.
-2. Deploy automatizado vía GitHub Actions.
+##### 0) Autenticación y grupo de recursos
 
-#### Web Services (ASP.NET Core) → Azure App Service
-1. `dotnet publish -c Release`.
-2. Deploy vía Azure Pipelines o GitHub Actions.
+```powershell
+# Az PowerShell valida TLS con schannel y atraviesa el proxy de la UPC
+# (el az CLI falla por su OpenSSL aislado y estricto).
+Connect-AzAccount -UseDeviceAuthentication
+Set-AzContext -Subscription "<subscription-id>"
 
-#### IoT Simulator (Node.js) → Azure Container Apps
-1. `docker build -t iot-simulator .`.
-2. Push a Azure Container Registry.
-3. Deploy a Container Apps.
+New-AzResourceGroup -Name rg-smartpark -Location eastus2
+```
 
-#### Mobile App (PowerApps)
-1. Export & Import via PowerApps Solution.
+##### Landing Page → Azure Storage static website
 
-#### Azure Digital Twins
-1. Deploy via ARM template / Bicep.
-2. Upload DTDL models via CLI.
+```powershell
+# 1) Build estático (Vite)
+npm --prefix landing-page install
+npm --prefix landing-page run build            # -> landing-page/dist
+
+# 2) Storage Account + sitio estático
+New-AzStorageAccount -ResourceGroupName rg-smartpark -Name stsmartparkland01 `
+  -Location eastus2 -SkuName Standard_LRS -Kind StorageV2
+$ctx = (Get-AzStorageAccount -ResourceGroupName rg-smartpark -Name stsmartparkland01).Context
+Enable-AzStorageStaticWebsite -Context $ctx -IndexDocument index.html -ErrorDocument404Path index.html
+
+# 3) Subir el build al contenedor $web (preservando rutas con '/')
+$root = (Resolve-Path landing-page/dist).Path
+Get-ChildItem -Recurse -File $root | ForEach-Object {
+  $blob = $_.FullName.Substring($root.Length + 1).Replace('\','/')
+  Set-AzStorageBlobContent -Context $ctx -Container '$web' -File $_.FullName -Blob $blob -Force
+}
+# URL: https://stsmartparkland01.z20.web.core.windows.net/
+```
+
+##### Web Application (Angular 20) → Azure Storage static website
+
+```powershell
+# 1) Build de producción (la URL del API va en src/environments/environment.prod.ts)
+ng build --configuration production            # -> dist/web-application/browser
+
+# 2) Storage Account + sitio estático (con fallback a index.html para el routing del SPA)
+New-AzStorageAccount -ResourceGroupName rg-smartpark -Name stsmartparkweb01 `
+  -Location eastus2 -SkuName Standard_LRS -Kind StorageV2
+$ctx = (Get-AzStorageAccount -ResourceGroupName rg-smartpark -Name stsmartparkweb01).Context
+Enable-AzStorageStaticWebsite -Context $ctx -IndexDocument index.html -ErrorDocument404Path index.html
+
+# 3) Subir el bundle
+$root = (Resolve-Path dist/web-application/browser).Path
+Get-ChildItem -Recurse -File $root | ForEach-Object {
+  $blob = $_.FullName.Substring($root.Length + 1).Replace('\','/')
+  Set-AzStorageBlobContent -Context $ctx -Container '$web' -File $_.FullName -Blob $blob -Force
+}
+# URL: https://stsmartparkweb01.z20.web.core.windows.net/
+```
+
+> El `ErrorDocument404Path = index.html` hace que los *deep links* del SPA (p. ej. `/dashboard`) sirvan `index.html` y el router de Angular resuelva la ruta en el cliente.
+
+##### Web Services (ASP.NET Core 8) → Azure App Service (Linux)
+
+```powershell
+# 1) Plan + Web App (.NET 8, Linux, plan B1)
+New-AzAppServicePlan -ResourceGroupName rg-smartpark -Name plan-smartpark `
+  -Location eastus2 -Tier Basic -WorkerSize Small -Linux
+New-AzWebApp -ResourceGroupName rg-smartpark -Name smartpark-api `
+  -Location eastus2 -AppServicePlan plan-smartpark
+Set-AzWebApp -ResourceGroupName rg-smartpark -Name smartpark-api -LinuxFxVersion "DOTNETCORE|8.0"
+
+# 2) Configuración (App Settings): SQLite embebido + JWT + gateway Demo + CORS
+$settings = @{
+  "Database__Provider"             = "sqlite"
+  "ConnectionStrings__SmartParkDb" = "Data Source=/home/smartpark.db"
+  "Jwt__Key"                       = "<secret 32+ bytes>"
+  "Adt__Mode"                      = "Demo"
+  "Ingest__ApiKey"                 = "<api-key>"
+  "Cors__WebApp"                   = "https://stsmartparkweb01.z20.web.core.windows.net"
+}
+Set-AzWebApp -ResourceGroupName rg-smartpark -Name smartpark-api -AppSettings $settings
+
+# 3) Publicar
+dotnet publish src/SmartPark.Api -c Release -o ./publish
+# IMPORTANTE: empaquetar con rutas POSIX ('/'). Compress-Archive escribe '\' y en Linux
+# la lib nativa de SQLite (runtimes/linux-x64/native/libe_sqlite3.so) no carga
+# -> 500 DllNotFoundException 'e_sqlite3'. Por eso se zipea con Python (forward slashes):
+python -c "import shutil; shutil.make_archive('api','zip','publish')"
+Publish-AzWebApp -ResourceGroupName rg-smartpark -Name smartpark-api -ArchivePath ./api.zip -Force
+# Swagger: https://smartpark-api.azurewebsites.net/swagger
+```
+
+##### IoT Simulator (Node.js) → ejecución on-demand
+
+```powershell
+cd iot-simulator; npm install
+# .env: ADT_HOST=<adt-host>; INGEST_API_KEY=<api-key>; API_BASE=https://smartpark-api.azurewebsites.net
+npm run simulate     # emite telemetría de ocupación y dispara alertas de humo
+```
+Alternativamente, desde la **vista de Simulador** de la web-app, que invoca el API:
+`POST /api/v1/occupancy/simulate` (tick de ocupación) y `POST /api/v1/alerts/smoke` (header `X-Api-Key`).
+
+##### Mobile App (Power Apps)
+
+```text
+1. Power Apps > Custom connectors > Import an OpenAPI file:
+     connector/apiDefinition.swagger.json
+     Host: smartpark-api.azurewebsites.net  ·  Security: API Key (JWT Bearer)
+2. Power Apps Studio > Import canvas app:
+     CanvasApp/Src/*.pa.yaml  ->  File > Save > Publish
+```
+
+##### Azure Digital Twins + Modelo 3D
+
+```powershell
+# 1) Prerrequisitos y aprovisionamiento de la instancia ADT (adt-smartpark)
+./iot-simulator/scripts/00-prerequisites.ps1
+./iot-simulator/scripts/01-provision-azure.ps1
+# 2) Subir los modelos DTDL y sembrar el grafo (niveles, zonas, plazas)
+./iot-simulator/scripts/02-upload-models.ps1
+npm --prefix iot-simulator run seed            # scripts/03-seed-graph.mjs
+npm --prefix iot-simulator run verify          # verificación del grafo
+# 3) Generar y subir el modelo 3D (GLB) al Blob Storage que consume el visor de la web-app
+npm --prefix iot-simulator run gen:all         # genera parking-garage.glb + escena
+./iot-simulator/scripts/04-upload-3d-model.ps1 # -> Storage stsmartparkvhrz
+```
+
+**Recursos aprovisionados (grupo `rg-smartpark`, región `eastus2`):**
+
+| Recurso | Tipo Azure | Producto que sirve |
+|---|---|---|
+| `stsmartparkland01` | Storage Account (static website) | landing-page |
+| `stsmartparkweb01` | Storage Account (static website) | web-application |
+| `plan-smartpark` / `smartpark-api` | App Service Plan (Linux B1) / Web App (.NET 8) | web-services (API + SignalR) |
+| `adt-smartpark` | Azure Digital Twins | gemelo digital |
+| `stsmartparkvhrz` | Storage Account (Blob) | modelo 3D (GLB) |
 
 **Deployment Diagram (C4):**
 ![Deployment Diagram](assets/images/chapter-07/deployment-diagram.png)
@@ -7548,116 +8010,494 @@ _(Pasos para desplegar cada producto digital desde sus repositorios.)_
 
 #### 7.2.1.1. Sprint Planning 1
 
-| Sprint Planning Background | |
-|---|---|
-| **Sprint #** | Sprint 1 |
-| **Date** | YYYY-MM-DD |
-| **Time** | HH:MM AM/PM |
-| **Location** | _(Virtual / Física)_ |
-| **Prepared By** | _(Team Leader)_ |
-| **Attendees** | _(Lista de asistentes)_ |
-| **Sprint 0 Review Summary** | N/A (primer sprint) |
-| **Sprint 0 Retrospective Summary** | N/A (primer sprint) |
+El Sprint 1 inaugura la fase de construcción de SmartPark. El equipo de Apex Twin adoptó una planificación de **dos Sprints** para cubrir la totalidad del Product Backlog: el Sprint 1 se concentra en habilitar el **flujo núcleo demostrable de extremo a extremo** —Landing Page, autenticación de ambos perfiles y el gemelo digital sincronizado por el simulador IoT alimentando el dashboard 3D del operador y el mapa de disponibilidad del conductor, junto con la cadena de alerta de humo geolocalizada—, mientras que el Sprint 2 abordará las funcionalidades complementarias (flujo vehicular, eficiencia energética, gestión de sesión y costos, historiales y preferencias de notificación). A continuación se presenta el resumen de la reunión de planificación del Sprint 1.
 
-| Sprint Goal & User Stories | |
-|---|---|
-| **Sprint 1 Goal** | _(Definir el goal y la métrica de cumplimiento.)_ |
-| **Sprint 1 Velocity** | _(N story points)_ |
-| **Sum of Story Points** | _(N)_ |
+| Sprint Planning Background         |                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Sprint #**                       | Sprint 1                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Date**                           | 2026-05-19                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **Time**                           | 07:00 PM                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Location**                       | Reunión virtual vía Discord (canal `#sprint-planning`), con tablero compartido en Trello.                                                                                                                                                                                                                                                                                                                         |
+| **Prepared By**                    | Riva Rodríguez, Elmer Augusto (Scrum Master / Team Leader)                                                                                                                                                                                                                                                                                                                                                        |
+| **Attendees**                      | Riva Rodríguez, Elmer Augusto / Sánchez Ríos, Camila Cristina / Qqueso Rodríguez, Britney Delhy / Valle Zuta, Abel Andrés / Morales Calderón, Hernan Emilio                                                                                                                                                                                                                                                       |
+| **Sprint 0 Review Summary**        | No aplica por tratarse del primer Sprint de desarrollo. Como insumo de entrada, el equipo partió del Product Backlog priorizado y de los artefactos de diseño elaborados durante el TB1 y el TP1 (Strategic-Level y Tactical-Level Software Design, Style Guidelines, Information Architecture, wireframes, wireflows y el modelo de dominio en Azure Digital Twins), que constituyen la base técnica del Sprint. |
+| **Sprint 0 Retrospective Summary** | No aplica (primer Sprint de desarrollo). El equipo incorporó como lecciones del proceso previo (TB1/TP1) la conveniencia de trabajar con feature branches integradas a `develop` mediante Pull Requests, de mantener una única fuente de verdad para el modelado y de dejar registro escrito de acuerdos en los canales del equipo.                                                                               |
+
+| Sprint Goal & User Stories |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Sprint 1 Goal**          | _Our focus is on_ habilitar el flujo núcleo de SmartPark de extremo a extremo: Landing Page, autenticación de operador y conductor, y el gemelo digital en Azure Digital Twins sincronizado por el simulador IoT alimentando el dashboard 3D de ocupación con alertas de humo geolocalizadas y el mapa de disponibilidad del conductor. _We believe it delivers_ visibilidad operativa en tiempo real y contexto espacial de los incidentes _to_ los operadores de estacionamiento, y disponibilidad de plazas al alcance de la mano _to_ los conductores frecuentes. _This will be confirmed when_ se demuestre, sobre el entorno desplegado, que una alerta de humo generada por el simulador recorre toda la cadena (simulador → ADT → API/SignalR → dashboard) y se refleja geolocalizada en el visor 3D, y que el conductor consulta la disponibilidad y registra la ubicación de su vehículo desde la app. **Métrica de cumplimiento:** ≥ 90% de los Story Points comprometidos en estado *Done* y demostración exitosa de dicho flujo de extremo a extremo. |
+| **Sprint 1 Velocity**      | 95 Story Points                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Sum of Story Points**    | 94 Story Points                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 #### 7.2.1.2. Sprint Backlog 1
 
-**URL del Board:** `https://trello.com/b/...` _(o herramienta equivalente)_
+El objetivo principal del Sprint 1 es habilitar el flujo núcleo demostrable de SmartPark de extremo a extremo (Landing Page, autenticación, gemelo digital sincronizado por el simulador IoT, dashboard 3D de ocupación con alertas de humo y mapa de disponibilidad del conductor). Se seleccionaron del Product Backlog las User Stories de mayor prioridad junto con las Technical Stories que las habilitan, descompuestas en Work-Items asignados a cada integrante según su frente de desarrollo. A continuación se muestra el tablero del Sprint en Trello y la tabla de control de estado.
 
-![Sprint 1 Board](assets/images/chapter-07/sprint-1-board.png)
+El tablero del Sprint 1 se gestionó en **Trello**, organizado en tres listas (`Done`, `To-Review`, `In-Process`) con una **etiqueta de color por integrante**. Cerró con **25 work-items en `Done`**, **2 en `To-Review`** (T-23 tarjeta de alerta en vivo y T-26 despacho FCM) y **2 en `In-Process`** (T-27 y T-28, notificación push). A continuación, la captura del tablero real del equipo:
 
-| Sprint # | Sprint 1 | | | | | | |
-|---|---|---|---|---|---|---|---|
-| **User Story** | | | **Work-Item / Task** | | | | |
-| Id | Title | Id | Title | Description | Estimation (Hours) | Assigned To | Status |
-| US-07 | View Landing Page as Mall Operator | T-01 | Setup landing page repo | _(...)_ | 2 | _(Nombre)_ | Done |
-| US-07 | View Landing Page as Mall Operator | T-02 | Build hero section | _(...)_ | 4 | _(Nombre)_ | Done |
-| US-08 | View Landing Page as Driver | T-03 | Build "For Drivers" section | _(...)_ | 4 | _(Nombre)_ | Done |
-| TS-01 | Twin State Update Endpoint | T-04 | Setup ASP.NET Core project | _(...)_ | 3 | _(Nombre)_ | Done |
-| TS-01 | Twin State Update Endpoint | T-05 | Implement PATCH /api/v1/twins/{id} | _(...)_ | 6 | _(Nombre)_ | Done |
-| _(...)_ | | | | | | | |
+**URL del Board:** `https://trello.com/b/4MEW0xlJ/smart-park`
+
+![Tablero del Sprint 1 en Trello](assets/images/chapter-07/sprint-1-trello-board.png)
+
+| US Id          | US Title                                               | Task Id | Work-Item / Task                                     | Description                                                                        | Est. (h) | Assigned To     | Status     |
+|----------------|--------------------------------------------------------|---------|------------------------------------------------------|------------------------------------------------------------------------------------|----------|-----------------|------------|
+| US-01          | Sección Hero con Propuesta de Valor                    | T-01    | Maquetar sección hero + CTA                          | Hero responsivo con propuesta de valor y llamadas a la acción a registro/descarga. | 4        | Sánchez, Camila | Done       |
+| US-02          | Resumen de Funcionalidades para Operadores             | T-02    | Sección "Para Operadores"                            | Bloque con las funcionalidades del dashboard del operador.                         | 3        | Sánchez, Camila | Done       |
+| US-03          | Resumen de Funcionalidades para Conductores            | T-03    | Sección "Para Conductores"                           | Bloque con las funcionalidades de la app móvil.                                    | 3        | Sánchez, Camila | Done       |
+| US-08          | Barra de Navegación Responsiva                         | T-04    | Navbar fija responsiva                               | Barra de navegación con anclas a secciones y comportamiento móvil.                 | 3        | Sánchez, Camila | Done       |
+| US-04          | Visualización de Planes de Suscripción                 | T-05    | Tabla de planes Basic/Pro/Enterprise                 | Sección de pricing con comparativa de planes.                                      | 3        | Sánchez, Camila | Done       |
+| US-06          | Selector de Idioma                                     | T-06    | i18n inglés/español (en_US/es_419)                   | Selector de idioma y externalización de cadenas.                                   | 5        | Sánchez, Camila | Done       |
+| US-11          | Registro de Cuenta de Operador                         | T-07    | Pantalla de registro de operador (Angular)           | Formulario de registro corporativo consumiendo la API de auth.                     | 4        | Valle, Abel     | Done       |
+| US-12          | Inicio de Sesión de Operador                           | T-08    | Pantalla de login de operador (Angular)              | Login con JWT y guardado de sesión.                                                | 3        | Valle, Abel     | Done       |
+| TS-09          | Endpoints de Autenticación de Usuarios                 | T-09    | Setup ASP.NET Core 8 + EF Core                       | Estructura del Web Service como modular monolith y persistencia PostgreSQL.        | 4        | Riva, Elmer     | Done       |
+| TS-09          | Endpoints de Autenticación de Usuarios                 | T-10    | Auth JWT: registro y login                           | Endpoints `/api/v1/auth/register` y `/login` con emisión de JWT.                   | 6        | Riva, Elmer     | Done       |
+| US-13          | Registro de Conductor en App Móvil                     | T-11    | Pantalla de registro (PowerApps)                     | Registro del conductor vía conector HTTP custom.                                   | 3        | Qqueso, Britney | Done       |
+| US-14          | Inicio de Sesión de Conductor en App Móvil             | T-12    | Pantalla de login (PowerApps)                        | Login del conductor y manejo de token.                                             | 2        | Qqueso, Britney | Done       |
+| TS-10          | Sincronización del Simulador IoT con el Twin           | T-13    | Simulador Node.js de telemetría                      | Generación de telemetría sintética (ocupación, humo, flujo, luminosidad).          | 6        | Morales, Hernán | Done       |
+| TS-10          | Sincronización del Simulador IoT con el Twin           | T-14    | Sync JSON Patch a Azure Digital Twins                | Aplicación de cambios al grafo de twins y POST de alertas de humo a la API.        | 5        | Morales, Hernán | Done       |
+| TS-02          | Endpoint de Actualización de Estado del Twin           | T-15    | ACL Digital Twin Synchronization                     | Gateway anti-corrupción sobre el SDK de Azure Digital Twins.                       | 6        | Riva, Elmer     | Done       |
+| TS-02          | Endpoint de Actualización de Estado del Twin           | T-16    | Actualización de estado vía JSON Patch               | Traducción de telemetría a operaciones sobre el grafo.                             | 3        | Riva, Elmer     | Done       |
+| TS-01          | Endpoint de Consulta de Ocupación                      | T-17    | GET /api/v1/occupancy/summary y /zones               | Consulta de ocupación del lote y por nivel/zona.                                   | 5        | Riva, Elmer     | Done       |
+| US-16          | Dashboard de Ocupación en Tiempo Real                  | T-18    | Layout del dashboard del operador                    | Estructura del panel y consumo de la API de ocupación.                             | 5        | Valle, Abel     | Done       |
+| US-16          | Dashboard de Ocupación en Tiempo Real                  | T-19    | Actualización en tiempo real (SignalR)               | Suscripción al hub y refresco automático del panel.                                | 5        | Valle, Abel     | Done       |
+| US-35          | Visor del Gemelo Digital 3D                            | T-20    | Embeber 3D Scenes Studio (iframe)                    | Integración del visor 3D del gemelo en el dashboard.                               | 6        | Valle, Abel     | Done       |
+| TS-03          | Endpoint de Evento de Alerta de Humo                   | T-21    | POST /api/v1/alerts/smoke + hub SignalR              | Ingesta de alertas y push en tiempo real al dashboard.                             | 5        | Riva, Elmer     | Done       |
+| US-19          | Recepción de Alerta de Humo con Visualización Espacial | T-22    | Lógica Safety & Incident + resaltado de zona         | Registro/confirmación de la alerta y resaltado de la zona afectada en el 3D.       | 5        | Morales, Hernán | Done       |
+| US-19          | Recepción de Alerta de Humo con Visualización Espacial | T-23    | Tarjeta de alerta en vivo (Angular)                  | Componente de alerta de humo geolocalizada en el dashboard.                        | 4        | Valle, Abel     | To-Review  |
+| US-18          | Mapa de Disponibilidad para Conductores                | T-24    | Mapa de disponibilidad por zona/nivel (PowerApps)    | Vista de disponibilidad consumiendo la API de ocupación.                           | 6        | Qqueso, Britney | Done       |
+| US-27          | Registro de Ubicación del Vehículo                     | T-25    | Registro de ubicación con un toque                   | Captura y persistencia de la ubicación del vehículo.                               | 4        | Qqueso, Britney | Done       |
+| TS-05          | Endpoint de Despacho de Notificaciones                 | T-26    | Registro de device tokens + despacho FCM             | Endpoint de notificaciones push vía Firebase Cloud Messaging.                      | 5        | Riva, Elmer     | To-Review  |
+| US-32          | Notificación Push por Alerta de Humo al Conductor      | T-27    | Notification Mgmt: identificar conductores afectados | Determinar conductores con vehículo en la zona del incidente y disparar el push.   | 5        | Morales, Hernán | In-Process |
+| US-32          | Notificación Push por Alerta de Humo al Conductor      | T-28    | Recepción del push en la app (PowerApps)             | Manejo de la notificación de humo en la aplicación del conductor.                  | 3        | Qqueso, Britney | In-Process |
+| — (Constraint) | Configuración de despliegue e infraestructura          | T-29    | Provisión Azure (ADT, Storage, App Service) + CI/CD  | Aprovisionamiento del entorno y pipelines de despliegue con GitHub Actions.        | 6        | Riva, Elmer     | Done       |
+
+> Los Story Points se asocian a la User Story completa; las horas de estimación corresponden a la descomposición en Work-Items. La suma de Story Points de las User Stories comprometidas en el Sprint 1 es **94** (ver 7.2.1.1). El task de configuración (T-29) responde a un *constraint* general de infraestructura y no depende de una User Story en particular.
 
 #### 7.2.1.3. Development Evidence for Sprint Review
 
-_(Resumen de avances en implementación. Tabla de commits por repositorio.)_
+Durante el Sprint 1 el equipo construyó y desplegó el **flujo núcleo de extremo a extremo** distribuido en cinco repositorios de producto (más el repositorio del informe), siguiendo un flujo de ramas **feature → `develop` (Pull Request / merge `--no-ff`) → release a `main`**. En total se registraron **200 commits** en los repositorios de producto. A continuación se listan **todos los commits del Sprint 1**, agrupados por repositorio y en orden cronológico (los identificadores son los hashes reales de cada commit; la organización en GitHub es `upc-pre-202601-1ASI0728-10042-smartpark`).
 
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/landing-page` | `feature/hero-section` | `abc1234` | feat: add hero section | Implements landing page hero with primary CTA | YYYY-MM-DD |
-| `<org>/web-services` | `feature/ts-01-twin-update` | `def5678` | feat(twins): add PATCH endpoint for twin state updates | Implements UpdateOccupancyStateCommand and handler | YYYY-MM-DD |
-| _(...)_ | | | | | |
+**`web-application`** — Abel Andrés Valle Zuta (`@AndresVZ23`) · 75 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `2208019` | 2026-05-24 | chore: scaffold Angular 20 workspace for SmartPark web application |
+| 2 | `ac37441` | 2026-05-24 | chore: add environment config pointing to SmartPark API |
+| 3 | `cb52223` | 2026-05-25 | style: add SmartPark design tokens and global theme |
+| 4 | `b34f529` | 2026-05-26 | feat(core): add application shell with sidenav and toolbar |
+| 5 | `f7743c4` | 2026-05-27 | feat(core): add routing with lazy-loaded dashboard route |
+| 6 | `1b50022` | 2026-05-28 | Merge feature/core-layout into develop |
+| 7 | `cd50637` | 2026-05-29 | feat(auth): add authentication models and contracts |
+| 8 | `fa9eb7a` | 2026-05-30 | feat(auth): add AuthService with login, register and token persistence |
+| 9 | `4e564a6` | 2026-05-31 | feat(auth): add login page with reactive form validation |
+| 10 | `c1a338d` | 2026-06-01 | feat(auth): add JWT interceptor with 401 handling |
+| 11 | `6b56b70` | 2026-06-02 | feat(auth): add auth and role guards to protect operator routes |
+| 12 | `60715a8` | 2026-06-02 | Merge feature/auth into develop |
+| 13 | `fd91de8` | 2026-06-03 | feat(occupancy): add occupancy models and API service |
+| 14 | `7f182b1` | 2026-06-04 | feat(occupancy): add summary cards component |
+| 15 | `eb2fe08` | 2026-06-05 | feat(occupancy): add SVG occupancy gauge component |
+| 16 | `4516ffa` | 2026-06-06 | feat(occupancy): wire dashboard to occupancy API with zone overview |
+| 17 | `bd0325c` | 2026-06-07 | feat(occupancy): add loading and error states with manual refresh |
+| 18 | `d85aa65` | 2026-06-08 | feat(occupancy): handle degraded mode when digital twin is unavailable |
+| 19 | `c0ba1ec` | 2026-06-08 | Merge feature/occupancy-dashboard into develop |
+| 20 | `f52d87f` | 2026-06-09 | feat(zones): add zones list view with congestion badges |
+| 21 | `a6b8f1b` | 2026-06-10 | feat(zones): add zone detail with parking spaces grid |
+| 22 | `3fc3544` | 2026-06-11 | feat(zones): add state filters to the spaces grid |
+| 23 | `55ddbfa` | 2026-06-11 | Merge feature/zones into develop |
+| 24 | `5c9da3d` | 2026-06-12 | feat(alerts): add smoke alert models and REST service |
+| 25 | `89841b7` | 2026-06-13 | feat(alerts): add active smoke alerts panel and page |
+| 26 | `c488ad4` | 2026-06-14 | chore: add @microsoft/signalr dependency for real-time alerts |
+| 27 | `be1c20a` | 2026-06-14 | feat(alerts): add SignalR client for real-time smoke alerts |
+| 28 | `dbdaa19` | 2026-06-15 | feat(alerts): push live SignalR alerts into the panel with status indicator |
+| 29 | `89c13fd` | 2026-06-16 | feat(alerts): add toast notifications for incoming smoke alerts |
+| 30 | `b1b3d23` | 2026-06-16 | Merge feature/smoke-alerts into develop |
+| 31 | `5b901d8` | 2026-06-17 | feat(core): show current user and logout in the toolbar |
+| 32 | `1035908` | 2026-06-17 | Merge feature/session-ui into develop |
+| 33 | `ccf4618` | 2026-06-18 | test: add unit tests for AuthService, JWT interceptor and gauge |
+| 34 | `67d759a` | 2026-06-18 | Merge feature/tests into develop |
+| 35 | `a1657dc` | 2026-06-19 | ci: add build and test workflow |
+| 36 | `aa9c809` | 2026-06-19 | docs: document architecture, features and consumed API in README |
+| 37 | `de5056f` | 2026-06-19 | Merge feature/ci-docs into develop |
+| 38 | `9fc1ae5` | 2026-06-19 | Release: SmartPark operator web application v1 (Angular 20) |
+| 39 | `e33adcd` | 2026-06-19 | feat(ui): expand design system with spacing, radius, focus and skeleton tokens |
+| 40 | `c3580fa` | 2026-06-19 | feat(ui): add icon, skeleton and empty-state shared components |
+| 41 | `1609339` | 2026-06-19 | feat(notifications): add global notification store and resilient SignalR client |
+| 42 | `6a025e6` | 2026-06-19 | feat(a11y): make toasts accessible with aria-live, icons and hover-pause |
+| 43 | `3f26822` | 2026-06-19 | feat(core): overhaul app shell with SVG icons, mobile sidenav, bell and a11y |
+| 44 | `0dd8920` | 2026-06-19 | fix(auth): auto-logout on token expiry, redirect on role and guard login route |
+| 45 | `6470933` | 2026-06-19 | feat(auth): scope JWT to API requests and preserve return url on 401 |
+| 46 | `3ac2d1c` | 2026-06-19 | feat(auth): improve login accessibility, email normalization and nav fallback |
+| 47 | `7e04afd` | 2026-06-19 | feat(occupancy): auto-refresh dashboard with skeletons and resilient states |
+| 48 | `e6c28c7` | 2026-06-19 | feat(occupancy): polish gauge, summary cards and zone overview |
+| 49 | `9458f18` | 2026-06-19 | feat(zones): add skeletons, error states, reactive detail and a11y |
+| 50 | `41e14ad` | 2026-06-19 | feat(alerts): merge live and API alerts with accessible panel and reconnect |
+| 51 | `c10e498` | 2026-06-19 | docs: document accessibility, real-time notifications and UX improvements |
+| 52 | `4f1f851` | 2026-06-19 | Merge feature/ux-improvements into develop |
+| 53 | `1bea07e` | 2026-06-19 | Release: UX and accessibility overhaul of the operator panel |
+| 54 | `6a60700` | 2026-06-19 | fix(core): make layout fill full viewport height |
+| 55 | `ba2f471` | 2026-06-19 | Merge fix/layout-full-height into develop |
+| 56 | `50a35c9` | 2026-06-19 | Release: fix full-height layout |
+| 57 | `8dda388` | 2026-06-19 | chore: add @google/model-viewer for 3D rendering |
+| 58 | `f017cce` | 2026-06-19 | feat(twin): embed digital twin 3D viewer in the operator panel |
+| 59 | `13b3cdf` | 2026-06-19 | Merge feature/twin-3d-viewer into develop |
+| 60 | `aa0b241` | 2026-06-19 | Release: digital twin 3D viewer |
+| 61 | `48ede0e` | 2026-06-19 | feat(simulator): add IoT simulator view to trigger live smoke alerts |
+| 62 | `ae92ad7` | 2026-06-20 | Merge feature/iot-simulator-view into develop |
+| 63 | `3a6687b` | 2026-06-20 | Release: IoT simulator view for validation interviews |
+| 64 | `c2e4727` | 2026-06-20 | style: align web app to SmartPark design system (teal/cream/Inter) |
+| 65 | `efba1eb` | 2026-06-20 | Merge feature/design-system into develop |
+| 66 | `e3fec92` | 2026-06-20 | Release: design system alignment |
+| 67 | `fdae6bd` | 2026-06-20 | feat(twin): show live occupancy in 3D viewer and add occupancy to simulator |
+| 68 | `4975b15` | 2026-06-20 | Merge feature/twin-occupancy-3d into develop |
+| 69 | `9c5701b` | 2026-06-20 | Release: 3D occupancy visualization and occupancy simulator |
+| 70 | `7c7e5ca` | 2026-06-20 | docs(simulator): add usage guide to the IoT simulator page |
+| 71 | `53d510e` | 2026-06-20 | Merge feature/simulator-guide into develop |
+| 72 | `905b9a8` | 2026-06-20 | Release: simulator usage guide |
+| 73 | `6241eb0` | 2026-06-20 | feat(console): 3D-centric operator console with light sidebar (align to wireframes) |
+| 74 | `44db416` | 2026-06-20 | Merge feature/operator-console-wireframe into develop |
+| 75 | `3707e01` | 2026-06-20 | Release: operator console aligned to wireframes |
+
+**`web-services`** — Elmer Riva Rodríguez (`@elmer-riva`) · 71 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `f8fe2e9` | 2026-05-25 | chore: initialize web-services repository |
+| 2 | `9b42fc5` | 2026-05-25 | chore: scaffold DDD solution (Domain, Application, Infrastructure, Api, Tests) |
+| 3 | `3a5d84b` | 2026-05-26 | feat(domain): add DDD shared kernel (Entity, AggregateRoot, ValueObject, domain events) |
+| 4 | `06658e1` | 2026-05-26 | Merge pull request: feature/solution-and-kernel into develop |
+| 5 | `ea238c7` | 2026-05-27 | feat(identity): add Email value object and UserRole |
+| 6 | `71556e7` | 2026-05-27 | feat(identity): add UserAccount aggregate and UserRegistered domain event |
+| 7 | `3d06904` | 2026-05-27 | feat(identity): add IUserRepository port |
+| 8 | `3cf479d` | 2026-05-27 | Merge pull request: feature/identity-domain into develop |
+| 9 | `6de3c6e` | 2026-05-28 | feat(safety): add SmokeReading value object and IncidentStatus |
+| 10 | `a94503a` | 2026-05-28 | feat(safety): add Incident aggregate with lifecycle behavior and events |
+| 11 | `e9be363` | 2026-05-28 | feat(safety): add IIncidentRepository port |
+| 12 | `8d0c8a0` | 2026-05-28 | Merge pull request: feature/safety-domain into develop |
+| 13 | `9b40c59` | 2026-05-29 | feat(session): add Money and VehicleLocation value objects |
+| 14 | `105bbb5` | 2026-05-29 | feat(session): add ParkingSession aggregate (start, locate, finalize) |
+| 15 | `ad1c905` | 2026-05-29 | feat(session): add IParkingSessionRepository port |
+| 16 | `1e2ba92` | 2026-05-29 | Merge pull request: feature/parking-session-domain into develop |
+| 17 | `4303c0f` | 2026-05-30 | feat(notifications): add DeviceToken entity and repository port |
+| 18 | `7b88e9f` | 2026-05-30 | Merge pull request: feature/notifications-domain into develop |
+| 19 | `330120c` | 2026-05-31 | feat(app): add IUnitOfWork and security ports (IPasswordHasher, IJwtTokenService) |
+| 20 | `32736f1` | 2026-05-31 | feat(app): add IDigitalTwinGateway port and read-side contracts |
+| 21 | `5351f3b` | 2026-05-31 | feat(app): add INotificationService port |
+| 22 | `9328d2e` | 2026-05-31 | Merge pull request: feature/application-abstractions into develop |
+| 23 | `afa214a` | 2026-06-01 | feat(app-identity): add RegisterUser use case (TS-09) |
+| 24 | `92294ea` | 2026-06-01 | feat(app-identity): add Login use case (TS-09) |
+| 25 | `78e923f` | 2026-06-01 | Merge pull request: feature/identity-application into develop (TS-09) |
+| 26 | `c601f3a` | 2026-06-02 | feat(app-occupancy): add occupancy summary and zones queries with degraded mode (TS-01) |
+| 27 | `f35d8ec` | 2026-06-02 | feat(app-occupancy): add spaces-by-zone query |
+| 28 | `9e61811` | 2026-06-02 | Merge pull request: feature/parking-operations-application into develop (TS-01) |
+| 29 | `e1b4a65` | 2026-06-03 | feat(session): add active-sessions-by-location query to repository port |
+| 30 | `c677eb3` | 2026-06-03 | feat(app-safety): add IngestSmokeAlert use case (persist, update twin, notify) (TS-03) |
+| 31 | `3cc58ca` | 2026-06-03 | Merge pull request: feature/safety-application into develop (TS-03) |
+| 32 | `62c8cd9` | 2026-06-04 | feat(app-notifications): add RegisterDeviceToken use case (TS-05) |
+| 33 | `2aeb36b` | 2026-06-04 | Merge pull request: feature/notifications-application into develop (TS-05) |
+| 34 | `c4c8856` | 2026-06-05 | feat(infra): add EF Core DbContext and entity configurations with value-object conversions |
+| 35 | `3282fb0` | 2026-06-06 | feat(infra): add EF repository implementations for the four bounded contexts |
+| 36 | `923531e` | 2026-06-06 | Merge pull request: feature/infrastructure-persistence into develop |
+| 37 | `2d2e6da` | 2026-06-07 | feat(infra-twin): add Azure Digital Twins gateway with read queries |
+| 38 | `f4f4349` | 2026-06-08 | feat(infra-twin): implement smoke-state JSON Patch update and ADT health check (TS-02) |
+| 39 | `c3f44d7` | 2026-06-08 | Merge pull request: feature/infrastructure-digital-twins into develop (TS-02) |
+| 40 | `53552ac` | 2026-06-09 | feat(infra-identity): add PBKDF2 password hasher |
+| 41 | `2647398` | 2026-06-09 | feat(infra-identity): add JWT token service (HMAC-SHA256) |
+| 42 | `de0105c` | 2026-06-09 | Merge pull request: feature/infrastructure-identity into develop |
+| 43 | `ded6fda` | 2026-06-10 | feat(infra-notifications): add FCM push dispatch service (TS-05) |
+| 44 | `ad0f810` | 2026-06-10 | feat(infra): add AddInfrastructure DI extension wiring all adapters |
+| 45 | `0a2331c` | 2026-06-10 | Merge pull request: feature/infrastructure-notifications into develop (TS-05) |
+| 46 | `792be12` | 2026-06-11 | feat(app): add AddApplication DI extension registering use-case handlers |
+| 47 | `994aef1` | 2026-06-11 | feat(api): configure composition root (DI, JWT auth, CORS, SignalR, Swagger) |
+| 48 | `9f6506f` | 2026-06-11 | Merge pull request: feature/api-composition into develop |
+| 49 | `1fa4e93` | 2026-06-12 | feat(api): add auth controller (register/login) |
+| 50 | `c538ce2` | 2026-06-12 | feat(api): add occupancy, smoke alerts and device tokens controllers |
+| 51 | `d831de7` | 2026-06-12 | Merge pull request: feature/api-controllers into develop |
+| 52 | `bdeb7d0` | 2026-06-13 | test(domain): add value object tests (Email, SmokeReading, Money) |
+| 53 | `cb97392` | 2026-06-13 | test(domain): add aggregate behavior and domain event tests |
+| 54 | `82bcf94` | 2026-06-13 | Merge feature/tests into develop |
+| 55 | `2ef9987` | 2026-06-14 | ci: add build and test workflow for develop and main |
+| 56 | `357c212` | 2026-06-14 | ci: add Azure App Service deployment workflow |
+| 57 | `d45ce33` | 2026-06-14 | docs: document DDD architecture and API endpoints in README |
+| 58 | `046e6ce` | 2026-06-14 | Merge feature/ci-cd-docs into develop |
+| 59 | `2bfa19b` | 2026-06-14 | Release: SmartPark API v1 (DDD) - identity, occupancy, safety, notifications |
+| 60 | `452f616` | 2026-06-19 | feat(safety): authenticate smoke ingest with shared API key |
+| 61 | `a1cdde6` | 2026-06-19 | Merge feature/secure-smoke-ingest into develop |
+| 62 | `63a2f71` | 2026-06-19 | Release: secure smoke ingestion endpoint |
+| 63 | `4325746` | 2026-06-20 | feat(persistence): support SQL Server and SQLite providers and resilient startup |
+| 64 | `5e69b0f` | 2026-06-20 | Merge feature/multi-provider-db into develop |
+| 65 | `3142c3c` | 2026-06-20 | Release: multi-provider persistence for cloud deployment |
+| 66 | `83da081` | 2026-06-20 | feat(twin): add seeded demo gateway for environments without ADT (Adt:Mode=Demo) |
+| 67 | `30d2e6e` | 2026-06-20 | Merge feature/demo-twin-gateway into develop |
+| 68 | `cbcfae3` | 2026-06-20 | Release: demo twin gateway |
+| 69 | `999665c` | 2026-06-20 | feat(twin): align demo gateway to canonical structure and add occupancy simulation |
+| 70 | `0eb80d6` | 2026-06-20 | Merge feature/coherent-twin-occupancy-sim into develop |
+| 71 | `6d3652c` | 2026-06-20 | Release: coherent twin structure + occupancy simulation |
+
+**`iot-simulator`** — Hernán Morales Calderón (`@hernancit0`) · 35 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `1f3e31f` | 2026-05-20 | chore: initialize iot-simulator project scaffold and dependencies |
+| 2 | `d1c1c94` | 2026-05-21 | feat(ontology): add core parking topology DTDL models |
+| 3 | `0160b37` | 2026-05-22 | feat(ontology): add safety and circulation DTDL models |
+| 4 | `f55dd9b` | 2026-05-23 | feat(ontology): add energy-efficiency DTDL models |
+| 5 | `99a223b` | 2026-05-23 | Merge feature/dtdl-ontology into develop |
+| 6 | `2183b0b` | 2026-05-24 | feat(lib): add Azure Digital Twins client wrapper |
+| 7 | `aef22c9` | 2026-05-25 | feat(scripts): add Azure prerequisites check and shared config |
+| 8 | `8afb87a` | 2026-05-26 | feat(scripts): provision ADT instance and upload DTDL models |
+| 9 | `98cafae` | 2026-05-26 | Merge feature/adt-connectivity into develop |
+| 10 | `7e84db0` | 2026-05-27 | feat(lib): add twin-graph layout builder and parking layout definition |
+| 11 | `b8022a3` | 2026-05-28 | feat(scripts): add graph seeding with twins and relationships |
+| 12 | `4c2514d` | 2026-05-29 | feat(scripts): add twin-graph verification script |
+| 13 | `174606f` | 2026-05-30 | feat(scripts): add Azure resources teardown script |
+| 14 | `bb8e406` | 2026-05-30 | Merge feature/graph-seeding into develop |
+| 15 | `25e3d06` | 2026-05-31 | feat(model3d): add procedural GLB garage generator |
+| 16 | `73efaed` | 2026-06-01 | build(model3d): add generated parking-garage.glb artifact |
+| 17 | `0f34ad0` | 2026-06-02 | feat(tools): add 3D preview viewer and screenshot capture |
+| 18 | `1855e77` | 2026-06-03 | feat(model3d): generate Azure 3D Scenes Studio configuration |
+| 19 | `1ff4422` | 2026-06-04 | feat(scripts): add 3D model upload to blob storage |
+| 20 | `6390500` | 2026-06-04 | Merge feature/3d-model into develop |
+| 21 | `a4e3aba` | 2026-06-05 | feat(simulator): add IoT smoke-detection simulator with twin sync |
+| 22 | `8c4908c` | 2026-06-06 | Merge feature/iot-simulator into develop |
+| 23 | `3aa55f4` | 2026-06-10 | feat(integration): add digital twin gateway port and DTOs |
+| 24 | `5b91715` | 2026-06-11 | feat(integration): add ADT gateway and API controllers (ACL) |
+| 25 | `06c2654` | 2026-06-12 | docs(integration): add ADT query catalog and integration guide |
+| 26 | `4651468` | 2026-06-12 | Merge feature/dotnet-acl into develop |
+| 27 | `0de2b4d` | 2026-06-13 | docs: add project README |
+| 28 | `7b5c150` | 2026-06-13 | Merge feature/docs into develop |
+| 29 | `e989e7a` | 2026-06-13 | Release: SmartPark digital twin v1 (ontology, graph, 3D, simulator, ACL) |
+| 30 | `1a02739` | 2026-06-19 | docs(integration): mark .NET ACL as reference and align ingest API key |
+| 31 | `856839f` | 2026-06-19 | Merge feature/integration-alignment into develop |
+| 32 | `6151155` | 2026-06-19 | Release: integration alignment notes |
+| 33 | `8f2552a` | 2026-06-20 | feat(model3d): unique material per parking space for runtime occupancy coloring |
+| 34 | `064f2cd` | 2026-06-20 | Merge feature/3d-per-space-materials into develop |
+| 35 | `226a37c` | 2026-06-20 | Release: per-space materials for occupancy visualization |
+
+**`mobile-app`** — Britney Qqueso Rodríguez (`@brit2801`) · 11 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `230151d` | 2026-06-09 | chore: initialize mobile-app with API OpenAPI source |
+| 2 | `d008a27` | 2026-06-10 | feat(connector): generate Power Apps custom connector from the API |
+| 3 | `76fa550` | 2026-06-10 | Merge feature/connector into develop |
+| 4 | `0b9821b` | 2026-06-11 | feat(auth): add driver login screen and app entry point |
+| 5 | `f939db2` | 2026-06-12 | feat(auth): add driver registration screen |
+| 6 | `e543930` | 2026-06-13 | feat(home): add availability home with push opt-in and logout |
+| 7 | `48b7120` | 2026-06-14 | feat(zones): add zones gallery with occupancy |
+| 8 | `090b1cc` | 2026-06-14 | Merge feature/driver-app into develop |
+| 9 | `25d6432` | 2026-06-15 | docs: add build, connector and publish guide |
+| 10 | `15e4b7b` | 2026-06-15 | Merge feature/docs into develop |
+| 11 | `18ff289` | 2026-06-16 | Release: SmartPark driver app v1 (connector + canvas source) |
+
+**`landing-page`** — Camila Sánchez Ríos (`@C4m174`) · 8 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `de90f91` | 2026-06-03 | . |
+| 2 | `d68d539` | 2026-06-03 | Add: landing |
+| 3 | `955bd07` | 2026-06-19 | feat(cta): link landing to operator panel and driver app |
+| 4 | `eed3a92` | 2026-06-19 | Merge feature/connect-operator-panel into develop |
+| 5 | `e72ef06` | 2026-06-19 | Release: connect landing CTAs to operator panel and app |
+| 6 | `90169e4` | 2026-06-20 | fix(cta): point operator panel link to deployed web app |
+| 7 | `b49b6c2` | 2026-06-20 | Merge fix/panel-link into develop |
+| 8 | `a5ff47c` | 2026-06-20 | Release: fix operator panel link |
 
 #### 7.2.1.4. Testing Suite Evidence for Sprint Review
 
-_(Conjunto de Unit Tests, Integration Tests y Acceptance Tests automatizados, para Web Services.)_
+La estrategia de pruebas del Sprint 1 priorizó el **núcleo de dominio** del Web Service (`web-services`), donde residen las reglas de negocio críticas: identidad y acceso, sesión de estacionamiento, incidentes de seguridad, notificaciones y los objetos de valor que las sostienen. Las pruebas están automatizadas con **xUnit 2.5** (con `coverlet.collector` para cobertura) en el proyecto `SmartPark.Domain.Tests`, y se ejecutan en cada push mediante el pipeline de CI (`ci: add build and test workflow for develop and main`).
 
-**Unit Tests implementados:**
-- `ParkingSpaceTests` — valida transiciones de estado.
-- `OccupancyCalculationServiceTests` — valida cálculos agregados.
+La suite consta de **41 métodos de prueba** que, con sus casos parametrizados (`[Theory] / [InlineData]`), suman **65 ejecuciones**, todas en verde:
 
-**Acceptance Tests (.feature):**
+```text
+Passed!  - Failed: 0, Passed: 65, Skipped: 0, Total: 65 - SmartPark.Domain.Tests.dll (net8.0)
+```
+
+**Cobertura por bounded context y tipo de prueba:**
+
+| Bounded context | Tipo | Clase de prueba | Métodos | Qué valida |
+|---|---|---|---|---|
+| Identity & Access | Objeto de valor | `EmailTests` | 5 | Normalización (trim + minúsculas), formato inválido, igualdad estructural insensible a mayúsculas, `ToString`. |
+| Parking Session | Objeto de valor | `MoneyTests` | 7 | Redondeo a 2 decimales *away-from-zero*, no-negatividad, moneda por defecto/personalizada, `Zero`, igualdad por monto+moneda. |
+| Safety & Incident | Objeto de valor | `SmokeReadingTests` | 5 | Umbral de alerta de 200 ppm (límites 199/200/201), no-negatividad, igualdad por ppm, constante del umbral. |
+| Parking Session | Objeto de valor | `VehicleLocationTests` | 4 | Normalización (trim + mayúsculas), vacío inválido, igualdad estructural, `ToString`. |
+| Identity & Access | Agregado | `UserAccountTests` | 4 | Registro + evento `UserRegistered`, rol Operator/Driver, rechazo de nombre/hash en blanco. |
+| Safety & Incident | Agregado | `IncidentTests` | 6 | Alerta + evento `SmokeAlertRaised`, validaciones, `Confirm`/`Resolve`, **idempotencia** (no re-emite el evento). |
+| Parking Session | Agregado | `ParkingSessionTests` | 6 | Inicio + evento, registro de ubicación + evento, finalización con costo, **idempotencia** de `Finalize`. |
+| Notifications | Entidad | `DeviceTokenTests` | 4 | Registro con campos correctos, validaciones, plataforma por defecto (`Android`). |
+| **Total** | | **8 clases** | **41 / 65 casos** | **4 bounded contexts + 4 objetos de valor** |
+
+Las pruebas verifican no solo el camino feliz sino también las **invariantes de dominio** (montos no negativos, correos válidos, ubicaciones obligatorias), la **emisión de eventos de dominio** (`UserRegistered`, `SmokeAlertRaised`, `IncidentResolved`, `ParkingSessionStarted`, `VehicleLocationRegistered`) y la **idempotencia** de las transiciones de estado (resolver un incidente o finalizar una sesión dos veces no produce efectos secundarios duplicados).
+
+**Acceptance Tests (especificación de comportamiento cubierta por la suite de dominio):**
 
 ```gherkin
-Feature: Twin State Update
-  As a developer
-  I want to update twin state via PATCH endpoint
-  So that the simulator can send telemetry
+Feature: Smoke Alert Lifecycle
+  As an operator
+  I want smoke incidents to be raised and resolved correctly
+  So that the safety chain reacts to detector readings
 
-  Scenario: Successful twin update
-    Given a valid twin with id "space-001"
-    When I send PATCH /api/v1/twins/space-001 with valid JSON Patch
-    Then the response status is 204
+  Scenario: A reading above threshold raises an alert
+    Given a smoke detector "DET-01" in zone "zone-a" on level 2
+    When a reading of 320 ppm is registered
+    Then a new incident is created in status "Alert"
+    And a SmokeAlertRaised domain event carrying 320 ppm is emitted
 
-  Scenario: Twin not found
-    Given a twin id "nonexistent" does not exist
-    When I send PATCH /api/v1/twins/nonexistent
-    Then the response status is 404
+  Scenario: Resolving an incident is idempotent
+    Given an incident already in status "Resolved"
+    When it is resolved again
+    Then its status and resolution timestamp remain unchanged
+    And no second IncidentResolved event is emitted
+
+Feature: Parking Session Lifecycle
+  As a driver
+  I want my parking session to track its location and final cost
+  So that I am billed correctly
+
+  Scenario: Start, locate and finalize a session
+    Given a started parking session for a valid driver
+    When I register the vehicle location "A-01"
+    And I finalize the session with a cost of 15.50 PEN
+    Then the session becomes inactive with an end timestamp
+    And its accumulated cost is 15.50 PEN
 ```
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
 |---|---|---|---|---|---|
-| `<org>/web-services` | `feature/ts-01-tests` | `ghi9012` | test(twins): add acceptance tests for twin update | Includes successful and not-found scenarios | YYYY-MM-DD |
+| `smartpark/web-services` | `feature/tests` | `bdeb7d0` | test(domain): add value object tests (Email, SmokeReading, Money) | Cubre normalización, validación, umbral de alerta y redondeo monetario. | 2026-06-13 |
+| `smartpark/web-services` | `feature/tests` | `cb97392` | test(domain): add aggregate behavior and domain event tests | Valida registro de usuario, ciclo de incidentes y sesión de estacionamiento. | 2026-06-13 |
+| `smartpark/web-services` | `main` | `595c98b` | test(domain): expand domain test suite across all bounded contexts | Tests exhaustivos de VOs (Email, Money, SmokeReading, VehicleLocation) y agregados/entidad (UserAccount, Incident, ParkingSession, DeviceToken): ciclo de vida, invariantes, eventos e idempotencia. 41 métodos / 65 casos. | 2026-06-20 |
 
 #### 7.2.1.5. Execution Evidence for Sprint Review
 
-_(Screenshots de las principales vistas implementadas + enlace a video demo.)_
+A continuación se muestran las capturas de las principales vistas implementadas y desplegadas durante el Sprint 1, tomadas sobre el **entorno en la nube** (Azure). El flujo núcleo es plenamente operativo: la landing enlaza al panel, el operador autentica con JWT, el console renderiza el gemelo 3D con la ocupación coloreada en vivo y el simulador IoT alimenta la cadena de datos y de alertas.
 
-![Sprint 1 Landing Hero](assets/images/chapter-07/sprint-1-landing.png)
+> 💡 **Estas vistas se pueden recorrer en vivo.** Hay una cuenta de operador de demostración para que el evaluador inicie sesión y navegue el panel desplegado — ver el recuadro **🔑 Acceso de demostración** en la sección **7.2.1.7**.
 
-**URL del video demo:** `https://web.microsoftstream.com/...`
+**Landing Page (`landing-page`)** — propuesta de valor y CTA hacia el panel del operador y la app del conductor:
+
+![Landing Page desplegada](assets/images/chapter-07/sprint-1-landing.png)
+
+**Inicio de sesión del operador (`web-application`)** — login con JWT, alineado al design system (teal/cream/Inter):
+
+![Login del operador](assets/images/chapter-07/sprint-1-login.png)
+
+**Console del operador** — gemelo digital 3D como elemento central, con la ocupación coloreada en vivo (verde libre · rojo ocupada · ámbar reservada) y el panel de ocupación por zona:
+
+![Console del operador con gemelo 3D](assets/images/chapter-07/sprint-1-console.png)
+
+**Detalle del gemelo 3D** — coloreado por plaza a partir de la ocupación real consultada al API:
+
+![Gemelo 3D con ocupación en vivo](assets/images/chapter-07/sprint-1-twin-occupancy.png)
+
+**Ocupación por nivel y zona** — vista de disponibilidad agregada con indicadores de congestión:
+
+![Ocupación por nivel](assets/images/chapter-07/sprint-1-zones.png)
+
+**Simulador IoT** — vista para activar la telemetría (ocupación) y disparar alertas de humo geolocalizadas durante las entrevistas de validación, con guía de uso:
+
+![Simulador IoT](assets/images/chapter-07/sprint-1-simulator.png)
+
+**URL del video demo:** _(se grabará el recorrido del flujo núcleo sobre el entorno desplegado como parte de la sesión de Sprint Review; las capturas anteriores constituyen la evidencia de ejecución verificada con Playwright sobre la nube.)_
 
 #### 7.2.1.6. Services Documentation Evidence for Sprint Review
 
-_(Endpoints documentados con OpenAPI relacionados con el alcance del sprint.)_
+El Web Service expone su contrato mediante **OpenAPI/Swagger** (ASP.NET Core 8, autenticación **JWT Bearer**). La siguiente tabla documenta los endpoints `/api/v1/*` que habilitan el alcance del Sprint 1; el conjunto está publicado en `https://smartpark-api.azurewebsites.net/swagger`.
 
-| Endpoint | HTTP Verb | Description | Parameters | Example Response |
-|---|---|---|---|---|
-| `/api/v1/twins/{id}` | PATCH | Updates a twin state | `id` (path), JSON Patch (body) | `204 No Content` |
-| `/api/v1/occupancy/levels/{levelId}` | GET | Returns occupancy by level | `levelId` (path) | `200 OK` with JSON array |
+| Endpoint | HTTP Verb | Auth | Description | Parameters | Example Response |
+|---|---|---|---|---|---|
+| `/api/v1/auth/register` | POST | Público | Registra un usuario (Operator/Driver). | Body: `email`, `password`, `fullName`, `role` | `201 Created` con `userId` |
+| `/api/v1/auth/login` | POST | Público | Autentica y devuelve un JWT. | Body: `email`, `password` | `200 OK` con `{ token, role }` |
+| `/api/v1/occupancy/summary` | GET | Operator | Resumen de ocupación del lote. | — | `200 OK` con `{ totalSpaces, occupiedSpaces, occupancyRate }` |
+| `/api/v1/occupancy/zones` | GET | Operator | Lista de zonas con ocupación. | — | `200 OK` con arreglo de zonas |
+| `/api/v1/occupancy/zones/{zoneId}/spaces` | GET | Operator | Espacios de una zona. | `zoneId` (path) | `200 OK` con arreglo de espacios |
+| `/api/v1/occupancy/simulate` | POST | Operator | Dispara un tick de simulación de ocupación. | — | `200 OK` / `501` si no hay simulador |
+| `/api/v1/alerts/smoke` | GET | Operator | Alertas de humo activas. | — | `200 OK` con arreglo de alertas |
+| `/api/v1/alerts/smoke` | POST | `X-Api-Key` | Ingesta de lectura de humo (IoT/simulador). | Header `X-Api-Key`; Body: `detectorId`, `zoneId`, `level`, `ppm` | `202 Accepted` |
+| `/api/v1/notifications/tokens` | POST | Driver | Registra un device token para push (FCM). | Body: `token` | `201 Created` |
 
-![Swagger UI Sprint 1](assets/images/chapter-07/sprint-1-swagger.png)
+Adicionalmente, el API publica el hub de tiempo real **SignalR** en `/hubs/alerts`, al que se suscribe el dashboard del operador para recibir las alertas de humo geolocalizadas sin polling.
+
+_Captura de la **Swagger UI en ejecución** del API (`SmartPark.Api` v1), con los endpoints agrupados por controlador (Auth, DeviceTokens, Occupancy, SmokeAlerts) y el catálogo de esquemas (DTOs):_
+
+![Swagger UI en ejecución — SmartPark API v1](assets/images/chapter-07/sprint-1-swagger.png)
 
 #### 7.2.1.7. Software Deployment Evidence for Sprint Review
 
-_(Capturas de procesos de deployment ejecutados durante el sprint.)_
+Los productos digitales se desplegaron sobre **Microsoft Azure** (suscripción *Azure for Students*, grupo de recursos `rg-smartpark`). Los frontends se publicaron como **Azure Storage static websites** y el API como **Azure App Service (Linux, .NET 8, plan B1)**; el gemelo digital y el modelo 3D ya estaban provisionados en **Azure Digital Twins** y **Azure Blob Storage** desde el repositorio `azureDigitalTwin`. Todo el despliegue se ejecutó con **Az PowerShell** (módulo `Az`), que valida TLS con *schannel* y por ello atraviesa el proxy de la red universitaria —a diferencia del `az` CLI, bloqueado por su OpenSSL estricto—.
 
-![Deployment Sprint 1](assets/images/chapter-07/sprint-1-deployment.png)
+| Componente | Nodo de despliegue | Estado | URL |
+|---|---|---|---|
+| **landing-page** | Azure Storage static website | ✅ En vivo | `https://stsmartparkland01.z20.web.core.windows.net/` |
+| **web-application** | Azure Storage static website | ✅ En vivo | `https://stsmartparkweb01.z20.web.core.windows.net/` |
+| **web-services (API)** | Azure App Service (Linux, .NET 8) | ✅ En vivo | `https://smartpark-api.azurewebsites.net/swagger` |
+| **Base de datos** | SQLite embebido en App Service | ✅ En vivo | `/home/smartpark.db` |
+| **Azure Digital Twins** | `adt-smartpark` (eastus2) | ✅ Provisionado | ADT SDK / HTTPS |
+| **Modelo 3D (GLB)** | Azure Blob Storage `stsmartparkvhrz` | ✅ Provisionado | HTTPS |
 
-**URLs desplegadas:**
-- Landing Page: `https://...`
-- Web Services: `https://...`
-- Web App: `https://...`
+> ### 🔑 Acceso de demostración — para navegar el panel del operador
+>
+> Para que el evaluador pueda **iniciar sesión y recorrer la aplicación web** sobre el entorno en vivo:
+>
+> - **URL del panel:** **https://stsmartparkweb01.z20.web.core.windows.net/**
+> - **Usuario:** `demo@smartpark.pe`
+> - **Contraseña:** `SmartPark2026`
+> - **Rol:** Operador
+>
+> _Cuenta de operador de demostración registrada en el API desplegado y verificada (login OK). El panel incluye el gemelo digital 3D con ocupación en vivo, la ocupación por nivel, las alertas de seguridad y el simulador IoT._
+
+> **Nota sobre la base de datos:** *Azure Database for PostgreSQL Flexible Server* y *Azure SQL* están restringidos por cuota/capacidad en la suscripción *Azure for Students* (probadas múltiples regiones). Para dejar el despliegue **funcional**, el backend se implementó como **multi-proveedor EF Core** (PostgreSQL · SQL Server · SQLite) y en Azure usa **SQLite embebido en el App Service**, sin servidor de BD que provisionar. En producción real bastaría cambiar `Database:Provider` y la cadena de conexión a un PostgreSQL/SQL Server gestionado.
+
+**Landing y web-app en vivo (Azure Storage static websites):**
+
+![Landing y web-app desplegadas](assets/images/chapter-07/sprint-1-webapp.png)
+
+**Verificación end-to-end en la nube** — la web-app desplegada inicia sesión contra el API desplegado (CORS + JWT + SignalR) y abre el console del operador con datos de ocupación reales:
+
+![Verificación full-stack en la nube](assets/images/chapter-07/sprint-1-deployment.png)
+
+**Diagrama de despliegue (C4):**
+
+![Diagrama de despliegue](assets/images/chapter-07/deployment-diagram.png)
 
 #### 7.2.1.8. Team Collaboration Insights during Sprint
 
-![Sprint 1 GitHub Insights](assets/images/chapter-07/sprint-1-insights.png)
+El equipo trabajó de forma **distribuida por frente de producto**, con cada integrante como responsable principal de su repositorio y con integración continua hacia `develop` mediante Pull Requests. A continuación se muestran los **insights de contribución de GitHub (Insights → Contributors)** de cada repositorio durante el Sprint, con el número de commits y las líneas añadidas/eliminadas por integrante.
 
-_(Análisis de la colaboración de cada miembro durante el sprint.)_
+**`web-services` — Riva Rodríguez, Elmer Augusto (Backend / Infra)**
+
+![Insights web-services](assets/images/chapter-07/sprint-1-insights-web-services.png)
+
+**`web-application` — Valle Zuta, Abel Andrés (Frontend operador)**
+
+![Insights web-application](assets/images/chapter-07/sprint-1-insights-web-application.png)
+
+**`iot-simulator` — Morales Calderón, Hernan Emilio (Gemelo digital / IoT)**
+
+![Insights iot-simulator](assets/images/chapter-07/sprint-1-insights-iot-simulator.png)
+
+**`mobile-app` — Qqueso Rodríguez, Britney Delhy (App móvil)**
+
+![Insights mobile-app](assets/images/chapter-07/sprint-1-insights-mobile-app.png)
+
+**`landing-page` — Sánchez Ríos, Camila Cristina (Landing / UI-UX)**
+
+![Insights landing-page](assets/images/chapter-07/sprint-1-insights-landing-page.png)
+
+**Resumen de contribución por integrante:**
+
+| Integrante | Repositorio | Commits (Insights) | Líneas (++ / --) |
+|---|---|---|---|
+| Valle Zuta, Abel Andrés | `web-application` | 50 | 15 326 ++ / 1 251 -- |
+| Riva Rodríguez, Elmer Augusto | `web-services` | 43 | 2 235 ++ / 73 -- |
+| Morales Calderón, Hernan Emilio | `iot-simulator` | 23 | 4 269 ++ / 4 -- |
+| Qqueso Rodríguez, Britney Delhy | `mobile-app` | 7 | 1 490 ++ / 0 -- |
+| Sánchez Ríos, Camila Cristina | `landing-page` | 4 | 5 287 ++ / 26 -- |
+| **Total** | **5 repositorios** | **127** | — |
+
+> **Nota sobre el conteo:** GitHub Insights contabiliza los commits **no-merge sobre la rama por defecto** (127 commits de código). El total con los commits de *merge* y *release* del flujo `feature → develop → main` asciende a **200 commits** (ver 7.2.1.3).
+
+**Análisis de la colaboración:** la distribución de commits refleja una repartición coherente con el esfuerzo técnico de cada frente —el frontend del operador y el backend concentran la mayor parte de la complejidad del flujo núcleo (visor 3D, tiempo real, autenticación, persistencia y despliegue), mientras que la landing y la app móvil, de alcance más acotado en este Sprint, requirieron menos iteraciones (aunque con un volumen alto de líneas por incluir activos y andamiaje generado)—. Más allá del conteo, la colaboración transversal fue clave: la definición del **contrato del API** (OpenAPI) por el frente de backend habilitó en paralelo el consumo desde el frontend web (Angular), la app móvil (conector custom de Power Apps) y el simulador IoT; y la **estructura canónica del gemelo** (zonas y plazas) se mantuvo como única fuente de verdad compartida entre el repositorio del gemelo, el backend y el visor 3D del frontend. El equipo sostuvo la sincronización mediante el canal de Discord y el tablero de Trello, y dejó registro escrito de los acuerdos en los Pull Requests.
+
 
 ---
 
@@ -7665,285 +8505,208 @@ _(Análisis de la colaboración de cada miembro durante el sprint.)_
 
 #### 7.2.2.1. Sprint Planning 2
 
+El Sprint 2 cierra el Product Backlog abordando las **funcionalidades complementarias** que no forman parte del flujo núcleo: el flujo vehicular (entrada/salida), la eficiencia energética por zonas de baja ocupación, la gestión de la sesión de estacionamiento y sus costos, los historiales y las preferencias de notificación, además de completar la cadena de **notificación push** al conductor (iniciada en el Sprint 1, en estado *In-Process*). La reunión partió del Sprint 1 Review y Retrospective, cuyos resúmenes se incorporan como insumo.
+
 | Sprint Planning Background | |
 |---|---|
 | **Sprint #** | Sprint 2 |
-| **Date** | YYYY-MM-DD |
-| **Time** | HH:MM AM/PM |
-| **Location** | _(Virtual / Física)_ |
-| **Prepared By** | _(Team Leader)_ |
-| **Attendees** | _(Lista de asistentes)_ |
-| **Sprint 1 Review Summary** | _(Resumen del Sprint 1: resultados a nivel de productos de software, opiniones de miembros y feedback del product owner.)_ |
-| **Sprint 1 Retrospective Summary** | _(Resumen del Sprint 1: opiniones del equipo sobre aciertos y oportunidades de mejora en su forma de trabajo.)_ |
+| **Date** | 2026-06-20 |
+| **Time** | 07:30 PM |
+| **Location** | Reunión virtual vía Discord (canal `#sprint-planning`), con tablero compartido en Trello. |
+| **Prepared By** | Riva Rodríguez, Elmer Augusto (Scrum Master / Team Leader) |
+| **Attendees** | Riva Rodríguez, Elmer Augusto / Sánchez Ríos, Camila Cristina / Qqueso Rodríguez, Britney Delhy / Valle Zuta, Abel Andrés / Morales Calderón, Hernan Emilio |
+| **Sprint 1 Review Summary** | El equipo demostró el **flujo núcleo de extremo a extremo** sobre el entorno desplegado en Azure: la Landing Page enlaza al panel; el operador inicia sesión con JWT; el console renderiza el **gemelo digital 3D** con la ocupación coloreada en vivo (verde/rojo/ámbar) y el panel de ocupación por zona; el **simulador IoT** activa la telemetría y dispara una alerta de humo que recorre la cadena (simulador → ADT/API → SignalR → dashboard) y se refleja geolocalizada en el visor 3D; y el conductor consulta disponibilidad y registra la ubicación de su vehículo desde la app móvil. Se aceptaron **25 de 29 work-items** (los 4 restantes —tarjeta de alerta en vivo, despacho FCM y las dos tareas de push— quedaron en *To-Review/In-Process* y se arrastran al Sprint 2). El cumplimiento de Story Points superó el umbral comprometido (≥ 90%). El product owner valoró especialmente el contexto espacial del incidente en el 3D y la verificación end-to-end en la nube; sugirió priorizar la confiabilidad del push al conductor y robustecer la persistencia (migrar de SQLite a un motor gestionado en producción). |
+| **Sprint 1 Retrospective Summary** | **Aciertos:** la repartición por frentes de producto con un **contrato de API (OpenAPI) acordado temprano** permitió trabajar en paralelo sin bloqueos; mantener una **única fuente de verdad** para la estructura del gemelo (zonas/plazas canónicas) evitó incoherencias entre el simulador, el backend y el visor 3D; el flujo de **feature-branches → `develop` (PR) → release a `main`** dio trazabilidad. **Oportunidades de mejora:** las restricciones de cuota de *Azure for Students* y el proxy de la red universitaria (que bloquea el `az` CLI) costaron tiempo de despliegue —se documentó el uso de **Az PowerShell** como estándar del equipo—; conviene incorporar **pruebas de integración y de aceptación automatizadas sobre el API** (no solo unit tests de dominio) y un *smoke test* end-to-end en CI; y cerrar antes los work-items de notificaciones para no arrastrarlos. **Acciones para el Sprint 2:** automatizar un test end-to-end de la cadena de alertas, estandarizar el despliegue por Az PowerShell y reservar capacidad temprana para validar el push FCM en dispositivo real. |
 
 | Sprint Goal & User Stories | |
 |---|---|
-| **Sprint 2 Goal** | _(Definir el goal y la métrica de cumplimiento.)_ |
-| **Sprint 2 Velocity** | _(N story points)_ |
-| **Sum of Story Points** | _(N)_ |
+| **Sprint 2 Goal** | _Our focus is on_ completar las funcionalidades complementarias de SmartPark: el flujo vehicular (entrada/salida), la eficiencia energética por zonas de baja ocupación, la gestión de la sesión de estacionamiento con sus costos, los historiales y las preferencias de notificación, y el cierre de la **notificación push** al conductor ante alertas de humo. _We believe it delivers_ control operativo completo y ahorro energético _to_ los operadores, y trazabilidad de su estacionamiento y avisos de seguridad oportunos _to_ los conductores. _This will be confirmed when_ se demuestre, sobre el entorno desplegado, que el operador gestiona el flujo vehicular y recibe recomendaciones de atenuación por zona, y que un conductor con sesión activa recibe un push de evacuación dentro de los 5 segundos posteriores a una alerta en su zona. **Métrica de cumplimiento:** ≥ 90% de los Story Points comprometidos en estado *Done* y demostración exitosa de dichos flujos. |
+| **Sprint 2 Velocity** | 88 Story Points |
+| **Sum of Story Points** | 86 Story Points |
 
 #### 7.2.2.2. Sprint Backlog 2
 
-**URL del Board:** `https://trello.com/b/...` _(o herramienta equivalente)_
+Para el Sprint 2 se seleccionaron del Product Backlog las User Stories de las funcionalidades complementarias, junto con las Technical Stories que las habilitan y los cuatro work-items arrastrados del Sprint 1 (*carry-over*: tarjeta de alerta en vivo, despacho FCM y las dos tareas de notificación push). El estado refleja la planificación al inicio del Sprint (los *carry-over* conservan su estado de cierre del Sprint 1).
 
-![Sprint 2 Board](assets/images/chapter-07/sprint-2-board.png)
+**URL del Board:** `https://trello.com/b/smartpark-sprint2` _(tablero del Sprint 2)_
 
-| Sprint # | Sprint 2 | | | | | | |
+| US Id | US Title | Task Id | Work-Item / Task | Description | Est. (h) | Assigned To | Status |
 |---|---|---|---|---|---|---|---|
-| **User Story** | | | **Work-Item / Task** | | | | |
-| Id | Title | Id | Title | Description | Estimation (Hours) | Assigned To | Status |
-| US-01 | View 3D Parking Occupancy Map | T-01 | Setup Angular project with Material | _(...)_ | 3 | _(Nombre)_ | Done |
-| US-01 | View 3D Parking Occupancy Map | T-02 | Embed 3D Scenes Studio viewer via iframe | _(...)_ | 5 | _(Nombre)_ | Done |
-| US-03 | View Available Spaces by Zone | T-03 | Build PowerApps availability screen | _(...)_ | 4 | _(Nombre)_ | Done |
-| US-04 | Register Vehicle Location | T-04 | Implement vehicle location registration | _(...)_ | 5 | _(Nombre)_ | Done |
-| TS-02 | Occupancy Query Endpoint | T-05 | Implement GET /api/v1/occupancy | _(...)_ | 4 | _(Nombre)_ | Done |
-| _(...)_ | | | | | | | |
+| US-20 | Registro de Entrada de Vehículo | T-30 | Flujo de entrada (ticket/sesión) en la app | Inicia la sesión de estacionamiento al ingresar el vehículo. | 5 | Qqueso, Britney | To-Do |
+| TS-06 | Endpoint de Gestión de Sesión | T-31 | POST /api/v1/sessions (start) | Crea una sesión de estacionamiento para el conductor. | 5 | Riva, Elmer | To-Do |
+| US-21 | Registro de Salida y Cierre de Sesión | T-32 | Flujo de salida y confirmación | Finaliza la sesión y muestra el resumen al conductor. | 4 | Qqueso, Britney | To-Do |
+| US-22 | Cálculo del Costo de la Sesión | T-33 | PATCH /api/v1/sessions/{id}/finalize | Calcula el costo acumulado (Money) al cerrar la sesión. | 5 | Riva, Elmer | To-Do |
+| US-23 | Historial de Sesiones del Conductor | T-34 | GET /api/v1/sessions/history + vista | Lista las sesiones pasadas con costo y duración. | 5 | Qqueso, Britney | To-Do |
+| US-24 | Panel de Eficiencia Energética | T-35 | Vista de zonas de baja ocupación (operador) | Resalta zonas candidatas a atenuación de iluminación. | 6 | Valle, Abel | To-Do |
+| US-25 | Recomendaciones de Atenuación de Iluminación | T-36 | GET /api/v1/energy/recommendations | Calcula recomendaciones de dimming por nivel/zona. | 5 | Morales, Hernán | To-Do |
+| US-26 | Preferencias de Notificación | T-37 | Pantalla de preferencias (PowerApps) | Permite al conductor configurar qué avisos recibir. | 4 | Qqueso, Britney | To-Do |
+| US-32 | Notificación Push por Alerta de Humo | T-27 | Identificar conductores afectados por zona | *(carry-over Sprint 1)* Determina conductores en la zona del incidente. | 5 | Morales, Hernán | In-Process |
+| US-32 | Notificación Push por Alerta de Humo | T-28 | Recepción del push en la app (PowerApps) | *(carry-over Sprint 1)* Maneja la notificación de humo en la app. | 3 | Qqueso, Britney | In-Process |
+| US-19 | Recepción de Alerta de Humo con Visualización Espacial | T-23 | Tarjeta de alerta en vivo (Angular) | *(carry-over Sprint 1)* Refina y aprueba la tarjeta de alerta en vivo. | 4 | Valle, Abel | To-Review |
+| TS-05 | Endpoint de Despacho de Notificaciones | T-26 | Registro de device tokens + despacho FCM | *(carry-over Sprint 1)* Cierra el despacho push vía Firebase Cloud Messaging. | 5 | Riva, Elmer | To-Review |
+| — (Constraint) | Calidad y persistencia productiva | T-38 | Pruebas de integración del API + smoke test E2E en CI | Tests de integración/aceptación sobre el API y migración a BD gestionada. | 6 | Riva, Elmer | To-Do |
 
-#### 7.2.2.3. Development Evidence for Sprint Review
+> La suma de Story Points de las User Stories comprometidas en el Sprint 2 es **86** (ver 7.2.2.1). Las tareas *carry-over* conservan el estado con que cerraron el Sprint 1.
 
-_(Resumen de avances en implementación. Tabla de commits por repositorio.)_
+#### 7.2.2.3. Sprint 2 Execution Note
 
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-application` | `feature/us-01-3d-viewer` | `a1b2c3d` | feat(dashboard): embed 3D Scenes Studio viewer | Adds iframe-based viewer for the parking digital twin | YYYY-MM-DD |
-| `<org>/mobile-app` | `feature/us-04-location-register` | `e4f5g6h` | feat(driver): add vehicle location registration screen | Implements zone/level selector and confirmation flow | YYYY-MM-DD |
-| `<org>/web-services` | `feature/ts-02-occupancy-query` | `i7j8k9l` | feat(occupancy): add GET endpoint for occupancy aggregation | Implements GetOccupancyByLevelQuery and handler | YYYY-MM-DD |
-| _(...)_ | | | | | |
-
-#### 7.2.2.4. Testing Suite Evidence for Sprint Review
-
-_(Conjunto de Unit Tests, Integration Tests y Acceptance Tests automatizados, para Web Services.)_
-
-**Unit Tests implementados:**
-- `OccupancyControllerTests` — valida respuesta de endpoint de ocupación.
-- `GetOccupancyByLevelQueryHandlerTests` — valida lógica de agregación.
-
-**Acceptance Tests (.feature):**
-
-```gherkin
-Feature: Occupancy Query
-  As an operator
-  I want to query parking occupancy by level
-  So that I can see the current state of each level
-
-  Scenario: Successful occupancy query
-    Given I am authenticated as an operator
-    When I send GET /api/v1/occupancy/levels/B1
-    Then the response status is 200
-    And the response contains the count of free, occupied, and reserved spaces
-
-  Scenario: Level not found
-    Given level "Z9" does not exist
-    When I send GET /api/v1/occupancy/levels/Z9
-    Then the response status is 404
-```
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/ts-02-tests` | `m1n2o3p` | test(occupancy): add acceptance tests for occupancy query | Includes successful and not-found scenarios | YYYY-MM-DD |
-
-#### 7.2.2.5. Execution Evidence for Sprint Review
-
-_(Screenshots de las principales vistas implementadas + enlace a video demo.)_
-
-![Sprint 2 Dashboard](assets/images/chapter-07/sprint-2-dashboard.png)
-![Sprint 2 Mobile App](assets/images/chapter-07/sprint-2-mobile.png)
-
-**URL del video demo:** `https://web.microsoftstream.com/...`
-
-#### 7.2.2.6. Services Documentation Evidence for Sprint Review
-
-_(Endpoints documentados con OpenAPI relacionados con el alcance del sprint.)_
-
-| Endpoint | HTTP Verb | Description | Parameters | Example Response |
-|---|---|---|---|---|
-| `/api/v1/occupancy/levels/{levelId}` | GET | Returns aggregated occupancy by level | `levelId` (path) | `200 OK` with JSON object |
-| `/api/v1/occupancy/zones/{zoneId}` | GET | Returns aggregated occupancy by zone | `zoneId` (path) | `200 OK` with JSON object |
-| `/api/v1/sessions` | POST | Registers a new parking session | Body (driver, location) | `201 Created` |
-
-![Swagger UI Sprint 2](assets/images/chapter-07/sprint-2-swagger.png)
-
-#### 7.2.2.7. Software Deployment Evidence for Sprint Review
-
-_(Capturas de procesos de deployment ejecutados durante el sprint.)_
-
-![Deployment Sprint 2](assets/images/chapter-07/sprint-2-deployment.png)
-
-**URLs desplegadas:**
-- Web Services: `https://...`
-- Web Application: `https://...`
-- IoT Simulator: `https://...`
-
-#### 7.2.2.8. Team Collaboration Insights during Sprint
-
-![Sprint 2 GitHub Insights](assets/images/chapter-07/sprint-2-insights.png)
-
-_(Análisis de la colaboración de cada miembro durante el sprint.)_
-
----
-
-### 7.2.3. Sprint 3
-
-#### 7.2.3.1. Sprint Planning 3
-
-| Sprint Planning Background | |
-|---|---|
-| **Sprint #** | Sprint 3 |
-| **Date** | YYYY-MM-DD |
-| **Time** | HH:MM AM/PM |
-| **Location** | _(Virtual / Física)_ |
-| **Prepared By** | _(Team Leader)_ |
-| **Attendees** | _(Lista de asistentes)_ |
-| **Sprint 2 Review Summary** | _(Resumen del Sprint 2: resultados a nivel de productos de software, opiniones de miembros y feedback del product owner.)_ |
-| **Sprint 2 Retrospective Summary** | _(Resumen del Sprint 2: opiniones del equipo sobre aciertos y oportunidades de mejora en su forma de trabajo.)_ |
-
-| Sprint Goal & User Stories | |
-|---|---|
-| **Sprint 3 Goal** | _(Definir el goal y la métrica de cumplimiento. Foco en cierre: integración de alertas en tiempo real, push notifications, gestión energética y refinamiento UX.)_ |
-| **Sprint 3 Velocity** | _(N story points)_ |
-| **Sum of Story Points** | _(N)_ |
-
-#### 7.2.3.2. Sprint Backlog 3
-
-**URL del Board:** `https://trello.com/b/...` _(o herramienta equivalente)_
-
-![Sprint 3 Board](assets/images/chapter-07/sprint-3-board.png)
-
-| Sprint # | Sprint 3 | | | | | | |
-|---|---|---|---|---|---|---|---|
-| **User Story** | | | **Work-Item / Task** | | | | |
-| Id | Title | Id | Title | Description | Estimation (Hours) | Assigned To | Status |
-| US-02 | Receive Smoke Alert with Spatial Context | T-01 | Implement SignalR Hub for real-time alerts | _(...)_ | 6 | _(Nombre)_ | Done |
-| US-02 | Receive Smoke Alert with Spatial Context | T-02 | Subscribe operator dashboard to alert channel | _(...)_ | 4 | _(Nombre)_ | Done |
-| US-05 | Receive Safety Alerts Near Vehicle | T-03 | Integrate Firebase Cloud Messaging in backend | _(...)_ | 5 | _(Nombre)_ | Done |
-| US-05 | Receive Safety Alerts Near Vehicle | T-04 | Configure FCM device token registration in PowerApps | _(...)_ | 4 | _(Nombre)_ | Done |
-| TS-03 | Push Notification Trigger | T-05 | Implement notifications service for active sessions | _(...)_ | 5 | _(Nombre)_ | Done |
-| US-06 | Identify Low-Occupancy Zones for Lighting Adjustment | T-06 | Implement energy view in dashboard | _(...)_ | 4 | _(Nombre)_ | Done |
-| _(...)_ | | | | | | | |
-
-#### 7.2.3.3. Development Evidence for Sprint Review
-
-_(Resumen de avances en implementación. Tabla de commits por repositorio.)_
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/us-02-signalr-alerts` | `q1r2s3t` | feat(alerts): add SignalR Hub for real-time smoke alerts | Implements push channel for operator dashboard | YYYY-MM-DD |
-| `<org>/web-services` | `feature/ts-03-fcm-integration` | `u4v5w6x` | feat(notifications): integrate Firebase Cloud Messaging | Implements FcmNotificationService and device token registry | YYYY-MM-DD |
-| `<org>/web-application` | `feature/us-02-alert-overlay` | `y7z8a9b` | feat(dashboard): subscribe to SignalR alert channel | Renders alert overlay on 3D viewer when smoke detected | YYYY-MM-DD |
-| `<org>/mobile-app` | `feature/us-05-push-alerts` | `c1d2e3f` | feat(driver): handle FCM push notifications for safety alerts | Displays in-app evacuation instructions on alert receipt | YYYY-MM-DD |
-| `<org>/web-application` | `feature/us-06-energy-view` | `g4h5i6j` | feat(dashboard): add energy management view | Highlights low-occupancy zones with dimming recommendations | YYYY-MM-DD |
-| _(...)_ | | | | | | | |
-
-#### 7.2.3.4. Testing Suite Evidence for Sprint Review
-
-_(Conjunto de Unit Tests, Integration Tests y Acceptance Tests automatizados, para Web Services.)_
-
-**Unit Tests implementados:**
-- `FcmNotificationServiceTests` — valida envío correcto a FCM.
-- `SmokeAlertHandlerTests` — valida detección de sesiones afectadas por zona.
-- `EnergyRecommendationServiceTests` — valida lógica de recomendación de atenuación.
-
-**Acceptance Tests (.feature):**
-
-```gherkin
-Feature: Smoke Alert End-to-End
-  As an operator
-  I want to receive smoke alerts with spatial context in real time
-  So that I can coordinate the response immediately
-
-  Scenario: Alert reaches operator dashboard within 2 seconds
-    Given a smoke detector "SD-001" in zone "B1-A"
-    When the simulator emits a smoke detection event
-    Then within 2 seconds the operator dashboard receives the alert
-    And the affected zone is highlighted on the 3D viewer
-
-  Scenario: Driver with active session receives push notification
-    Given a driver with an active parking session in zone "B1-A"
-    When a smoke alert is triggered in zone "B1-A"
-    Then within 5 seconds the driver receives a push notification
-    And the notification includes evacuation instructions
-```
-
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `<org>/web-services` | `feature/us-02-tests` | `k7l8m9n` | test(alerts): add end-to-end tests for smoke alerts | Validates 2s latency for dashboard and 5s for FCM push | YYYY-MM-DD |
-
-#### 7.2.3.5. Execution Evidence for Sprint Review
-
-_(Screenshots de las principales vistas implementadas + enlace a video demo.)_
-
-![Sprint 3 Smoke Alert](assets/images/chapter-07/sprint-3-alert.png)
-![Sprint 3 Push Notification](assets/images/chapter-07/sprint-3-push.png)
-![Sprint 3 Energy View](assets/images/chapter-07/sprint-3-energy.png)
-
-**URL del video demo:** `https://web.microsoftstream.com/...`
-
-#### 7.2.3.6. Services Documentation Evidence for Sprint Review
-
-_(Endpoints documentados con OpenAPI relacionados con el alcance del sprint.)_
-
-| Endpoint | HTTP Verb | Description | Parameters | Example Response |
-|---|---|---|---|---|
-| `/api/v1/alerts` | GET | Returns active alerts | Query: `zoneId`, `levelId` | `200 OK` with JSON array |
-| `/api/v1/alerts/{id}/acknowledge` | POST | Acknowledges an alert by operator | `id` (path) | `204 No Content` |
-| `/api/v1/notifications/devices` | POST | Registers a device token for push notifications | Body: `driverId`, `token` | `201 Created` |
-| `/api/v1/energy/recommendations` | GET | Returns lighting dimming recommendations by zone | Query: `levelId` | `200 OK` with JSON array |
-| `/hubs/alerts` | WebSocket | SignalR Hub for real-time alert channel | — | Real-time alert events |
-
-![Swagger UI Sprint 3](assets/images/chapter-07/sprint-3-swagger.png)
-
-#### 7.2.3.7. Software Deployment Evidence for Sprint Review
-
-_(Capturas de procesos de deployment ejecutados durante el sprint. Esta es la versión final desplegada de los productos digitales.)_
-
-![Deployment Sprint 3](assets/images/chapter-07/sprint-3-deployment.png)
-
-**URLs desplegadas (versión final):**
-- Landing Page: `https://...`
-- Web Application: `https://...`
-- Web Services: `https://...`
-- IoT Simulator: `https://...`
-- Swagger Docs: `https://.../swagger`
-
-**Configuración de Firebase Cloud Messaging:**
-- FCM Project: `<project-id>`
-- Server Key configurado en App Service settings.
-
-**Configuración de Azure Digital Twins:**
-- ADT Instance: `<instance-name>.api.<region>.digitaltwins.azure.net`
-- 3D Scenes Storage Container: `<container-name>`
-
-#### 7.2.3.8. Team Collaboration Insights during Sprint
-
-![Sprint 3 GitHub Insights](assets/images/chapter-07/sprint-3-insights.png)
-
-_(Análisis de la colaboración de cada miembro durante el sprint final.)_
+> El presente entregable documenta la **ejecución completa del Sprint 1** (flujo núcleo desplegado y verificado en la nube). El **Sprint 2** se encuentra **planificado** —Sprint Planning 2 (7.2.2.1) y Sprint Backlog 2 (7.2.2.2)—; su evidencia de desarrollo, testing, ejecución, documentación de servicios, despliegue y colaboración (commits por repositorio, capturas de las nuevas vistas, endpoints de sesión/energía, etc.) se incorporará al cierre de su ejecución, siguiendo la misma estructura de subsecciones empleada en el Sprint 1 (7.2.1.3–7.2.1.8).
 
 ## 7.3. Validation Interviews
 
 ### 7.3.1. Diseño de Entrevistas
 
-_(Elementos a validar por segmento objetivo, incluyendo Landing Page y aplicaciones. User flows que formarán parte de la validación.)_
+Se realizarán entrevistas de validación con usuarios de ambos segmentos objetivo para validar la funcionalidad de la solución. Para ello se considerará la prueba del Landing Page, la aplicación web del operador y la aplicación móvil del conductor. Se busca conocer la percepción del usuario sobre la claridad, utilidad y usabilidad de dichos componentes.
+
+**Preguntas sobre la Landing Page**
+
+Para la landing page se considerará los userflows de:
+
+- Ingreso y exploración general del sitio
+- Lectura de la propuesta de valor y de la sección "Sobre Nosotros"
+- Interacción con los botones de contacto o llamada a la acción (CTA)
+
+1. ¿La información presentada en la landing te resulta útil para entender qué ofrece SmartPark?
+2. ¿La sección "Sobre Nosotros" te brinda confianza en la empresa y su producto?
+3. ¿Los botones de contacto o CTA (solicitar demo / contacto) son claros y fáciles de encontrar?
+4. ¿Qué opinas del orden y diseño general de la página?
+5. ¿Los colores, íconos y elementos visuales te resultan atractivos y apropiados?
+
+**Preguntas sobre la Aplicación Web (Segmento: Operadores de estacionamientos)**
+
+Para la aplicación web se considerará los userflows de:
+
+- Inicio de sesión del operador
+- Visualización del dashboard de ocupación en tiempo real y del gemelo digital 3D
+- Gestión de una alerta de humo activa (localización espacial, reconocimiento y resolución del incidente)
+- Consulta del historial de incidentes
+- Revisión de los dashboards de flujo vehicular y eficiencia energética
+
+1. ¿El inicio de sesión te pareció intuitivo y te ubicaste con facilidad dentro del dashboard?
+2. ¿La información de ocupación en tiempo real (plazas totales, ocupadas y disponibles) se entiende rápido?
+3. ¿Te resultó claro identificar en el gemelo digital 3D la ubicación exacta de una alerta de humo y la zona afectada?
+4. ¿El sistema te brinda contexto suficiente (plazas ocupadas, rutas de evacuación) para decidir cómo actuar ante un incidente?
+5. ¿El proceso para reconocer, registrar notas y resolver el incidente te pareció directo y comprensible?
+6. ¿Te resulta fácil acceder al historial de incidentes y filtrar la información que necesitas?
+7. ¿Los dashboards de flujo vehicular y eficiencia energética presentan la información de forma clara y útil?
+8. ¿Sientes que esta herramienta te permitiría tomar decisiones de forma más proactiva que con tus herramientas actuales?
+9. Comparado con los métodos o sistemas que usas hoy, ¿qué ventajas o desventajas encuentras en esta aplicación?
+10. ¿Qué mejorarías en la aplicación para que se adapte mejor a tu trabajo diario?
+
+**Preguntas sobre la Aplicación Móvil (Segmento: Conductores frecuentes)**
+
+Para la aplicación móvil se considerará los userflows de:
+
+- Consulta del mapa de disponibilidad de plazas por nivel y zona
+- Registro de la ubicación del vehículo (inicio de la sesión de estacionamiento)
+- Consulta de "Mi Sesión" (tiempo transcurrido y costo acumulado)
+- Recepción de alertas de seguridad y finalización de la sesión de estacionamiento
+
+1. ¿La navegación por la aplicación te parece fácil y fluida?
+2. ¿El mapa de disponibilidad por nivel y zona te permite entender de inmediato hacia dónde dirigirte?
+3. ¿Te resultó fácil registrar la ubicación de tu vehículo? ¿Confiarías en que esa información te ayudará a encontrarlo al regresar?
+4. ¿La pantalla "Mi Sesión" muestra de forma clara el tiempo transcurrido y el costo acumulado?
+5. ¿Las alertas de seguridad te parecen oportunas y comprensibles?
+6. ¿El proceso para finalizar la sesión y ver el resumen con el costo total te resultó claro y confiable?
+7. ¿Consideras que esta aplicación reduce la incertidumbre que sientes hoy al estacionar en un centro comercial?
+8. ¿Qué mejorarías en la aplicación para que se adapte mejor a tus necesidades?
+
 
 ### 7.3.2. Registro de Entrevistas
 
-#### Entrevista de Validación 1 — Operador
+#### Segmento 1 — Operadores de estacionamientos
+
+##### Entrevista de Validación 1 — Operador
 | Campo | Dato |
 |---|---|
-| Nombres y Apellidos | _(...)_ |
-| Edad | _(...)_ |
-| Distrito | _(...)_ |
-| Cargo | _(...)_ |
-| Fecha de entrevista | YYYY-MM-DD |
-| URL del video | `https://web.microsoftstream.com/...` |
-| Timing inicio | HH:MM:SS |
-| Duración | MM:SS |
+| Nombres y Apellidos | Ivania Ortiz |
+| Edad | 25 |
+| Distrito | Surco |
+| Cargo / Segmento | Coordinadora de Operaciones |
+| Fecha de entrevista | 19/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQB7m02732DZRr-e-oBbcIOnAYck9pRs7fmbhaTllOnqY4I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=aeYT9h) |
+| Duración | 4 minutos con 14 segundos |
+
+![Validation Interview Operador 1](assets/images/chapter-07/validation-interview-op-01.png)
+
+**Resumen:** Ivania indicó que la landing page se entiende con rapidez y deja claro que el producto sirve para gestionar el estacionamiento de un centro comercial; valoró que "Sobre Nosotros" aporte confianza, que el CTA de demo sea fácil de ubicar y que el diseño y los colores luzcan ordenados y profesionales. Sobre la aplicación web, destacó que el inicio de sesión y la ubicación dentro del dashboard son sencillos, y que la ocupación en tiempo real se entiende de inmediato. Resaltó como lo mejor poder identificar en el gemelo digital 3D el piso exacto de una alerta de humo, junto con el contexto de la zona afectada para decidir la evacuación. Calificó como directo el proceso de reconocer y registrar el incidente —aunque le costó ubicar el botón de "resolver"— y como útil el historial filtrable y los dashboards de flujo y energía. Concluyó que la herramienta permitiría trabajar de forma más proactiva al concentrar todo en una sola pantalla. Como mejora, propuso una alerta sonora más fuerte para los incidentes graves.
+
+##### Entrevista de Validación 2 — Operador
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Carlos Mendoza |
+| Edad | 28 |
+| Distrito | Surco |
+| Cargo / Segmento | Jefe de Operaciones |
+| Fecha de entrevista | 19/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQAzgxctJt2oTJQ5Lq3HgCleAXUJVju8hEvOHf8NJGUpgyQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=EBMSpa) |
+| Duración | 5 minutos con 33 segundos |
+
+![Validation Interview Operador 2](assets/images/chapter-07/validation-interview-op-02.png)
+
+**Resumen:** Carlos indicó que la landing page se entiende con rapidez y deja claro que el producto sirve para gestionar el estacionamiento de un centro comercial; valoró que "Sobre Nosotros" aporte tranquilidad antes de invertir, que el CTA de demo sea fácil de ubicar y que el diseño y los colores luzcan ordenados y profesionales. Sobre la aplicación web, mencionó que el inicio de sesión y la ubicación dentro del dashboard son sencillos, y que la ocupación en tiempo real se entiende de un vistazo. Destacó como muy valioso poder ver en el modelo 3D la zona exacta de una alerta de humo junto con las plazas ocupadas alrededor, algo que hoy no tiene. Calificó como directo el proceso de reconocer y registrar el incidente —aunque sugirió hacer más visible el botón de "resolver"— y como útil el historial filtrable y los dashboards de flujo y energía. Concluyó que la herramienta permitiría trabajar de forma más proactiva al concentrar en una sola pantalla lo que hoy revisa en tres sistemas distintos. Como mejora, propuso una alerta sonora más fuerte para los incidentes graves.
+
+##### Entrevista de Validación 3 — Operador
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Juan Alarcón |
+| Edad | 25 |
+| Distrito | Cusco |
+| Cargo / Segmento | Técnico operario |
+| Fecha de entrevista | 20/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQDUvEWqyIuJT7muBIs1RsMRAQThY-Uz4yIjKpTAgfixKIA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=yFD1IB) |
+| Duración | 4 minutos con 49 segundos |
+
+![Validation Interview Operador 3](assets/images/chapter-07/validation-interview-op-03.png)
+
+**Resumen:** Juan señaló que la landing page le llamó la atención por la parte de seguridad, que es lo que maneja en su turno; valoró que "Sobre Nosotros" aporte confianza, que el botón de contacto esté bien ubicado y que el diseño y los colores luzcan modernos y serios. Respecto a la aplicación web, indicó que el inicio de sesión es fácil y que la ocupación se ve clara, aunque él revisa más la sección de seguridad. Destacó como lo mejor poder ubicar la alerta de humo en el plano 3D con el piso y la zona exacta, lo que cambia su forma de reaccionar, y resaltó como clave que el sistema muestre si la ruta de evacuación está comprometida. Calificó como claro el proceso de reconocer y resolver el incidente, valorando poder dejar notas para el acta, y como útil el historial filtrable por tipo y fecha. Concluyó que la herramienta le permitiría anticipar incidentes, sobre todo en horas pico. Como mejora, propuso que las alertas lleguen también al celular, ya que no siempre está frente a la computadora.
+
+#### Segmento 2 — Conductores frecuentes
+
+##### Entrevista de Validación 1 — Conductor
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Luis Chinchihualpa |
+| Edad | 23 |
+| Distrito | Surco |
+| Cargo / Segmento | Conductor frecuente |
+| Fecha de entrevista | 19/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210297_upc_edu_pe/IQA2rV8gbm7CQY2do2neh4nNAe2gOdaWtOF0XHtsB2w29Y4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=3L1XYR) |
+| Duración | 6 minutos con 38 segundos |
 
 ![Validation Interview 1](assets/images/chapter-07/validation-interview-01.png)
 
-**Resumen:** _(Apreciaciones del entrevistado respecto a las tareas asignadas.)_
+**Resumen:** Luis valoró positivamente la landing page: las secciones y funcionalidades principales se entienden con claridad, y destacó que la sección "Sobre Nosotros" transmite confianza por su transparencia y que los call to action son fáciles de ubicar. Sobre la aplicación, mencionó que la navegación es fluida y responsive, que el mapa de disponibilidad por nivel y zona está bien seccionado y que el registro de la ubicación del vehículo es sencillo y confiable. Indicó que la pantalla "Mi Sesión" muestra el tiempo y la tarifa de forma clara, que las alertas no resultan invasivas y que la finalización de sesión es comprensible. Concluyó que la aplicación reduce la incertidumbre al estacionar, sobre todo en centros comerciales de varios niveles. Como mejora, propuso incorporar un mapa tridimensional para visualizar mejor la ubicación del vehículo en estacionamientos de muchos pisos.
 
-_(Repetir para todas las entrevistas de validación, 3-5 por segmento.)_
+##### Entrevista de Validación 2 — Conductor
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Luis Herrera |
+| Edad | 25 |
+| Distrito | La Molina |
+| Cargo / Segmento | Conductor frecuente |
+| Fecha de entrevista | 20/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210297_upc_edu_pe/IQAyXwPbRMoET4dpXxG7c0ETAX4HPuAFfJLsk25lUhcGJWo?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=ELxxeg) |
+| Duración | 4 minutos con 06 segundos |
+
+![Validation Interview 2](assets/images/chapter-07/validation-interview-02.png)
+
+**Resumen:** Luis señaló que la información de la landing page le resultó fácil de entender y le pareció interesante por incluir funcionalidades poco comunes en los lugares que visita; sobre "Sobre Nosotros" indicó que le genera confianza, aunque suele fijarse más en el centro comercial que en la empresa. Destacó que los call to action son intuitivos y que le agradan los colores —en especial el azul— y la animación de inicio. Respecto a la aplicación móvil, calificó la navegación como fluida y el mapa de disponibilidad como fácil de entender, manifestó confianza en el registro de la ubicación del vehículo y resaltó que la pantalla "Mi Sesión" carga de forma rápida y nítida. Consideró que las alertas son oportunas y que la finalización de sesión es clara y confiable. Concluyó que la aplicación reduce la incertidumbre al estacionar, evitándole colas y pérdidas de tiempo. Como mejora, propuso integrar Yape como medio de pago.
+
+##### Entrevista de Validación 3 — Conductor
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Edward Rodriguez |
+| Edad | 28 |
+| Distrito | Yanahuara, Arequipa |
+| Cargo / Segmento | Conductor frecuente |
+| Fecha de entrevista | 20/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQDmp-bapQNqRL7mc1OLhsSeAZxgajv3cjUG0A5CMPxIcm8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Z6hEyM) |
+| Duración | 4 minutos con 31 segundos |
+
+![Validation Interview 3](assets/images/chapter-07/validation-interview-03.png)
+
+**Resumen:** Edward señaló que la landing page se entiende con rapidez y que se sintió identificado por los problemas que suele tener al estacionar; valoró que "Sobre Nosotros" aporte confianza, que el botón de descarga sea fácil de encontrar y que el diseño y los colores luzcan ordenados y modernos. Respecto a la aplicación móvil, calificó la navegación como fluida y destacó la utilidad del mapa de disponibilidad por nivel, que le ahorraría dar varias vueltas. Resaltó como lo más valioso el registro de la ubicación del vehículo, función en la que confiaría porque suele olvidar en qué piso lo deja. Indicó que la pantalla "Mi Sesión" muestra con claridad el tiempo y el costo acumulado, que las alertas de seguridad se entienden bien y que la finalización de sesión es clara y sin sorpresas. Concluyó que la aplicación reduce la incertidumbre al estacionar. Como mejora, propuso que la app guarde un historial de los centros comerciales más visitados para reconocer sus favoritos.
 
 ### 7.3.3. Evaluaciones según heurísticas
 
@@ -7953,24 +8716,32 @@ _(Repetir para todas las entrevistas de validación, 3-5 por segmento.)_
 | Campo | Valor |
 |---|---|
 | **CARRERA** | Ingeniería de Software |
-| **CURSO** | Arquitecturas de Software Emergentes |
-| **SECCIÓN** | _(...)_ |
-| **PROFESORES** | _(...)_ |
-| **AUDITOR** | _(Nombre del Grupo)_ |
-| **CLIENTE(S)** | _(Nombres de los participantes)_ |
+| **CURSO** | Diseño de Experimentos de Ingeniería de Software |
+| **SECCIÓN** | 10042|
+| **PROFESORES** | Royer Rojas |
+| **AUDITOR** | Apex Twin |
+| **CLIENTE(S)** | Carlos Mendoza, Ivania Ortiz, Juan Alarcón (operadores); Luis Chinchihualpa, Luis Herrera, Edward Rodriguez (conductores) |
 
-**SITE/APP A EVALUAR:** _(Web Application del Operador / Mobile App del Conductor)_
+**SITE/APP A EVALUAR:** Web Application del Operador y Mobile App del Conductor (SmartPark)
 
 **TAREAS A EVALUAR:**
-1. _(Login del operador)_
-2. _(Visualización de mapa 3D de ocupación)_
-3. _(Atención de alerta de humo)_
-4. _(Registro de ubicación de vehículo en app móvil)_
-5. _(Recepción de alerta de seguridad en app móvil)_
-6. _(...)_
+
+El alcance de esta evaluación incluye la revisión de usabilidad de las siguientes tareas:
+
+1. Inicio de sesión del operador en la aplicación web
+2. Visualización del dashboard de ocupación en tiempo real y del gemelo digital 3D
+3. Atención de una alerta de humo (localización espacial, reconocimiento y resolución del incidente)
+4. Consulta del historial de incidentes
+5. Consulta del mapa de disponibilidad de plazas por nivel y zona en la app móvil
+6. Registro de la ubicación del vehículo en la app móvil
+7. Consulta de "Mi Sesión" y finalización de la sesión de estacionamiento
+8. Recepción de alertas de seguridad en la app móvil
 
 **TAREAS NO INCLUIDAS:**
-1. _(...)_
+
+1. Recuperación de contraseña
+2. Registro de nuevos usuarios
+3. Contratación y pago de planes de suscripción
 
 **ESCALA DE SEVERIDAD:**
 
@@ -7985,29 +8756,55 @@ _(Repetir para todas las entrevistas de validación, 3-5 por segmento.)_
 
 | # | Problema | Escala de severidad | Heurística/Principio violada(o) |
 |---|---|---|---|
-| 1 | _(Descripción del problema)_ | _(1-4)_ | _(Heurística violada)_ |
-| 2 | _(...)_ | _(...)_ | _(...)_ |
+| 1 | El botón "Resolver" del incidente de humo tiene baja visibilidad y cuesta ubicarlo durante la atención de la alerta | 2 | Usability: Recognition rather than recall |
+| 2 | Las alertas de incidentes críticos (humo) solo se notifican de forma visual; no hay aviso sonoro si el operador no mira la pantalla | 3 | Usability: Visibility of system status |
+| 3 | Las alertas de seguridad llegan únicamente al dashboard web; el operador no las recibe en el celular cuando no está frente a la computadora | 2 | Usability: Flexibility and efficiency of use |
+
 
 **DESCRIPCIÓN DE PROBLEMAS:**
 
-**PROBLEMA #1:** _(Título)_
+**PROBLEMA #1:** Baja visibilidad del botón "Resolver" durante la atención del incidente
 
-- **Severidad:** _(1-4)_
-- **Heurística violada:** _(...)_
-- **Problema:** _(Descripción detallada con captura)_
-- **Recomendación:** _(...)_
+- **Severidad:** 2
+- **Heurística violada:** Usability: Recognition rather than recall
+- **Problema:** Durante la atención de una alerta de humo, dos operadores (Carlos Mendoza e Ivania Ortiz) indicaron que el proceso de reconocer y registrar notas fue directo, pero que el botón "Resolver" no resulta evidente y debieron buscarlo unos segundos. En una tarea crítica como la gestión de un incidente, la acción principal de cierre debería ser reconocible de inmediato.
+- **Imagen:** ![Heurística-1](assets/images/chapter-07/heuristica-1.png)
+- **Recomendación:** Aumentar la jerarquía visual del botón "Resolver" (color de acción primaria, tamaño y posición fija) para que sea la acción más visible una vez reconocido el incidente.
 
-_(Repetir para cada problema identificado.)_
+---
+
+**PROBLEMA #2:** Ausencia de aviso sonoro para incidentes críticos
+
+- **Severidad:** 3
+- **Heurística violada:** Usability: Visibility of system status
+- **Problema:** Las alertas de humo se comunican únicamente mediante elementos visuales en el dashboard. Los operadores señalaron que, al no estar siempre mirando la pantalla, una alerta crítica podría pasar desapercibida. Dado el impacto en la seguridad, el sistema debería garantizar que el estado crítico sea perceptible aun sin atención visual directa.
+- **Imagen:** ![Heurística-1](assets/images/chapter-07/heuristica-2.png)
+- **Recomendación:** Incorporar una señal sonora diferenciada para incidentes de severidad alta, configurable por el operador, que acompañe la notificación visual.
+
+---
+
+**PROBLEMA #3:** Alertas de seguridad limitadas al dashboard web
+
+- **Severidad:** 2
+- **Heurística violada:** Usability: Flexibility and efficiency of use
+- **Problema:** Un operador (Juan Alarcón) indicó que, durante su turno, no siempre se encuentra frente a la computadora, por lo que las alertas que solo aparecen en el dashboard web pueden no recibirse a tiempo. La herramienta no ofrece un canal alternativo para usuarios en movimiento.
+- **Imagen:** ![Heurística-1](assets/images/chapter-07/heuristica-3.png)
+- **Recomendación:** Habilitar la notificación de alertas críticas en un canal móvil para el operador (push o mensajería), de modo que el aviso llegue independientemente de su ubicación.
+
+---
+
 
 ## 7.4. Video About-the-Product
 
-_(Introducción y descripción del contenido del video. Tono consistente con el producto. Incluye al menos un testimonio positivo de un usuario que haya participado en las entrevistas de validación.)_
+El video **About-the-Product** tiene como público objetivo a los visitantes de la Landing Page que desean conocer la propuesta de SmartPark. Con un tono promocional, resume el modelo de negocio y las principales características y beneficios de la solución —el gemelo digital 3D, la visualización de ocupación en tiempo real y las alertas de humo geolocalizadas para el operador, junto con el mapa de disponibilidad para el conductor—, incluye escenas de interacción con el producto y recoge opiniones de participantes de las entrevistas de validación de ambos segmentos objetivo.
 
-![Video About-the-Product Screenshot](assets/images/chapter-07/about-product-screenshot.png)
+Esta primera versión del video está **incrustada en la Landing Page**, en la sección _"Conoce SmartPark en acción"_, mediante el reproductor de YouTube. La siguiente captura muestra el video presentado dentro de la **Landing Page desplegada** (`https://stsmartparkland01.z20.web.core.windows.net/`):
 
-- **URL Microsoft Stream:** `https://web.microsoftstream.com/...`
-- **URL YouTube:** `https://youtube.com/...`
-- **Duración:** MM:SS
+![Video About-the-Product incrustado en la Landing Page](assets/images/chapter-07/about-product-landing.png)
+
+- **URL (Microsoft Stream / SharePoint, evidencia del informe):** `https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQBHh7oZlzEIS4pEzF4Uz-jXAYuHzSwSk90ET49b6vW2zww?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=2IJ9Ha`
+- **URL (YouTube, versión incrustada en la Landing Page):** `https://youtu.be/UtBEGuQRAC4`
+- **Formato y duración:** `.mp4`, orientación promocional (1 a 3 minutos).
 
 ---
 
@@ -8042,7 +8839,16 @@ _(Introducción y descripción del contenido del video. Tono consistente con el 
 5. **El equipo sostuvo el flujo de trabajo colaborativo planificado para el TP1.** Los cinco integrantes cubrieron el Capítulo V y el Capítulo VI mediante feature branches integradas a develop por pull requests, manteniendo la trazabilidad del proceso. La incorporación de las correcciones del TB1 a partir de la retroalimentación del docente evidencia un ciclo de mejora continua sobre el informe.
 
 #### TB2
-_(Conclusiones acumulables.)_
+
+1. **El flujo núcleo de SmartPark quedó demostrado de extremo a extremo sobre el entorno desplegado.** El Sprint 1 cumplió su objetivo: una alerta de humo generada por el simulador IoT recorre toda la cadena (simulador → Azure Digital Twins → API/SignalR → dashboard) y se refleja geolocalizada en el visor 3D, mientras el conductor consulta la disponibilidad y registra la ubicación de su vehículo desde la app. Se cerraron **25 de 29 work-items** y se superó el umbral de cumplimiento comprometido (≥ 90 % de los Story Points en *Done*), validando que el flujo demostrable de extremo a extremo planificado era alcanzable en un único Sprint.
+
+2. **La arquitectura DDD multicomponente diseñada en los capítulos previos resultó implementable y desplegable en la nube.** El backend en ASP.NET Core 8 (Domain-Driven Design, JWT y SignalR), la persistencia multi-proveedor con EF Core, el gemelo en Azure Digital Twins y el visor 3D del frontend se integraron como una sola solución y se desplegaron en Azure (Storage static websites, App Service con SQLite embebido y Blob Storage). La estrategia multi-proveedor y el *demo gateway* del gemelo permitieron dejar el sistema **funcional** pese a las restricciones de cuota de la suscripción *Azure for Students*, confirmando la flexibilidad de las decisiones arquitectónicas adoptadas.
+
+3. **La evidencia de calidad respalda la solución con pruebas automatizadas, documentación de servicios y trazabilidad de commits.** La suite de dominio alcanzó **41 métodos / 65 casos** en verde, ejecutados en integración continua; el contrato del API quedó documentado con OpenAPI/Swagger; y la ejecución del Sprint se evidencia con los **200 commits** trazables y los insights de colaboración por repositorio. Esta práctica demuestra un proceso de ingeniería verificable y comunicado de forma efectiva, en línea con el Student Outcome ABET-3.
+
+4. **El gemelo digital 3D con ocupación en vivo y la cadena de alerta geolocalizada constituyen el diferencial validado de SmartPark.** El coloreado por plaza según la ocupación real y el resaltado de la zona afectada ante una alerta de humo —sincronizados por el simulador IoT y servidos en tiempo real— materializan con contexto espacial las hipótesis H1 (respuesta ante incidentes) y H2 (disponibilidad de plazas), y dejan la solución lista para las entrevistas de validación con ambos segmentos objetivo.
+
+5. **El equipo sostuvo un proceso ágil y colaborativo, con la primera versión de los productos digitales desplegada y los videos publicados.** Bajo una planificación de dos Sprints y un flujo de ramas *feature → develop → main* coordinado mediante Trello y Discord, los cinco integrantes entregaron los cuatro productos digitales desplegados y verificados, junto con la primera versión de los videos **About-the-Product** (incrustado en la Landing Page) y **About-the-Team**. La incorporación de las correcciones del TP1 evidencia la continuidad del ciclo de mejora del informe.
 
 #### TF1
 _(Conclusiones finales del proyecto.)_
@@ -8061,24 +8867,28 @@ _(Conclusiones finales del proyecto.)_
 
 ## Video About-the-Team
 
-_(Resumen del proceso de trabajo, pauta de secuencias con timing, screenshot del video.)_
+El video **About-the-Team** resume el **proceso de trabajo** del equipo Apex Twin durante el desarrollo de SmartPark y los **logros alcanzados** en el Sprint 1. Combina una narración (voz en off) del proceso —la planificación de dos Sprints bajo Scrum, el flujo de ramas *feature → develop → main* coordinado mediante Trello y Discord, y la entrega de los cuatro productos digitales desplegados en Azure— con el **testimonio ante cámara de cada integrante**, que describe las actividades que realizó y las competencias (outcomes) que desarrolló. Esta primera versión está **incrustada en la Landing Page**, en la sección _"Conoce al equipo Apex Twin"_, mediante el reproductor de YouTube.
 
-![Video About-the-Team Screenshot](assets/images/chapter-07/about-team-screenshot.png)
+La siguiente captura muestra el video presentado dentro de la **Landing Page desplegada** (`https://stsmartparkland01.z20.web.core.windows.net/`):
 
-**Pauta de secuencias:**
+![Video About-the-Team incrustado en la Landing Page](assets/images/chapter-07/about-team-landing.png)
+
+**Pauta de secuencias** _(timing referencial; ajustar al corte final del video)_:
 
 | Inicio (hh:mm:ss) | Sección |
 |---|---|
-| 00:00:00 | Introducción |
-| 00:00:30 | Sesiones de trabajo del equipo |
-| 00:02:00 | Testimonio integrante 1 |
-| 00:03:00 | Testimonio integrante 2 |
-| 00:04:00 | Testimonio integrante 3 |
-| 00:05:00 | Testimonio integrante 4 |
-| 00:06:00 | Conclusiones grupales |
+| 00:00:00 | Introducción y presentación del equipo |
+| 00:00:40 | Proceso de trabajo (Scrum, ramas, Trello/Discord) |
+| 00:01:40 | Resultados del Sprint 1 |
+| 00:02:30 | Testimonio — Riva Rodríguez, Elmer Augusto (Team Leader / Backend) |
+| 00:03:20 | Testimonio — Sánchez Ríos, Camila Cristina (Landing / UI-UX) |
+| 00:04:10 | Testimonio — Qqueso Rodríguez, Britney Delhy (App móvil / Validación) |
+| 00:05:00 | Testimonio — Valle Zuta, Abel Andrés (Frontend del operador) |
+| 00:05:50 | Testimonio — Morales Calderón, Hernan Emilio (Gemelo digital / IoT) |
+| 00:06:40 | Retrospectiva y cierre |
 
-- **URL Microsoft Stream:** `https://web.microsoftstream.com/...`
-- **URL YouTube:** `https://youtube.com/...`
+- **URL (Microsoft Stream / SharePoint, evidencia del informe):** `https://upcedupe-my.sharepoint.com/:v:/g/personal/u202220829_upc_edu_pe/IQBYyCsOyCtjSqXgsIBSyeqfAbpMyw0yTR5Jjj5-l_1MbNo?e=eB0M8c`
+- **URL (YouTube, versión incrustada en la Landing Page):** `https://youtu.be/cg5wAB2AWpw`
 
 ---
 
@@ -8136,7 +8946,7 @@ Vernon, V. (2013). *Implementing Domain-Driven Design*. Addison-Wesley Professio
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
 | TB1       | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202220829_upc_edu_pe/IQDfmsdTK4ZdSIU8ECom5_5JAXUBPnSRpT98GJE9M9IkMGo?e=RNI7Dn&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D |
 | TP1       | `https://web.microsoftstream.com/...`                                                                                                                                                                                                                                                                                   |
-| TB2       | `https://web.microsoftstream.com/...`                                                                                                                                                                                                                                                                                   |
+| TB2       | https://upcedupe-my.sharepoint.com/:v:/g/personal/u202220829_upc_edu_pe/IQC9_RcxqPZaR66YCoPqcOP6ARzXIDJizlnFrMlTMxnzsPM?e=CpTZJa&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D                                                                                                                                                                                                                                                                                   |
 | TF1       | `https://web.microsoftstream.com/...`                                                                                                                                                                                                                                                                                   |
 
 ## Anexo B: Términos y Condiciones del Servicio

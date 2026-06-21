@@ -1,0 +1,55 @@
+GUION — KEYNOTE TB2 · SmartPark (Apex Twin)
+1ASI0728 Arquitecturas de Software Emergentes · Sección 10042
+======================================================================
+
+Reparto de slides (números consecutivos por integrante):
+  Elmer   -> 1, 2, 3      Camila  -> 4, 5, 6
+  Britney -> 7, 8, 9      Abel    -> 10, 11, 12
+  Hernán  -> 13, 14, 15
+Nota: en cada slide hay un recuadro inferior derecho para el video del expositor.
+======================================================================
+
+--- SLIDE 1 · Riva Rodríguez, Elmer Augusto · PORTADA ---
+Buenas, somos el equipo Apex Twin y les presentamos SmartPark, un gemelo digital para la operación inteligente de estacionamientos. Esta es la entrega TB2, donde mostramos la primera versión desplegada de nuestra solución y la ejecución del Sprint 1. Mi nombre es Elmer Riva y soy el líder del equipo; a lo largo de la presentación cada integrante expondrá su parte.
+
+--- SLIDE 2 · Riva Rodríguez, Elmer Augusto · Operar un estacionamiento a ciegas ---
+El problema que abordamos es claro: hoy un operador de estacionamiento trabaja casi a ciegas. No tiene una vista en tiempo real de cuántas plazas están ocupadas ni del estado de seguridad del lote. El conductor, por su lado, pierde tiempo buscando dónde estacionar. Y cuando ocurre un incidente, como humo o fuego, se detecta tarde y sin saber en qué zona exacta. La información está dispersa y no existe un gemelo digital que conecte el mundo físico con el digital.
+
+--- SLIDE 3 · Riva Rodríguez, Elmer Augusto · SmartPark: gemelo digital operativo ---
+Nuestra solución es SmartPark: un gemelo digital operativo del estacionamiento. La construimos como cuatro productos digitales integrados: la Landing Page, la aplicación web del operador, la app móvil del conductor y el gemelo digital alimentado por un simulador IoT. Por debajo, un backend en ASP.NET Core 8 con Domain-Driven Design, autenticación JWT y tiempo real con SignalR, todo desplegado en Azure. El corazón es el gemelo en Azure Digital Twins, que el operador ve en un visor 3D con la ocupación coloreada en vivo y las alertas de humo geolocalizadas.
+
+--- SLIDE 4 · Sánchez Ríos, Camila Cristina · Design System y experiencia UX/UI ---
+Desde el diseño, definimos un sistema propio para SmartPark: una paleta basada en teal y crema, la tipografía Inter y un conjunto de componentes reutilizables. Sobre esa base elaboramos los wireframes de los dos perfiles, el operador y el conductor, y las guías de estilo para web y móvil. El objetivo fue lograr coherencia visual entre los cuatro productos, de modo que la marca y la experiencia se sientan como un solo sistema.
+
+--- SLIDE 5 · Sánchez Ríos, Camila Cristina · Landing Page e Information Architecture ---
+La Landing Page es la puerta de entrada. Comunica la propuesta de valor y tiene secciones específicas para operadores y conductores, además de los planes de suscripción y una navegación totalmente responsiva, con soporte de idioma inglés y español. Detrás trabajamos la arquitectura de información: el sistema de etiquetado, la navegación y las etiquetas SEO, para que el sitio sea claro tanto para las personas como para los buscadores.
+
+--- SLIDE 6 · Sánchez Ríos, Camila Cristina · Del wireframe al producto ---
+A partir de los wireframes elaboramos los mock-ups de alta fidelidad: el dashboard del operador, el gemelo digital, las pantallas de seguridad e incidentes y las de eficiencia. También diagramamos los flujos de usuario del operador y del conductor. Cada mock-up se validó contra el sistema de diseño, asegurando que lo que diseñamos fuera consistente con lo que finalmente se implementó.
+
+--- SLIDE 7 · Qqueso Rodríguez, Britney Delhy · Planificación del Sprint 1 ---
+Organizamos el trabajo en dos Sprints. El objetivo del Sprint 1 fue habilitar el flujo núcleo de SmartPark de extremo a extremo: que una alerta de humo recorra toda la cadena, del simulador al gemelo y al dashboard, y que el conductor consulte disponibilidad desde la app. Comprometimos noventa y cuatro Story Points, seleccionando del Product Backlog las historias de usuario de mayor prioridad junto con las historias técnicas que las habilitan, y repartimos los work-items según el frente de cada integrante.
+
+--- SLIDE 8 · Qqueso Rodríguez, Britney Delhy · Tablero Trello y colaboración ---
+Gestionamos el Sprint en Trello, con tres listas: Done, To-Review e In-Process, y una etiqueta de color por integrante. Cerramos veinticinco de los veintinueve work-items. A nivel técnico seguimos un flujo de ramas ordenado: cada funcionalidad en su feature-branch, integrada a develop mediante Pull Request y liberada a main. En total registramos doscientos commits en los cinco repositorios de producto, lo que evidencia un trabajo colaborativo y trazable.
+
+--- SLIDE 9 · Qqueso Rodríguez, Britney Delhy · App móvil del conductor ---
+La experiencia del conductor vive en una app móvil construida en Power Apps. Permite registrarse e iniciar sesión, consultar un mapa de disponibilidad por zona y nivel, y registrar con un toque la ubicación del vehículo. Para conectarse al backend generamos un conector personalizado a partir del contrato OpenAPI del API, de modo que la app consume exactamente los mismos servicios que la web.
+
+--- SLIDE 10 · Valle Zuta, Abel Andrés · Console del operador con gemelo en vivo ---
+El console del operador pone al gemelo digital tridimensional en el centro. Cada plaza del modelo se colorea en vivo según su estado: verde si está libre, rojo si está ocupada y ámbar si está reservada, con datos reales que consulta al API. A la derecha, un panel resume la ocupación por zona y su nivel de congestión. Todo se auto-refresca y, si el gemelo no responde, la interfaz degrada con elegancia mostrando el último estado conocido.
+
+--- SLIDE 11 · Valle Zuta, Abel Andrés · Alertas de humo en tiempo real ---
+La cadena de seguridad es uno de los diferenciales. Cuando el simulador emite una lectura de humo por encima del umbral, el incidente se geolocaliza y la zona afectada se resalta en el modelo 3D. La alerta llega al dashboard del operador en tiempo real mediante SignalR, sin necesidad de recargar. Para las entrevistas de validación implementamos además una vista de simulador, que permite disparar estos eventos en vivo y mostrar el comportamiento de extremo a extremo.
+
+--- SLIDE 12 · Valle Zuta, Abel Andrés · Aplicación web desplegada ---
+La aplicación web del operador está construida en Angular 20, con componentes standalone y signals para un estado reactivo y eficiente. Incluye inicio de sesión con JWT y sesión persistente, y vistas como la ocupación por nivel con indicadores de congestión. Lo importante es que no se quedó en local: está desplegada sobre Azure y verificamos el flujo completo de inicio de sesión y consulta de datos directamente sobre el entorno en la nube.
+
+--- SLIDE 13 · Morales Calderón, Hernan Emilio · Simulador IoT y Azure Digital Twins ---
+Del lado del gemelo y el IoT, desarrollamos un simulador en Node.js que genera telemetría sintética de ocupación y de humo. Esa telemetría se sincroniza con el grafo de twins en Azure Digital Twins mediante operaciones JSON Patch, a través de una capa anti-corrupción que aísla nuestro dominio del SDK de Azure. Además generamos el modelo 3D en formato GLB con un material único por plaza, lo que permite colorear cada espacio individualmente según su ocupación en tiempo de ejecución.
+
+--- SLIDE 14 · Morales Calderón, Hernan Emilio · Desplegado en Azure ---
+Cumplimos el hito de tener la primera versión desplegada. La Landing y la Web App se publican como sitios estáticos en Azure Storage; el API corre en App Service con .NET 8 sobre Linux, con una base SQLite embebida como solución funcional ante las restricciones de la suscripción de estudiante. El gemelo vive en Azure Digital Twins y el modelo 3D en Blob Storage. Todo el despliegue se ejecuta con Az PowerShell, que atraviesa el proxy de la universidad, y el API queda documentado con Swagger.
+
+--- SLIDE 15 · Morales Calderón, Hernan Emilio · Validación, calidad y próximos pasos ---
+Para cerrar: preparamos el diseño de las entrevistas de validación con ambos segmentos objetivo, y respaldamos la calidad con una suite de pruebas automatizadas de cuarenta y un métodos y sesenta y cinco casos, todos en verde y ejecutados en integración continua. El Sprint 2 abordará las funcionalidades complementarias: el flujo vehicular, la eficiencia energética, la gestión de sesión y costos, y la notificación push. Con esto demostramos el flujo núcleo de SmartPark, de extremo a extremo y sobre la nube. Muchas gracias.
