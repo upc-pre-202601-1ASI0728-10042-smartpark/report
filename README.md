@@ -7982,23 +7982,101 @@ Para la aplicación móvil se considerará los userflows de:
 
 ### 7.3.2. Registro de Entrevistas
 
-#### Entrevista de Validación 1 — Operador
+#### Segmento 1 — Operadores de estacionamientos
+
+##### Entrevista de Validación 1 — Operador
 | Campo | Dato |
 |---|---|
-| Nombres y Apellidos | _(...)_ |
-| Edad | _(...)_ |
-| Distrito | _(...)_ |
-| Cargo | _(...)_ |
-| Fecha de entrevista | YYYY-MM-DD |
-| URL del video | `https://web.microsoftstream.com/...` |
-| Timing inicio | HH:MM:SS |
+| Nombres y Apellidos | Ivania Ortiz |
+| Edad | 25 |
+| Distrito | Surco |
+| Cargo / Segmento | Coordinadora de Operaciones |
+| Fecha de entrevista | 19/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQB7m02732DZRr-e-oBbcIOnAYck9pRs7fmbhaTllOnqY4I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=aeYT9h) |
+| Duración | 4 minutos con 14 segundos |
+
+![Validation Interview Operador 1](assets/images/chapter-07/validation-interview-op-01.png)
+
+**Resumen:** Ivania indicó que la landing page se entiende con rapidez y deja claro que el producto sirve para gestionar el estacionamiento de un centro comercial; valoró que "Sobre Nosotros" aporte confianza, que el CTA de demo sea fácil de ubicar y que el diseño y los colores luzcan ordenados y profesionales. Sobre la aplicación web, destacó que el inicio de sesión y la ubicación dentro del dashboard son sencillos, y que la ocupación en tiempo real se entiende de inmediato. Resaltó como lo mejor poder identificar en el gemelo digital 3D el piso exacto de una alerta de humo, junto con el contexto de la zona afectada para decidir la evacuación. Calificó como directo el proceso de reconocer y registrar el incidente —aunque le costó ubicar el botón de "resolver"— y como útil el historial filtrable y los dashboards de flujo y energía. Concluyó que la herramienta permitiría trabajar de forma más proactiva al concentrar todo en una sola pantalla. Como mejora, propuso una alerta sonora más fuerte para los incidentes graves.
+
+##### Entrevista de Validación 2 — Operador
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Carlos Mendoza |
+| Edad | 28 |
+| Distrito | Surco |
+| Cargo / Segmento | Jefe de Operaciones |
+| Fecha de entrevista | 19/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://web.microsoftstream.com/...) |
 | Duración | MM:SS |
+
+![Validation Interview Operador 2](assets/images/chapter-07/validation-interview-op-02.png)
+
+**Resumen:** Carlos indicó que la landing page se entiende con rapidez y deja claro que el producto sirve para gestionar el estacionamiento de un centro comercial; valoró que "Sobre Nosotros" aporte tranquilidad antes de invertir, que el CTA de demo sea fácil de ubicar y que el diseño y los colores luzcan ordenados y profesionales. Sobre la aplicación web, mencionó que el inicio de sesión y la ubicación dentro del dashboard son sencillos, y que la ocupación en tiempo real se entiende de un vistazo. Destacó como muy valioso poder ver en el modelo 3D la zona exacta de una alerta de humo junto con las plazas ocupadas alrededor, algo que hoy no tiene. Calificó como directo el proceso de reconocer y registrar el incidente —aunque sugirió hacer más visible el botón de "resolver"— y como útil el historial filtrable y los dashboards de flujo y energía. Concluyó que la herramienta permitiría trabajar de forma más proactiva al concentrar en una sola pantalla lo que hoy revisa en tres sistemas distintos. Como mejora, propuso una alerta sonora más fuerte para los incidentes graves.
+
+##### Entrevista de Validación 3 — Operador
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Juan Alarcón |
+| Edad | 25 |
+| Distrito | Cusco |
+| Cargo / Segmento | Técnico operario |
+| Fecha de entrevista | 20/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://web.microsoftstream.com/...) |
+| Duración | MM:SS |
+
+![Validation Interview Operador 3](assets/images/chapter-07/validation-interview-op-03.png)
+
+**Resumen:** Juan señaló que la landing page le llamó la atención por la parte de seguridad, que es lo que maneja en su turno; valoró que "Sobre Nosotros" aporte confianza, que el botón de contacto esté bien ubicado y que el diseño y los colores luzcan modernos y serios. Respecto a la aplicación web, indicó que el inicio de sesión es fácil y que la ocupación se ve clara, aunque él revisa más la sección de seguridad. Destacó como lo mejor poder ubicar la alerta de humo en el plano 3D con el piso y la zona exacta, lo que cambia su forma de reaccionar, y resaltó como clave que el sistema muestre si la ruta de evacuación está comprometida. Calificó como claro el proceso de reconocer y resolver el incidente, valorando poder dejar notas para el acta, y como útil el historial filtrable por tipo y fecha. Concluyó que la herramienta le permitiría anticipar incidentes, sobre todo en horas pico. Como mejora, propuso que las alertas lleguen también al celular, ya que no siempre está frente a la computadora.
+
+#### Segmento 2 — Conductores frecuentes
+
+##### Entrevista de Validación 1 — Conductor
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Luis Chinchihualpa |
+| Edad | 23 |
+| Distrito | Surco |
+| Cargo / Segmento | Conductor frecuente |
+| Fecha de entrevista | 19/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210297_upc_edu_pe/IQA2rV8gbm7CQY2do2neh4nNAe2gOdaWtOF0XHtsB2w29Y4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=3L1XYR) |
+| Duración | 6 minutos con 38 segundos |
 
 ![Validation Interview 1](assets/images/chapter-07/validation-interview-01.png)
 
-**Resumen:** _(Apreciaciones del entrevistado respecto a las tareas asignadas.)_
+**Resumen:** Luis valoró positivamente la landing page: las secciones y funcionalidades principales se entienden con claridad, y destacó que la sección "Sobre Nosotros" transmite confianza por su transparencia y que los call to action son fáciles de ubicar. Sobre la aplicación, mencionó que la navegación es fluida y responsive, que el mapa de disponibilidad por nivel y zona está bien seccionado y que el registro de la ubicación del vehículo es sencillo y confiable. Indicó que la pantalla "Mi Sesión" muestra el tiempo y la tarifa de forma clara, que las alertas no resultan invasivas y que la finalización de sesión es comprensible. Concluyó que la aplicación reduce la incertidumbre al estacionar, sobre todo en centros comerciales de varios niveles. Como mejora, propuso incorporar un mapa tridimensional para visualizar mejor la ubicación del vehículo en estacionamientos de muchos pisos.
 
-_(Repetir para todas las entrevistas de validación, 3-5 por segmento.)_
+##### Entrevista de Validación 2 — Conductor
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Luis Herrera |
+| Edad | 25 |
+| Distrito | La Molina |
+| Cargo / Segmento | Conductor frecuente |
+| Fecha de entrevista | 20/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202210297_upc_edu_pe/IQAyXwPbRMoET4dpXxG7c0ETAX4HPuAFfJLsk25lUhcGJWo?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=ELxxeg) |
+| Duración | 4 minutos con 06 segundos |
+
+![Validation Interview 2](assets/images/chapter-07/validation-interview-02.png)
+
+**Resumen:** Luis señaló que la información de la landing page le resultó fácil de entender y le pareció interesante por incluir funcionalidades poco comunes en los lugares que visita; sobre "Sobre Nosotros" indicó que le genera confianza, aunque suele fijarse más en el centro comercial que en la empresa. Destacó que los call to action son intuitivos y que le agradan los colores —en especial el azul— y la animación de inicio. Respecto a la aplicación móvil, calificó la navegación como fluida y el mapa de disponibilidad como fácil de entender, manifestó confianza en el registro de la ubicación del vehículo y resaltó que la pantalla "Mi Sesión" carga de forma rápida y nítida. Consideró que las alertas son oportunas y que la finalización de sesión es clara y confiable. Concluyó que la aplicación reduce la incertidumbre al estacionar, evitándole colas y pérdidas de tiempo. Como mejora, propuso integrar Yape como medio de pago.
+
+##### Entrevista de Validación 3 — Conductor
+| Campo | Dato |
+|---|---|
+| Nombres y Apellidos | Edward Rodriguez |
+| Edad | 28 |
+| Distrito | Yanahuara, Arequipa |
+| Cargo / Segmento | Conductor frecuente |
+| Fecha de entrevista | 20/06/2026 |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQDmp-bapQNqRL7mc1OLhsSeAZxgajv3cjUG0A5CMPxIcm8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Z6hEyM) |
+| Duración | 4 minutos con 31 segundos |
+
+![Validation Interview 3](assets/images/chapter-07/validation-interview-03.png)
+
+**Resumen:** Edward señaló que la landing page se entiende con rapidez y que se sintió identificado por los problemas que suele tener al estacionar; valoró que "Sobre Nosotros" aporte confianza, que el botón de descarga sea fácil de encontrar y que el diseño y los colores luzcan ordenados y modernos. Respecto a la aplicación móvil, calificó la navegación como fluida y destacó la utilidad del mapa de disponibilidad por nivel, que le ahorraría dar varias vueltas. Resaltó como lo más valioso el registro de la ubicación del vehículo, función en la que confiaría porque suele olvidar en qué piso lo deja. Indicó que la pantalla "Mi Sesión" muestra con claridad el tiempo y el costo acumulado, que las alertas de seguridad se entienden bien y que la finalización de sesión es clara y sin sorpresas. Concluyó que la aplicación reduce la incertidumbre al estacionar. Como mejora, propuso que la app guarde un historial de los centros comerciales más visitados para reconocer sus favoritos.
+
+### 7.3.3. Evaluaciones según heurísticas
 
 ### 7.3.3. Evaluaciones según heurísticas
 
@@ -8008,24 +8086,32 @@ _(Repetir para todas las entrevistas de validación, 3-5 por segmento.)_
 | Campo | Valor |
 |---|---|
 | **CARRERA** | Ingeniería de Software |
-| **CURSO** | Arquitecturas de Software Emergentes |
-| **SECCIÓN** | _(...)_ |
-| **PROFESORES** | _(...)_ |
-| **AUDITOR** | _(Nombre del Grupo)_ |
-| **CLIENTE(S)** | _(Nombres de los participantes)_ |
+| **CURSO** | Diseño de Experimentos de Ingeniería de Software |
+| **SECCIÓN** | 10042|
+| **PROFESORES** | Royer Rojas |
+| **AUDITOR** | Apex Twin |
+| **CLIENTE(S)** | Carlos Mendoza, Ivania Ortiz, Juan Alarcón (operadores); Luis Chinchihualpa, Luis Herrera, Edward Rodriguez (conductores) |
 
-**SITE/APP A EVALUAR:** _(Web Application del Operador / Mobile App del Conductor)_
+**SITE/APP A EVALUAR:** Web Application del Operador y Mobile App del Conductor (SmartPark)
 
 **TAREAS A EVALUAR:**
-1. _(Login del operador)_
-2. _(Visualización de mapa 3D de ocupación)_
-3. _(Atención de alerta de humo)_
-4. _(Registro de ubicación de vehículo en app móvil)_
-5. _(Recepción de alerta de seguridad en app móvil)_
-6. _(...)_
+
+El alcance de esta evaluación incluye la revisión de usabilidad de las siguientes tareas:
+
+1. Inicio de sesión del operador en la aplicación web
+2. Visualización del dashboard de ocupación en tiempo real y del gemelo digital 3D
+3. Atención de una alerta de humo (localización espacial, reconocimiento y resolución del incidente)
+4. Consulta del historial de incidentes
+5. Consulta del mapa de disponibilidad de plazas por nivel y zona en la app móvil
+6. Registro de la ubicación del vehículo en la app móvil
+7. Consulta de "Mi Sesión" y finalización de la sesión de estacionamiento
+8. Recepción de alertas de seguridad en la app móvil
 
 **TAREAS NO INCLUIDAS:**
-1. _(...)_
+
+1. Recuperación de contraseña
+2. Registro de nuevos usuarios
+3. Contratación y pago de planes de suscripción
 
 **ESCALA DE SEVERIDAD:**
 
@@ -8040,31 +8126,99 @@ _(Repetir para todas las entrevistas de validación, 3-5 por segmento.)_
 
 | # | Problema | Escala de severidad | Heurística/Principio violada(o) |
 |---|---|---|---|
-| 1 | _(Descripción del problema)_ | _(1-4)_ | _(Heurística violada)_ |
-| 2 | _(...)_ | _(...)_ | _(...)_ |
+| 1 | El botón "Resolver" del incidente de humo tiene baja visibilidad y cuesta ubicarlo durante la atención de la alerta | 2 | Usability: Recognition rather than recall |
+| 2 | Las alertas de incidentes críticos (humo) solo se notifican de forma visual; no hay aviso sonoro si el operador no mira la pantalla | 3 | Usability: Visibility of system status |
+| 3 | Las alertas de seguridad llegan únicamente al dashboard web; el operador no las recibe en el celular cuando no está frente a la computadora | 2 | Usability: Flexibility and efficiency of use |
+| 4 | La ubicación del vehículo se indica solo por etiqueta de nivel/zona y no de forma espacial, lo que dificulta orientarse en estacionamientos de muchos pisos | 2 | Information Architecture: Is it usable? |
+| 5 | La app del conductor no permite guardar centros comerciales frecuentes ni recuperar visitas previas | 1 | Usability: Flexibility and efficiency of use |
+| 6 | La app móvil no integra medios de pago locales (Yape), de uso habitual entre los conductores del segmento objetivo | 2 | Usability: Match between system and the real world |
 
 **DESCRIPCIÓN DE PROBLEMAS:**
 
-**PROBLEMA #1:** _(Título)_
+**PROBLEMA #1:** Baja visibilidad del botón "Resolver" durante la atención del incidente
 
-- **Severidad:** _(1-4)_
-- **Heurística violada:** _(...)_
-- **Problema:** _(Descripción detallada con captura)_
-- **Recomendación:** _(...)_
+- **Severidad:** 2
+- **Heurística violada:** Usability: Recognition rather than recall
+- **Problema:** Durante la atención de una alerta de humo, dos operadores (Carlos Mendoza e Ivania Ortiz) indicaron que el proceso de reconocer y registrar notas fue directo, pero que el botón "Resolver" no resulta evidente y debieron buscarlo unos segundos. En una tarea crítica como la gestión de un incidente, la acción principal de cierre debería ser reconocible de inmediato.
+- **Imagen:** _(captura del panel de incidente)_
+- **Recomendación:** Aumentar la jerarquía visual del botón "Resolver" (color de acción primaria, tamaño y posición fija) para que sea la acción más visible una vez reconocido el incidente.
 
-_(Repetir para cada problema identificado.)_
+---
+
+**PROBLEMA #2:** Ausencia de aviso sonoro para incidentes críticos
+
+- **Severidad:** 3
+- **Heurística violada:** Usability: Visibility of system status
+- **Problema:** Las alertas de humo se comunican únicamente mediante elementos visuales en el dashboard. Los operadores señalaron que, al no estar siempre mirando la pantalla, una alerta crítica podría pasar desapercibida. Dado el impacto en la seguridad, el sistema debería garantizar que el estado crítico sea perceptible aun sin atención visual directa.
+- **Imagen:** _(captura del dashboard con la alerta activa)_
+- **Recomendación:** Incorporar una señal sonora diferenciada para incidentes de severidad alta, configurable por el operador, que acompañe la notificación visual.
+
+---
+
+**PROBLEMA #3:** Alertas de seguridad limitadas al dashboard web
+
+- **Severidad:** 2
+- **Heurística violada:** Usability: Flexibility and efficiency of use
+- **Problema:** Un operador (Juan Alarcón) indicó que, durante su turno, no siempre se encuentra frente a la computadora, por lo que las alertas que solo aparecen en el dashboard web pueden no recibirse a tiempo. La herramienta no ofrece un canal alternativo para usuarios en movimiento.
+- **Imagen:** _(captura de la notificación en el dashboard)_
+- **Recomendación:** Habilitar la notificación de alertas críticas en un canal móvil para el operador (push o mensajería), de modo que el aviso llegue independientemente de su ubicación.
+
+---
+
+**PROBLEMA #4:** Ubicación del vehículo no espacial en estacionamientos de varios niveles
+
+- **Severidad:** 2
+- **Heurística violada:** Information Architecture: Is it usable?
+- **Problema:** Un conductor (Luis Chinchihualpa) señaló que la ubicación del vehículo se gestiona mediante etiquetas de nivel y zona, lo cual resulta suficiente en estacionamientos pequeños, pero poco claro en establecimientos con muchos pisos, donde una referencia espacial facilitaría la orientación al regresar.
+- **Imagen:** _(captura de la pantalla de registro de ubicación)_
+- **Recomendación:** Complementar la indicación textual con una representación visual o mapa tridimensional simplificado de la ubicación del vehículo para estacionamientos de gran tamaño.
+
+---
+
+**PROBLEMA #5:** Falta de accesos rápidos para usuarios frecuentes
+
+- **Severidad:** 1
+- **Heurística violada:** Usability: Flexibility and efficiency of use
+- **Problema:** Un conductor (Edward Rodriguez) mencionó que la app no guarda un historial de los centros comerciales que más visita, por lo que un usuario frecuente debe repetir cada vez la búsqueda del establecimiento sin contar con atajos a sus destinos habituales.
+- **Imagen:** _(captura de la pantalla principal de la app)_
+- **Recomendación:** Incorporar una sección de centros comerciales favoritos o recientes que agilice el acceso de los usuarios frecuentes.
+
+---
+
+**PROBLEMA #6:** Ausencia de integración con medios de pago locales
+
+- **Severidad:** 2
+- **Heurística violada:** Usability: Match between system and the real world
+- **Problema:** Un conductor (Luis Herrera) indicó que esperaba poder pagar mediante Yape, un medio de pago de uso extendido en el segmento objetivo. La ausencia de esta opción aleja la experiencia de los hábitos reales del usuario peruano.
+- **Imagen:** _(captura de la pantalla de pago / resumen de sesión)_
+- **Recomendación:** Evaluar la integración de billeteras digitales locales (Yape, Plin) como medio de pago dentro del flujo de cierre de sesión.
 
 ## 7.4. Video About-the-Product
 
-_(Introducción y descripción del contenido del video. Tono consistente con el producto. Incluye al menos un testimonio positivo de un usuario que haya participado en las entrevistas de validación.)_
+A continuación se presenta el video About-the-Product de SmartPark, que cumple una doble función: sirve como evidencia de ejecución (execution evidence) de la solución desarrollada y, a la vez, como pieza promocional orientada a comunicar su propuesta de valor. En él se recorren de forma práctica las principales funcionalidades de los dos productos digitales —la aplicación web del operador, con el gemelo digital 3D como panel central de operaciones, y la aplicación móvil del conductor— acompañadas de una breve explicación de su propósito y de la problemática que resuelven. El video integra escenas de uso real de la plataforma con narración en voz en off que articula cómo SmartPark unifica la ocupación, la seguridad, el flujo vehicular y la eficiencia energética en una sola experiencia.
+
+Como parte del cierre, se incluye el testimonio de uno de los usuarios que participó en las entrevistas de validación, Luis Chinchihualpa (conductor frecuente), quien destacó que la aplicación móvil le resultó fluida y confiable: valoró especialmente el registro de la ubicación del vehículo —que usó varias veces y siempre le permitió encontrar su auto donde lo dejó— y concluyó que la solución reduce la incertidumbre al estacionar, sobre todo en centros comerciales grandes de varios niveles.
+
+**Pauta de secuencias del video:**
+
+| Timing (hh:mm:ss) | Sección |
+|---|---|
+| 00:00:00 | Introducción y presentación del problema |
+| 00:00:20 | Propuesta de valor de SmartPark y Landing Page |
+| 00:00:40 | Aplicación web del operador: dashboard de ocupación y gemelo digital 3D |
+| 00:01:05 | Gestión de una alerta de humo y dashboards de flujo y energía |
+| 00:01:30 | Aplicación móvil del conductor: disponibilidad, sesión y alertas |
+| 00:01:55 | Testimonio de usuario de validación |
+| 00:02:11 | Cierre |
 
 ![Video About-the-Product Screenshot](assets/images/chapter-07/about-product-screenshot.png)
 
-- **URL Microsoft Stream:** `https://web.microsoftstream.com/...`
-- **URL YouTube:** `https://youtube.com/...`
-- **Duración:** MM:SS
+- **URL Microsoft Stream:** [Ver video en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQBHh7oZlzEIS4pEzF4Uz-jXAYuHzSwSk90ET49b6vW2zww?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=2IJ9Ha)
+- **URL YouTube:** [Ver video en YouTube](https://youtu.be/UtBEGuQRAC4)
+- **Duración:** 2 minutos con 11 segundos
 
 ---
+
 
 # Conclusiones
 
@@ -8097,7 +8251,16 @@ _(Introducción y descripción del contenido del video. Tono consistente con el 
 5. **El equipo sostuvo el flujo de trabajo colaborativo planificado para el TP1.** Los cinco integrantes cubrieron el Capítulo V y el Capítulo VI mediante feature branches integradas a develop por pull requests, manteniendo la trazabilidad del proceso. La incorporación de las correcciones del TB1 a partir de la retroalimentación del docente evidencia un ciclo de mejora continua sobre el informe.
 
 #### TB2
-_(Conclusiones acumulables.)_
+
+1. **El flujo núcleo de SmartPark pasó del diseño a una implementación demostrable de punta a punta.** El Sprint 1 (94 story points) materializó las épicas priorizadas del Product Backlog en código funcional distribuido en cinco repositorios: el Landing Page, la autenticación JWT, el dashboard de ocupación en tiempo real con el visor del gemelo digital 3D embebido, la alerta de humo y el mapa de disponibilidad para el conductor. Esto confirma que la descomposición en bounded contexts del Capítulo IV y el diseño táctico del Capítulo V eran implementables, y que el modular monolith de Web Services puede orquestar la sincronización con Azure Digital Twins alimentado por el simulador IoT sin acoplar el dominio a la fuente de telemetría.
+
+2. **Las entrevistas de validación confirmaron empíricamente la utilidad y usabilidad de la solución con usuarios reales de ambos segmentos.** Las seis entrevistas —tres a operadores y tres a conductores frecuentes— evidenciaron que las funcionalidades centrales responden a los pain points identificados en el needfinding: los operadores valoraron especialmente la localización espacial de la alerta de humo en el gemelo digital 3D como una mejora directa sobre su proceso reactivo actual, mientras que los conductores destacaron el mapa de disponibilidad por nivel y el registro de la ubicación del vehículo como las funciones de mayor valor. Esta validación cualitativa cierra el ciclo Lean UX al contrastar las Hypothesis Statements con el comportamiento real de los usuarios frente al producto construido.
+
+3. **La evaluación heurística surfaceó oportunidades de mejora concretas y priorizables para el Sprint 2.** La aplicación del formato de evaluación según heurísticas de usabilidad, arquitectura de información e inclusive design identificó seis hallazgos con su nivel de severidad, todos trazables a un testimonio de entrevista: desde problemas menores de visibilidad (el botón "Resolver" del incidente) hasta mejoras de mayor impacto como el aviso sonoro para incidentes críticos, la notificación móvil para el operador y la integración de medios de pago locales (Yape). Estos hallazgos constituyen insumos accionables para el backlog del Sprint 2.
+
+4. **El diseño UX/UI se tradujo en interfaces coherentes con los User Personas de ambos segmentos.** La implementación respetó la diferenciación de patrones de navegación, búsqueda y etiquetado definida en el Capítulo VI: una aplicación web densa en información para el operador, centrada en el gemelo digital 3D como panel de operaciones, y una aplicación móvil PowerApps simple y orientada a tareas para el conductor. La retroalimentación de las entrevistas confirmó que esta diferenciación resultó adecuada para los perfiles tecnológicos opuestos de cada segmento.
+
+5. **El equipo sostuvo el flujo de trabajo colaborativo distribuido en seis repositorios sin bloqueos cruzados.** Los cinco integrantes desarrollaron en paralelo sus frentes (Landing Page, Web Services, Web App del operador, Simulador IoT y Mobile App del conductor) bajo la convención de feature branches con Pull Request hacia `develop`, replicando el flujo ya consolidado en el repositorio `report`. La integración del flujo núcleo exigió coordinación continua entre los frentes de backend, simulador y aplicaciones cliente, evidenciada en los analíticos de colaboración de GitHub documentados en la sección 7.2.1.8.
 
 #### TF1
 _(Conclusiones finales del proyecto.)_
