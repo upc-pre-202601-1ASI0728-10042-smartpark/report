@@ -8670,13 +8670,15 @@ _(Repetir para cada problema identificado.)_
 
 ## 7.4. Video About-the-Product
 
-_(Introducción y descripción del contenido del video. Tono consistente con el producto. Incluye al menos un testimonio positivo de un usuario que haya participado en las entrevistas de validación.)_
+El video **About-the-Product** tiene como público objetivo a los visitantes de la Landing Page que desean conocer la propuesta de SmartPark. Con un tono promocional, resume el modelo de negocio y las principales características y beneficios de la solución —el gemelo digital 3D, la visualización de ocupación en tiempo real y las alertas de humo geolocalizadas para el operador, junto con el mapa de disponibilidad para el conductor—, incluye escenas de interacción con el producto y recoge opiniones de participantes de las entrevistas de validación de ambos segmentos objetivo.
 
-![Video About-the-Product Screenshot](assets/images/chapter-07/about-product-screenshot.png)
+Esta primera versión del video está **incrustada en la Landing Page**, en la sección _"Conoce SmartPark en acción"_, mediante el reproductor de YouTube. La siguiente captura muestra el video presentado dentro de la Landing Page desplegada:
 
-- **URL Microsoft Stream:** `https://web.microsoftstream.com/...`
-- **URL YouTube:** `https://youtube.com/...`
-- **Duración:** MM:SS
+![Video About-the-Product incrustado en la Landing Page](assets/images/chapter-07/about-product-landing.png)
+
+- **URL (Microsoft Stream / SharePoint, evidencia del informe):** `https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQBHh7oZlzEIS4pEzF4Uz-jXAYuHzSwSk90ET49b6vW2zww`
+- **URL (YouTube, versión incrustada en la Landing Page):** `https://youtu.be/UtBEGuQRAC4`
+- **Formato y duración:** `.mp4`, orientación promocional (1 a 3 minutos).
 
 ---
 
