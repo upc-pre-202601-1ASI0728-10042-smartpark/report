@@ -2389,9 +2389,9 @@ Caso alternativo 2:
 ## 6.5. Applications Prototyping
 
 ### Prototype: Web Application (Operador)
-![Web App Prototype Screenshot](assets/images/chapter-06/webapp-prototype-screenshot.png)
+![Web App Prototype Screenshot](assets/images/chapter-06/webproto.png)
 
-**URL del video:** `https://web.microsoftstream.com/...`
+**URL del video:** `https://canva.link/515c7mgwcyh1xpj`
 
 ### Prototype: Mobile Application (Conductor)
 ![Mobile App Prototype Screenshot](assets/images/chapter-06/mobile-prototype-screenshot.png)
