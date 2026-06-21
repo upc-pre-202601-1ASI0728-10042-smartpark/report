@@ -1,0 +1,43 @@
+GUION — VIDEO ABOUT-THE-TEAM (v1) · SmartPark (Apex Twin)
+1ASI0728 Arquitecturas de Software Emergentes · Sección 10042
+======================================================================
+Estructura: retrospectiva del proceso (voz en off) + 1 testimonio por integrante.
+Sugerencia de timing: ~5 min de proceso/retrospectiva + ~1 min por testimonio.
+======================================================================
+
+### NARRACIÓN / VOZ EN OFF (proceso del equipo) — sugerido: Elmer (líder)
+
+[Slide 1 · Portada]
+Somos Apex Twin y este es el video About-the-Team: cómo construimos SmartPark durante el Sprint 1.
+
+[Conoce a Apex Twin]
+Somos Apex Twin, un equipo de cinco estudiantes del curso de Arquitecturas de Software Emergentes. Nos organizamos por frentes complementarios: liderazgo y backend, diseño y landing, aplicación móvil y validación, frontend del operador, y el gemelo digital con IoT. Cada integrante asumió la responsabilidad de su producto, pero trabajamos como una sola solución integrada.
+
+[Nuestra forma de trabajar]
+Trabajamos con un marco ágil Scrum, planificando dos Sprints para cubrir todo el backlog. Adoptamos un flujo de ramas ordenado: cada funcionalidad en su rama, integrada a develop por Pull Request y liberada a main. Nos coordinamos a diario por Discord y gestionamos el avance en Trello. Una decisión clave fue acordar temprano el contrato del API con OpenAPI: eso nos permitió que el frontend web, la app móvil y el simulador avanzaran en paralelo sin bloquearse.
+
+[Lo que logramos en el Sprint 1]
+Los resultados del Sprint 1 hablan por sí solos: cuatro productos digitales desplegados y verificados en Azure, con el flujo núcleo funcionando de extremo a extremo, desde el simulador IoT hasta el gemelo 3D y el dashboard del operador. Registramos doscientos commits y una suite de pruebas automatizadas en verde. Más allá de lo técnico, este proceso evidencia el outcome ABET de comunicación efectiva y de trabajo en un ambiente ágil y colaborativo.
+
+======================================================================
+### TESTIMONIOS POR INTEGRANTE (ante cámara, ~1 min c/u)
+
+--- Riva Rodríguez, Elmer Augusto · Team Leader · Backend & Cloud ---
+Hola, soy Elmer Riva, líder del equipo. Como Scrum Master coordiné la planificación y el seguimiento de los Sprints. En lo técnico, construí el backend en ASP.NET Core 8 con Domain-Driven Design: la autenticación con JWT, los servicios de ocupación, la cadena de alertas con SignalR y la persistencia con Entity Framework. También me encargué del despliegue completo en Azure. Aprendí a diseñar una arquitectura multicomponente y a comunicar decisiones técnicas al equipo.
+
+--- Sánchez Ríos, Camila Cristina · Landing & UI/UX ---
+Soy Camila Sánchez y lideré el diseño y la Landing Page. Definí el sistema de diseño de SmartPark, los wireframes y los mock-ups de los dos perfiles, y trabajé la arquitectura de información del sitio. Implementé la landing con su propuesta de valor, los planes y el soporte de idiomas. Desarrollé mi competencia de diseño centrado en el usuario y de comunicar una identidad visual coherente entre productos.
+
+--- Qqueso Rodríguez, Britney Delhy · App Móvil & Validación ---
+Hola, soy Britney Qqueso. Me encargué de la aplicación móvil del conductor en Power Apps: el registro, el inicio de sesión, el mapa de disponibilidad y el registro de la ubicación del vehículo, conectados al API por un conector personalizado. También apoyé el diseño de las entrevistas de validación. Aprendí a construir sobre plataformas low-code y a planificar la validación con usuarios reales.
+
+--- Valle Zuta, Abel Andrés · Frontend del Operador ---
+Soy Abel Valle y desarrollé la aplicación web del operador en Angular 20. Integré el visor 3D del gemelo digital con la ocupación coloreada en vivo, el dashboard con actualización en tiempo real por SignalR y las alertas de humo geolocalizadas. Cuidé la accesibilidad y los estados resilientes. Fortalecí mi competencia en frontend moderno y en integrar visualización 3D con datos en tiempo real.
+
+--- Morales Calderón, Hernan Emilio · Gemelo Digital & IoT ---
+Hola, soy Hernán Morales. Construí el gemelo digital en Azure Digital Twins y el simulador IoT en Node.js que lo alimenta con telemetría de ocupación y humo. Implementé la sincronización al grafo, la capa anti-corrupción y el modelo 3D con material por plaza. Aprendí a trabajar con tecnologías emergentes de gemelos digitales y a integrar IoT con la nube de forma desacoplada.
+
+======================================================================
+### CIERRE / RETROSPECTIVA — voz en off (Elmer)
+
+Para cerrar nuestra retrospectiva: como aciertos, acordar el contrato del API desde el inicio y mantener una única fuente de verdad para el gemelo nos permitió avanzar en paralelo sin choques. Como oportunidad de mejora, identificamos automatizar más pruebas de integración y estandarizar el despliegue. En el Sprint 2 abordaremos el flujo vehicular, la eficiencia energética, la gestión de sesión y costos, y la notificación push. Gracias por acompañarnos en el proceso de construir SmartPark.
