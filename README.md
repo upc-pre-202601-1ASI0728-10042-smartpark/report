@@ -8722,7 +8722,16 @@ Esta primera versión del video está **incrustada en la Landing Page**, en la s
 5. **El equipo sostuvo el flujo de trabajo colaborativo planificado para el TP1.** Los cinco integrantes cubrieron el Capítulo V y el Capítulo VI mediante feature branches integradas a develop por pull requests, manteniendo la trazabilidad del proceso. La incorporación de las correcciones del TB1 a partir de la retroalimentación del docente evidencia un ciclo de mejora continua sobre el informe.
 
 #### TB2
-_(Conclusiones acumulables.)_
+
+1. **El flujo núcleo de SmartPark quedó demostrado de extremo a extremo sobre el entorno desplegado.** El Sprint 1 cumplió su objetivo: una alerta de humo generada por el simulador IoT recorre toda la cadena (simulador → Azure Digital Twins → API/SignalR → dashboard) y se refleja geolocalizada en el visor 3D, mientras el conductor consulta la disponibilidad y registra la ubicación de su vehículo desde la app. Se cerraron **25 de 29 work-items** y se superó el umbral de cumplimiento comprometido (≥ 90 % de los Story Points en *Done*), validando que el flujo demostrable de extremo a extremo planificado era alcanzable en un único Sprint.
+
+2. **La arquitectura DDD multicomponente diseñada en los capítulos previos resultó implementable y desplegable en la nube.** El backend en ASP.NET Core 8 (Domain-Driven Design, JWT y SignalR), la persistencia multi-proveedor con EF Core, el gemelo en Azure Digital Twins y el visor 3D del frontend se integraron como una sola solución y se desplegaron en Azure (Storage static websites, App Service con SQLite embebido y Blob Storage). La estrategia multi-proveedor y el *demo gateway* del gemelo permitieron dejar el sistema **funcional** pese a las restricciones de cuota de la suscripción *Azure for Students*, confirmando la flexibilidad de las decisiones arquitectónicas adoptadas.
+
+3. **La evidencia de calidad respalda la solución con pruebas automatizadas, documentación de servicios y trazabilidad de commits.** La suite de dominio alcanzó **41 métodos / 65 casos** en verde, ejecutados en integración continua; el contrato del API quedó documentado con OpenAPI/Swagger; y la ejecución del Sprint se evidencia con los **200 commits** trazables y los insights de colaboración por repositorio. Esta práctica demuestra un proceso de ingeniería verificable y comunicado de forma efectiva, en línea con el Student Outcome ABET-3.
+
+4. **El gemelo digital 3D con ocupación en vivo y la cadena de alerta geolocalizada constituyen el diferencial validado de SmartPark.** El coloreado por plaza según la ocupación real y el resaltado de la zona afectada ante una alerta de humo —sincronizados por el simulador IoT y servidos en tiempo real— materializan con contexto espacial las hipótesis H1 (respuesta ante incidentes) y H2 (disponibilidad de plazas), y dejan la solución lista para las entrevistas de validación con ambos segmentos objetivo.
+
+5. **El equipo sostuvo un proceso ágil y colaborativo, con la primera versión de los productos digitales desplegada y los videos publicados.** Bajo una planificación de dos Sprints y un flujo de ramas *feature → develop → main* coordinado mediante Trello y Discord, los cinco integrantes entregaron los cuatro productos digitales desplegados y verificados, junto con la primera versión de los videos **About-the-Product** (incrustado en la Landing Page) y **About-the-Team**. La incorporación de las correcciones del TP1 evidencia la continuidad del ciclo de mejora del informe.
 
 #### TF1
 _(Conclusiones finales del proyecto.)_
