@@ -313,8 +313,8 @@ _(Pendiente)_
     - [7.1.3. Source Code Style Guide \& Conventions](#713-source-code-style-guide--conventions)
     - [7.1.4. Software Deployment Configuration](#714-software-deployment-configuration)
       - [Landing Page → Azure Storage static website](#landing-page--azure-storage-static-website)
-      - [Web Application (Angular) → Azure Storage static website](#web-application-angular--azure-storage-static-website)
-      - [Web Services (ASP.NET Core) → Azure App Service (Linux, .NET 8)](#web-services-aspnet-core--azure-app-service-linux-net-8)
+      - [Web Application (Angular 20) → Azure Storage static website](#web-application-angular-20--azure-storage-static-website)
+      - [Web Services (ASP.NET Core 8) → Azure App Service (Linux)](#web-services-aspnet-core-8--azure-app-service-linux)
       - [IoT Simulator (Node.js) → ejecución on-demand](#iot-simulator-nodejs--ejecución-on-demand)
       - [Mobile App (Power Apps)](#mobile-app-power-apps)
       - [Azure Digital Twins + Modelo 3D](#azure-digital-twins--modelo-3d)
@@ -7862,34 +7862,139 @@ Toda nomenclatura en inglés.
 
 Cada producto digital se despliega desde su repositorio hacia su nodo de Azure. El despliegue se ejecuta con **Az PowerShell** (módulo `Az`), que valida TLS con *schannel* y atraviesa el proxy de la red universitaria (el `az` CLI queda bloqueado por su OpenSSL estricto). Suscripción: *Azure for Students*; grupo de recursos `rg-smartpark`; región `eastus2`.
 
-#### Landing Page → Azure Storage static website
-1. `npm run build` (Vite) genera el bundle estático en `dist/`.
-2. Habilitar el static website del Storage Account (`stsmartparkland01`) y subir `dist/` al contenedor `$web` (`Set-AzStorageBlobContent`).
-3. Verificar en `https://stsmartparkland01.z20.web.core.windows.net/`.
+> **Nota sobre los secretos:** los valores sensibles (`Jwt__Key`, `Ingest__ApiKey`, host de ADT, cadenas de conexión) se inyectan como **App Settings** del App Service o variables de entorno locales; nunca se versionan. En los bloques siguientes aparecen como marcadores `<...>`.
 
-#### Web Application (Angular) → Azure Storage static website
-1. `ng build --configuration production` (salida en `dist/web-application/browser`).
-2. Configurar `environment.production` con la URL del API y subir el bundle a `$web` del Storage Account `stsmartparkweb01`.
-3. Verificar el login JWT contra el API en `https://stsmartparkweb01.z20.web.core.windows.net/`.
+##### 0) Autenticación y grupo de recursos
 
-#### Web Services (ASP.NET Core) → Azure App Service (Linux, .NET 8)
-1. `dotnet publish src/SmartPark.Api -c Release -o ./publish`.
-2. Empaquetar con rutas POSIX (las DLL nativas de SQLite requieren *forward slashes* en el ZIP) y publicar con `Publish-AzWebApp`/`az webapp deploy --type zip`.
-3. Configurar App Settings: `Database__Provider=sqlite`, `ConnectionStrings__SmartParkDb`, `Jwt__Key`, `Adt__Mode`, `Ingest__ApiKey`, `Cors__WebApp`.
-4. Verificar Swagger en `https://smartpark-api.azurewebsites.net/swagger`.
+```powershell
+# Az PowerShell valida TLS con schannel y atraviesa el proxy de la UPC
+# (el az CLI falla por su OpenSSL aislado y estricto).
+Connect-AzAccount -UseDeviceAuthentication
+Set-AzContext -Subscription "<subscription-id>"
 
-#### IoT Simulator (Node.js) → ejecución on-demand
-1. `npm install` en el repositorio `iot-simulator`.
-2. Configurar `.env` con el host de Azure Digital Twins y el `X-Api-Key` de ingesta del API.
-3. Ejecutar el simulador (`npm start`) para emitir telemetría de ocupación y disparar alertas de humo durante las entrevistas de validación; opcionalmente desde la vista de simulador de la web-app (`POST /api/v1/occupancy/simulate` y `POST /api/v1/alerts/smoke`).
+New-AzResourceGroup -Name rg-smartpark -Location eastus2
+```
 
-#### Mobile App (Power Apps)
-1. Importar el **custom connector** desde `connector/apiDefinition.swagger.json` (apuntando al API desplegado).
-2. Importar la app Canvas (`.msapp`/source `*.pa.yaml`) en Power Apps Studio y publicar.
+##### Landing Page → Azure Storage static website
 
-#### Azure Digital Twins + Modelo 3D
-1. Aprovisionar la instancia ADT (`adt-smartpark`) y subir los modelos **DTDL** con los scripts del repositorio `iot-simulator`.
-2. Sembrar el grafo de twins (niveles, zonas, plazas) y subir el modelo **GLB** al contenedor de **Azure Blob Storage** (`stsmartparkvhrz`) que consume el visor 3D de la web-app.
+```powershell
+# 1) Build estático (Vite)
+npm --prefix landing-page install
+npm --prefix landing-page run build            # -> landing-page/dist
+
+# 2) Storage Account + sitio estático
+New-AzStorageAccount -ResourceGroupName rg-smartpark -Name stsmartparkland01 `
+  -Location eastus2 -SkuName Standard_LRS -Kind StorageV2
+$ctx = (Get-AzStorageAccount -ResourceGroupName rg-smartpark -Name stsmartparkland01).Context
+Enable-AzStorageStaticWebsite -Context $ctx -IndexDocument index.html -ErrorDocument404Path index.html
+
+# 3) Subir el build al contenedor $web (preservando rutas con '/')
+$root = (Resolve-Path landing-page/dist).Path
+Get-ChildItem -Recurse -File $root | ForEach-Object {
+  $blob = $_.FullName.Substring($root.Length + 1).Replace('\','/')
+  Set-AzStorageBlobContent -Context $ctx -Container '$web' -File $_.FullName -Blob $blob -Force
+}
+# URL: https://stsmartparkland01.z20.web.core.windows.net/
+```
+
+##### Web Application (Angular 20) → Azure Storage static website
+
+```powershell
+# 1) Build de producción (la URL del API va en src/environments/environment.prod.ts)
+ng build --configuration production            # -> dist/web-application/browser
+
+# 2) Storage Account + sitio estático (con fallback a index.html para el routing del SPA)
+New-AzStorageAccount -ResourceGroupName rg-smartpark -Name stsmartparkweb01 `
+  -Location eastus2 -SkuName Standard_LRS -Kind StorageV2
+$ctx = (Get-AzStorageAccount -ResourceGroupName rg-smartpark -Name stsmartparkweb01).Context
+Enable-AzStorageStaticWebsite -Context $ctx -IndexDocument index.html -ErrorDocument404Path index.html
+
+# 3) Subir el bundle
+$root = (Resolve-Path dist/web-application/browser).Path
+Get-ChildItem -Recurse -File $root | ForEach-Object {
+  $blob = $_.FullName.Substring($root.Length + 1).Replace('\','/')
+  Set-AzStorageBlobContent -Context $ctx -Container '$web' -File $_.FullName -Blob $blob -Force
+}
+# URL: https://stsmartparkweb01.z20.web.core.windows.net/
+```
+
+> El `ErrorDocument404Path = index.html` hace que los *deep links* del SPA (p. ej. `/dashboard`) sirvan `index.html` y el router de Angular resuelva la ruta en el cliente.
+
+##### Web Services (ASP.NET Core 8) → Azure App Service (Linux)
+
+```powershell
+# 1) Plan + Web App (.NET 8, Linux, plan B1)
+New-AzAppServicePlan -ResourceGroupName rg-smartpark -Name plan-smartpark `
+  -Location eastus2 -Tier Basic -WorkerSize Small -Linux
+New-AzWebApp -ResourceGroupName rg-smartpark -Name smartpark-api `
+  -Location eastus2 -AppServicePlan plan-smartpark
+Set-AzWebApp -ResourceGroupName rg-smartpark -Name smartpark-api -LinuxFxVersion "DOTNETCORE|8.0"
+
+# 2) Configuración (App Settings): SQLite embebido + JWT + gateway Demo + CORS
+$settings = @{
+  "Database__Provider"             = "sqlite"
+  "ConnectionStrings__SmartParkDb" = "Data Source=/home/smartpark.db"
+  "Jwt__Key"                       = "<secret 32+ bytes>"
+  "Adt__Mode"                      = "Demo"
+  "Ingest__ApiKey"                 = "<api-key>"
+  "Cors__WebApp"                   = "https://stsmartparkweb01.z20.web.core.windows.net"
+}
+Set-AzWebApp -ResourceGroupName rg-smartpark -Name smartpark-api -AppSettings $settings
+
+# 3) Publicar
+dotnet publish src/SmartPark.Api -c Release -o ./publish
+# IMPORTANTE: empaquetar con rutas POSIX ('/'). Compress-Archive escribe '\' y en Linux
+# la lib nativa de SQLite (runtimes/linux-x64/native/libe_sqlite3.so) no carga
+# -> 500 DllNotFoundException 'e_sqlite3'. Por eso se zipea con Python (forward slashes):
+python -c "import shutil; shutil.make_archive('api','zip','publish')"
+Publish-AzWebApp -ResourceGroupName rg-smartpark -Name smartpark-api -ArchivePath ./api.zip -Force
+# Swagger: https://smartpark-api.azurewebsites.net/swagger
+```
+
+##### IoT Simulator (Node.js) → ejecución on-demand
+
+```powershell
+cd iot-simulator; npm install
+# .env: ADT_HOST=<adt-host>; INGEST_API_KEY=<api-key>; API_BASE=https://smartpark-api.azurewebsites.net
+npm run simulate     # emite telemetría de ocupación y dispara alertas de humo
+```
+Alternativamente, desde la **vista de Simulador** de la web-app, que invoca el API:
+`POST /api/v1/occupancy/simulate` (tick de ocupación) y `POST /api/v1/alerts/smoke` (header `X-Api-Key`).
+
+##### Mobile App (Power Apps)
+
+```text
+1. Power Apps > Custom connectors > Import an OpenAPI file:
+     connector/apiDefinition.swagger.json
+     Host: smartpark-api.azurewebsites.net  ·  Security: API Key (JWT Bearer)
+2. Power Apps Studio > Import canvas app:
+     CanvasApp/Src/*.pa.yaml  ->  File > Save > Publish
+```
+
+##### Azure Digital Twins + Modelo 3D
+
+```powershell
+# 1) Prerrequisitos y aprovisionamiento de la instancia ADT (adt-smartpark)
+./iot-simulator/scripts/00-prerequisites.ps1
+./iot-simulator/scripts/01-provision-azure.ps1
+# 2) Subir los modelos DTDL y sembrar el grafo (niveles, zonas, plazas)
+./iot-simulator/scripts/02-upload-models.ps1
+npm --prefix iot-simulator run seed            # scripts/03-seed-graph.mjs
+npm --prefix iot-simulator run verify          # verificación del grafo
+# 3) Generar y subir el modelo 3D (GLB) al Blob Storage que consume el visor de la web-app
+npm --prefix iot-simulator run gen:all         # genera parking-garage.glb + escena
+./iot-simulator/scripts/04-upload-3d-model.ps1 # -> Storage stsmartparkvhrz
+```
+
+**Recursos aprovisionados (grupo `rg-smartpark`, región `eastus2`):**
+
+| Recurso | Tipo Azure | Producto que sirve |
+|---|---|---|
+| `stsmartparkland01` | Storage Account (static website) | landing-page |
+| `stsmartparkweb01` | Storage Account (static website) | web-application |
+| `plan-smartpark` / `smartpark-api` | App Service Plan (Linux B1) / Web App (.NET 8) | web-services (API + SignalR) |
+| `adt-smartpark` | Azure Digital Twins | gemelo digital |
+| `stsmartparkvhrz` | Storage Account (Blob) | modelo 3D (GLB) |
 
 **Deployment Diagram (C4):**
 ![Deployment Diagram](assets/images/chapter-07/deployment-diagram.png)
@@ -7923,9 +8028,11 @@ El Sprint 1 inaugura la fase de construcción de SmartPark. El equipo de Apex Tw
 
 El objetivo principal del Sprint 1 es habilitar el flujo núcleo demostrable de SmartPark de extremo a extremo (Landing Page, autenticación, gemelo digital sincronizado por el simulador IoT, dashboard 3D de ocupación con alertas de humo y mapa de disponibilidad del conductor). Se seleccionaron del Product Backlog las User Stories de mayor prioridad junto con las Technical Stories que las habilitan, descompuestas en Work-Items asignados a cada integrante según su frente de desarrollo. A continuación se muestra el tablero del Sprint en Trello y la tabla de control de estado.
 
-**URL del Board:** `https://trello.com/b/smartpark-sprint1` _(tablero público del Sprint 1)_
+El tablero del Sprint 1 se gestionó en **Trello**, organizado en tres listas (`Done`, `To-Review`, `In-Process`) con una **etiqueta de color por integrante**. Cerró con **25 work-items en `Done`**, **2 en `To-Review`** (T-23 tarjeta de alerta en vivo y T-26 despacho FCM) y **2 en `In-Process`** (T-27 y T-28, notificación push). A continuación, la captura del tablero real del equipo:
 
-![Sprint 1 Board](assets/images/chapter-07/sprint-1-board.png)
+**URL del Board:** `https://trello.com/b/4MEW0xlJ/smart-park`
+
+![Tablero del Sprint 1 en Trello](assets/images/chapter-07/sprint-1-trello-board.png)
 
 | US Id          | US Title                                               | Task Id | Work-Item / Task                                     | Description                                                                        | Est. (h) | Assigned To     | Status     |
 |----------------|--------------------------------------------------------|---------|------------------------------------------------------|------------------------------------------------------------------------------------|----------|-----------------|------------|
