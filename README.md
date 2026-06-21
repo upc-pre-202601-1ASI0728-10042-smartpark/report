@@ -8007,8 +8007,8 @@ Para la aplicación móvil se considerará los userflows de:
 | Distrito | Surco |
 | Cargo / Segmento | Jefe de Operaciones |
 | Fecha de entrevista | 19/06/2026 |
-| URL del video | [Ver entrevista en Microsoft Stream](https://web.microsoftstream.com/...) |
-| Duración | MM:SS |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQAzgxctJt2oTJQ5Lq3HgCleAXUJVju8hEvOHf8NJGUpgyQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=EBMSpa) |
+| Duración | 5 minutos con 33 segundos |
 
 ![Validation Interview Operador 2](assets/images/chapter-07/validation-interview-op-02.png)
 
@@ -8022,8 +8022,8 @@ Para la aplicación móvil se considerará los userflows de:
 | Distrito | Cusco |
 | Cargo / Segmento | Técnico operario |
 | Fecha de entrevista | 20/06/2026 |
-| URL del video | [Ver entrevista en Microsoft Stream](https://web.microsoftstream.com/...) |
-| Duración | MM:SS |
+| URL del video | [Ver entrevista en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u20211g671_upc_edu_pe/IQDUvEWqyIuJT7muBIs1RsMRAQThY-Uz4yIjKpTAgfixKIA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=yFD1IB) |
+| Duración | 4 minutos con 49 segundos |
 
 ![Validation Interview Operador 3](assets/images/chapter-07/validation-interview-op-03.png)
 
@@ -8129,9 +8129,7 @@ El alcance de esta evaluación incluye la revisión de usabilidad de las siguien
 | 1 | El botón "Resolver" del incidente de humo tiene baja visibilidad y cuesta ubicarlo durante la atención de la alerta | 2 | Usability: Recognition rather than recall |
 | 2 | Las alertas de incidentes críticos (humo) solo se notifican de forma visual; no hay aviso sonoro si el operador no mira la pantalla | 3 | Usability: Visibility of system status |
 | 3 | Las alertas de seguridad llegan únicamente al dashboard web; el operador no las recibe en el celular cuando no está frente a la computadora | 2 | Usability: Flexibility and efficiency of use |
-| 4 | La ubicación del vehículo se indica solo por etiqueta de nivel/zona y no de forma espacial, lo que dificulta orientarse en estacionamientos de muchos pisos | 2 | Information Architecture: Is it usable? |
-| 5 | La app del conductor no permite guardar centros comerciales frecuentes ni recuperar visitas previas | 1 | Usability: Flexibility and efficiency of use |
-| 6 | La app móvil no integra medios de pago locales (Yape), de uso habitual entre los conductores del segmento objetivo | 2 | Usability: Match between system and the real world |
+
 
 **DESCRIPCIÓN DE PROBLEMAS:**
 
@@ -8140,7 +8138,7 @@ El alcance de esta evaluación incluye la revisión de usabilidad de las siguien
 - **Severidad:** 2
 - **Heurística violada:** Usability: Recognition rather than recall
 - **Problema:** Durante la atención de una alerta de humo, dos operadores (Carlos Mendoza e Ivania Ortiz) indicaron que el proceso de reconocer y registrar notas fue directo, pero que el botón "Resolver" no resulta evidente y debieron buscarlo unos segundos. En una tarea crítica como la gestión de un incidente, la acción principal de cierre debería ser reconocible de inmediato.
-- **Imagen:** _(captura del panel de incidente)_
+- **Imagen:** ![Heurística-1](assets/images/chapter-07/heuristica-1.png)
 - **Recomendación:** Aumentar la jerarquía visual del botón "Resolver" (color de acción primaria, tamaño y posición fija) para que sea la acción más visible una vez reconocido el incidente.
 
 ---
@@ -8150,7 +8148,7 @@ El alcance de esta evaluación incluye la revisión de usabilidad de las siguien
 - **Severidad:** 3
 - **Heurística violada:** Usability: Visibility of system status
 - **Problema:** Las alertas de humo se comunican únicamente mediante elementos visuales en el dashboard. Los operadores señalaron que, al no estar siempre mirando la pantalla, una alerta crítica podría pasar desapercibida. Dado el impacto en la seguridad, el sistema debería garantizar que el estado crítico sea perceptible aun sin atención visual directa.
-- **Imagen:** _(captura del dashboard con la alerta activa)_
+- **Imagen:** ![Heurística-1](assets/images/chapter-07/heuristica-2.png)
 - **Recomendación:** Incorporar una señal sonora diferenciada para incidentes de severidad alta, configurable por el operador, que acompañe la notificación visual.
 
 ---
@@ -8160,38 +8158,11 @@ El alcance de esta evaluación incluye la revisión de usabilidad de las siguien
 - **Severidad:** 2
 - **Heurística violada:** Usability: Flexibility and efficiency of use
 - **Problema:** Un operador (Juan Alarcón) indicó que, durante su turno, no siempre se encuentra frente a la computadora, por lo que las alertas que solo aparecen en el dashboard web pueden no recibirse a tiempo. La herramienta no ofrece un canal alternativo para usuarios en movimiento.
-- **Imagen:** _(captura de la notificación en el dashboard)_
+- **Imagen:** ![Heurística-1](assets/images/chapter-07/heuristica-3.png)
 - **Recomendación:** Habilitar la notificación de alertas críticas en un canal móvil para el operador (push o mensajería), de modo que el aviso llegue independientemente de su ubicación.
 
 ---
 
-**PROBLEMA #4:** Ubicación del vehículo no espacial en estacionamientos de varios niveles
-
-- **Severidad:** 2
-- **Heurística violada:** Information Architecture: Is it usable?
-- **Problema:** Un conductor (Luis Chinchihualpa) señaló que la ubicación del vehículo se gestiona mediante etiquetas de nivel y zona, lo cual resulta suficiente en estacionamientos pequeños, pero poco claro en establecimientos con muchos pisos, donde una referencia espacial facilitaría la orientación al regresar.
-- **Imagen:** _(captura de la pantalla de registro de ubicación)_
-- **Recomendación:** Complementar la indicación textual con una representación visual o mapa tridimensional simplificado de la ubicación del vehículo para estacionamientos de gran tamaño.
-
----
-
-**PROBLEMA #5:** Falta de accesos rápidos para usuarios frecuentes
-
-- **Severidad:** 1
-- **Heurística violada:** Usability: Flexibility and efficiency of use
-- **Problema:** Un conductor (Edward Rodriguez) mencionó que la app no guarda un historial de los centros comerciales que más visita, por lo que un usuario frecuente debe repetir cada vez la búsqueda del establecimiento sin contar con atajos a sus destinos habituales.
-- **Imagen:** _(captura de la pantalla principal de la app)_
-- **Recomendación:** Incorporar una sección de centros comerciales favoritos o recientes que agilice el acceso de los usuarios frecuentes.
-
----
-
-**PROBLEMA #6:** Ausencia de integración con medios de pago locales
-
-- **Severidad:** 2
-- **Heurística violada:** Usability: Match between system and the real world
-- **Problema:** Un conductor (Luis Herrera) indicó que esperaba poder pagar mediante Yape, un medio de pago de uso extendido en el segmento objetivo. La ausencia de esta opción aleja la experiencia de los hábitos reales del usuario peruano.
-- **Imagen:** _(captura de la pantalla de pago / resumen de sesión)_
-- **Recomendación:** Evaluar la integración de billeteras digitales locales (Yape, Plin) como medio de pago dentro del flujo de cierre de sesión.
 
 ## 7.4. Video About-the-Product
 
