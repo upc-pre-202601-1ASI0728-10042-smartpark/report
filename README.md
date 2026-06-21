@@ -102,7 +102,10 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 ![tp1.png](assets/images/contributions/tp1.png)
 
 #### TB2
-_(Pendiente)_
+
+Contribución del equipo durante el TB2 (Sprint 1): **200 commits** distribuidos por frente de producto a través de los repositorios de la organización.
+
+![tb2.png](assets/images/contributions/tb2.png)
 
 #### TF1
 _(Pendiente)_
