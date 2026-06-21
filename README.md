@@ -7963,46 +7963,260 @@ El objetivo principal del Sprint 1 es habilitar el flujo núcleo demostrable de 
 
 #### 7.2.1.3. Development Evidence for Sprint Review
 
-Durante el Sprint 1 el equipo construyó y desplegó el **flujo núcleo de extremo a extremo** distribuido en cinco repositorios de producto (más el repositorio del informe), siguiendo un flujo de ramas **feature → `develop` (Pull Request / merge `--no-ff`) → release a `main`**. Se registraron **200 commits** en los repositorios de producto. La siguiente tabla resume los commits más representativos por repositorio (los identificadores son los hashes reales de cada commit). La organización en GitHub es `upc-pre-202601-1ASI0728-10042-smartpark`.
+Durante el Sprint 1 el equipo construyó y desplegó el **flujo núcleo de extremo a extremo** distribuido en cinco repositorios de producto (más el repositorio del informe), siguiendo un flujo de ramas **feature → `develop` (Pull Request / merge `--no-ff`) → release a `main`**. En total se registraron **200 commits** en los repositorios de producto. A continuación se listan **todos los commits del Sprint 1**, agrupados por repositorio y en orden cronológico (los identificadores son los hashes reales de cada commit; la organización en GitHub es `upc-pre-202601-1ASI0728-10042-smartpark`).
 
-| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
-|---|---|---|---|---|---|
-| `smartpark/web-services` | `feature/api-composition` | `994aef1` | feat(api): configure composition root (DI, JWT auth, CORS, SignalR, Swagger) | Cablea la raíz de composición del API con autenticación JWT, CORS, SignalR y Swagger. | 2026-06-11 |
-| `smartpark/web-services` | `feature/api-controllers` | `c538ce2` | feat(api): add occupancy, smoke alerts and device tokens controllers | Expone los endpoints REST de ocupación, alertas de humo y registro de device tokens. | 2026-06-12 |
-| `smartpark/web-services` | `feature/secure-smoke-ingest` | `452f616` | feat(safety): authenticate smoke ingest with shared API key | Protege la ingesta de humo con `X-Api-Key` validada en tiempo constante. | 2026-06-19 |
-| `smartpark/web-services` | `feature/multi-provider-db` | `4325746` | feat(persistence): support SQL Server and SQLite providers and resilient startup | EF Core multi-proveedor (Npgsql/SqlServer/Sqlite) y arranque resiliente para la nube. | 2026-06-20 |
-| `smartpark/web-application` | `feature/twin-3d-viewer` | `f017cce` | feat(twin): embed digital twin 3D viewer in the operator panel | Integra el visor 3D `model-viewer` del gemelo en el panel del operador. | 2026-06-19 |
-| `smartpark/web-application` | `feature/ux-improvements` | `7e04afd` | feat(occupancy): auto-refresh dashboard with skeletons and resilient states | Dashboard con auto-refresco, skeletons y estados degradados ante fallos del API. | 2026-06-19 |
-| `smartpark/web-application` | `feature/iot-simulator-view` | `48ede0e` | feat(simulator): add IoT simulator view to trigger live smoke alerts | Vista de simulador IoT para las entrevistas de validación. | 2026-06-19 |
-| `smartpark/web-application` | `feature/operator-console-wireframe` | `6241eb0` | feat(console): 3D-centric operator console with light sidebar (align to wireframes) | Console del operador centrado en el gemelo 3D, alineado a los wireframes. | 2026-06-20 |
-| `smartpark/iot-simulator` | `feature/adt-connectivity` | `8afb87a` | feat(scripts): provision ADT instance and upload DTDL models | Aprovisiona Azure Digital Twins y sube los modelos DTDL. | 2026-05-26 |
-| `smartpark/iot-simulator` | `feature/iot-simulator` | `a4e3aba` | feat(simulator): add IoT smoke-detection simulator with twin sync | Simulador Node.js de telemetría sincronizado con el grafo de twins. | 2026-06-05 |
-| `smartpark/iot-simulator` | `feature/dotnet-acl` | `5b91715` | feat(integration): add ADT gateway and API controllers (ACL) | Gateway anti-corrupción sobre el SDK de Azure Digital Twins. | 2026-06-11 |
-| `smartpark/iot-simulator` | `feature/3d-per-space-materials` | `8f2552a` | feat(model3d): unique material per parking space for runtime occupancy coloring | Material único por plaza para colorear la ocupación en runtime. | 2026-06-20 |
-| `smartpark/landing-page` | `feature/connect-operator-panel` | `955bd07` | feat(cta): link landing to operator panel and driver app | Conecta las CTAs de la landing al panel del operador y a la app del conductor. | 2026-06-19 |
-| `smartpark/landing-page` | `fix/panel-link` | `90169e4` | fix(cta): point operator panel link to deployed web app | Apunta el botón "Acceder al panel" a la web-app desplegada. | 2026-06-20 |
-| `smartpark/mobile-app` | `feature/connector` | `d008a27` | feat(connector): generate Power Apps custom connector from the API | Conector custom de Power Apps generado desde el OpenAPI del API. | 2026-06-10 |
-| `smartpark/mobile-app` | `feature/driver-app` | `0b9821b` | feat(auth): add driver login screen and app entry point | Pantalla de login del conductor y punto de entrada de la app. | 2026-06-11 |
-| `smartpark/mobile-app` | `feature/driver-app` | `48b7120` | feat(zones): add zones gallery with occupancy | Galería de zonas con disponibilidad consumiendo el API de ocupación. | 2026-06-14 |
+**`web-application`** — Abel Andrés Valle Zuta (`@AndresVZ23`) · 75 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `2208019` | 2026-05-24 | chore: scaffold Angular 20 workspace for SmartPark web application |
+| 2 | `ac37441` | 2026-05-24 | chore: add environment config pointing to SmartPark API |
+| 3 | `cb52223` | 2026-05-25 | style: add SmartPark design tokens and global theme |
+| 4 | `b34f529` | 2026-05-26 | feat(core): add application shell with sidenav and toolbar |
+| 5 | `f7743c4` | 2026-05-27 | feat(core): add routing with lazy-loaded dashboard route |
+| 6 | `1b50022` | 2026-05-28 | Merge feature/core-layout into develop |
+| 7 | `cd50637` | 2026-05-29 | feat(auth): add authentication models and contracts |
+| 8 | `fa9eb7a` | 2026-05-30 | feat(auth): add AuthService with login, register and token persistence |
+| 9 | `4e564a6` | 2026-05-31 | feat(auth): add login page with reactive form validation |
+| 10 | `c1a338d` | 2026-06-01 | feat(auth): add JWT interceptor with 401 handling |
+| 11 | `6b56b70` | 2026-06-02 | feat(auth): add auth and role guards to protect operator routes |
+| 12 | `60715a8` | 2026-06-02 | Merge feature/auth into develop |
+| 13 | `fd91de8` | 2026-06-03 | feat(occupancy): add occupancy models and API service |
+| 14 | `7f182b1` | 2026-06-04 | feat(occupancy): add summary cards component |
+| 15 | `eb2fe08` | 2026-06-05 | feat(occupancy): add SVG occupancy gauge component |
+| 16 | `4516ffa` | 2026-06-06 | feat(occupancy): wire dashboard to occupancy API with zone overview |
+| 17 | `bd0325c` | 2026-06-07 | feat(occupancy): add loading and error states with manual refresh |
+| 18 | `d85aa65` | 2026-06-08 | feat(occupancy): handle degraded mode when digital twin is unavailable |
+| 19 | `c0ba1ec` | 2026-06-08 | Merge feature/occupancy-dashboard into develop |
+| 20 | `f52d87f` | 2026-06-09 | feat(zones): add zones list view with congestion badges |
+| 21 | `a6b8f1b` | 2026-06-10 | feat(zones): add zone detail with parking spaces grid |
+| 22 | `3fc3544` | 2026-06-11 | feat(zones): add state filters to the spaces grid |
+| 23 | `55ddbfa` | 2026-06-11 | Merge feature/zones into develop |
+| 24 | `5c9da3d` | 2026-06-12 | feat(alerts): add smoke alert models and REST service |
+| 25 | `89841b7` | 2026-06-13 | feat(alerts): add active smoke alerts panel and page |
+| 26 | `c488ad4` | 2026-06-14 | chore: add @microsoft/signalr dependency for real-time alerts |
+| 27 | `be1c20a` | 2026-06-14 | feat(alerts): add SignalR client for real-time smoke alerts |
+| 28 | `dbdaa19` | 2026-06-15 | feat(alerts): push live SignalR alerts into the panel with status indicator |
+| 29 | `89c13fd` | 2026-06-16 | feat(alerts): add toast notifications for incoming smoke alerts |
+| 30 | `b1b3d23` | 2026-06-16 | Merge feature/smoke-alerts into develop |
+| 31 | `5b901d8` | 2026-06-17 | feat(core): show current user and logout in the toolbar |
+| 32 | `1035908` | 2026-06-17 | Merge feature/session-ui into develop |
+| 33 | `ccf4618` | 2026-06-18 | test: add unit tests for AuthService, JWT interceptor and gauge |
+| 34 | `67d759a` | 2026-06-18 | Merge feature/tests into develop |
+| 35 | `a1657dc` | 2026-06-19 | ci: add build and test workflow |
+| 36 | `aa9c809` | 2026-06-19 | docs: document architecture, features and consumed API in README |
+| 37 | `de5056f` | 2026-06-19 | Merge feature/ci-docs into develop |
+| 38 | `9fc1ae5` | 2026-06-19 | Release: SmartPark operator web application v1 (Angular 20) |
+| 39 | `e33adcd` | 2026-06-19 | feat(ui): expand design system with spacing, radius, focus and skeleton tokens |
+| 40 | `c3580fa` | 2026-06-19 | feat(ui): add icon, skeleton and empty-state shared components |
+| 41 | `1609339` | 2026-06-19 | feat(notifications): add global notification store and resilient SignalR client |
+| 42 | `6a025e6` | 2026-06-19 | feat(a11y): make toasts accessible with aria-live, icons and hover-pause |
+| 43 | `3f26822` | 2026-06-19 | feat(core): overhaul app shell with SVG icons, mobile sidenav, bell and a11y |
+| 44 | `0dd8920` | 2026-06-19 | fix(auth): auto-logout on token expiry, redirect on role and guard login route |
+| 45 | `6470933` | 2026-06-19 | feat(auth): scope JWT to API requests and preserve return url on 401 |
+| 46 | `3ac2d1c` | 2026-06-19 | feat(auth): improve login accessibility, email normalization and nav fallback |
+| 47 | `7e04afd` | 2026-06-19 | feat(occupancy): auto-refresh dashboard with skeletons and resilient states |
+| 48 | `e6c28c7` | 2026-06-19 | feat(occupancy): polish gauge, summary cards and zone overview |
+| 49 | `9458f18` | 2026-06-19 | feat(zones): add skeletons, error states, reactive detail and a11y |
+| 50 | `41e14ad` | 2026-06-19 | feat(alerts): merge live and API alerts with accessible panel and reconnect |
+| 51 | `c10e498` | 2026-06-19 | docs: document accessibility, real-time notifications and UX improvements |
+| 52 | `4f1f851` | 2026-06-19 | Merge feature/ux-improvements into develop |
+| 53 | `1bea07e` | 2026-06-19 | Release: UX and accessibility overhaul of the operator panel |
+| 54 | `6a60700` | 2026-06-19 | fix(core): make layout fill full viewport height |
+| 55 | `ba2f471` | 2026-06-19 | Merge fix/layout-full-height into develop |
+| 56 | `50a35c9` | 2026-06-19 | Release: fix full-height layout |
+| 57 | `8dda388` | 2026-06-19 | chore: add @google/model-viewer for 3D rendering |
+| 58 | `f017cce` | 2026-06-19 | feat(twin): embed digital twin 3D viewer in the operator panel |
+| 59 | `13b3cdf` | 2026-06-19 | Merge feature/twin-3d-viewer into develop |
+| 60 | `aa0b241` | 2026-06-19 | Release: digital twin 3D viewer |
+| 61 | `48ede0e` | 2026-06-19 | feat(simulator): add IoT simulator view to trigger live smoke alerts |
+| 62 | `ae92ad7` | 2026-06-20 | Merge feature/iot-simulator-view into develop |
+| 63 | `3a6687b` | 2026-06-20 | Release: IoT simulator view for validation interviews |
+| 64 | `c2e4727` | 2026-06-20 | style: align web app to SmartPark design system (teal/cream/Inter) |
+| 65 | `efba1eb` | 2026-06-20 | Merge feature/design-system into develop |
+| 66 | `e3fec92` | 2026-06-20 | Release: design system alignment |
+| 67 | `fdae6bd` | 2026-06-20 | feat(twin): show live occupancy in 3D viewer and add occupancy to simulator |
+| 68 | `4975b15` | 2026-06-20 | Merge feature/twin-occupancy-3d into develop |
+| 69 | `9c5701b` | 2026-06-20 | Release: 3D occupancy visualization and occupancy simulator |
+| 70 | `7c7e5ca` | 2026-06-20 | docs(simulator): add usage guide to the IoT simulator page |
+| 71 | `53d510e` | 2026-06-20 | Merge feature/simulator-guide into develop |
+| 72 | `905b9a8` | 2026-06-20 | Release: simulator usage guide |
+| 73 | `6241eb0` | 2026-06-20 | feat(console): 3D-centric operator console with light sidebar (align to wireframes) |
+| 74 | `44db416` | 2026-06-20 | Merge feature/operator-console-wireframe into develop |
+| 75 | `3707e01` | 2026-06-20 | Release: operator console aligned to wireframes |
+
+**`web-services`** — Elmer Riva Rodríguez (`@elmer-riva`) · 71 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `f8fe2e9` | 2026-05-25 | chore: initialize web-services repository |
+| 2 | `9b42fc5` | 2026-05-25 | chore: scaffold DDD solution (Domain, Application, Infrastructure, Api, Tests) |
+| 3 | `3a5d84b` | 2026-05-26 | feat(domain): add DDD shared kernel (Entity, AggregateRoot, ValueObject, domain events) |
+| 4 | `06658e1` | 2026-05-26 | Merge pull request: feature/solution-and-kernel into develop |
+| 5 | `ea238c7` | 2026-05-27 | feat(identity): add Email value object and UserRole |
+| 6 | `71556e7` | 2026-05-27 | feat(identity): add UserAccount aggregate and UserRegistered domain event |
+| 7 | `3d06904` | 2026-05-27 | feat(identity): add IUserRepository port |
+| 8 | `3cf479d` | 2026-05-27 | Merge pull request: feature/identity-domain into develop |
+| 9 | `6de3c6e` | 2026-05-28 | feat(safety): add SmokeReading value object and IncidentStatus |
+| 10 | `a94503a` | 2026-05-28 | feat(safety): add Incident aggregate with lifecycle behavior and events |
+| 11 | `e9be363` | 2026-05-28 | feat(safety): add IIncidentRepository port |
+| 12 | `8d0c8a0` | 2026-05-28 | Merge pull request: feature/safety-domain into develop |
+| 13 | `9b40c59` | 2026-05-29 | feat(session): add Money and VehicleLocation value objects |
+| 14 | `105bbb5` | 2026-05-29 | feat(session): add ParkingSession aggregate (start, locate, finalize) |
+| 15 | `ad1c905` | 2026-05-29 | feat(session): add IParkingSessionRepository port |
+| 16 | `1e2ba92` | 2026-05-29 | Merge pull request: feature/parking-session-domain into develop |
+| 17 | `4303c0f` | 2026-05-30 | feat(notifications): add DeviceToken entity and repository port |
+| 18 | `7b88e9f` | 2026-05-30 | Merge pull request: feature/notifications-domain into develop |
+| 19 | `330120c` | 2026-05-31 | feat(app): add IUnitOfWork and security ports (IPasswordHasher, IJwtTokenService) |
+| 20 | `32736f1` | 2026-05-31 | feat(app): add IDigitalTwinGateway port and read-side contracts |
+| 21 | `5351f3b` | 2026-05-31 | feat(app): add INotificationService port |
+| 22 | `9328d2e` | 2026-05-31 | Merge pull request: feature/application-abstractions into develop |
+| 23 | `afa214a` | 2026-06-01 | feat(app-identity): add RegisterUser use case (TS-09) |
+| 24 | `92294ea` | 2026-06-01 | feat(app-identity): add Login use case (TS-09) |
+| 25 | `78e923f` | 2026-06-01 | Merge pull request: feature/identity-application into develop (TS-09) |
+| 26 | `c601f3a` | 2026-06-02 | feat(app-occupancy): add occupancy summary and zones queries with degraded mode (TS-01) |
+| 27 | `f35d8ec` | 2026-06-02 | feat(app-occupancy): add spaces-by-zone query |
+| 28 | `9e61811` | 2026-06-02 | Merge pull request: feature/parking-operations-application into develop (TS-01) |
+| 29 | `e1b4a65` | 2026-06-03 | feat(session): add active-sessions-by-location query to repository port |
+| 30 | `c677eb3` | 2026-06-03 | feat(app-safety): add IngestSmokeAlert use case (persist, update twin, notify) (TS-03) |
+| 31 | `3cc58ca` | 2026-06-03 | Merge pull request: feature/safety-application into develop (TS-03) |
+| 32 | `62c8cd9` | 2026-06-04 | feat(app-notifications): add RegisterDeviceToken use case (TS-05) |
+| 33 | `2aeb36b` | 2026-06-04 | Merge pull request: feature/notifications-application into develop (TS-05) |
+| 34 | `c4c8856` | 2026-06-05 | feat(infra): add EF Core DbContext and entity configurations with value-object conversions |
+| 35 | `3282fb0` | 2026-06-06 | feat(infra): add EF repository implementations for the four bounded contexts |
+| 36 | `923531e` | 2026-06-06 | Merge pull request: feature/infrastructure-persistence into develop |
+| 37 | `2d2e6da` | 2026-06-07 | feat(infra-twin): add Azure Digital Twins gateway with read queries |
+| 38 | `f4f4349` | 2026-06-08 | feat(infra-twin): implement smoke-state JSON Patch update and ADT health check (TS-02) |
+| 39 | `c3f44d7` | 2026-06-08 | Merge pull request: feature/infrastructure-digital-twins into develop (TS-02) |
+| 40 | `53552ac` | 2026-06-09 | feat(infra-identity): add PBKDF2 password hasher |
+| 41 | `2647398` | 2026-06-09 | feat(infra-identity): add JWT token service (HMAC-SHA256) |
+| 42 | `de0105c` | 2026-06-09 | Merge pull request: feature/infrastructure-identity into develop |
+| 43 | `ded6fda` | 2026-06-10 | feat(infra-notifications): add FCM push dispatch service (TS-05) |
+| 44 | `ad0f810` | 2026-06-10 | feat(infra): add AddInfrastructure DI extension wiring all adapters |
+| 45 | `0a2331c` | 2026-06-10 | Merge pull request: feature/infrastructure-notifications into develop (TS-05) |
+| 46 | `792be12` | 2026-06-11 | feat(app): add AddApplication DI extension registering use-case handlers |
+| 47 | `994aef1` | 2026-06-11 | feat(api): configure composition root (DI, JWT auth, CORS, SignalR, Swagger) |
+| 48 | `9f6506f` | 2026-06-11 | Merge pull request: feature/api-composition into develop |
+| 49 | `1fa4e93` | 2026-06-12 | feat(api): add auth controller (register/login) |
+| 50 | `c538ce2` | 2026-06-12 | feat(api): add occupancy, smoke alerts and device tokens controllers |
+| 51 | `d831de7` | 2026-06-12 | Merge pull request: feature/api-controllers into develop |
+| 52 | `bdeb7d0` | 2026-06-13 | test(domain): add value object tests (Email, SmokeReading, Money) |
+| 53 | `cb97392` | 2026-06-13 | test(domain): add aggregate behavior and domain event tests |
+| 54 | `82bcf94` | 2026-06-13 | Merge feature/tests into develop |
+| 55 | `2ef9987` | 2026-06-14 | ci: add build and test workflow for develop and main |
+| 56 | `357c212` | 2026-06-14 | ci: add Azure App Service deployment workflow |
+| 57 | `d45ce33` | 2026-06-14 | docs: document DDD architecture and API endpoints in README |
+| 58 | `046e6ce` | 2026-06-14 | Merge feature/ci-cd-docs into develop |
+| 59 | `2bfa19b` | 2026-06-14 | Release: SmartPark API v1 (DDD) - identity, occupancy, safety, notifications |
+| 60 | `452f616` | 2026-06-19 | feat(safety): authenticate smoke ingest with shared API key |
+| 61 | `a1cdde6` | 2026-06-19 | Merge feature/secure-smoke-ingest into develop |
+| 62 | `63a2f71` | 2026-06-19 | Release: secure smoke ingestion endpoint |
+| 63 | `4325746` | 2026-06-20 | feat(persistence): support SQL Server and SQLite providers and resilient startup |
+| 64 | `5e69b0f` | 2026-06-20 | Merge feature/multi-provider-db into develop |
+| 65 | `3142c3c` | 2026-06-20 | Release: multi-provider persistence for cloud deployment |
+| 66 | `83da081` | 2026-06-20 | feat(twin): add seeded demo gateway for environments without ADT (Adt:Mode=Demo) |
+| 67 | `30d2e6e` | 2026-06-20 | Merge feature/demo-twin-gateway into develop |
+| 68 | `cbcfae3` | 2026-06-20 | Release: demo twin gateway |
+| 69 | `999665c` | 2026-06-20 | feat(twin): align demo gateway to canonical structure and add occupancy simulation |
+| 70 | `0eb80d6` | 2026-06-20 | Merge feature/coherent-twin-occupancy-sim into develop |
+| 71 | `6d3652c` | 2026-06-20 | Release: coherent twin structure + occupancy simulation |
+
+**`iot-simulator`** — Hernán Morales Calderón (`@hernancit0`) · 35 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `1f3e31f` | 2026-05-20 | chore: initialize iot-simulator project scaffold and dependencies |
+| 2 | `d1c1c94` | 2026-05-21 | feat(ontology): add core parking topology DTDL models |
+| 3 | `0160b37` | 2026-05-22 | feat(ontology): add safety and circulation DTDL models |
+| 4 | `f55dd9b` | 2026-05-23 | feat(ontology): add energy-efficiency DTDL models |
+| 5 | `99a223b` | 2026-05-23 | Merge feature/dtdl-ontology into develop |
+| 6 | `2183b0b` | 2026-05-24 | feat(lib): add Azure Digital Twins client wrapper |
+| 7 | `aef22c9` | 2026-05-25 | feat(scripts): add Azure prerequisites check and shared config |
+| 8 | `8afb87a` | 2026-05-26 | feat(scripts): provision ADT instance and upload DTDL models |
+| 9 | `98cafae` | 2026-05-26 | Merge feature/adt-connectivity into develop |
+| 10 | `7e84db0` | 2026-05-27 | feat(lib): add twin-graph layout builder and parking layout definition |
+| 11 | `b8022a3` | 2026-05-28 | feat(scripts): add graph seeding with twins and relationships |
+| 12 | `4c2514d` | 2026-05-29 | feat(scripts): add twin-graph verification script |
+| 13 | `174606f` | 2026-05-30 | feat(scripts): add Azure resources teardown script |
+| 14 | `bb8e406` | 2026-05-30 | Merge feature/graph-seeding into develop |
+| 15 | `25e3d06` | 2026-05-31 | feat(model3d): add procedural GLB garage generator |
+| 16 | `73efaed` | 2026-06-01 | build(model3d): add generated parking-garage.glb artifact |
+| 17 | `0f34ad0` | 2026-06-02 | feat(tools): add 3D preview viewer and screenshot capture |
+| 18 | `1855e77` | 2026-06-03 | feat(model3d): generate Azure 3D Scenes Studio configuration |
+| 19 | `1ff4422` | 2026-06-04 | feat(scripts): add 3D model upload to blob storage |
+| 20 | `6390500` | 2026-06-04 | Merge feature/3d-model into develop |
+| 21 | `a4e3aba` | 2026-06-05 | feat(simulator): add IoT smoke-detection simulator with twin sync |
+| 22 | `8c4908c` | 2026-06-06 | Merge feature/iot-simulator into develop |
+| 23 | `3aa55f4` | 2026-06-10 | feat(integration): add digital twin gateway port and DTOs |
+| 24 | `5b91715` | 2026-06-11 | feat(integration): add ADT gateway and API controllers (ACL) |
+| 25 | `06c2654` | 2026-06-12 | docs(integration): add ADT query catalog and integration guide |
+| 26 | `4651468` | 2026-06-12 | Merge feature/dotnet-acl into develop |
+| 27 | `0de2b4d` | 2026-06-13 | docs: add project README |
+| 28 | `7b5c150` | 2026-06-13 | Merge feature/docs into develop |
+| 29 | `e989e7a` | 2026-06-13 | Release: SmartPark digital twin v1 (ontology, graph, 3D, simulator, ACL) |
+| 30 | `1a02739` | 2026-06-19 | docs(integration): mark .NET ACL as reference and align ingest API key |
+| 31 | `856839f` | 2026-06-19 | Merge feature/integration-alignment into develop |
+| 32 | `6151155` | 2026-06-19 | Release: integration alignment notes |
+| 33 | `8f2552a` | 2026-06-20 | feat(model3d): unique material per parking space for runtime occupancy coloring |
+| 34 | `064f2cd` | 2026-06-20 | Merge feature/3d-per-space-materials into develop |
+| 35 | `226a37c` | 2026-06-20 | Release: per-space materials for occupancy visualization |
+
+**`mobile-app`** — Britney Qqueso Rodríguez (`@brit2801`) · 11 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `230151d` | 2026-06-09 | chore: initialize mobile-app with API OpenAPI source |
+| 2 | `d008a27` | 2026-06-10 | feat(connector): generate Power Apps custom connector from the API |
+| 3 | `76fa550` | 2026-06-10 | Merge feature/connector into develop |
+| 4 | `0b9821b` | 2026-06-11 | feat(auth): add driver login screen and app entry point |
+| 5 | `f939db2` | 2026-06-12 | feat(auth): add driver registration screen |
+| 6 | `e543930` | 2026-06-13 | feat(home): add availability home with push opt-in and logout |
+| 7 | `48b7120` | 2026-06-14 | feat(zones): add zones gallery with occupancy |
+| 8 | `090b1cc` | 2026-06-14 | Merge feature/driver-app into develop |
+| 9 | `25d6432` | 2026-06-15 | docs: add build, connector and publish guide |
+| 10 | `15e4b7b` | 2026-06-15 | Merge feature/docs into develop |
+| 11 | `18ff289` | 2026-06-16 | Release: SmartPark driver app v1 (connector + canvas source) |
+
+**`landing-page`** — Camila Sánchez Ríos (`@C4m174`) · 8 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `de90f91` | 2026-06-03 | . |
+| 2 | `d68d539` | 2026-06-03 | Add: landing |
+| 3 | `955bd07` | 2026-06-19 | feat(cta): link landing to operator panel and driver app |
+| 4 | `eed3a92` | 2026-06-19 | Merge feature/connect-operator-panel into develop |
+| 5 | `e72ef06` | 2026-06-19 | Release: connect landing CTAs to operator panel and app |
+| 6 | `90169e4` | 2026-06-20 | fix(cta): point operator panel link to deployed web app |
+| 7 | `b49b6c2` | 2026-06-20 | Merge fix/panel-link into develop |
+| 8 | `a5ff47c` | 2026-06-20 | Release: fix operator panel link |
 
 #### 7.2.1.4. Testing Suite Evidence for Sprint Review
 
-La estrategia de pruebas del Sprint 1 priorizó el **núcleo de dominio** del Web Service (`web-services`), donde residen las reglas de negocio críticas (identidad, sesión de estacionamiento, incidentes de seguridad y objetos de valor). Las pruebas están automatizadas con **xUnit** en el proyecto `SmartPark.Domain.Tests` y se ejecutan en el pipeline de CI (`ci: add build and test workflow`). Se implementaron **13 métodos de prueba** que, con sus casos parametrizados (`[Theory]`), suman **18 ejecuciones**.
+La estrategia de pruebas del Sprint 1 priorizó el **núcleo de dominio** del Web Service (`web-services`), donde residen las reglas de negocio críticas: identidad y acceso, sesión de estacionamiento, incidentes de seguridad, notificaciones y los objetos de valor que las sostienen. Las pruebas están automatizadas con **xUnit 2.5** (con `coverlet.collector` para cobertura) en el proyecto `SmartPark.Domain.Tests`, y se ejecutan en cada push mediante el pipeline de CI (`ci: add build and test workflow for develop and main`).
 
-**Unit Tests implementados — Value Objects (`ValueObjectTests`):**
-- `Email_Create_normalizes` — normaliza (trim + minúsculas) el correo al crearlo.
-- `Email_Create_invalid_throws` — rechaza correos inválidos (`""`, `not-an-email`, `a@b`).
-- `Email_equality_is_structural` — igualdad estructural insensible a mayúsculas.
-- `SmokeReading_alert_threshold` — valida el umbral de alerta (≥ 200 ppm ⇒ `IsAlert`).
-- `Money_negative_throws` — impide montos negativos.
-- `Money_rounds_to_two_decimals` — redondea el monto a dos decimales.
+La suite consta de **41 métodos de prueba** que, con sus casos parametrizados (`[Theory] / [InlineData]`), suman **65 ejecuciones**, todas en verde:
 
-**Unit Tests implementados — Agregados y eventos de dominio (`AggregateTests`):**
-- `UserAccountTests` — registro de cuenta y emisión de `UserRegistered`; rechazo de nombre en blanco.
-- `IncidentTests` — `Incident.Raise` inicia en estado `Alert` y emite `SmokeAlertRaised`; `Resolve` cierra el incidente y emite `IncidentResolved`.
-- `ParkingSessionTests` — inicio de sesión activa con `ParkingSessionStarted`; rechazo de conductor vacío; finalización con cálculo de costo (`Money`).
+```text
+Passed!  - Failed: 0, Passed: 65, Skipped: 0, Total: 65 - SmartPark.Domain.Tests.dll (net8.0)
+```
 
-**Acceptance Tests (especificación de comportamiento cubierta por los tests de dominio):**
+**Cobertura por bounded context y tipo de prueba:**
+
+| Bounded context | Tipo | Clase de prueba | Métodos | Qué valida |
+|---|---|---|---|---|
+| Identity & Access | Objeto de valor | `EmailTests` | 5 | Normalización (trim + minúsculas), formato inválido, igualdad estructural insensible a mayúsculas, `ToString`. |
+| Parking Session | Objeto de valor | `MoneyTests` | 7 | Redondeo a 2 decimales *away-from-zero*, no-negatividad, moneda por defecto/personalizada, `Zero`, igualdad por monto+moneda. |
+| Safety & Incident | Objeto de valor | `SmokeReadingTests` | 5 | Umbral de alerta de 200 ppm (límites 199/200/201), no-negatividad, igualdad por ppm, constante del umbral. |
+| Parking Session | Objeto de valor | `VehicleLocationTests` | 4 | Normalización (trim + mayúsculas), vacío inválido, igualdad estructural, `ToString`. |
+| Identity & Access | Agregado | `UserAccountTests` | 4 | Registro + evento `UserRegistered`, rol Operator/Driver, rechazo de nombre/hash en blanco. |
+| Safety & Incident | Agregado | `IncidentTests` | 6 | Alerta + evento `SmokeAlertRaised`, validaciones, `Confirm`/`Resolve`, **idempotencia** (no re-emite el evento). |
+| Parking Session | Agregado | `ParkingSessionTests` | 6 | Inicio + evento, registro de ubicación + evento, finalización con costo, **idempotencia** de `Finalize`. |
+| Notifications | Entidad | `DeviceTokenTests` | 4 | Registro con campos correctos, validaciones, plataforma por defecto (`Android`). |
+| **Total** | | **8 clases** | **41 / 65 casos** | **4 bounded contexts + 4 objetos de valor** |
+
+Las pruebas verifican no solo el camino feliz sino también las **invariantes de dominio** (montos no negativos, correos válidos, ubicaciones obligatorias), la **emisión de eventos de dominio** (`UserRegistered`, `SmokeAlertRaised`, `IncidentResolved`, `ParkingSessionStarted`, `VehicleLocationRegistered`) y la **idempotencia** de las transiciones de estado (resolver un incidente o finalizar una sesión dos veces no produce efectos secundarios duplicados).
+
+**Acceptance Tests (especificación de comportamiento cubierta por la suite de dominio):**
 
 ```gherkin
 Feature: Smoke Alert Lifecycle
@@ -8014,19 +8228,32 @@ Feature: Smoke Alert Lifecycle
     Given a smoke detector "DET-01" in zone "zone-a" on level 2
     When a reading of 320 ppm is registered
     Then a new incident is created in status "Alert"
-    And a SmokeAlertRaised domain event is emitted
+    And a SmokeAlertRaised domain event carrying 320 ppm is emitted
 
-  Scenario: An incident is resolved
-    Given an active incident in status "Alert"
-    When the incident is resolved
-    Then its status becomes "Resolved" with a resolution timestamp
-    And an IncidentResolved domain event is emitted
+  Scenario: Resolving an incident is idempotent
+    Given an incident already in status "Resolved"
+    When it is resolved again
+    Then its status and resolution timestamp remain unchanged
+    And no second IncidentResolved event is emitted
+
+Feature: Parking Session Lifecycle
+  As a driver
+  I want my parking session to track its location and final cost
+  So that I am billed correctly
+
+  Scenario: Start, locate and finalize a session
+    Given a started parking session for a valid driver
+    When I register the vehicle location "A-01"
+    And I finalize the session with a cost of 15.50 PEN
+    Then the session becomes inactive with an end timestamp
+    And its accumulated cost is 15.50 PEN
 ```
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on |
 |---|---|---|---|---|---|
 | `smartpark/web-services` | `feature/tests` | `bdeb7d0` | test(domain): add value object tests (Email, SmokeReading, Money) | Cubre normalización, validación, umbral de alerta y redondeo monetario. | 2026-06-13 |
 | `smartpark/web-services` | `feature/tests` | `cb97392` | test(domain): add aggregate behavior and domain event tests | Valida registro de usuario, ciclo de incidentes y sesión de estacionamiento. | 2026-06-13 |
+| `smartpark/web-services` | `main` | `595c98b` | test(domain): expand domain test suite across all bounded contexts | Tests exhaustivos de VOs (Email, Money, SmokeReading, VehicleLocation) y agregados/entidad (UserAccount, Incident, ParkingSession, DeviceToken): ciclo de vida, invariantes, eventos e idempotencia. 41 métodos / 65 casos. | 2026-06-20 |
 
 #### 7.2.1.5. Execution Evidence for Sprint Review
 
@@ -8076,7 +8303,9 @@ El Web Service expone su contrato mediante **OpenAPI/Swagger** (ASP.NET Core 8, 
 
 Adicionalmente, el API publica el hub de tiempo real **SignalR** en `/hubs/alerts`, al que se suscribe el dashboard del operador para recibir las alertas de humo geolocalizadas sin polling.
 
-![Swagger UI — SmartPark API v1](assets/images/chapter-07/sprint-1-swagger.png)
+_Captura de la **Swagger UI en ejecución** del API (`SmartPark.Api` v1), con los endpoints agrupados por controlador (Auth, DeviceTokens, Occupancy, SmokeAlerts) y el catálogo de esquemas (DTOs):_
+
+![Swagger UI en ejecución — SmartPark API v1](assets/images/chapter-07/sprint-1-swagger.png)
 
 #### 7.2.1.7. Software Deployment Evidence for Sprint Review
 
@@ -8107,20 +8336,43 @@ Los productos digitales se desplegaron sobre **Microsoft Azure** (suscripción *
 
 #### 7.2.1.8. Team Collaboration Insights during Sprint
 
-El equipo trabajó de forma **distribuida por frente de producto**, con cada integrante como responsable principal de su repositorio y con integración continua hacia `develop` mediante Pull Requests. El siguiente gráfico resume la actividad de commits por integrante durante el Sprint 1 (fuente: `git shortlog -sn` por repositorio); en total se registraron **200 commits** en los cinco repositorios de producto.
+El equipo trabajó de forma **distribuida por frente de producto**, con cada integrante como responsable principal de su repositorio y con integración continua hacia `develop` mediante Pull Requests. A continuación se muestran los **insights de contribución de GitHub (Insights → Contributors)** de cada repositorio durante el Sprint, con el número de commits y las líneas añadidas/eliminadas por integrante.
 
-![Insights de colaboración del Sprint 1](assets/images/chapter-07/sprint-1-insights.png)
+**`web-services` — Riva Rodríguez, Elmer Augusto (Backend / Infra)**
 
-| Integrante | Rol / Frente | Repositorio principal | Commits |
+![Insights web-services](assets/images/chapter-07/sprint-1-insights-web-services.png)
+
+**`web-application` — Valle Zuta, Abel Andrés (Frontend operador)**
+
+![Insights web-application](assets/images/chapter-07/sprint-1-insights-web-application.png)
+
+**`iot-simulator` — Morales Calderón, Hernan Emilio (Gemelo digital / IoT)**
+
+![Insights iot-simulator](assets/images/chapter-07/sprint-1-insights-iot-simulator.png)
+
+**`mobile-app` — Qqueso Rodríguez, Britney Delhy (App móvil)**
+
+![Insights mobile-app](assets/images/chapter-07/sprint-1-insights-mobile-app.png)
+
+**`landing-page` — Sánchez Ríos, Camila Cristina (Landing / UI-UX)**
+
+![Insights landing-page](assets/images/chapter-07/sprint-1-insights-landing-page.png)
+
+**Resumen de contribución por integrante:**
+
+| Integrante | Repositorio | Commits (Insights) | Líneas (++ / --) |
 |---|---|---|---|
-| Valle Zuta, Abel Andrés | Frontend operador (Angular) | `web-application` | 75 |
-| Riva Rodríguez, Elmer Augusto | Scrum Master · Backend/Infra (.NET, Azure) | `web-services` | 71 |
-| Morales Calderón, Hernan Emilio | Gemelo digital · IoT (ADT, simulador, 3D) | `iot-simulator` | 35 |
-| Qqueso Rodríguez, Britney Delhy | App móvil (Power Apps) | `mobile-app` | 11 |
-| Sánchez Ríos, Camila Cristina | Landing page · UI/UX | `landing-page` | 8 |
-| **Total** | | **5 repositorios** | **200** |
+| Valle Zuta, Abel Andrés | `web-application` | 50 | 15 326 ++ / 1 251 -- |
+| Riva Rodríguez, Elmer Augusto | `web-services` | 43 | 2 235 ++ / 73 -- |
+| Morales Calderón, Hernan Emilio | `iot-simulator` | 23 | 4 269 ++ / 4 -- |
+| Qqueso Rodríguez, Britney Delhy | `mobile-app` | 7 | 1 490 ++ / 0 -- |
+| Sánchez Ríos, Camila Cristina | `landing-page` | 4 | 5 287 ++ / 26 -- |
+| **Total** | **5 repositorios** | **127** | — |
 
-**Análisis de la colaboración:** la distribución de commits refleja una repartición coherente con el esfuerzo técnico de cada frente —el frontend del operador y el backend concentran la mayor parte de la complejidad del flujo núcleo (visor 3D, tiempo real, autenticación, persistencia y despliegue), mientras que la landing y la app móvil, de alcance más acotado en este Sprint, requirieron menos iteraciones—. Más allá del conteo, la colaboración transversal fue clave: la definición del **contrato del API** (OpenAPI) por el frente de backend habilitó en paralelo el consumo desde el frontend web (Angular), la app móvil (conector custom de Power Apps) y el simulador IoT; y la **estructura canónica del gemelo** (zonas y plazas) se mantuvo como única fuente de verdad compartida entre el repositorio del gemelo, el backend y el visor 3D del frontend. El equipo sostuvo la sincronización mediante el canal de Discord y el tablero de Trello, y dejó registro escrito de los acuerdos en los Pull Requests.
+> **Nota sobre el conteo:** GitHub Insights contabiliza los commits **no-merge sobre la rama por defecto** (127 commits de código). El total con los commits de *merge* y *release* del flujo `feature → develop → main` asciende a **200 commits** (ver 7.2.1.3).
+
+**Análisis de la colaboración:** la distribución de commits refleja una repartición coherente con el esfuerzo técnico de cada frente —el frontend del operador y el backend concentran la mayor parte de la complejidad del flujo núcleo (visor 3D, tiempo real, autenticación, persistencia y despliegue), mientras que la landing y la app móvil, de alcance más acotado en este Sprint, requirieron menos iteraciones (aunque con un volumen alto de líneas por incluir activos y andamiaje generado)—. Más allá del conteo, la colaboración transversal fue clave: la definición del **contrato del API** (OpenAPI) por el frente de backend habilitó en paralelo el consumo desde el frontend web (Angular), la app móvil (conector custom de Power Apps) y el simulador IoT; y la **estructura canónica del gemelo** (zonas y plazas) se mantuvo como única fuente de verdad compartida entre el repositorio del gemelo, el backend y el visor 3D del frontend. El equipo sostuvo la sincronización mediante el canal de Discord y el tablero de Trello, y dejó registro escrito de los acuerdos en los Pull Requests.
+
 
 ---
 
