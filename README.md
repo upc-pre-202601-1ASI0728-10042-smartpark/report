@@ -8534,7 +8534,11 @@ El Sprint 2 cierra el Product Backlog abordando las **funcionalidades complement
 
 Para el Sprint 2 se seleccionaron del Product Backlog las User Stories de las funcionalidades complementarias, junto con las Technical Stories que las habilitan y los cuatro work-items arrastrados del Sprint 1 (*carry-over*: tarjeta de alerta en vivo, despacho FCM y las dos tareas de notificación push). El Sprint 2 se ejecutó: la mayoría de los work-items se completaron (*Done*) y la tarea de calidad productiva (T-38 — pruebas de integración/E2E en CI y migración a BD gestionada) quedó **en progreso**.
 
-**URL del Board:** `https://trello.com/b/smartpark-sprint2` _(tablero del Sprint 2)_
+El tablero del Sprint 2 se gestionó en **Trello**, con tres listas (`Done`, `To-Review`, `In-Process`) y una etiqueta de color por integrante. Al cierre del Sprint quedó con **12 work-items en `Done`** y **1 en `In-Process`** (T-38, calidad productiva). A continuación, la captura del tablero real del equipo:
+
+**URL del Board:** `https://trello.com/b/GTx1F5NY/smartpark-sprint-2`
+
+![Tablero del Sprint 2 en Trello](assets/images/chapter-07/sprint-2-trello-board.png)
 
 | US Id | US Title | Task Id | Work-Item / Task | Description | Est. (h) | Assigned To | Status |
 |---|---|---|---|---|---|---|---|
