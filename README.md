@@ -80,6 +80,7 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 | 2.7.0   | 2026-06-20 | Riva Rodriguez, Elmer Augusto   | Incorporación de la sección 7.2.2 Sprint 2 (Sprint Planning 2 con Sprint 1 Review & Retrospective, y Sprint Backlog 2) y captura del tablero real del Sprint en Trello (7.2.1.2). |
 | 2.8.0   | 2026-06-20 | Sánchez Ríos, Camila Cristina   | Incorporación de la sección 7.4 Video About-the-Product: introducción, URLs (SharePoint y YouTube) y captura del video incrustado en la Landing Page desplegada. |
 | 3.0.0   | 2026-06-21 | Riva Rodriguez, Elmer Augusto   | Versión final para entrega TB2: primera versión desplegada de los productos digitales y publicación de la primera versión de los videos About-the-Product y About-the-Team. Actualización del Registro de Versiones del Informe, el Project Report Collaboration Insights y la sección Student Outcome. |
+| 3.1.0   | 2026-07-04 | Riva Rodriguez, Elmer Augusto   | Documentación de la ejecución del Sprint 2 en la sección 7.2.2: Sprint Backlog 2 actualizado a *Done* y evidencias de Development (22 commits por repositorio), Testing (77 casos), Services Documentation (endpoints de sesión y energía) y Team Collaboration Insights del Sprint 2. |
 
 ---
 
@@ -338,7 +339,10 @@ _(Pendiente)_
     - [7.2.2. Sprint 2](#722-sprint-2)
       - [7.2.2.1. Sprint Planning 2](#7221-sprint-planning-2)
       - [7.2.2.2. Sprint Backlog 2](#7222-sprint-backlog-2)
-      - [7.2.2.3. Sprint 2 Execution Note](#7223-sprint-2-execution-note)
+      - [7.2.2.3. Development Evidence for Sprint Review](#7223-development-evidence-for-sprint-review-1)
+      - [7.2.2.4. Testing Suite Evidence for Sprint Review](#7224-testing-suite-evidence-for-sprint-review-1)
+      - [7.2.2.5. Services Documentation Evidence for Sprint Review](#7225-services-documentation-evidence-for-sprint-review-1)
+      - [7.2.2.6. Team Collaboration Insights during Sprint](#7226-team-collaboration-insights-during-sprint-1)
   - [7.3. Validation Interviews](#73-validation-interviews)
     - [7.3.1. Diseño de Entrevistas](#731-diseño-de-entrevistas)
     - [7.3.2. Registro de Entrevistas](#732-registro-de-entrevistas)
@@ -8061,12 +8065,12 @@ El tablero del Sprint 1 se gestionó en **Trello**, organizado en tres listas (`
 | US-35          | Visor del Gemelo Digital 3D                            | T-20    | Embeber 3D Scenes Studio (iframe)                    | Integración del visor 3D del gemelo en el dashboard.                               | 6        | Valle, Abel     | Done       |
 | TS-03          | Endpoint de Evento de Alerta de Humo                   | T-21    | POST /api/v1/alerts/smoke + hub SignalR              | Ingesta de alertas y push en tiempo real al dashboard.                             | 5        | Riva, Elmer     | Done       |
 | US-19          | Recepción de Alerta de Humo con Visualización Espacial | T-22    | Lógica Safety & Incident + resaltado de zona         | Registro/confirmación de la alerta y resaltado de la zona afectada en el 3D.       | 5        | Morales, Hernán | Done       |
-| US-19          | Recepción de Alerta de Humo con Visualización Espacial | T-23    | Tarjeta de alerta en vivo (Angular)                  | Componente de alerta de humo geolocalizada en el dashboard.                        | 4        | Valle, Abel     | To-Review  |
+| US-19          | Recepción de Alerta de Humo con Visualización Espacial | T-23    | Tarjeta de alerta en vivo (Angular)                  | Componente de alerta de humo geolocalizada en el dashboard.                        | 4        | Valle, Abel     | Done |
 | US-18          | Mapa de Disponibilidad para Conductores                | T-24    | Mapa de disponibilidad por zona/nivel (PowerApps)    | Vista de disponibilidad consumiendo la API de ocupación.                           | 6        | Qqueso, Britney | Done       |
 | US-27          | Registro de Ubicación del Vehículo                     | T-25    | Registro de ubicación con un toque                   | Captura y persistencia de la ubicación del vehículo.                               | 4        | Qqueso, Britney | Done       |
 | TS-05          | Endpoint de Despacho de Notificaciones                 | T-26    | Registro de device tokens + despacho FCM             | Endpoint de notificaciones push vía Firebase Cloud Messaging.                      | 5        | Riva, Elmer     | To-Review  |
-| US-32          | Notificación Push por Alerta de Humo al Conductor      | T-27    | Notification Mgmt: identificar conductores afectados | Determinar conductores con vehículo en la zona del incidente y disparar el push.   | 5        | Morales, Hernán | In-Process |
-| US-32          | Notificación Push por Alerta de Humo al Conductor      | T-28    | Recepción del push en la app (PowerApps)             | Manejo de la notificación de humo en la aplicación del conductor.                  | 3        | Qqueso, Britney | In-Process |
+| US-32          | Notificación Push por Alerta de Humo al Conductor      | T-27    | Notification Mgmt: identificar conductores afectados | Determinar conductores con vehículo en la zona del incidente y disparar el push.   | 5        | Morales, Hernán | Done |
+| US-32          | Notificación Push por Alerta de Humo al Conductor      | T-28    | Recepción del push en la app (PowerApps)             | Manejo de la notificación de humo en la aplicación del conductor.                  | 3        | Qqueso, Britney | Done |
 | — (Constraint) | Configuración de despliegue e infraestructura          | T-29    | Provisión Azure (ADT, Storage, App Service) + CI/CD  | Aprovisionamiento del entorno y pipelines de despliegue con GitHub Actions.        | 6        | Riva, Elmer     | Done       |
 
 > Los Story Points se asocian a la User Story completa; las horas de estimación corresponden a la descomposición en Work-Items. La suma de Story Points de las User Stories comprometidas en el Sprint 1 es **94** (ver 7.2.1.1). El task de configuración (T-29) responde a un *constraint* general de infraestructura y no depende de una User Story en particular.
@@ -8524,31 +8528,119 @@ El Sprint 2 cierra el Product Backlog abordando las **funcionalidades complement
 
 #### 7.2.2.2. Sprint Backlog 2
 
-Para el Sprint 2 se seleccionaron del Product Backlog las User Stories de las funcionalidades complementarias, junto con las Technical Stories que las habilitan y los cuatro work-items arrastrados del Sprint 1 (*carry-over*: tarjeta de alerta en vivo, despacho FCM y las dos tareas de notificación push). El estado refleja la planificación al inicio del Sprint (los *carry-over* conservan su estado de cierre del Sprint 1).
+Para el Sprint 2 se seleccionaron del Product Backlog las User Stories de las funcionalidades complementarias, junto con las Technical Stories que las habilitan y los cuatro work-items arrastrados del Sprint 1 (*carry-over*: tarjeta de alerta en vivo, despacho FCM y las dos tareas de notificación push). El Sprint 2 se ejecutó: la mayoría de los work-items se completaron (*Done*) y la tarea de calidad productiva (T-38 — pruebas de integración/E2E en CI y migración a BD gestionada) quedó **en progreso**.
 
 **URL del Board:** `https://trello.com/b/smartpark-sprint2` _(tablero del Sprint 2)_
 
 | US Id | US Title | Task Id | Work-Item / Task | Description | Est. (h) | Assigned To | Status |
 |---|---|---|---|---|---|---|---|
-| US-20 | Registro de Entrada de Vehículo | T-30 | Flujo de entrada (ticket/sesión) en la app | Inicia la sesión de estacionamiento al ingresar el vehículo. | 5 | Qqueso, Britney | To-Do |
-| TS-06 | Endpoint de Gestión de Sesión | T-31 | POST /api/v1/sessions (start) | Crea una sesión de estacionamiento para el conductor. | 5 | Riva, Elmer | To-Do |
-| US-21 | Registro de Salida y Cierre de Sesión | T-32 | Flujo de salida y confirmación | Finaliza la sesión y muestra el resumen al conductor. | 4 | Qqueso, Britney | To-Do |
-| US-22 | Cálculo del Costo de la Sesión | T-33 | PATCH /api/v1/sessions/{id}/finalize | Calcula el costo acumulado (Money) al cerrar la sesión. | 5 | Riva, Elmer | To-Do |
-| US-23 | Historial de Sesiones del Conductor | T-34 | GET /api/v1/sessions/history + vista | Lista las sesiones pasadas con costo y duración. | 5 | Qqueso, Britney | To-Do |
-| US-24 | Panel de Eficiencia Energética | T-35 | Vista de zonas de baja ocupación (operador) | Resalta zonas candidatas a atenuación de iluminación. | 6 | Valle, Abel | To-Do |
-| US-25 | Recomendaciones de Atenuación de Iluminación | T-36 | GET /api/v1/energy/recommendations | Calcula recomendaciones de dimming por nivel/zona. | 5 | Morales, Hernán | To-Do |
-| US-26 | Preferencias de Notificación | T-37 | Pantalla de preferencias (PowerApps) | Permite al conductor configurar qué avisos recibir. | 4 | Qqueso, Britney | To-Do |
-| US-32 | Notificación Push por Alerta de Humo | T-27 | Identificar conductores afectados por zona | *(carry-over Sprint 1)* Determina conductores en la zona del incidente. | 5 | Morales, Hernán | In-Process |
-| US-32 | Notificación Push por Alerta de Humo | T-28 | Recepción del push en la app (PowerApps) | *(carry-over Sprint 1)* Maneja la notificación de humo en la app. | 3 | Qqueso, Britney | In-Process |
-| US-19 | Recepción de Alerta de Humo con Visualización Espacial | T-23 | Tarjeta de alerta en vivo (Angular) | *(carry-over Sprint 1)* Refina y aprueba la tarjeta de alerta en vivo. | 4 | Valle, Abel | To-Review |
-| TS-05 | Endpoint de Despacho de Notificaciones | T-26 | Registro de device tokens + despacho FCM | *(carry-over Sprint 1)* Cierra el despacho push vía Firebase Cloud Messaging. | 5 | Riva, Elmer | To-Review |
-| — (Constraint) | Calidad y persistencia productiva | T-38 | Pruebas de integración del API + smoke test E2E en CI | Tests de integración/aceptación sobre el API y migración a BD gestionada. | 6 | Riva, Elmer | To-Do |
+| US-20 | Registro de Entrada de Vehículo | T-30 | Flujo de entrada (ticket/sesión) en la app | Inicia la sesión de estacionamiento al ingresar el vehículo. | 5 | Qqueso, Britney | Done |
+| TS-06 | Endpoint de Gestión de Sesión | T-31 | POST /api/v1/sessions (start) | Crea una sesión de estacionamiento para el conductor. | 5 | Riva, Elmer | Done |
+| US-21 | Registro de Salida y Cierre de Sesión | T-32 | Flujo de salida y confirmación | Finaliza la sesión y muestra el resumen al conductor. | 4 | Qqueso, Britney | Done |
+| US-22 | Cálculo del Costo de la Sesión | T-33 | PATCH /api/v1/sessions/{id}/finalize | Calcula el costo acumulado (Money) al cerrar la sesión. | 5 | Riva, Elmer | Done |
+| US-23 | Historial de Sesiones del Conductor | T-34 | GET /api/v1/sessions/history + vista | Lista las sesiones pasadas con costo y duración. | 5 | Qqueso, Britney | Done |
+| US-24 | Panel de Eficiencia Energética | T-35 | Vista de zonas de baja ocupación (operador) | Resalta zonas candidatas a atenuación de iluminación. | 6 | Valle, Abel | Done |
+| US-25 | Recomendaciones de Atenuación de Iluminación | T-36 | GET /api/v1/energy/recommendations | Calcula recomendaciones de dimming por nivel/zona. | 5 | Morales, Hernán | Done |
+| US-26 | Preferencias de Notificación | T-37 | Pantalla de preferencias (PowerApps) | Permite al conductor configurar qué avisos recibir. | 4 | Qqueso, Britney | Done |
+| US-32 | Notificación Push por Alerta de Humo | T-27 | Identificar conductores afectados por zona | *(carry-over Sprint 1)* Determina conductores en la zona del incidente. | 5 | Morales, Hernán | Done |
+| US-32 | Notificación Push por Alerta de Humo | T-28 | Recepción del push en la app (PowerApps) | *(carry-over Sprint 1)* Maneja la notificación de humo en la app. | 3 | Qqueso, Britney | Done |
+| US-19 | Recepción de Alerta de Humo con Visualización Espacial | T-23 | Tarjeta de alerta en vivo (Angular) | *(carry-over Sprint 1)* Refina y aprueba la tarjeta de alerta en vivo. | 4 | Valle, Abel | Done |
+| TS-05 | Endpoint de Despacho de Notificaciones | T-26 | Registro de device tokens + despacho FCM | *(carry-over Sprint 1)* Cierra el despacho push vía Firebase Cloud Messaging. | 5 | Riva, Elmer | Done |
+| — (Constraint) | Calidad y persistencia productiva | T-38 | Pruebas de integración del API + smoke test E2E en CI | Tests de integración/aceptación sobre el API y migración a BD gestionada. | 6 | Riva, Elmer | In-Process |
 
-> La suma de Story Points de las User Stories comprometidas en el Sprint 2 es **86** (ver 7.2.2.1). Las tareas *carry-over* conservan el estado con que cerraron el Sprint 1.
+> La suma de Story Points de las User Stories comprometidas en el Sprint 2 es **86** (ver 7.2.2.1). Las cuatro tareas *carry-over* del Sprint 1 se cerraron durante el Sprint 2.
 
-#### 7.2.2.3. Sprint 2 Execution Note
+#### 7.2.2.3. Development Evidence for Sprint Review
 
-> El presente entregable documenta la **ejecución completa del Sprint 1** (flujo núcleo desplegado y verificado en la nube). El **Sprint 2** se encuentra **planificado** —Sprint Planning 2 (7.2.2.1) y Sprint Backlog 2 (7.2.2.2)—; su evidencia de desarrollo, testing, ejecución, documentación de servicios, despliegue y colaboración (commits por repositorio, capturas de las nuevas vistas, endpoints de sesión/energía, etc.) se incorporará al cierre de su ejecución, siguiendo la misma estructura de subsecciones empleada en el Sprint 1 (7.2.1.3–7.2.1.8).
+El Sprint 2 se ejecutó implementando las funcionalidades complementarias en los cinco repositorios de producto, con el mismo flujo **feature → develop → main**. Se registraron **22 commits** (sin contar merges de release) distribuidos por integrante y frente. A continuación, todos los commits del Sprint 2 por repositorio.
+
+**`smartpark/web-services`** — Riva Rodríguez, Elmer Augusto (`@elmer-riva`) · 5 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `2698f62` | 2026-06-24 | fix(twin): operate ADT gateway in degraded mode when unconfigured |
+| 2 | `8f7c12e` | 2026-06-26 | feat(session): add parking cost calculator domain service |
+| 3 | `67afa41` | 2026-06-28 | feat(session): manage parking session lifecycle and history |
+| 4 | `a42357b` | 2026-06-30 | feat(energy): recommend lighting dimming from low occupancy |
+| 5 | `637ede0` | 2026-07-02 | test(session,energy): cover cost calculation and lighting rules |
+
+**`smartpark/web-application`** — Valle Zuta, Abel Andrés (`@AndresVZ23`) · 4 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `3502dd9` | 2026-06-25 | feat(energy): add energy recommendations service and models |
+| 2 | `87a9cab` | 2026-06-27 | feat(energy): add energy efficiency panel view with nav entry |
+| 3 | `84fbf01` | 2026-06-30 | feat(alerts): add live smoke alert card with acknowledge and resolve actions |
+| 4 | `43d1923` | 2026-07-02 | feat(sessions): add vehicle flow summary widget to energy panel |
+
+**`smartpark/iot-simulator`** — Morales Calderón, Hernan Emilio (`@hernancit0`) · 4 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `1c4cc1f` | 2026-06-24 | feat(ontology): add vehicle-flow and occupancy-trend properties to ParkingZone |
+| 2 | `cfdf0c3` | 2026-06-28 | feat(simulator): drive occupancy from a per-zone vehicle entry/exit flow model |
+| 3 | `2b34e82` | 2026-07-01 | feat(scripts): add energy advisor computing low-occupancy zones from the graph |
+| 4 | `233ca93` | 2026-07-03 | docs: document Sprint 2 vehicle flow and occupancy trends |
+
+**`smartpark/mobile-app`** — Qqueso Rodríguez, Britney Delhy (`@brit2801`) · 6 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `daa9bc5` | 2026-06-25 | feat(connector): add parking session and notification preference endpoints |
+| 2 | `d7a4a13` | 2026-06-27 | feat(sessions): add parking entry screen to start a session |
+| 3 | `142a553` | 2026-06-29 | feat(sessions): add active session screen with elapsed time, cost and exit |
+| 4 | `8b3c901` | 2026-07-01 | feat(sessions): add session history gallery with cost and duration |
+| 5 | `f04dd9c` | 2026-07-02 | feat(notifications): add notification preferences screen and home navigation |
+| 6 | `bb01e3a` | 2026-07-03 | docs: document Sprint 2 driver screens and session endpoints |
+
+**`smartpark/landing-page`** — Sánchez Ríos, Camila Cristina (`@C4m174`) · 3 commits
+
+| # | Commit | Fecha | Mensaje |
+|---|---|---|---|
+| 1 | `9e2544c` | 2026-06-27 | feat(content): add Sprint 2 complementary features to landing lists |
+| 2 | `bf505cf` | 2026-06-29 | feat(operators): map icons for energy efficiency and vehicle flow |
+| 3 | `82ef458` | 2026-07-01 | feat(drivers): map icons for session, history and notification preferences |
+
+#### 7.2.2.4. Testing Suite Evidence for Sprint Review
+
+La suite de pruebas del Web Service se amplió para cubrir la lógica de negocio del Sprint 2: el **cálculo del costo** de la sesión (tarifa base + por hora, con redondeo `Money`), la **finalización** de la sesión y las **reglas de recomendación de iluminación**. Con estas pruebas nuevas, el total pasó a **77 casos ejecutados, todos en verde** (66 del Sprint 1 + 11 nuevos), automatizados con **xUnit** y ejecutados en CI.
+
+```text
+Passed!  - Failed: 0, Passed: 77, Skipped: 0, Total: 77 - SmartPark.Domain.Tests.dll (net8.0)
+```
+
+| Repository | Branch | Commit Id | Commit Message | Committed on |
+|---|---|---|---|---|
+| `smartpark/web-services` | `develop` | `637ede0` | test(session,energy): cover cost calculation and lighting rules | 2026-07-02 |
+
+#### 7.2.2.5. Services Documentation Evidence for Sprint Review
+
+El Sprint 2 añadió los siguientes endpoints REST al API (documentados automáticamente con **OpenAPI/Swagger**):
+
+| Endpoint | HTTP Verb | Auth | Description |
+|---|---|---|---|
+| `/api/v1/sessions` | POST | Driver | Inicia una sesión de estacionamiento (entrada del vehículo). |
+| `/api/v1/sessions/{id}/location` | PATCH | Driver | Registra o actualiza la ubicación del vehículo. |
+| `/api/v1/sessions/{id}/finalize` | PATCH | Driver | Finaliza la sesión y calcula el costo acumulado (salida). |
+| `/api/v1/sessions/history` | GET | Driver | Historial de sesiones del conductor, con costo y duración. |
+| `/api/v1/energy/recommendations` | GET | Operator | Recomendaciones de atenuación de iluminación por zona de baja ocupación. |
+
+Adicionalmente se **cerró la cadena de notificación push** (carry-over del Sprint 1): al ingerir una alerta de humo (`POST /api/v1/alerts/smoke`), el API identifica a los conductores con **sesión activa** en la zona afectada y despacha el aviso a sus device tokens vía **Firebase Cloud Messaging**.
+
+#### 7.2.2.6. Team Collaboration Insights during Sprint
+
+Los 22 commits del Sprint 2 se distribuyeron entre los cinco integrantes según su frente de producto:
+
+| Integrante | Repositorio | Commits (Sprint 2) |
+|---|---|---|
+| Qqueso Rodríguez, Britney Delhy | `mobile-app` | 6 |
+| Riva Rodríguez, Elmer Augusto | `web-services` | 5 |
+| Valle Zuta, Abel Andrés | `web-application` | 4 |
+| Morales Calderón, Hernan Emilio | `iot-simulator` | 4 |
+| Sánchez Ríos, Camila Cristina | `landing-page` | 3 |
+| **Total** | **5 repositorios** | **22** |
+
+La colaboración se mantuvo alineada por el **contrato del API**: el frente de backend definió los endpoints de sesión y energía, consumidos en paralelo por el frontend web (panel de eficiencia energética y flujo vehicular), la app móvil (sesión, historial y preferencias de notificación) y el simulador IoT (flujo vehicular y tendencias de ocupación que alimentan las recomendaciones de energía).
 
 ## 7.3. Validation Interviews
 
