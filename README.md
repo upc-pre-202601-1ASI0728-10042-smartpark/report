@@ -81,6 +81,8 @@ Startup: Apex Twin<br>Producto: SmartPark<br>
 | 2.8.0   | 2026-06-20 | Sánchez Ríos, Camila Cristina   | Incorporación de la sección 7.4 Video About-the-Product: introducción, URLs (SharePoint y YouTube) y captura del video incrustado en la Landing Page desplegada. |
 | 3.0.0   | 2026-06-21 | Riva Rodriguez, Elmer Augusto   | Versión final para entrega TB2: primera versión desplegada de los productos digitales y publicación de la primera versión de los videos About-the-Product y About-the-Team. Actualización del Registro de Versiones del Informe, el Project Report Collaboration Insights y la sección Student Outcome. |
 | 3.1.0   | 2026-07-04 | Riva Rodriguez, Elmer Augusto   | Documentación de la ejecución del Sprint 2 en la sección 7.2.2: Sprint Backlog 2 actualizado a *Done* y evidencias de Development (22 commits por repositorio), Testing (77 casos), Services Documentation (endpoints de sesión y energía) y Team Collaboration Insights del Sprint 2. |
+| 3.2.0   | 2026-07-05 | Valle Zuta, Abel Andrés         | Incorporación de la sección 7.2.2.5 Execution Evidence del Sprint 2: capturas del Panel de Eficiencia Energética desplegado y de las pantallas de la app móvil del conductor. |
+| 3.3.0   | 2026-07-06 | Riva Rodriguez, Elmer Augusto   | Incorporación de la sección 7.2.2.7 Software Deployment Evidence del Sprint 2 (redeploy de backend, web-app y landing a Azure, verificado end-to-end) y reordenamiento de las subsecciones del Sprint Review 2. |
 
 ---
 
@@ -339,10 +341,12 @@ _(Pendiente)_
     - [7.2.2. Sprint 2](#722-sprint-2)
       - [7.2.2.1. Sprint Planning 2](#7221-sprint-planning-2)
       - [7.2.2.2. Sprint Backlog 2](#7222-sprint-backlog-2)
-      - [7.2.2.3. Development Evidence for Sprint Review](#7223-development-evidence-for-sprint-review-1)
-      - [7.2.2.4. Testing Suite Evidence for Sprint Review](#7224-testing-suite-evidence-for-sprint-review-1)
-      - [7.2.2.5. Services Documentation Evidence for Sprint Review](#7225-services-documentation-evidence-for-sprint-review-1)
-      - [7.2.2.6. Team Collaboration Insights during Sprint](#7226-team-collaboration-insights-during-sprint-1)
+      - [7.2.2.3. Development Evidence for Sprint Review](#7223-development-evidence-for-sprint-review)
+      - [7.2.2.4. Testing Suite Evidence for Sprint Review](#7224-testing-suite-evidence-for-sprint-review)
+      - [7.2.2.5. Execution Evidence for Sprint Review](#7225-execution-evidence-for-sprint-review)
+      - [7.2.2.6. Services Documentation Evidence for Sprint Review](#7226-services-documentation-evidence-for-sprint-review)
+      - [7.2.2.7. Software Deployment Evidence for Sprint Review](#7227-software-deployment-evidence-for-sprint-review)
+      - [7.2.2.8. Team Collaboration Insights during Sprint](#7228-team-collaboration-insights-during-sprint)
   - [7.3. Validation Interviews](#73-validation-interviews)
     - [7.3.1. Diseño de Entrevistas](#731-diseño-de-entrevistas)
     - [7.3.2. Registro de Entrevistas](#732-registro-de-entrevistas)
@@ -8613,7 +8617,25 @@ Passed!  - Failed: 0, Passed: 77, Skipped: 0, Total: 77 - SmartPark.Domain.Tests
 |---|---|---|---|---|
 | `smartpark/web-services` | `develop` | `637ede0` | test(session,energy): cover cost calculation and lighting rules | 2026-07-02 |
 
-#### 7.2.2.5. Services Documentation Evidence for Sprint Review
+#### 7.2.2.5. Execution Evidence for Sprint Review
+
+Las funcionalidades del Sprint 2 se verificaron sobre el **entorno desplegado en Azure**. A continuación, la evidencia de ejecución de las principales vistas.
+
+**Panel de Eficiencia Energética (operador)** — recomendaciones de atenuación de iluminación por zona de baja ocupación y el widget de flujo vehicular, consumiendo en vivo `GET /api/v1/energy/recommendations` y `GET /api/v1/sessions/summary` del API desplegado:
+
+![Panel de Eficiencia Energética desplegado](assets/images/chapter-07/sprint-2-energy.png)
+
+**App móvil del conductor** — pantallas de gestión de sesión ("Mi Sesión": tiempo y costo, con cierre) e historial de sesiones (Power Apps):
+
+![Mi Sesión — app del conductor](assets/images/chapter-06/Mob%20mock%20up%20-%20Mi%20sesion.png)
+
+![Historial de sesiones — app del conductor](assets/images/chapter-06/Mob%20mock%20up%20-%20historial.png)
+
+El Sprint 2 incorpora además la **tarjeta de alerta de humo en vivo** en el dashboard del operador (con acciones de confirmar/resolver sobre `POST /api/v1/alerts/smoke/{id}/acknowledge` y `/resolve`) y la pantalla de **preferencias de notificación** en la app móvil.
+
+**URL del video demo:** _(se grabará el recorrido de las funcionalidades del Sprint 2 sobre el entorno desplegado.)_
+
+#### 7.2.2.6. Services Documentation Evidence for Sprint Review
 
 El Sprint 2 añadió los siguientes endpoints REST al API (documentados automáticamente con **OpenAPI/Swagger**):
 
@@ -8627,7 +8649,23 @@ El Sprint 2 añadió los siguientes endpoints REST al API (documentados automát
 
 Adicionalmente se **cerró la cadena de notificación push** (carry-over del Sprint 1): al ingerir una alerta de humo (`POST /api/v1/alerts/smoke`), el API identifica a los conductores con **sesión activa** en la zona afectada y despacha el aviso a sus device tokens vía **Firebase Cloud Messaging**.
 
-#### 7.2.2.6. Team Collaboration Insights during Sprint
+#### 7.2.2.7. Software Deployment Evidence for Sprint Review
+
+El Sprint 2 se **redesplegó sobre la misma infraestructura de Azure** del Sprint 1, con **Az PowerShell**. El API se republicó en el App Service con el esquema de base de datos ampliado (nuevas tablas de sesiones de estacionamiento y de preferencias de notificación); los frontends se re-subieron a sus Storage static websites.
+
+| Componente | Nodo de despliegue | Estado | URL |
+|---|---|---|---|
+| **web-services (API)** | Azure App Service (Linux, .NET 8) | ✅ Redesplegado | `https://smartpark-api.azurewebsites.net/swagger` |
+| **web-application** | Azure Storage static website | ✅ Redesplegado | `https://stsmartparkweb01.z20.web.core.windows.net/` |
+| **landing-page** | Azure Storage static website | ✅ Redesplegado | `https://stsmartparkland01.z20.web.core.windows.net/` |
+
+**Verificación end-to-end en la nube:** el operador inicia sesión y el Panel de Eficiencia Energética carga las 4 zonas con sus recomendaciones y el flujo vehicular, consumiendo los endpoints del Sprint 2 (`/energy/recommendations`, `/sessions/summary`) del API desplegado (captura en 7.2.2.5). La Landing Page desplegada refleja las nuevas funcionalidades complementarias:
+
+![Landing con las funcionalidades del Sprint 2](assets/images/chapter-07/sprint-2-landing.png)
+
+> El acceso de demostración documentado en 7.2.1.7 (`demo@smartpark.pe` / `SmartPark2026`) permanece vigente sobre el entorno del Sprint 2.
+
+#### 7.2.2.8. Team Collaboration Insights during Sprint
 
 Los 22 commits del Sprint 2 se distribuyeron entre los cinco integrantes según su frente de producto:
 
