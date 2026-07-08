@@ -3,3 +3,7 @@ Thumbs.db
 
 # Imagen temporal materializada por el harness desde adjuntos del chat
 /img.png
+node_modules/
+_report_tmp.html
+_build/
+*.pdf
