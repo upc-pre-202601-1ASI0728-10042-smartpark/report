@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>SmartPark — Deployment Diagram</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    body { margin: 0; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; }
+    .wrap { padding: 24px; }
+    h1 { color: #0d47a1; font-size: 20px; margin: 0 0 4px; }
+    .sub { color: #5a626e; font-size: 12px; margin: 0 0 16px; }
+    .mermaid { font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>SmartPark · Apex Twin — Diagrama de Despliegue</h1>
+    <p class="sub">Mapeo de los productos a la infraestructura de Azure / Power Platform · UPC 1ASI0728-10042</p>
+    <pre class="mermaid">
+flowchart TB
+  classDef client fill:#eef2f8,stroke:#5e92f3,color:#1f2733;
+  classDef azure fill:#e3f2fd,stroke:#1565c0,color:#0d47a1;
+  classDef data fill:#e6f4ea,stroke:#2e7d32,color:#1b5e20;
+  classDef ext fill:#fff6e0,stroke:#f9a825,color:#a66a00;
+
+  subgraph CLIENT["Dispositivos cliente"]
+    OP["fa:fa-desktop Operador<br/>(navegador)"]:::client
+    DRV["fa:fa-mobile Conductor<br/>(smartphone)"]:::client
+    IOT["fa:fa-microchip Sensores IoT /<br/>Simulador Node.js"]:::client
+  end
+
+  subgraph AZ["Microsoft Azure (Suscripcion Azure for Students)"]
+    SWA1["«Azure Static Web Apps»<br/>landing-page (React)"]:::azure
+    SWA2["«Azure Static Web Apps»<br/>web-application (Angular)"]:::azure
+    API["«Azure App Service · Linux»<br/>SmartPark.Api (.NET 8)<br/>REST + SignalR Hub"]:::azure
+    PG[("«Azure DB for PostgreSQL»<br/>smartpark")]:::data
+    ADT["«Azure Digital Twins»<br/>grafo DTDL (gemelo)"]:::azure
+    BLOB[("«Azure Blob Storage»<br/>parking-garage.glb (3D)")]:::data
+  end
+
+  subgraph PP["Power Platform"]
+    MOB["«Power Apps»<br/>mobile-app (Conductor)"]:::azure
+  end
+
+  FCM["«Firebase Cloud Messaging»<br/>push notifications"]:::ext
+
+  OP -->|"HTTPS REST + WSS (SignalR)"| API
+  OP -->|HTTPS| SWA2
+  SWA2 -->|"GLB"| BLOB
+  DRV -->|HTTPS| SWA1
+  DRV -->|"Power Apps player"| MOB
+  MOB -->|"HTTPS REST (custom connector)"| API
+  SWA1 -.->|"CTA: Acceder al panel"| SWA2
+
+  API -->|"EF Core · TCP 5432"| PG
+  API -->|"ADT SDK · HTTPS"| ADT
+  API -->|"FCM HTTP v1"| FCM
+  FCM -->|push| DRV
+
+  IOT -->|"updateDigitalTwin"| ADT
+  IOT -->|"HTTPS POST /alerts/smoke"| API
+    </pre>
+  </div>
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: 'base', flowchart: { curve: 'basis' } });
+  </script>
+</body>
+</html>
