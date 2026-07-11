@@ -1,0 +1,368 @@
+==================================================================
+GUIONES DE EXPOSICION - SMARTPARK / APEX TWIN
+==================================================================
+
+Cada guion es texto hablado (~40-60 s). Entre [ ] va la indicacion
+de lo que se muestra o senala en pantalla.
+
+Slides activos y encargados:
+  Elmer:   1, 2, 3, 25, 42, 43
+  Camila:  10, 12, 13, 41
+  Britney: 14, 15, 44, 45
+  Andres:  27, 37, 38, 39
+  Hernan:  32, 33, 34, 35
+
+==================================================================
+ELMER
+==================================================================
+
+------------------------------------------------------------------
+SLIDE 1 - Portada
+[Pantalla con el logo "SmartPark" y "Apex Twin"]
+
+"Buenos dias. Somos Apex Twin y hoy les vamos a presentar SmartPark,
+una plataforma de gestion inteligente de estacionamientos para
+centros comerciales de gran escala, basada en tecnologia de gemelos
+digitales. A lo largo de la exposicion les mostraremos desde el
+problema que detectamos hasta la arquitectura y el diseno de los dos
+productos digitales que componen la solucion."
+
+------------------------------------------------------------------
+SLIDE 2 - Equipo
+[Las 5 fotos del equipo]
+
+"Primero, el equipo. Somos cinco estudiantes de Ingenieria de
+Software de la UPC: Camila Sanchez, quien aporta en diseno UI/UX y
+prototipado; yo, Elmer Rodriguez, en liderazgo tecnico y decisiones
+de arquitectura; Britney Rodriguez, en desarrollo web y analisis de
+datos; Abel Andres Valle, en desarrollo y gestion de proyecto; y
+Hernan Morales, en IoT y modelado de dominio. Cada uno de nosotros
+expondra la parte del proyecto donde mas contribuyo."
+
+------------------------------------------------------------------
+SLIDE 3 - Que es y que problema resuelve SmartPark
+[Texto: descripcion + 4 problemas]
+
+"Que es SmartPark? Es una plataforma SaaS cuyo nucleo es un gemelo
+digital 3D construido sobre Azure Digital Twins y sincronizado con
+sensores IoT. Se materializa en dos productos: una app web en Angular
+para el operador -con mapa 3D, alertas, flujo y energia- y una app
+movil en PowerApps para el conductor. Resuelve cuatro problemas
+concretos: la fragmentacion tecnologica -hoy ocupacion, seguridad,
+flujo y energia se gestionan como silos aislados-; las alertas sin
+contexto espacial; la busqueda ineficiente de plazas; y el sobrecosto
+energetico, donde recomendamos niveles de luz segun ocupacion real,
+con un ahorro de entre 15 y 25%."
+
+------------------------------------------------------------------
+SLIDE 25 - Product Backlog
+[Tablero del Product Backlog en Jira]
+
+"Este es nuestro Product Backlog, gestionado en Jira. En total: 57
+issues, organizados en 10 epics, con 37 User Stories, 10 Technical
+Stories y 178 Story Points estimados con secuencia de Fibonacci. La
+priorizacion se hace por valor de negocio: arriba estan las historias
+del mapa de disponibilidad para el conductor, el dashboard de
+ocupacion en tiempo real y la recepcion de alertas de humo con
+visualizacion espacial. Las historias del Landing Page entran desde
+el primer sprint por ser el primer punto de contacto. A la derecha
+ven la distribucion de puntos por epic, que abarca desde Landing y
+Autenticacion hasta el gemelo digital y la API."
+
+------------------------------------------------------------------
+SLIDE 42 - Web Application Wireframes (Operador)
+[8 wireframes de la app web del operador]
+
+"Estos son los wireframes de la aplicacion web del operador. Son ocho
+pantallas de baja fidelidad que estructuran el panel de gestion: el
+login y registro, el dashboard principal con los indicadores clave,
+la vista de ocupacion por nivel, las alertas de seguridad, el flujo
+vehicular, la eficiencia energetica y el historial de incidentes. La
+pantalla central es el dashboard, donde se integra el visor del
+gemelo digital 3D. Estos wireframes traducen las User Stories del
+operador del backlog en una estructura navegable, antes de pasar al
+diseno visual de alta fidelidad."
+
+------------------------------------------------------------------
+SLIDE 43 - Web Application Wireflow (Operador)
+[Wireflow: Monitoreo de ocupacion en tiempo real]
+
+"Del lado del operador elegimos el flujo mas representativo: el
+monitoreo de ocupacion en tiempo real. El operador entra al
+dashboard, selecciona un nivel y accede al detalle de plazas, con
+datos que se actualizan cada 5 segundos. Lo interesante es que
+modelamos el modo degradado: si Azure Digital Twins no esta
+disponible, el sistema no se cae -muestra el ultimo estado conocido
+con una marca de tiempo y un banner de advertencia. Ese diseno del
+happy path y el unhappy path refleja una decision arquitectonica
+concreta: la disponibilidad del dashboard es un atributo de calidad
+que priorizamos explicitamente."
+
+==================================================================
+CAMILA
+==================================================================
+
+------------------------------------------------------------------
+SLIDE 10 - Publico objetivo
+[Dos columnas: operadores y conductores]
+
+"Definimos dos segmentos objetivo. El primero son los operadores de
+estacionamientos de centros comerciales: Jefes de Operaciones,
+Supervisores de Seguridad y Facility Managers, de 30 a 55 anos, en
+Lima Metropolitana, que trabajan turnos rotativos de 8 a 12 horas y
+tienen minimo 3 anos de experiencia. El segundo son los conductores
+frecuentes: personas de 25 a 55 anos que visitan el centro comercial
+de 1 a 3 veces por semana, con estadias de hora y media a tres horas.
+Sus frustraciones son claras: dar vueltas sin saber la
+disponibilidad, olvidar donde dejaron el auto, conocer el costo solo
+al salir y no recibir alertas de seguridad."
+
+------------------------------------------------------------------
+SLIDE 12 - Analisis competitivo
+[Tabla de 3 competidores + oportunidad SmartPark]
+
+"Analizamos tres competidores. ParkingSoft, en Peru, fuerte en
+control de acceso con hardware y con integracion Sunat, pero sin
+gemelo digital. Parkimovil, en Latinoamerica, con una app para
+conductores con mas de 500 mil descargas, pero sin ninguna solucion
+para el operador. Y TIBA, lider global con hardware premium y 99.95%
+de confiabilidad, pero con un costo de inversion superior al millon
+de dolares. La oportunidad de SmartPark esta en el cruce: somos los
+unicos que integran un gemelo digital 3D con las cuatro dimensiones
+operativas, con alertas de humo geolocalizadas, un modelo SaaS sin
+inversion inicial -de 499 a 1,999 dolares al mes- y dos productos
+diferenciados, uno para cada usuario."
+
+------------------------------------------------------------------
+SLIDE 13 - Analisis de entrevistas
+[Dos bloques: operadores y conductores]
+
+"Validamos el problema con entrevistas a ambos segmentos. Los
+operadores confirmaron que su principal dificultad es la falta de
+precision y visibilidad en tiempo real sobre la disponibilidad:
+fallan los sensores, hay errores en el conteo y dependen de monitoreo
+manual con camaras y radio; ademas reconocen una gestion energetica
+ineficiente. Los conductores relataron tiempos de busqueda de entre 5
+y 30 minutos en horas pico, estres e incluso cambios de destino,
+junto con preocupaciones por la seguridad del vehiculo. El punto
+clave: ambos segmentos mostraron alta disposicion a adoptar una
+plataforma tecnologica mas precisa. Eso confirmo que el problema es
+real y que hay demanda."
+
+------------------------------------------------------------------
+SLIDE 41 - Landing Page UI Design
+[Mockup del Landing Page completo]
+
+"Este es el diseno del Landing Page, el primer punto de contacto con
+ambos segmentos. Comunica la propuesta de valor en la seccion hero,
+explica que problema resuelve, y luego separa el contenido en dos
+bloques: funcionalidades para operadores y funcionalidades para
+conductores, porque son audiencias distintas. Mas abajo presenta los
+tres planes de suscripcion -Basic, Professional y Enterprise- y
+cierra con un formulario de contacto. Es un sitio estatico con
+internacionalizacion ingles-espanol y criterios de accesibilidad. Las
+llamadas a la accion redirigen al registro de la app web o a la
+descarga de la app movil."
+
+==================================================================
+BRITNEY
+==================================================================
+
+------------------------------------------------------------------
+SLIDE 14 - User Persona: Operador
+[Persona card del operador con barras de skills]
+
+"A partir de los segmentos construimos dos User Personas que
+humanizan los datos. Esta es la del operador de estacionamiento.
+Representa a un Jefe de Operaciones o Supervisor de Seguridad con una
+gestion operativa muy alta, pero con un uso de tecnologia intermedio
+y un analisis de datos medio. Esto es clave para el diseno: la
+herramienta no puede asumir un perfil tecnico avanzado; el dashboard
+del operador tiene que ser visual, directo y apoyarse en el gemelo
+digital 3D para que la informacion se entienda de un vistazo, sin
+curvas de aprendizaje pronunciadas."
+
+------------------------------------------------------------------
+SLIDE 15 - User Persona: Conductor
+[Persona card del conductor con barras de skills]
+
+"Esta es la segunda persona, la conductora frecuente. A diferencia
+del operador, tiene una adaptacion tecnologica muy alta: usa con
+naturalidad apps como Yape, Rappi o Waze, lo que genera una
+expectativa de interfaces simples y respuestas rapidas. Tambien
+puntua alto en planificacion del tiempo y toma de decisiones rapida.
+Por eso su app, construida en PowerApps, prioriza tareas de minimo
+esfuerzo: consultar disponibilidad antes de entrar, registrar la
+ubicacion del auto con un toque y recibir alertas. Las dos personas
+guian decisiones de diseno opuestas y eso justifica tener dos
+productos separados."
+
+------------------------------------------------------------------
+SLIDE 44 - Web Application Wireframes (Driver)
+[Conjunto de wireframes moviles del conductor]
+
+"Estos son los wireframes de la aplicacion del conductor. Son disenos
+de baja fidelidad que definen la estructura antes de entrar al
+detalle visual. Cubren el flujo completo del conductor: el login y
+registro, el dashboard con disponibilidad de zonas, los mapas
+interactivos por nivel, el localizador del vehiculo, la gestion de
+pagos con el costo acumulado, el centro de alertas y el perfil de
+usuario. Cada pantalla esta pensada para la persona conductora: pocas
+decisiones por vista y acciones rapidas, en linea con sus skills de
+adaptacion tecnologica alta y toma de decisiones rapida."
+
+------------------------------------------------------------------
+SLIDE 45 - Mobile Application Wireflow (Driver)
+[Wireflow: Busqueda y registro de estacionamiento]
+
+"De todos los flujos del conductor elegimos el mas importante: la
+busqueda y registro de un espacio de estacionamiento. El wireflow
+parte del Home, pasa al mapa, el conductor selecciona una plaza y el
+sistema valida disponibilidad antes de registrar la sesion. Modelamos
+tres rutas: el happy path, donde la plaza esta libre y se confirma;
+el unhappy path, cuando la plaza deja de estar disponible y el
+sistema ofrece una alternativa cercana; y el flujo de informacion
+general. Este wireflow conecta directamente con la User Story de
+mayor prioridad del backlog: el mapa de disponibilidad para
+conductores. Profesor, compañeros, esta a sido toda la exposicion,
+gracias por su atencion."
+
+==================================================================
+HERNAN
+==================================================================
+
+------------------------------------------------------------------
+SLIDE 32 - EventStorming
+[Tablero completo de EventStorming]
+
+"Para entender el dominio aplicamos EventStorming a nivel
+estrategico. Esta dinamica nos permitio mapear los eventos de dominio
+mas relevantes de SmartPark, junto con sus actores, comandos y
+agregados. El resultado fue revelador: la solucion no debia modelarse
+como un monolito tradicional, sino como un conjunto de contextos
+especializados que colaboran entre si. Lo que ven en el tablero son
+esos grupos de eventos. Un hallazgo central: la telemetria IoT actua
+como el principal generador de cambios de estado, propagando
+informacion hacia el monitoreo operativo, la seguridad, la eficiencia
+energetica y el gemelo digital."
+
+------------------------------------------------------------------
+SLIDE 33 - Candidate Context Discovery
+[Tabla de 9 Bounded Contexts candidatos]
+
+"A partir del EventStorming hicimos el descubrimiento de contextos
+candidatos. Agrupamos eventos, comandos y agregados que compartian
+una misma intencion de negocio, usando tres criterios:
+start-with-value, partir de las capacidades que generan mas valor;
+look-for-pivotal-events, identificar eventos que cambian el estado
+del negocio; y start-with-simple, aislar primero los flujos mas
+evidentes. El resultado fueron nueve bounded contexts: Landing &
+Subscription, Identity & Access, Telemetry Simulation & Ingestion,
+Parking Operations Monitoring, Digital Twin Management, Safety &
+Incident, Energy Efficiency, Parking Session y Notification
+Management. Cada uno responde a una preocupacion de negocio distinta."
+
+------------------------------------------------------------------
+SLIDE 34 - Domain Message Flows Modeling
+[Diagrama de flujos entre contextos]
+
+"Con los contextos identificados, modelamos los flujos de mensajes
+entre dominios usando Domain Storytelling. El objetivo era ver como
+viaja la informacion desde un estimulo operativo hasta una respuesta
+util. En el diagrama se observa como Telemetry Simulation & Ingestion
+-arriba- alimenta a Parking Operations Monitoring, a Safety &
+Incident y a Energy Efficiency; y como esa informacion llega
+finalmente al Digital Twin Management, que la visualiza para el
+operador, y al Notification Management, que alerta al conductor.
+Modelamos cuatro flujos clave: actualizacion de ocupacion, gestion de
+alerta de humo, ciclo de sesion de estacionamiento y optimizacion
+energetica. Esto confirmo que SmartPark necesita comunicacion
+desacoplada basada en eventos."
+
+------------------------------------------------------------------
+SLIDE 35 - Context Mapping
+[Context Map con patrones de relacion]
+
+"Finalmente elaboramos el Context Map, que representa las relaciones
+estrategicas entre los contextos. Identificamos cuales son upstream
+-proveedores de informacion- y cuales downstream -consumidores-, y
+asignamos un patron a cada relacion. Usamos Published Language para
+el intercambio de eventos de telemetria mediante contratos comunes;
+Customer/Supplier cuando hay dependencia funcional directa, como
+entre Parking Operations y Digital Twin; Conformist cuando un
+contexto adopta el modelo de otro; Shared Kernel para autenticacion y
+seguridad; y Open Host Service para las interfaces publicas de
+registro. El resultado es una arquitectura desacoplada y preparada
+para escalar."
+
+==================================================================
+ANDRES
+==================================================================
+
+------------------------------------------------------------------
+SLIDE 27 - Design Purpose
+[Imagenes: sistema de parking, Digital Thread, sensores, mockup]
+
+"Antes de la arquitectura definimos el proposito de diseno. El
+objetivo fue doble. Primero, traducir el problema -la falta de
+visibilidad integral del estacionamiento- en una estructura que
+permitiera contextualizar espacialmente la informacion. Segundo,
+permitir un despliegue progresivo: la solucion debia funcionar
+inicialmente con sensores simulados y, en fases posteriores, admitir
+sensores fisicos sin cambios disruptivos. El concepto clave es el
+gemelo digital: una representacion virtual sincronizada con el
+sistema fisico mediante un digital thread -el fisico envia
+informacion, el digital devuelve datos. En SmartPark el gemelo
+digital no es un accesorio visual, es el centro arquitectonico sobre
+el que gravitan el resto de decisiones."
+
+------------------------------------------------------------------
+SLIDE 37 - Context Level Diagram
+[Diagrama de contexto C4]
+
+"Pasamos a la arquitectura de software, usando el modelo C4. Este es
+el diagrama de contexto: muestra la plataforma SmartPark como una
+caja central y sus interacciones externas. Dos usuarios la consumen:
+el operador, via navegador web sobre HTTPS, y el conductor, via la
+app PowerApps. Y se conecta con tres sistemas externos: Azure Digital
+Twins, donde vive el grafo del gemelo digital; Firebase Cloud
+Messaging, para las notificaciones push; y el Simulador IoT, un
+servicio Node.js que genera la telemetria sintetica. Este nivel
+define los limites del sistema sin entrar todavia en su composicion
+interna."
+
+------------------------------------------------------------------
+SLIDE 38 - Container Level Diagram
+[Diagrama de contenedores C4]
+
+"Bajando un nivel, el diagrama de contenedores muestra las piezas
+internas de SmartPark. Son seis containers: el Landing Page, sitio
+estatico en GitHub Pages; la Web Application del operador, una SPA en
+Angular con PrimeNG desplegada en Azure Static Web Apps; la Mobile
+Application del conductor, una Canvas App en PowerApps; el Web
+Service, una API RESTful en ASP.NET Core 8 organizada como modular
+monolith siguiendo los bounded contexts; y la Base de Datos de
+Sesiones en PostgreSQL. El Web Service incluye una capa
+anti-corrupcion que abstrae las llamadas a Azure Digital Twins, de
+modo que ningun otro contexto depende directamente del servicio
+externo."
+
+------------------------------------------------------------------
+SLIDE 39 - Deployment Diagram
+[Diagrama de despliegue]
+
+"El diagrama de despliegue muestra como esos containers se
+distribuyen sobre la infraestructura. La estrategia gira en torno a
+Microsoft Azure como cloud principal, por coherencia con Azure
+Digital Twins, que es el nucleo del sistema. La Web App va en Azure
+Static Web Apps, el Web Service en Azure App Service tier B1, la base
+de datos en Azure Database for PostgreSQL, y el gemelo digital en
+Azure Digital Twins con un Storage Account para las escenas 3D. Lo
+complementan GitHub Pages para el Landing, Power Platform para la app
+movil y Firebase, en Google Cloud, para las notificaciones. El
+Simulador IoT corre en el entorno local del desarrollador. Esta
+eleccion, ademas, aprovecha el credito de Azure for Students."
+
+==================================================================
+FIN
+==================================================================

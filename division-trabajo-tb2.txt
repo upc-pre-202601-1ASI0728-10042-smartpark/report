@@ -1,0 +1,165 @@
+==================================================
+ SMARTPARK · APEX TWIN — DIVISION DE TRABAJO TB2
+ Sprint 1 (2026-05-19 al 2026-05-30)
+==================================================
+
+Equipo, esta es la repartición para la TB2. El proyecto se hace en 2
+sprints: en este Sprint 1 armamos el FLUJO NUCLEO demostrable de punta a
+punta (Landing + login + gemelo digital + dashboard 3D + alerta de humo +
+mapa de disponibilidad). El Sprint 2 (TF) cubre lo que falta.
+
+Cada uno tiene 1 frente de desarrollo + sus apartados del informe.
+Flujo de trabajo: feature branch -> PR a develop. El código de cada
+producto va a su repo (landing-page, web-application, web-services, etc.).
+
+--------------------------------------------------
+ RESUMEN POR PERSONA
+--------------------------------------------------
+
+CAMILA — UI/UX + Landing Page
+  DESARROLLO:
+    - Implementar el Landing Page (HTML/CSS/JS): hero, secciones
+      operador/conductor, planes, navbar, footer, i18n es/en.
+      (Tasks T-01 a T-06)
+  INFORME:
+    - 6.4.2 Applications Mock-ups
+    - 6.4.3 Applications User Flow Diagrams
+    - 6.5 Applications Prototyping
+
+ELMER — Arquitectura / Azure + Backend
+  DESARROLLO:
+    - Web Services (API ASP.NET Core 8) + ACL Digital Twin Sync.
+    - Auth JWT (registro/login), endpoint de ocupacion, ingesta de humo,
+      despacho FCM, y todo el despliegue en Azure + CI/CD.
+      (Tasks T-09,10,15,16,17,21,26,29)
+  INFORME:
+    - 7.1 Software Configuration Management completo
+      (7.1.1 Dev Environment, 7.1.2 Source Code Mgmt,
+       7.1.3 Style Guide & Conventions, 7.1.4 Deployment Config)
+    - 7.2.1.1 Sprint Planning 1  (YA REDACTADO)
+    - 7.2.1.7 Software Deployment Evidence
+
+ANDRES — Web App Angular (Operador)
+  DESARROLLO:
+    - Web App Angular: login operador, dashboard de ocupacion en tiempo
+      real (SignalR), visor 3D del gemelo embebido y tarjeta de alerta.
+      (Tasks T-07,08,18,19,20,23)
+  INFORME:
+    - 7.2.1.2 Sprint Backlog 1  (YA REDACTADO; faltan las imagenes del board)
+    - 7.2.1.4 Testing Suite Evidence for Sprint Review
+    - 7.2.1.5 Execution Evidence for Sprint Review
+
+HERNAN — Simulador IoT + Dominio Safety/Notifications
+  DESARROLLO:
+    - Simulador IoT (Node.js, TS-10) que sincroniza el gemelo en Azure
+      Digital Twins, + bounded contexts Safety & Incident y Notifications.
+      (Tasks T-13,14,22,27)
+  INFORME:
+    - 7.2.1.3 Development Evidence for Sprint Review
+    - 7.2.1.6 Services Documentation Evidence (OpenAPI/Swagger)
+
+BRITNEY — Mobile App PowerApps (Conductor)
+  DESARROLLO:
+    - Mobile App PowerApps: login/registro conductor, mapa de
+      disponibilidad y registro de ubicacion del vehiculo.
+      (Tasks T-11,12,24,25,28)
+  INFORME:
+    - 7.3 Validation Interviews (7.3.1 Diseno, 7.3.2 Registro,
+      7.3.3 Evaluaciones segun heuristicas)
+    - 7.4 Video About-the-Product (coordina; todos graban su modulo)
+    - 7.2.1.8 Team Collaboration Insights during Sprint
+    - Avance de Conclusiones, Bibliografia y Anexos
+
+--------------------------------------------------
+ ALCANCE DEL SPRINT 1  (94 Story Points)
+--------------------------------------------------
+  Landing:   US-01, US-02, US-03, US-04, US-06, US-08
+  Auth:      US-11, US-12, US-13, US-14  + TS-09
+  Operador:  US-16, US-35, US-19, US-17(*)  (dashboard + visor 3D + humo)
+  Conductor: US-18, US-27  (+ US-32 push)
+  Backend:   TS-01, TS-02, TS-03, TS-05, TS-10  (API, ACL, simulador)
+  Infra:     provision Azure + CI/CD
+
+  -> El Sprint 2 (TF) cubre: flujo vehicular, eficiencia energetica,
+     gestion de sesion y costos, historiales, preferencias, etc.
+
+--------------------------------------------------
+ REPOS DONDE TRABAJAR  (org: upc-pre-202601-1ASI0728-10042-smartpark)
+--------------------------------------------------
+Los 6 repos YA estan creados en la organizacion. Estan vacios todavia:
+el PRIMER push inicializa la rama main; luego se crea develop a partir
+de main. Convencion: trabajar en feature branches y abrir PR a develop;
+develop -> main solo en releases (igual que venimos haciendo en report).
+
+  PERSONA   REPO            URL
+  -------   ----            ---
+  Camila    landing-page    https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/landing-page
+  Andres    web-application https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-application
+  Elmer     web-services    https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/web-services
+  Hernan    iot-simulator   https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/iot-simulator
+  Britney   mobile-app      https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/mobile-app
+  (todos)   report          https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/report
+
+NOTAS:
+  - El gemelo digital (ontologia DTDL + modelo 3D + scripts de Azure +
+    simulador) YA esta subido a iot-simulator (ver seccion para Hernan).
+  - El ACL "Digital Twin Synchronization" (clases .cs) va en
+    web-services (frente de Elmer).
+  - El informe (este documento, .md/.pdf) sigue en report.
+
+INICIALIZAR CADA REPO (una sola vez, el responsable):
+    git init
+    git add .
+    git commit -m "chore: initial commit"
+    git branch -M main
+    git remote add origin <URL-del-repo>.git
+    git push -u origin main
+    git checkout -b develop
+    git push -u origin develop
+  A partir de ahi: feature branch -> PR a develop.
+
+--------------------------------------------------
+ HERNAN — EL GEMELO DIGITAL YA ESTA EN iot-simulator
+--------------------------------------------------
+Ya subi todo el paquete del gemelo digital al repo iot-simulator. NO tienes
+que inicializar el repo (ya tiene main y develop). El paquete completo esta
+en la rama:
+
+    feature/digital-twin-base
+
+Que contiene:
+    ontology/      -> 9 modelos DTDL (ParkingLot, Level, Zone, Space,
+                      SmokeDetector, AccessPoint, Ramp, LightingZone,
+                      LuminositySensor)
+    model3d/       -> modelo 3D del estacionamiento (parking-garage.glb)
+                      + generadores + 3DScenesConfiguration.json
+    scripts/       -> provision de Azure (ADT + Storage + roles + CORS),
+                      subida de ontologia, seed del grafo, subida del 3D
+    simulator/     -> simulador IoT (Node.js, TS-10) que sincroniza el
+                      gemelo via JSON Patch y dispara alertas de humo
+    lib/           -> cliente ADT + builder del layout (fuente de verdad)
+    integration/   -> ACL en C# (esto es REFERENCIA; va a web-services)
+                      + queries.md (consultas ADT) + guia de integracion
+    tools/         -> harness para renderizar/capturar el 3D (opcional)
+    README.md      -> MANUAL paso a paso (leelo, esta todo detallado)
+
+OJO: el .env NO esta subido (tiene el subscription id y el host de ADT).
+Copia .env.example a .env y completa tus valores. node_modules tampoco
+esta: corre "npm install".
+
+COMO TRABAJAR (sacas el codigo de ahi y haces PRs a develop):
+    git clone https://github.com/upc-pre-202601-1ASI0728-10042-smartpark/iot-simulator.git
+    cd iot-simulator
+    git checkout develop
+    git checkout -b feature/<tu-tarea>          (ej. feature/iot-simulator-core)
+    # traes lo que necesites desde la rama base:
+    git checkout feature/digital-twin-base -- simulator/ lib/ ontology/
+    # ... trabajas, commiteas ...
+    git push -u origin feature/<tu-tarea>
+    # abres PR de feature/<tu-tarea> -> develop
+
+Tus tasks del Sprint 1 (del Sprint Backlog): T-13, T-14 (simulador +
+sync ADT), T-22 (Safety & Incident + resaltado de zona), T-27 (Notification
+Mgmt: identificar conductores afectados).
+
+==================================================
